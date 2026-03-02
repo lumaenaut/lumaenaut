@@ -97,3 +97,37 @@
     }
   }, 1000);
 })();
+
+(function () {
+  var content = document.querySelector(".content");
+  var controls = document.querySelector(".floating-controls");
+  if (!content || !controls) return;
+
+  var lastScrollTop = content.scrollTop || 0;
+  var ticking = false;
+
+  function setHidden(hidden) {
+    controls.classList.toggle("is-hidden", hidden);
+  }
+
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+
+    requestAnimationFrame(function () {
+      var current = content.scrollTop || 0;
+      var delta = current - lastScrollTop;
+
+      if (current <= 0) {
+        setHidden(false);
+      } else if (Math.abs(delta) >= 8) {
+        setHidden(delta > 0);
+        lastScrollTop = current;
+      }
+
+      ticking = false;
+    });
+  }
+
+  content.addEventListener("scroll", onScroll, { passive: true });
+})();

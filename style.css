@@ -136,7 +136,7 @@ body {
 
 .content {
     text-align: left;
-    padding: 0.5rem 0;
+    padding: 0;
     border-left: 5px solid var(--contrast);
     border-right: 5px solid var(--contrast);
     background-color: var(--background-color);
@@ -146,7 +146,7 @@ body {
 
 .floating-controls {
     position: sticky;
-    top: 0.75rem;
+    top: 0;
     right: inherit;
     z-index: 5;
 
@@ -154,8 +154,16 @@ body {
     justify-content: flex-end;
     gap: 1rem;
 
-    padding-right: 2rem;
-    margin-bottom: -2rem;
+    padding: 0.5rem 2rem 0.5rem;
+    margin-bottom: 0.5rem;
+    background-color: var(--background-color);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+    transition: transform 180ms ease;
+    will-change: transform;
+}
+
+.floating-controls.is-hidden {
+    transform: translateY(-140%);
 }
 
 .lang-btn {
@@ -286,6 +294,7 @@ body {
     }
 
     .floating-controls {
+        padding-left: 1rem;
         padding-right: 1rem;
     }
 }
