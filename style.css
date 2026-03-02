@@ -307,12 +307,16 @@ body {
     border-radius: 50%;
 
     box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.4);
-    font-family: "Courier New", monospace;
-    text-transform: uppercase;
 
     margin: 4px;
 
     cursor: pointer;
+}
+
+.social-links a img {
+    width: 24px;
+    height: 24px;
+    display: block;
 }
 
 .footer-meta {
