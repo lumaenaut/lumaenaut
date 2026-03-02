@@ -339,6 +339,11 @@ body {
     display: block;
 }
 
+.social-links a img[src*="twitter"] {
+    width: 20px;
+    height: 20px;
+}
+
 .footer-meta {
     font-size: 0.85rem;
     color: var(--text-subtle);
