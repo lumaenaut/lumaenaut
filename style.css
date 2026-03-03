@@ -166,36 +166,22 @@ body {
     transform: translateY(-140%);
 }
 
-.lang-btn {
-
-    font-size: 0.8rem;
-    padding: 0.25rem 0.5rem;
-    border: 2px solid var(--contrast);
-    border-radius: 6px;
-    background-color: transparent;
-    cursor: pointer;
-}
-
 .toggle-track {
-
     width: 44px;
     height: 24px;
     border: 2px solid var(--contrast);
     border-radius: 999px;
-    background-color:#ddd;
+    background-color: #ddd;
     display: flex;
     align-items: center;
     padding: 2px;
-
 }
 
 .toggle-thumb {
-    
     width: 10px;
     height: 10px;
     border-radius: 50%;
     background-color: var(--contrast);
-
 }
 
 .post {
