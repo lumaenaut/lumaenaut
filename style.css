@@ -308,6 +308,11 @@ body {
     color: #fff;
 }
 
+/* Safari: slightly more line-height to correct squashed ASCII art */
+html.safari .hero-ascii {
+    line-height: 1.35;
+}
+
 .home-intro p {
     line-height: 1.7;
     font-size: 1rem;

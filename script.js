@@ -1,4 +1,10 @@
 (function () {
+  if (navigator.vendor && navigator.vendor.indexOf("Apple") !== -1) {
+    document.documentElement.classList.add("safari");
+  }
+})();
+
+(function () {
   var logoSource = `
             =
           .  **
