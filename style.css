@@ -19,6 +19,23 @@ body {
   background-color: var(--background-color);
 }
 
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 0;
+  z-index: 100;
+  padding: 0.5rem 1rem;
+  background: var(--contrast);
+  color: var(--background-color);
+  font-size: 1rem;
+  text-decoration: none;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
 .page-wrapper {
   max-width: 42rem;
   height: 100vh;
