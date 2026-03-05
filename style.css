@@ -417,6 +417,14 @@ html.safari .hero-ascii {
   .blog-card-list {
     grid-template-columns: 1fr;
   }
+
+  .header-right .logo-div-mirror {
+    display: none;
+  }
+
+  .header-right {
+    justify-content: center;
+  }
 }
 
 .footer {
