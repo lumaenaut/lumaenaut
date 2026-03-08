@@ -236,6 +236,10 @@ body {
   font-weight: 500;
 }
 
+.post-read-time {
+  font-style: italic;
+}
+
 .post-body {
   line-height: 1.7;
   font-size: 1rem;
@@ -244,6 +248,17 @@ body {
 
 .post-body p + p {
   margin-top: 1.25rem;
+}
+
+.post-body ul {
+  margin-top: 1rem;
+  margin-bottom: 1.25rem;
+  padding-left: 1.5rem;
+  list-style-type: disc;
+}
+
+.post-body ul li {
+  margin-top: 0.35rem;
 }
 
 .post-aside {
@@ -300,16 +315,30 @@ body {
   border: 2px solid var(--contrast);
   border-radius: 8px;
   background-color: var(--background-color);
-  box-shadow: 4px 4px 0px #99B4EA;
   text-decoration: none;
   color: inherit;
   cursor: pointer;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
+.blog-card-list li:nth-child(1) .blog-card {
+  box-shadow: 4px 4px 0px #c4a574;
+}
+
+.blog-card-list li:nth-child(2) .blog-card {
+  box-shadow: 4px 4px 0px #9a8bb5;
+}
+
 .blog-card:hover {
   transform: translate(2px, 2px);
-  box-shadow: 2px 2px 0px #99B4EA;
+}
+
+.blog-card-list li:nth-child(1) .blog-card:hover {
+  box-shadow: 2px 2px 0px #c4a574;
+}
+
+.blog-card-list li:nth-child(2) .blog-card:hover {
+  box-shadow: 2px 2px 0px #9a8bb5;
 }
 
 .blog-card-title {
