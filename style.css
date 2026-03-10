@@ -227,6 +227,9 @@ body {
 }
 
 .lang-switcher-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   padding: 4px 10px;
   font-size: 0.9rem;
   border: 2px solid var(--contrast);
@@ -234,13 +237,19 @@ body {
   background: var(--background-color);
   color: inherit;
   cursor: pointer;
-  box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.4);
   transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.lang-switcher-btn .lang-switcher-icon {
+  width: 18px;
+  height: 18px;
+  display: block;
 }
 
 .lang-switcher-btn:hover {
   transform: translate(2px, 2px);
-  box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.4);
 }
 
 .lang-switcher-dropdown {

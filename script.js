@@ -237,6 +237,9 @@
     ? pathname
     : "/esp-LAT/" + (pathname === "/" || pathname === "" ? "" : pathname.replace(/^\//, ""));
 
+  var label = btn.querySelector(".lang-switcher-label");
+  if (label) label.textContent = isEng ? "eng-US" : "esp-LAT";
+
   var engLink = dropdown.querySelector('a[data-lang="eng-US"]');
   var espLink = dropdown.querySelector('a[data-lang="esp-LAT"]');
   if (engLink) engLink.href = base + engPath;
