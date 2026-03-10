@@ -156,19 +156,8 @@
       return;
     }
 
-    function showCopied() {
-      var img = shareBtn.querySelector(".share-btn-icon");
-      shareBtn.textContent = "Copied!";
-      shareBtn.disabled = true;
-      setTimeout(function () {
-        shareBtn.textContent = "";
-        if (img) shareBtn.appendChild(img);
-        shareBtn.disabled = false;
-      }, 1500);
-    }
-
     if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(url).then(showCopied);
+      navigator.clipboard.writeText(url);
       return;
     }
 
@@ -181,7 +170,6 @@
     ta.select();
     try {
       document.execCommand("copy");
-      showCopied();
     } catch (e) {}
     document.body.removeChild(ta);
   });

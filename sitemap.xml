@@ -3,12 +3,14 @@
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://lumaenaut.com/</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lumaenaut.com/eng-US/"/>
     <lastmod>2026-03-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://lumaenaut.com/eng-US/</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lumaenaut.com/eng-US/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://lumaenaut.com/eng-US/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://lumaenaut.com/esp-LAT/"/>
     <lastmod>2026-03-05</lastmod>
@@ -17,6 +19,7 @@
   </url>
   <url>
     <loc>https://lumaenaut.com/esp-LAT/</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lumaenaut.com/eng-US/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://lumaenaut.com/eng-US/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://lumaenaut.com/esp-LAT/"/>
     <lastmod>2026-03-05</lastmod>
@@ -25,6 +28,7 @@
   </url>
   <url>
     <loc>https://lumaenaut.com/eng-US/blog/blog-index.html</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lumaenaut.com/eng-US/blog/blog-index.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://lumaenaut.com/eng-US/blog/blog-index.html"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://lumaenaut.com/esp-LAT/blog/blog-index.html"/>
     <lastmod>2026-03-05</lastmod>
@@ -33,6 +37,7 @@
   </url>
   <url>
     <loc>https://lumaenaut.com/esp-LAT/blog/blog-index.html</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lumaenaut.com/eng-US/blog/blog-index.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://lumaenaut.com/eng-US/blog/blog-index.html"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://lumaenaut.com/esp-LAT/blog/blog-index.html"/>
     <lastmod>2026-03-05</lastmod>
@@ -41,6 +46,7 @@
   </url>
   <url>
     <loc>https://lumaenaut.com/eng-US/blog/everything-i-dont-know-about-blogging.html</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lumaenaut.com/eng-US/blog/everything-i-dont-know-about-blogging.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://lumaenaut.com/eng-US/blog/everything-i-dont-know-about-blogging.html"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://lumaenaut.com/esp-LAT/blog/everything-i-dont-know-about-blogging.html"/>
     <lastmod>2026-03-07</lastmod>
@@ -49,6 +55,7 @@
   </url>
   <url>
     <loc>https://lumaenaut.com/esp-LAT/blog/everything-i-dont-know-about-blogging.html</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lumaenaut.com/eng-US/blog/everything-i-dont-know-about-blogging.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://lumaenaut.com/eng-US/blog/everything-i-dont-know-about-blogging.html"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://lumaenaut.com/esp-LAT/blog/everything-i-dont-know-about-blogging.html"/>
     <lastmod>2026-03-07</lastmod>
@@ -57,6 +64,7 @@
   </url>
   <url>
     <loc>https://lumaenaut.com/eng-US/blog/aspiring-digital-nomad.html</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lumaenaut.com/eng-US/blog/aspiring-digital-nomad.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://lumaenaut.com/eng-US/blog/aspiring-digital-nomad.html"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://lumaenaut.com/esp-LAT/blog/aspiring-digital-nomad.html"/>
     <lastmod>2026-03-01</lastmod>
@@ -65,6 +73,7 @@
   </url>
   <url>
     <loc>https://lumaenaut.com/esp-LAT/blog/aspiring-digital-nomad.html</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lumaenaut.com/eng-US/blog/aspiring-digital-nomad.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://lumaenaut.com/eng-US/blog/aspiring-digital-nomad.html"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://lumaenaut.com/esp-LAT/blog/aspiring-digital-nomad.html"/>
     <lastmod>2026-03-01</lastmod>
@@ -73,6 +82,7 @@
   </url>
   <url>
     <loc>https://lumaenaut.com/eng-US/privacy-policy.html</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lumaenaut.com/eng-US/privacy-policy.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://lumaenaut.com/eng-US/privacy-policy.html"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://lumaenaut.com/esp-LAT/privacy-policy.html"/>
     <lastmod>2026-03-07</lastmod>
@@ -81,6 +91,7 @@
   </url>
   <url>
     <loc>https://lumaenaut.com/esp-LAT/privacy-policy.html</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lumaenaut.com/eng-US/privacy-policy.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://lumaenaut.com/eng-US/privacy-policy.html"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://lumaenaut.com/esp-LAT/privacy-policy.html"/>
     <lastmod>2026-03-07</lastmod>

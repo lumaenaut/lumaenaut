@@ -390,6 +390,18 @@ body {
   font-style: italic;
 }
 
+.post-featured-image {
+  text-align: center;
+  margin: 1.5rem 0;
+}
+
+.post-featured-img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
 .post-body {
   line-height: 1.7;
   font-size: 1rem;
@@ -551,27 +563,28 @@ body {
   margin-bottom: 1.5rem;
 }
 
-.hero-ascii-wrap {
+.hero-portrait-wrap {
   text-align: center;
-  overflow-x: auto;
-  background-color: #1a1a1a;
+  margin: 0 auto 0;
 }
 
-.hero-ascii {
-  font-family: ui-monospace, "Cascadia Code", "Consolas", monospace;
-  font-size: 3px;
-  line-height: 1.2;
-  white-space: pre;
-  margin: 0;
+.hero-portrait {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
   padding: 0;
-  display: inline-block;
-  text-align: left;
-  color: #fff;
-}
-
-/* Safari: slightly more line-height to correct squashed ASCII art */
-html.safari .hero-ascii {
-  line-height: 1.35;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .home-intro p {
