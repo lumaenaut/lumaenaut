@@ -202,6 +202,84 @@ body {
   overflow-y: auto;
 }
 
+.floating-controls {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 2rem 0.5rem;
+  margin-bottom: 0.5rem;
+  background-color: var(--background-color);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+  transition: transform 180ms ease;
+  will-change: transform;
+}
+
+.floating-controls.is-hidden {
+  transform: translateY(-140%);
+}
+
+.lang-switcher {
+  position: relative;
+}
+
+.lang-switcher-btn {
+  padding: 4px 10px;
+  font-size: 0.9rem;
+  border: 2px solid var(--contrast);
+  border-radius: 6px;
+  background: var(--background-color);
+  color: inherit;
+  cursor: pointer;
+  box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.lang-switcher-btn:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.2);
+}
+
+.lang-switcher-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 4px;
+  min-width: 120px;
+  border: 2px solid var(--contrast);
+  border-radius: 6px;
+  background: var(--background-color);
+  box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.2);
+  list-style: none;
+  padding: 0.25rem 0;
+  display: none;
+  z-index: 20;
+}
+
+.lang-switcher-dropdown.is-open {
+  display: block;
+}
+
+.lang-switcher-dropdown a {
+  display: block;
+  padding: 0.4rem 0.75rem;
+  font-size: 0.9rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+.lang-switcher-dropdown a:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.lang-switcher-dropdown a.is-current {
+  font-weight: 600;
+  background: rgba(0, 0, 0, 0.08);
+}
+
 .legal-page {
   max-width: 38rem;
   margin: 0 auto;
@@ -499,6 +577,11 @@ html.safari .hero-ascii {
 
 @media (max-width: 600px) {
   .content {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .floating-controls {
     padding-left: 1rem;
     padding-right: 1rem;
   }

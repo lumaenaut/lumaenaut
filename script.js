@@ -186,3 +186,74 @@
     document.body.removeChild(ta);
   });
 })();
+
+(function () {
+  var content = document.querySelector(".content");
+  var controls = document.querySelector(".floating-controls");
+  if (!content || !controls) return;
+
+  var lastScrollTop = content.scrollTop || 0;
+  var ticking = false;
+
+  function setHidden(hidden) {
+    controls.classList.toggle("is-hidden", hidden);
+  }
+
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () {
+      var current = content.scrollTop || 0;
+      var delta = current - lastScrollTop;
+      if (current <= 0) {
+        setHidden(false);
+      } else if (Math.abs(delta) >= 8) {
+        setHidden(delta > 0);
+        lastScrollTop = current;
+      }
+      ticking = false;
+    });
+  }
+
+  content.addEventListener("scroll", onScroll, { passive: true });
+})();
+
+(function () {
+  var btn = document.querySelector(".lang-switcher-btn");
+  var dropdown = document.querySelector(".lang-switcher-dropdown");
+  if (!btn || !dropdown) return;
+
+  var pathname = window.location.pathname || "";
+  var base = window.location.origin;
+  var isEng = pathname.indexOf("/esp-LAT") !== 0;
+  var engPath = pathname.startsWith("/esp-LAT")
+    ? pathname.replace(/^\/esp-LAT/, "/eng-US")
+    : pathname.startsWith("/eng-US")
+    ? pathname
+    : "/eng-US/" + (pathname === "/" || pathname === "" ? "" : pathname.replace(/^\//, ""));
+  var espPath = pathname.startsWith("/eng-US")
+    ? pathname.replace(/^\/eng-US/, "/esp-LAT")
+    : pathname.startsWith("/esp-LAT")
+    ? pathname
+    : "/esp-LAT/" + (pathname === "/" || pathname === "" ? "" : pathname.replace(/^\//, ""));
+
+  var engLink = dropdown.querySelector('a[data-lang="eng-US"]');
+  var espLink = dropdown.querySelector('a[data-lang="esp-LAT"]');
+  if (engLink) engLink.href = base + engPath;
+  if (espLink) espLink.href = base + espPath;
+  if (engLink) engLink.classList.toggle("is-current", isEng);
+  if (espLink) espLink.classList.toggle("is-current", !isEng);
+
+  btn.addEventListener("click", function (e) {
+    e.stopPropagation();
+    dropdown.classList.toggle("is-open");
+  });
+
+  document.addEventListener("click", function () {
+    dropdown.classList.remove("is-open");
+  });
+
+  dropdown.addEventListener("click", function (e) {
+    e.stopPropagation();
+  });
+})();
