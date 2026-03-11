@@ -4,7 +4,7 @@
   <url>
     <loc>https://lumaenaut.com/</loc>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://lumaenaut.com/eng-US/"/>
-    <lastmod>2026-03-05</lastmod>
+    <lastmod>2026-03-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -13,7 +13,7 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://lumaenaut.com/eng-US/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://lumaenaut.com/eng-US/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://lumaenaut.com/esp-LAT/"/>
-    <lastmod>2026-03-05</lastmod>
+    <lastmod>2026-03-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -22,7 +22,7 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://lumaenaut.com/eng-US/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://lumaenaut.com/eng-US/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://lumaenaut.com/esp-LAT/"/>
-    <lastmod>2026-03-05</lastmod>
+    <lastmod>2026-03-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -31,7 +31,7 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://lumaenaut.com/eng-US/blog/blog-index.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://lumaenaut.com/eng-US/blog/blog-index.html"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://lumaenaut.com/esp-LAT/blog/blog-index.html"/>
-    <lastmod>2026-03-05</lastmod>
+    <lastmod>2026-03-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -40,7 +40,7 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://lumaenaut.com/eng-US/blog/blog-index.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://lumaenaut.com/eng-US/blog/blog-index.html"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://lumaenaut.com/esp-LAT/blog/blog-index.html"/>
-    <lastmod>2026-03-05</lastmod>
+    <lastmod>2026-03-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -59,6 +59,24 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://lumaenaut.com/eng-US/blog/everything-i-dont-know-about-blogging.html"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://lumaenaut.com/esp-LAT/blog/everything-i-dont-know-about-blogging.html"/>
     <lastmod>2026-03-07</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://lumaenaut.com/eng-US/blog/how-a-game-loop-works.html</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lumaenaut.com/eng-US/blog/how-a-game-loop-works.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://lumaenaut.com/eng-US/blog/how-a-game-loop-works.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://lumaenaut.com/esp-LAT/blog/how-a-game-loop-works.html"/>
+    <lastmod>2026-03-11</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://lumaenaut.com/esp-LAT/blog/how-a-game-loop-works.html</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lumaenaut.com/eng-US/blog/how-a-game-loop-works.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://lumaenaut.com/eng-US/blog/how-a-game-loop-works.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://lumaenaut.com/esp-LAT/blog/how-a-game-loop-works.html"/>
+    <lastmod>2026-03-11</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
