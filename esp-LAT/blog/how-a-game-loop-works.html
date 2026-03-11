@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-TLP7F5XM');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Así funciona el ciclo del videojuego: input, actualizar, renderizar y tiempo delta — el latido del videojuego. Por Alberto Del Valle.">
+  <title>Así funciona el ciclo del videojuego</title>
+  <link rel="canonical" href="https://lumaenaut.com/esp-LAT/blog/how-a-game-loop-works.html">
+  <link rel="alternate" hreflang="x-default" href="https://lumaenaut.com/eng-US/blog/how-a-game-loop-works.html">
+  <link rel="alternate" hreflang="en" href="https://lumaenaut.com/eng-US/blog/how-a-game-loop-works.html">
+  <link rel="alternate" hreflang="es" href="https://lumaenaut.com/esp-LAT/blog/how-a-game-loop-works.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Así funciona el ciclo del videojuego">
+  <meta property="og:description" content="Así funciona el ciclo del videojuego: input, actualizar, renderizar y tiempo delta — el latido del videojuego. Por Alberto Del Valle.">
+  <meta property="og:url" content="https://lumaenaut.com/esp-LAT/blog/how-a-game-loop-works.html">
+  <meta property="og:image" content="https://lumaenaut.com/images/hands-typing-on-keyboard.png">
+  <meta property="article:published_time" content="2026-03-11">
+  <meta property="article:author" content="Alberto Del Valle">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://lumaenaut.com/images/hands-typing-on-keyboard.png">
+  <meta name="twitter:title" content="Así funciona el ciclo del videojuego">
+  <meta name="twitter:description" content="Así funciona el ciclo del videojuego: input, actualizar, renderizar y tiempo delta — el latido del videojuego. Por Alberto Del Valle.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%94%A5%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../../style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Así funciona el ciclo del videojuego",
+    "alternativeHeadline": "Input, actualizar, renderizar — el latido del videojuego",
+    "description": "Así funciona el ciclo del videojuego: input, actualizar, renderizar y tiempo delta — el latido del videojuego. Por Alberto Del Valle.",
+    "url": "https://lumaenaut.com/esp-LAT/blog/how-a-game-loop-works.html",
+    "mainEntityOfPage": { "@id": "https://lumaenaut.com/esp-LAT/blog/how-a-game-loop-works.html" },
+    "image": "https://lumaenaut.com/images/hands-typing-on-keyboard.png",
+    "datePublished": "2026-03-11",
+    "dateModified": "2026-03-11",
+    "inLanguage": "es",
+    "author": {
+      "@type": "Person",
+      "name": "Alberto Del Valle",
+      "url": "https://lumaenaut.com/esp-LAT/"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Alberto Del Valle"
+    }
+  }
+  </script>
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TLP7F5XM"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+  <div class="page-wrapper">
+    <header class="header">
+      <div class="header-left">
+        <div class="logo-div">
+          <pre class="logo-ascii" id="logo-container" aria-hidden="true"></pre>
+        </div>
+      </div>
+      <div class="header-center">
+        <h1>Lumænaut_</h1>
+        <nav class="main-nav" aria-label="Navegación principal">
+          <ul>
+            <li><a class="home-btn" href="../index.html">inicio</a></li>
+            <li><a class="blog-btn" href="blog-index.html">blog</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="header-right">
+        <div class="logo-div-mirror" aria-hidden="true"></div>
+        <button type="button" class="share-btn" aria-label="Compartir esta página"><img src="../../assets/share.png" alt="" class="share-btn-icon" data-ios-src="../../assets/ios share.png" width="20" height="20"></button>
+      </div>
+    </header>
+    <main id="main-content" class="content">
+      <div class="floating-controls">
+        <div class="lang-switcher">
+          <button type="button" class="lang-switcher-btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Seleccionar idioma"><img src="../../assets/translate.png" alt="" class="lang-switcher-icon"><span class="lang-switcher-label">esp (LAT)</span></button>
+          <ul class="lang-switcher-dropdown" role="listbox" aria-label="Opciones de idioma">
+            <li><a href="#" data-lang="eng-US" role="option">eng (US)</a></li>
+            <li><a href="#" data-lang="esp-LAT" role="option">esp (LAT)</a></li>
+          </ul>
+        </div>
+      </div>
+      <article class="post" aria-labelledby="post-title">
+        <header class="post-header">
+          <h2 id="post-title" class="post-title">Así funciona el ciclo del videojuego</h2>
+          <p class="post-subtitle">Input, actualizar, renderizar — el latido del videojuego</p>
+          <p class="post-meta">
+            Por <span class="author">Alberto Del Valle</span><br>
+            <time datetime="2026-03-11">11 de marzo de 2026</time><br>
+            <span class="post-read-time">(Tiempo de lectura aprox. 7 min.)</span>
+          </p>
+        </header>
+        <div class="post-body">
+          <p>
+            Cada videojuego que has jugado — desde el Pong hasta el último 
+            éxito de mundo abierto — lo mueve un solo latido: el 
+            <strong>ciclo del juego</strong>. El bloque de código que no se 
+            detiene. Mientras el ciclo corre, el juego está vivo. Cuando se 
+            detiene, el juego termina. Entender cómo funciona es el primer paso 
+            para hacer tus propios videojuegos.
+          </p>
+
+          <h3>El ciclo más simple</h3>
+          <p>
+            En el núcleo, un ciclo de juego hace tres cosas, una y otra vez: 
+            revisa el <strong>input</strong>, <strong>actualiza</strong> el 
+            estado del juego (posiciones, puntajes, física) y 
+            <strong>renderiza</strong> el siguiente cuadro en pantalla. En 
+            pseudocódigo se ve así:
+          </p>
+          <pre><code>while (gameIsRunning) {  // Mientras el juego esté corriendo
+  processInput();  // Procesa el input
+  update();  // Actualiza el estado del juego
+  render();  // Renderiza el siguiente cuadro en pantalla
+}</code></pre>
+          <p>
+            Eso es todo. Sin magia. El ciclo corre tan rápido como la máquina 
+            lo permita (o como tú lo limites). Cada vuelta es un “tic” del 
+            reloj del juego. Mueves al jugador, actualizas a los enemigos, 
+            resuelves colisiones y pintas el resultado. Repites hasta que el 
+            jugador cierra.
+          </p>
+
+          <h3>Por qué los cuadros por segundo no son fijos</h3>
+          <p>
+            En las máquinas arcade y consolas viejas la lógica corría a un 
+            ritmo fijo, por ejemplo 60 veces por segundo. En computadoras y 
+            celulares de hoy el ritmo varía: una escena pesada puede ir a 50 
+            FPS y un menú simple a 120 FPS. Si atas la lógica del juego a “una 
+            actualización por cuadro”, el juego irá más rápido en hardware 
+            potente y más lento en uno débil. Un personaje que se mueve 10 
+            píxeles por cuadro cruzaría la pantalla en la mitad del tiempo a 
+            120 FPS que a 60 FPS. Eso se siente roto e injusto.
+          </p>
+          <p>
+            La solución es usar el <strong>tiempo delta</strong> (suele 
+            escribirse <code>dt</code>): el tiempo en segundos (o milisegundos) 
+            desde el cuadro anterior. Multiplicas el movimiento y otros cambios 
+            por <code>dt</code>. Así, “10 píxeles por segundo” se vuelve 
+            <code>position += 10 * dt</code>. El personaje recorre la misma 
+            distancia por segundo sin importar cuántos cuadros renderice la 
+            máquina. El juego queda <strong>independiente del framerate</strong>.
+          </p>
+
+          <h3>Actualizar vs renderizar</h3>
+          <p>
+            Conviene tener claro la diferencia entre “actualizar” y “renderizar”. 
+            <strong>Actualizar</strong> es donde cambias el mundo del juego: 
+            física, IA, timers, input. <strong>Renderizar</strong> es donde llevas 
+            ese estado a la pantalla. Puedes actualizar varias veces en un 
+            cuadro (por ejemplo física a paso fijo) y renderizar una sola vez, o 
+            saltarte un render si el cuadro se atrasó. Muchos motores hacen 
+            “actualizar a 60 Hz, renderizar cuando se pueda” para que la física 
+            sea estable y la imagen varíe.
+          </p>
+
+          <h3>El ciclo en el navegador</h3>
+          <p>
+            En el navegador no escribes <code>while (true)</code>. El navegador 
+            te da <strong><code>requestAnimationFrame</code></strong> (a veces 
+            abreviado <code>rAF</code>). Le pasas una función; el navegador la 
+            llama antes del siguiente refresco, casi siempre al ritmo de la 
+            pantalla (60 o 120 Hz). Tu “ciclo” es: pedir el siguiente cuadro y 
+            en esa función hacer tu actualización y tu render. Una llamada por 
+            cuadro, con un tiempo que puedes medir para obtener <code>dt</code>.
+          </p>
+
+          <figure class="game-loop-demo" id="game-loop-demo" aria-labelledby="game-loop-demo-caption">
+            <p class="demo-title" id="game-loop-demo-caption">Mira el ciclo en acción</p>
+            <div class="demo-canvas-wrap">
+              <canvas class="demo-canvas" id="game-loop-canvas" width="640" height="360" aria-describedby="game-loop-demo-caption">Demostración: una pelota se mueve y rebota; el ciclo corre con requestAnimationFrame.</canvas>
+            </div>
+            <div class="demo-stats" aria-live="polite">
+              <span id="demo-frame">Cuadro: 0</span>
+              <span id="demo-fps">FPS: —</span>
+              <span id="demo-dt">Δt: — ms</span>
+            </div>
+            <div class="demo-controls">
+              <button type="button" id="demo-pause">Pausa</button>
+              <button type="button" id="demo-step" disabled>Avanzar 1 cuadro</button>
+            </div>
+            <p class="demo-caption">
+              Es el mismo ciclo: en cada cuadro actualizamos la posición de la 
+              pelota con el tiempo delta y luego renderizamos. Pausa y usa 
+              “Avanzar 1 cuadro” para hacer una actualización y un render a 
+              la vez.
+            </p>
+          </figure>
+
+          <p>
+            En la demo de arriba la posición de la pelota se actualiza con 
+            <code>position += velocity * dt</code>. Su velocidad está en 
+            “unidades por segundo”, no “unidades por cuadro”. Los números 
+            muestran el cuadro actual, los FPS y el tiempo delta. Al pausar se 
+            detiene el ciclo; “Avanzar 1 cuadro” hace una actualización y un 
+            render para que veas el ciclo dar un solo tic.
+          </p>
+
+          <h3>Paso fijo vs paso variable</h3>
+          <p>
+            Algunos juegos usan un <strong>paso fijo</strong> para la física 
+            (por ejemplo siempre 1/60 s por paso). Pueden ejecutar varios pasos 
+            de física en un cuadro si el cuadro fue largo, para que la 
+            simulación no se desincronice del tiempo real. Otros usan 
+            <strong>paso variable</strong>: una actualización por cuadro, con 
+            <code>dt</code> igual al tiempo real transcurrido. Cada enfoque 
+            tiene sus pros y contras: el fijo es estable y reproducible; el 
+            variable es más simple y es suficiente para muchos juegos. Los motores 
+            profesionales suelen mezclar (física fija, render variable).
+          </p>
+
+          <h3>Un solo ciclo para todos</h3>
+          <p>
+            No importa qué tan grande sea el juego, la idea es la misma: un 
+            ciclo, input → actualizar → renderizar, con el tiempo (tiempo delta) 
+            impulsando los cambios. Cuando lo ves así, puedes entrar a sistemas 
+            de entrada, pipelines de renderizado y motores de física sabiendo 
+            que todos se conectan a este latido. Dominar el ciclo es tener la 
+            base sobre la que se construye todo lo demás.
+          </p>
+        </div>
+        <blockquote class="closing-quote">
+          Un ciclo. Input, actualizar, renderizar. Repetir.
+        </blockquote>
+      </article>
+    </main>
+    <footer class="footer">
+      <nav class="social-links" aria-label="Enlaces sociales">
+        <ul>
+          <li><a href="https://www.reddit.com/user/Lumaenaut_/" target="_blank" rel="noopener noreferrer" title="Reddit"><img src="../../assets/reddit.png" alt="Reddit" width="24" height="24"></a></li>
+          <li><a href="https://x.com/lumaenaut_" target="_blank" rel="noopener noreferrer" title="X"><img src="../../assets/twitter.png" alt="X" width="24" height="24"></a></li>
+          <li><a href="https://github.com/Lumaenaut" target="_blank" rel="noopener noreferrer" title="GitHub"><img src="../../assets/github.png" alt="GitHub" width="24" height="24"></a></li>
+        </ul>
+      </nav>
+      <div class="footer-meta">
+        <p>2026, Lumænaut_ <a href="../privacy-policy.html">Política de privacidad</a></p>
+      </div>
+    </footer>
+  </div>
+  <script src="../../script.js"></script>
+  <script>
+  (function () {
+    var canvas = document.getElementById('game-loop-canvas');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    var frameEl = document.getElementById('demo-frame');
+    var fpsEl = document.getElementById('demo-fps');
+    var dtEl = document.getElementById('demo-dt');
+    var pauseBtn = document.getElementById('demo-pause');
+    var stepBtn = document.getElementById('demo-step');
+
+    var frameLabel = 'Cuadro: ';
+    var fpsLabel = 'FPS: ';
+    var dtLabel = 'Δt: ';
+    var pauseText = 'Pausa';
+    var resumeText = 'Reanudar';
+
+    var w = 640, h = 360;
+    var ball = { x: w * 0.2, y: h / 2, vx: 120, vy: 80, r: 24 };
+    var frameCount = 0;
+    var lastTime = null;
+    var fps = 0;
+    var fpsFrames = 0;
+    var fpsAccum = 0;
+    var paused = false;
+    var rafId = null;
+
+    function update(dt) {
+      ball.x += ball.vx * dt;
+      ball.y += ball.vy * dt;
+      if (ball.x - ball.r < 0) { ball.x = ball.r; ball.vx = -ball.vx; }
+      if (ball.x + ball.r > w) { ball.x = w - ball.r; ball.vx = -ball.vx; }
+      if (ball.y - ball.r < 0) { ball.y = ball.r; ball.vy = -ball.vy; }
+      if (ball.y + ball.r > h) { ball.y = h - ball.r; ball.vy = -ball.vy; }
+    }
+
+    function render() {
+      ctx.fillStyle = '#0d0d0e';
+      ctx.fillRect(0, 0, w, h);
+      ctx.fillStyle = '#e8e6e3';
+      ctx.beginPath();
+      ctx.arc(ball.x, ball.y, ball.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    function tick(timestamp) {
+      if (!lastTime) lastTime = timestamp;
+      var dt = (timestamp - lastTime) / 1000;
+      lastTime = timestamp;
+      if (dt > 0.2) dt = 0.016;
+
+      if (!paused) {
+        update(dt);
+        frameCount++;
+        fpsFrames++;
+        fpsAccum += dt;
+        if (fpsAccum >= 0.5) {
+          fps = Math.round(fpsFrames / fpsAccum);
+          fpsFrames = 0;
+          fpsAccum = 0;
+        }
+      }
+      render();
+
+      if (frameEl) frameEl.textContent = frameLabel + frameCount;
+      if (fpsEl) fpsEl.textContent = fpsLabel + (paused ? '—' : fps);
+      if (dtEl) dtEl.textContent = dtLabel + (paused ? '—' : (dt * 1000).toFixed(2)) + ' ms';
+
+      stepBtn.disabled = !paused;
+      pauseBtn.textContent = paused ? resumeText : pauseText;
+      rafId = requestAnimationFrame(tick);
+    }
+
+    pauseBtn.addEventListener('click', function () {
+      paused = !paused;
+      if (!paused) lastTime = null;
+    });
+
+    stepBtn.addEventListener('click', function () {
+      if (!paused) return;
+      var t = performance.now();
+      if (!lastTime) lastTime = t - 16.67;
+      var dt = (t - lastTime) / 1000;
+      if (dt > 0.2) dt = 0.016;
+      lastTime = t;
+      update(dt);
+      frameCount++;
+      render();
+      frameEl.textContent = frameLabel + frameCount;
+      fpsEl.textContent = fpsLabel + '—';
+      dtEl.textContent = dtLabel + (dt * 1000).toFixed(2) + ' ms';
+    });
+
+    rafId = requestAnimationFrame(tick);
+  })();
+  </script>
+</body>
+</html>

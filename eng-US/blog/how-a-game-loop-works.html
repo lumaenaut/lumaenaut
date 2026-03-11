@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-TLP7F5XM');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="How the game loop works: input, update, render, delta time — the videogame heartbeat. By Alberto Del Valle.">
+  <title>How the Game Loop works</title>
+  <link rel="canonical" href="https://lumaenaut.com/eng-US/blog/how-a-game-loop-works.html">
+  <link rel="alternate" hreflang="x-default" href="https://lumaenaut.com/eng-US/blog/how-a-game-loop-works.html">
+  <link rel="alternate" hreflang="en" href="https://lumaenaut.com/eng-US/blog/how-a-game-loop-works.html">
+  <link rel="alternate" hreflang="es" href="https://lumaenaut.com/esp-LAT/blog/how-a-game-loop-works.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="How the Game Loop works">
+  <meta property="og:description" content="How the game loop works: input, update, render, delta time — the videogame heartbeat. By Alberto Del Valle.">
+  <meta property="og:url" content="https://lumaenaut.com/eng-US/blog/how-a-game-loop-works.html">
+  <meta property="og:image" content="https://lumaenaut.com/images/hands-typing-on-keyboard.png">
+  <meta property="article:published_time" content="2026-03-11">
+  <meta property="article:author" content="Alberto Del Valle">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://lumaenaut.com/images/hands-typing-on-keyboard.png">
+  <meta name="twitter:title" content="How the Game Loop works">
+  <meta name="twitter:description" content="How the game loop works: input, update, render, delta time — the videogame heartbeat. By Alberto Del Valle.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%94%A5%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../../style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "How the Game Loop works",
+    "alternativeHeadline": "Input, update, render — the videogame heartbeat",
+    "description": "How the game loop works: input, update, render, delta time — the videogame heartbeat. By Alberto Del Valle.",
+    "url": "https://lumaenaut.com/eng-US/blog/how-a-game-loop-works.html",
+    "mainEntityOfPage": { "@id": "https://lumaenaut.com/eng-US/blog/how-a-game-loop-works.html" },
+    "image": "https://lumaenaut.com/images/hands-typing-on-keyboard.png",
+    "datePublished": "2026-03-11",
+    "dateModified": "2026-03-11",
+    "author": {
+      "@type": "Person",
+      "name": "Alberto Del Valle",
+      "url": "https://lumaenaut.com/eng-US/"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Alberto Del Valle"
+    }
+  }
+  </script>
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TLP7F5XM"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <div class="page-wrapper">
+    <header class="header">
+      <div class="header-left">
+        <div class="logo-div">
+          <pre class="logo-ascii" id="logo-container" aria-hidden="true"></pre>
+        </div>
+      </div>
+      <div class="header-center">
+        <h1>Lumænaut_</h1>
+        <nav class="main-nav" aria-label="Main navigation">
+          <ul>
+            <li><a class="home-btn" href="../index.html">home</a></li>
+            <li><a class="blog-btn" href="blog-index.html">blog</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="header-right">
+        <div class="logo-div-mirror" aria-hidden="true"></div>
+        <button type="button" class="share-btn" aria-label="Share this page"><img src="../../assets/share.png" alt="" class="share-btn-icon" data-ios-src="../../assets/ios share.png" width="20" height="20"></button>
+      </div>
+    </header>
+    <main id="main-content" class="content">
+      <div class="floating-controls">
+        <div class="lang-switcher">
+          <button type="button" class="lang-switcher-btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Select language"><img src="../../assets/translate.png" alt="" class="lang-switcher-icon"><span class="lang-switcher-label">eng (US)</span></button>
+          <ul class="lang-switcher-dropdown" role="listbox" aria-label="Language options">
+            <li><a href="#" data-lang="eng-US" role="option">eng (US)</a></li>
+            <li><a href="#" data-lang="esp-LAT" role="option">esp (LAT)</a></li>
+          </ul>
+        </div>
+      </div>
+      <article class="post" aria-labelledby="post-title">
+        <header class="post-header">
+          <h2 id="post-title" class="post-title">How the Game Loop works</h2>
+          <p class="post-subtitle">Input, update, render — the videogame heartbeat</p>
+          <p class="post-meta">
+            By <span class="author">Alberto Del Valle</span><br>
+            <time datetime="2026-03-11">March 11, 2026</time><br>
+            <span class="post-read-time">(Est. Read Time 7 minutes.)</span>
+          </p>
+        </header>
+        <div class="post-body">
+          <p>
+            Every game you've ever played — from Pong to the latest open-world 
+            blockbuster — is driven by a single, relentless heartbeat: the 
+            <strong>game loop</strong>. It's the piece of code that never 
+            sleeps. While the loop runs, the game is alive. When it stops, the 
+            game is over. Understanding how it works is the first step to 
+            making games yourself.
+          </p>
+
+          <h3>The simplest loop</h3>
+          <p>
+            At its core, a game loop does three things, over and over: it 
+            checks for <strong>input</strong>, it <strong>updates</strong> the 
+            game's state (positions, scores, physics), and it 
+            <strong>draws</strong> the next frame to the screen. In pseudocode 
+            it looks like this:
+          </p>
+          <pre><code>while (gameIsRunning) {
+  processInput();
+  update();
+  render();
+}</code></pre>
+          <p>
+            That's it. No magic. The loop runs as fast as the machine allows 
+            (or as fast as you cap it). Each iteration is one “tick” of the 
+            game’s clock. Move the player, update the enemies, resolve 
+            collisions, then paint the result. Repeat until the player quits.
+          </p>
+
+          <h3>Why frame rate isn’t fixed</h3>
+          <p>
+            Old arcade machines and consoles used fixed hardware where game 
+            logic ran at a consistent rate, such as 60 times per second. In 
+            contrast, modern PCs and phones have variable frame rates — a 
+            complex scene might run at 50 FPS while a simple menu hits 120 FPS. 
+            If your game logic updates once per frame, the simulation speed 
+            becomes tied to the frame rate. A character moving 10 pixels per 
+            frame would cover the screen twice as fast at 120 FPS compared to 
+            60 FPS, creating an unfair and broken experience.
+          </p>
+          <p>
+            The fix is to use <strong>delta time</strong> (often written 
+            <code>dt</code>): the time in seconds (or milliseconds) since the 
+            last frame. You multiply movement and other time-based changes by 
+            <code>dt</code>. So “10 pixels per second” becomes 
+            <code>position += 10 * dt</code>. Now the character moves the same 
+            distance per second regardless of how many frames the machine can 
+            draw. The game is <strong>frame-rate independent</strong>.
+          </p>
+
+          <h3>Update vs render</h3>
+          <p>
+            It’s useful to keep “update” and “render” separate in your head. 
+            <strong>Update</strong> is where you change the game world: 
+            physics, AI, timers, input handling. <strong>Render</strong> is 
+            where you draw the current state to the screen. You can even update 
+            multiple times per frame (e.g. fixed timestep physics) and still 
+            render once, or skip rendering when the frame is late. Many engines 
+            do “update at 60 Hz, render when possible” so physics stays stable 
+            while the picture can vary.
+          </p>
+
+          <h3>The loop in the browser</h3>
+          <p>
+            In a browser, you don’t write <code>while (true)</code>. The 
+            browser gives you <strong><code>requestAnimationFrame</code></strong> 
+            (often shortened to <code>rAF</code>). You pass it a callback; the 
+            browser calls that callback before the next repaint, usually synced 
+            to the display’s refresh rate (60 or 120 Hz). So your “loop” is: 
+            schedule the next frame, then in the callback run your update and 
+            draw. One call per frame, with timing you can measure to get <code>dt</code>.
+          </p>
+
+          <figure class="game-loop-demo" id="game-loop-demo" aria-labelledby="game-loop-demo-caption">
+            <p class="demo-title" id="game-loop-demo-caption">See the loop in action</p>
+            <div class="demo-canvas-wrap">
+              <canvas class="demo-canvas" id="game-loop-canvas" width="640" height="360" aria-describedby="game-loop-demo-caption">A small demo: a ball moves and bounces; the loop runs with requestAnimationFrame.</canvas>
+            </div>
+            <div class="demo-stats" aria-live="polite">
+              <span id="demo-frame">Frame: 0</span>
+              <span id="demo-fps">FPS: —</span>
+              <span id="demo-dt">Δt: — ms</span>
+            </div>
+            <div class="demo-controls">
+              <button type="button" id="demo-pause">Pause</button>
+              <button type="button" id="demo-step" disabled>Step 1 frame</button>
+            </div>
+            <p class="demo-caption">
+              This is the same loop: each frame we update the ball’s position 
+              with delta time, then draw. Pause and step to advance one update 
+              + render at a time.
+            </p>
+          </figure>
+
+          <p>
+            In the demo above, the ball’s position is updated with 
+            <code>position += velocity * dt</code>. So its speed is in “units 
+            per second,” not “units per frame.” The stats show the current 
+            frame number, FPS, and delta time. When you pause, the loop stops; 
+            “Step 1 frame” runs one update and one render so you can see the 
+            loop tick once.
+          </p>
+
+          <h3>Fixed vs variable timestep</h3>
+          <p>
+            Some games use a <strong>fixed timestep</strong> for physics (e.g. 
+            always 1/60 s per step). They might run several physics steps in 
+            one frame if the frame was long, so the simulation stays in sync 
+            with real time. Others use a <strong>variable timestep</strong>: 
+            one update per frame, with <code>dt</code> equal to the actual 
+            elapsed time. Each approach has trade-offs: fixed is stable and 
+            reproducible; variable is simpler and can feel fine for many games. 
+            Professional engines often use a mix (fixed physics, variable 
+            rendering).
+          </p>
+
+          <h3>One loop to rule them all</h3>
+          <p>
+            No matter how big the game is, the idea is the same: one loop, 
+            input → update → render, with time (delta time) driving change. 
+            Once you see that, you can dig into input systems, rendering 
+            pipelines, and physics engines knowing they all plug into this 
+            heartbeat. Master the loop, and you’ve got the foundation 
+            everything else is built on.
+          </p>
+        </div>
+        <blockquote class="closing-quote">
+          One loop. Input, update, render. Repeat.
+        </blockquote>
+      </article>
+    </main>
+    <footer class="footer">
+      <nav class="social-links" aria-label="Social links">
+        <ul>
+          <li><a href="https://www.reddit.com/user/Lumaenaut_/" target="_blank" rel="noopener noreferrer" title="Reddit"><img src="../../assets/reddit.png" alt="Reddit" width="24" height="24"></a></li>
+          <li><a href="https://x.com/lumaenaut_" target="_blank" rel="noopener noreferrer" title="X"><img src="../../assets/twitter.png" alt="X" width="24" height="24"></a></li>
+          <li><a href="https://github.com/Lumaenaut" target="_blank" rel="noopener noreferrer" title="GitHub"><img src="../../assets/github.png" alt="GitHub" width="24" height="24"></a></li>
+        </ul>
+      </nav>
+      <div class="footer-meta">
+        <p>2026, Lumænaut_ <a href="../privacy-policy.html">Privacy Policy</a></p>
+      </div>
+    </footer>
+  </div>
+  <script src="../../script.js"></script>
+  <script>
+  (function () {
+    var canvas = document.getElementById('game-loop-canvas');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    var frameEl = document.getElementById('demo-frame');
+    var fpsEl = document.getElementById('demo-fps');
+    var dtEl = document.getElementById('demo-dt');
+    var pauseBtn = document.getElementById('demo-pause');
+    var stepBtn = document.getElementById('demo-step');
+
+    var w = 640, h = 360;
+    var ball = { x: w * 0.2, y: h / 2, vx: 120, vy: 80, r: 24 };
+    var frameCount = 0;
+    var lastTime = null;
+    var fps = 0;
+    var fpsFrames = 0;
+    var fpsAccum = 0;
+    var paused = false;
+    var rafId = null;
+
+    function update(dt) {
+      ball.x += ball.vx * dt;
+      ball.y += ball.vy * dt;
+      if (ball.x - ball.r < 0) { ball.x = ball.r; ball.vx = -ball.vx; }
+      if (ball.x + ball.r > w) { ball.x = w - ball.r; ball.vx = -ball.vx; }
+      if (ball.y - ball.r < 0) { ball.y = ball.r; ball.vy = -ball.vy; }
+      if (ball.y + ball.r > h) { ball.y = h - ball.r; ball.vy = -ball.vy; }
+    }
+
+    function render() {
+      ctx.fillStyle = '#0d0d0e';
+      ctx.fillRect(0, 0, w, h);
+      ctx.fillStyle = '#e8e6e3';
+      ctx.beginPath();
+      ctx.arc(ball.x, ball.y, ball.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    function tick(timestamp) {
+      if (!lastTime) lastTime = timestamp;
+      var dt = (timestamp - lastTime) / 1000;
+      lastTime = timestamp;
+      if (dt > 0.2) dt = 0.016;
+
+      if (!paused) {
+        update(dt);
+        frameCount++;
+        fpsFrames++;
+        fpsAccum += dt;
+        if (fpsAccum >= 0.5) {
+          fps = Math.round(fpsFrames / fpsAccum);
+          fpsFrames = 0;
+          fpsAccum = 0;
+        }
+      }
+      render();
+
+      if (frameEl) frameEl.textContent = 'Frame: ' + frameCount;
+      if (fpsEl) fpsEl.textContent = 'FPS: ' + (paused ? '—' : fps);
+      if (dtEl) dtEl.textContent = 'Δt: ' + (paused ? '—' : (dt * 1000).toFixed(2)) + ' ms';
+
+      stepBtn.disabled = !paused;
+      rafId = requestAnimationFrame(tick);
+    }
+
+    pauseBtn.addEventListener('click', function () {
+      paused = !paused;
+      pauseBtn.textContent = paused ? 'Resume' : 'Pause';
+      if (!paused) lastTime = null;
+    });
+
+    stepBtn.addEventListener('click', function () {
+      if (!paused) return;
+      var t = performance.now();
+      if (!lastTime) lastTime = t - 16.67;
+      var dt = (t - lastTime) / 1000;
+      if (dt > 0.2) dt = 0.016;
+      lastTime = t;
+      update(dt);
+      frameCount++;
+      render();
+      frameEl.textContent = 'Frame: ' + frameCount;
+      fpsEl.textContent = 'FPS: —';
+      dtEl.textContent = 'Δt: ' + (dt * 1000).toFixed(2) + ' ms';
+    });
+
+    rafId = requestAnimationFrame(tick);
+  })();
+  </script>
+</body>
+</html>
