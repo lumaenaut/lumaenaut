@@ -92,7 +92,7 @@
   if (!container) return;
 
   // Create one span per character, grouped by line; store refs for animation
-  var r, c, span, lineEl, charSpan;
+  var r, c, lineEl, charSpan;
   for (r = 0; r < rows; r++) {
     colorMatrix[r] = [];
     spanMatrix[r] = [];
