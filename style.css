@@ -478,8 +478,9 @@ body {
   opacity: 0.8;
 }
 
-/* Game loop demo (blog post interactive) */
-.game-loop-demo {
+/* Game loop demo + algorithm demos (blog post interactive) */
+.game-loop-demo,
+.algorithm-demo {
   margin: 2.5rem 0;
   padding: 1.25rem;
   background: var(--bg-subtle, #1a1a1c);
@@ -487,14 +488,16 @@ body {
   border: 1px solid var(--border-subtle, #333);
 }
 
-.game-loop-demo .demo-title {
+.game-loop-demo .demo-title,
+.algorithm-demo .demo-title {
   font-size: 1rem;
   font-weight: 600;
   margin-bottom: 0.75rem;
   color: #e8e6e3;
 }
 
-.game-loop-demo .demo-canvas-wrap {
+.game-loop-demo .demo-canvas-wrap,
+.algorithm-demo .demo-canvas-wrap {
   position: relative;
   max-width: 100%;
   border-radius: 6px;
@@ -502,14 +505,16 @@ body {
   background: #0d0d0e;
 }
 
-.game-loop-demo .demo-canvas {
+.game-loop-demo .demo-canvas,
+.algorithm-demo .demo-canvas {
   display: block;
   width: 100%;
   height: auto;
   max-height: 360px;
 }
 
-.game-loop-demo .demo-stats {
+.game-loop-demo .demo-stats,
+.algorithm-demo .demo-stats {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
@@ -519,18 +524,21 @@ body {
   color: #c4c2be;
 }
 
-.game-loop-demo .demo-stats span {
+.game-loop-demo .demo-stats span,
+.algorithm-demo .demo-stats span {
   white-space: nowrap;
 }
 
-.game-loop-demo .demo-controls {
+.game-loop-demo .demo-controls,
+.algorithm-demo .demo-controls {
   margin-top: 0.75rem;
   display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;
 }
 
-.game-loop-demo .demo-controls button {
+.game-loop-demo .demo-controls button,
+.algorithm-demo .demo-controls button {
   padding: 0.35rem 0.75rem;
   font-size: 0.9rem;
   border-radius: 4px;
@@ -540,20 +548,33 @@ body {
   cursor: pointer;
 }
 
-.game-loop-demo .demo-controls button:hover {
+.game-loop-demo .demo-controls button:hover,
+.algorithm-demo .demo-controls button:hover {
   background: #333;
 }
 
-.game-loop-demo .demo-controls button:disabled {
+.game-loop-demo .demo-controls button:disabled,
+.algorithm-demo .demo-controls button:disabled {
   opacity: 0.6;
   cursor: not-allowed;
 }
 
-.game-loop-demo .demo-caption {
+.game-loop-demo .demo-caption,
+.algorithm-demo .demo-caption {
   font-size: 0.8rem;
   color: #a8a6a2;
   margin-top: 0.5rem;
   font-style: italic;
+}
+
+.algorithm-demo .demo-controls input {
+  padding: 0.35rem 0.5rem;
+  font-size: 0.9rem;
+  border-radius: 4px;
+  border: 1px solid #555;
+  background: #252528;
+  color: #e8e6e3;
+  max-width: 5rem;
 }
 
 /* Blog menu */
