@@ -24,8 +24,8 @@
   <meta property="og:image:alt" content="ASCII art: hands typing on a computer keyboard, evoking code and algorithms.">
   <meta property="og:locale" content="en_US">
   <meta property="og:locale:alternate" content="es">
-  <meta property="article:published_time" content="2026-03-12">
-  <meta property="article:modified_time" content="2026-03-12">
+  <meta property="article:published_time" content="2026-03-13">
+  <meta property="article:modified_time" content="2026-03-13">
   <meta property="article:author" content="Alberto Del Valle">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://lumaenaut.com/images/hands-typing-on-keyboard-ascii.png">
@@ -44,8 +44,8 @@
     "mainEntityOfPage": { "@id": "https://lumaenaut.com/eng-US/blog/the-8-algorithm-paradigms.html" },
     "image": "https://lumaenaut.com/images/hands-typing-on-keyboard-ascii.png",
     "inLanguage": "en-US",
-    "datePublished": "2026-03-12",
-    "dateModified": "2026-03-12",
+    "datePublished": "2026-03-13",
+    "dateModified": "2026-03-13",
     "author": {
       "@type": "Person",
       "name": "Alberto Del Valle",
@@ -101,7 +101,7 @@
           <p class="post-subtitle">Algorithm design techniques</p>
           <p class="post-meta">
             By <span class="author">Alberto Del Valle</span><br>
-            <time datetime="2026-03-12">March 12, 2026</time><br>
+            <time datetime="2026-03-13">March 13, 2026</time><br>
             <span class="post-read-time">(Est. Read Time 8 minutes.)</span>
           </p>
         </header>
@@ -305,53 +305,56 @@
 
           <h3>7. Sorting</h3>
           <p>
-            The sorting paradigm is "arrange data in a defined order" —
-            smallest to largest, A–Z, and so on. Many concrete algorithms
-            implement it (bubble, insertion, merge, quick, …), each with
-            different trade-offs. They often embody other paradigms: merge
-            sort is divide-and-conquer; quicksort uses a pivot and
-            partitioning; bubble sort is the simplest "compare and swap"
-            approach.
+            Sorting means arranging data in a defined order, like smallest to
+            largest or A to Z. Many algorithms do it. Bubble, insertion,
+            merge, and quicksort are a few, each with different trade-offs.
+            Merge sort is divide-and-conquer. Quicksort uses a pivot and
+            partitioning. Bubble sort is the simplest. It just compares
+            adjacent pairs and swaps them when they're out of order.
           </p>
           <p>
-            The demo uses bubble sort: repeatedly compare adjacent pairs and
-            swap if they’re out of order, until a full pass does no swaps.
-            Shuffle the bars, then run it and watch the larger values "bubble"
-            toward the end. It’s not the fastest, but it makes the idea of
-            comparing and swapping very visible.
+            In the demo you shuffle the bars and run bubble sort. Watch
+            larger values "bubble" toward the end as adjacent pairs are
+            compared and swapped. A full pass with no swaps means the list is
+            sorted. It's not the fastest algorithm, but the idea is easy to
+            see.
           </p>
           <figure class="algorithm-demo" id="demo-sort" aria-labelledby="demo-sort-caption">
-            <p class="demo-title" id="demo-sort-caption">Sorting: bubble sort</p>
+            <p class="demo-title" id="demo-sort-caption">Sorting, bubble sort</p>
             <div class="demo-canvas-wrap">
               <canvas class="demo-canvas" id="algo-sort-canvas" width="560" height="240" aria-describedby="demo-sort-caption">Bars get reordered by bubble sort until they are ascending.</canvas>
             </div>
             <div class="demo-stats" aria-live="polite"></div>
             <div class="demo-controls"></div>
-            <p class="demo-caption">Shuffle, then run bubble sort. Adjacent pairs are compared and swapped until the list is sorted.</p>
+            <p class="demo-caption">Shuffle the bars, then run bubble sort. Adjacent pairs are compared and swapped until the list is sorted.</p>
           </figure>
 
           <h3>8. Hashing</h3>
           <p>
-            The hashing paradigm: map an input of any size (a string, a file,
-            a key) to a fixed-size value — a "hash." That value decides
-            where to store or look up the item (e.g. which bucket in a hash
-            table). The design principle is "spread keys evenly so lookups
-            stay fast." You see it in hash maps, caches, and checksums.
+            Imagine you're organizing a massive library, but instead of 
+            searching every single shelf for a book, you have a simple rule: 
+            take the book's title, run it through a quick calculation, and it 
+            tells you exactly which shelf to look on. That's hashing. It's a 
+            way to instantly narrow down where data should live or be found, so 
+            you never have to check everything — you just go straight to the 
+            right spot. It's what makes looking things up in programs feel 
+            instant, whether it's finding a file, checking a password, or 
+            grabbing data from memory.
           </p>
           <p>
-            Like a librarian who doesn’t scan every shelf: the catalog maps
-            your book title to an aisle and shelf. Type a key in the demo; it
-            gets hashed to an integer, and that integer (mod the number of
-            buckets) picks a bucket. Same idea as a real hash table.
+            The demo shows a hash table with five buckets and 10 words in each.
+            Click "Get random word" to pick one of the words, then "Look up"
+            to see which bucket it lives in. We only check that one bucket,
+            not all the others, so finding it stays fast.
           </p>
           <figure class="algorithm-demo" id="demo-hash" aria-labelledby="demo-hash-caption">
-            <p class="demo-title" id="demo-hash-caption">Hashing: key → bucket</p>
+            <p class="demo-title" id="demo-hash-caption">Hashing, find which bucket a key goes in</p>
             <div class="demo-canvas-wrap">
-              <canvas class="demo-canvas" id="algo-hash-canvas" width="560" height="240" aria-describedby="demo-hash-caption">Type a key; see its hash and which bucket it maps to.</canvas>
+              <canvas class="demo-canvas" id="algo-hash-canvas" width="560" height="240" aria-describedby="demo-hash-caption">Hash table with five buckets and sample keys; type a key and find which bucket it maps to.</canvas>
             </div>
             <div class="demo-stats" aria-live="polite"></div>
             <div class="demo-controls"></div>
-            <p class="demo-caption">Enter a key and hash it. The hash value determines which bucket would hold it in a hash table.</p>
+            <p class="demo-caption">Type a key and click "Find bucket" to see the hash and the bucket. We only look in that bucket, not the whole table.</p>
           </figure>
 
           <h3>Eight paradigms, countless algorithms</h3>
@@ -367,7 +370,7 @@
           </p>
         </div>
         <blockquote class="closing-quote">
-          Eight paradigms. Countless algorithms. One mindset at a time.
+          Eight ways to think. Countless ways to code.
         </blockquote>
       </article>
     </main>

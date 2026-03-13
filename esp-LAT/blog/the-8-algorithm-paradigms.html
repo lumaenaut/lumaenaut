@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-TLP7F5XM');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Los 8 paradigmas de algoritmos: fuerza bruta, divide y vencerás, programación dinámica, greedy, backtracking, búsqueda, ordenamiento y hashing. Técnicas de diseño explicadas. Por Alberto Del Valle.">
+  <title>Los 8 paradigmas de algoritmos — Técnicas de diseño</title>
+  <link rel="canonical" href="https://lumaenaut.com/esp-LAT/blog/the-8-algorithm-paradigms.html">
+  <link rel="alternate" hreflang="x-default" href="https://lumaenaut.com/eng-US/blog/the-8-algorithm-paradigms.html">
+  <link rel="alternate" hreflang="en" href="https://lumaenaut.com/eng-US/blog/the-8-algorithm-paradigms.html">
+  <link rel="alternate" hreflang="es" href="https://lumaenaut.com/esp-LAT/blog/the-8-algorithm-paradigms.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Los 8 paradigmas de algoritmos — Técnicas de diseño">
+  <meta property="og:description" content="Los 8 paradigmas de algoritmos: fuerza bruta, divide y vencerás, programación dinámica, greedy, backtracking, búsqueda, ordenamiento y hashing. Por Alberto Del Valle.">
+  <meta property="og:url" content="https://lumaenaut.com/esp-LAT/blog/the-8-algorithm-paradigms.html">
+  <meta property="og:image" content="https://lumaenaut.com/images/hands-typing-on-keyboard-ascii.png">
+  <meta property="og:image:alt" content="Arte ASCII: manos tecleando en un teclado, evocando código y algoritmos.">
+  <meta property="og:locale" content="es">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="article:published_time" content="2026-03-13">
+  <meta property="article:modified_time" content="2026-03-13">
+  <meta property="article:author" content="Alberto Del Valle">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://lumaenaut.com/images/hands-typing-on-keyboard-ascii.png">
+  <meta name="twitter:title" content="Los 8 paradigmas de algoritmos — Técnicas de diseño">
+  <meta name="twitter:description" content="Los 8 paradigmas de algoritmos: fuerza bruta, divide y vencerás, programación dinámica, greedy y más. Por Alberto Del Valle.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%94%A5%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../../style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Los 8 paradigmas de algoritmos",
+    "alternativeHeadline": "Técnicas de diseño de algoritmos",
+    "description": "Los 8 paradigmas de algoritmos: fuerza bruta, divide y vencerás, programación dinámica, greedy, backtracking, búsqueda, ordenamiento y hashing. Por Alberto Del Valle.",
+    "url": "https://lumaenaut.com/esp-LAT/blog/the-8-algorithm-paradigms.html",
+    "mainEntityOfPage": { "@id": "https://lumaenaut.com/esp-LAT/blog/the-8-algorithm-paradigms.html" },
+    "image": "https://lumaenaut.com/images/hands-typing-on-keyboard-ascii.png",
+    "inLanguage": "es",
+    "datePublished": "2026-03-13",
+    "dateModified": "2026-03-13",
+    "author": {
+      "@type": "Person",
+      "name": "Alberto Del Valle",
+      "url": "https://lumaenaut.com/esp-LAT/"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Alberto Del Valle"
+    }
+  }
+  </script>
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TLP7F5XM"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+  <div class="page-wrapper">
+    <header class="header">
+      <div class="header-left">
+        <div class="logo-div">
+          <pre class="logo-ascii" id="logo-container" aria-hidden="true"></pre>
+        </div>
+      </div>
+      <div class="header-center">
+        <h1>Lumænaut_</h1>
+        <nav class="main-nav" aria-label="Navegación principal">
+          <ul>
+            <li><a class="home-btn" href="../index.html">inicio</a></li>
+            <li><a class="blog-btn" href="blog-index.html">blog</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="header-right">
+        <div class="logo-div-mirror" aria-hidden="true"></div>
+        <button type="button" class="share-btn" aria-label="Compartir esta página"><img src="../../assets/share.png" alt="" class="share-btn-icon" data-ios-src="../../assets/ios share.png" width="20" height="20"></button>
+      </div>
+    </header>
+    <main id="main-content" class="content">
+      <div class="floating-controls">
+        <div class="lang-switcher">
+          <button type="button" class="lang-switcher-btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Seleccionar idioma"><img src="../../assets/translate.png" alt="" class="lang-switcher-icon"><span class="lang-switcher-label">esp (LAT)</span></button>
+          <ul class="lang-switcher-dropdown" role="listbox" aria-label="Opciones de idioma">
+            <li><a href="#" data-lang="eng-US" role="option">eng (US)</a></li>
+            <li><a href="#" data-lang="esp-LAT" role="option">esp (LAT)</a></li>
+          </ul>
+        </div>
+      </div>
+      <article class="post" aria-labelledby="post-title">
+        <header class="post-header">
+          <h2 id="post-title" class="post-title">Los 8 paradigmas de algoritmos</h2>
+          <p class="post-subtitle">Técnicas de diseño de algoritmos</p>
+          <p class="post-meta">
+            Por <span class="author">Alberto Del Valle</span><br>
+            <time datetime="2026-03-13">13 de marzo de 2026</time><br>
+            <span class="post-read-time">(Tiempo de lectura aprox. 8 min.)</span>
+          </p>
+        </header>
+        <figure class="post-featured-image" aria-labelledby="algorithms-image-caption">
+          <img
+            src="../../images/hands-typing-on-keyboard-ascii.png"
+            alt="Arte ASCII: manos tecleando en un teclado, evocando código y algoritmos."
+            title="Arte ASCII — manos en el teclado"
+            width="800"
+            height="450"
+            decoding="async"
+            loading="eager"
+            class="post-featured-img">
+          <figcaption id="algorithms-image-caption" class="visually-hidden">Ilustración en estilo arte ASCII: manos tecleando en un teclado, evocando el acto de escribir código y diseñar algoritmos.</figcaption>
+        </figure>
+        <div class="post-body">
+          <p>
+            Antes de escribir una sola línea de código, eliges una forma de
+            pensar: ¿cómo va a <em>abordar</em> este programa el problema?
+            Esa elección es de lo que tratan los paradigmas de algoritmos. Un
+            paradigma no es un algoritmo concreto como QuickSort o Dijkstra,
+            sino la mentalidad de fondo: "divide el problema en partes más
+            chicas", "prueba todas las opciones", "recuerda lo que ya
+            calculaste", etc. Distintos paradigmas llevan a distintos
+            algoritmos; el mismo paradigma aparece en ordenamiento, teoría de
+            grafos y tu próximo proyecto.
+          </p>
+          <p>
+            Esta entrada recorre ocho de los paradigmas principales: las
+            técnicas de diseño que aparecen en todos lados en ciencias de la
+            computación, desde entrevistas hasta código en producción. Cada
+            sección tiene una demo interactiva corta para que veas el
+            paradigma en acción, no solo en teoría.
+          </p>
+
+          <h3>1. Fuerza bruta</h3>
+          <p>
+            En el fondo, fuerza bruta es solo prueba y error sistemático. Pasas
+            por todas las opciones hasta dar con la correcta. No hay
+            trucos: solo cómputo puro. Eso lo hace fácil de implementar y a
+            veces es la única forma de garantizar una solución. El costo es la
+            velocidad: cuando crece la entrada, la fuerza bruta se vuelve lenta.
+          </p>
+          <p>
+            Piensa en una caja fuerte de 3 dígitos. No sabes la clave, así que
+            empiezas en 000, luego 001, 002… y así. Al final das con la
+            combinación. Eso es fuerza bruta. La demo de abajo hace exactamente
+            eso: elige un número al azar y prueba uno por uno hasta que
+            coincida. Usa "Siguiente" para un intento o "Ejecutar hasta
+            abrir" para ver cómo recorre todas las posibilidades.
+          </p>
+          <figure class="algorithm-demo" id="demo-brute-force" aria-labelledby="demo-brute-force-caption">
+            <p class="demo-title" id="demo-brute-force-caption">Fuerza bruta: candado de 3 dígitos</p>
+            <div class="demo-canvas-wrap">
+              <canvas class="demo-canvas" id="algo-brute-force-canvas" width="560" height="240" aria-describedby="demo-brute-force-caption">Demo interactiva: prueba cada combinación desde 000 hasta que se abre el candado.</canvas>
+            </div>
+            <div class="demo-stats" aria-live="polite"></div>
+            <div class="demo-controls"></div>
+            <p class="demo-caption">Prueba cada combinación en orden hasta encontrar la correcta. Sin atajos: eso es fuerza bruta.</p>
+          </figure>
+
+          <h3>2. Divide y vencerás</h3>
+          <p>
+            El paradigma divide y vencerás dice: toma un problema grande,
+            divídelo en subproblemas más chicos y parecidos, resuélvelos (a
+            menudo de forma recursiva) y luego combina las respuestas. Es una
+            técnica de diseño, no un solo algoritmo: la misma idea aparece en
+            merge sort, búsqueda binaria y muchos problemas clásicos.
+          </p>
+          <p>
+            Piensa en dividir y vencer como ordenar una casa desordenada. En
+            lugar de atacar todo de una vez, lo divides: una habitación a la
+            vez. Cuando cada habitación está en orden, la casa entera está
+            lista. Merge sort funciona igual: toma una lista y la va partiendo
+            a la mitad hasta que quedan elementos sueltos (que están
+            "ordenados" por definición). Luego junta esas partes en el orden
+            correcto.
+          </p>
+          <p>
+            La demo muestra ese proceso paso a paso. Usa <strong>Siguiente
+            paso</strong> para ver cada "dividir" (partir un segmento a la
+            mitad; izquierda y derecha con color) y cada "vencer" (juntar dos
+            mitades ordenadas; el segmento fusionado se resalta).
+            <strong>Ejecutar todo</strong> corre la secuencia completa;
+            <strong>Mezclar</strong> reinicia con un nuevo arreglo.
+          </p>
+          <figure class="algorithm-demo" id="demo-divide-conquer" aria-labelledby="demo-divide-conquer-caption">
+            <p class="demo-title" id="demo-divide-conquer-caption">Divide y vencerás: merge sort paso a paso</p>
+            <div class="demo-canvas-wrap">
+              <canvas class="demo-canvas" id="algo-divide-conquer-canvas" width="560" height="240" aria-describedby="demo-divide-conquer-caption">Paso a paso: cada dividir muestra la partición; cada vencer muestra el segmento fusionado.</canvas>
+            </div>
+            <div class="demo-stats" aria-live="polite"></div>
+            <div class="demo-controls"></div>
+            <p class="demo-caption">Avanza cada dividir (partir a la mitad) y vencer (fusionar mitades ordenadas). Anterior / Siguiente paso / Ejecutar todo / Mezclar.</p>
+          </figure>
+
+          <h3>3. Programación dinámica</h3>
+          <p>
+            El paradigma de programación dinámica también parte el problema en
+            subproblemas, pero con una vuelta clave: <em>guarda</em> los
+            resultados. Cuando el mismo subproblema vuelve a aparecer, reusa la
+            respuesta guardada en lugar de recalcular. Esa "memoización" (o
+            tabulación) es el corazón del paradigma: convierte muchas ideas de
+            tiempo exponencial en algo factible.
+          </p>
+          <p>
+            El ejemplo clásico es la sucesión de Fibonacci. A lo tonto, fib(5)
+            dispara trabajo repetido para fib(4), fib(3), etc. Con PD llenas
+            una tabla una vez: fib(0), fib(1), fib(2)… y cada valor nuevo solo
+            necesita ver los dos anteriores. En la demo puedes avanzar o
+            retroceder y calcular fib(n); la tabla muestra qué se guarda y se
+            reutiliza.
+          </p>
+          <figure class="algorithm-demo" id="demo-dp" aria-labelledby="demo-dp-caption">
+            <p class="demo-title" id="demo-dp-caption">Programación dinámica: Fibonacci con memo</p>
+            <div class="demo-canvas-wrap">
+              <canvas class="demo-canvas" id="algo-dp-canvas" width="560" height="240" aria-describedby="demo-dp-caption">Tabla memo con fib(0), fib(1), … para no recalcular los mismos valores.</canvas>
+            </div>
+            <div class="demo-stats" aria-live="polite"></div>
+            <div class="demo-controls"></div>
+            <p class="demo-caption">Calcula fib(n). La tabla guarda resultados para que cada subproblema se resuelva solo una vez.</p>
+          </figure>
+
+          <h3>4. Greedy (voraz)</h3>
+          <p>
+            El paradigma greedy: en cada paso, toma la mejor decisión local y
+            no vuelvas atrás. No reconsideres lo que ya decidiste. En muchos
+            problemas esa mentalidad da la solución óptima; en otros solo una
+            "buena". El arte está en saber cuándo el enfoque greedy es seguro.
+          </p>
+          <p>
+            Dar cambio con monedas es el ejemplo típico. Con monedas de 25, 10,
+            5 y 1 centavo, tomar en cada paso la moneda más grande que
+            quepa (greedy) da el menor número de monedas. Para 37¢ tomas 25,
+            luego 10, luego dos de 1. La demo te deja poner un monto y ver la
+            selección greedy de monedas. (Con algunas denominaciones greedy
+            falla; con 25, 10, 5, 1 funciona.)
+          </p>
+          <figure class="algorithm-demo" id="demo-greedy" aria-labelledby="demo-greedy-caption">
+            <p class="demo-title" id="demo-greedy-caption">Greedy: dar cambio</p>
+            <div class="demo-canvas-wrap">
+              <canvas class="demo-canvas" id="algo-greedy-canvas" width="560" height="240" aria-describedby="demo-greedy-caption">Monto en centavos y las monedas elegidas por la regla greedy.</canvas>
+            </div>
+            <div class="demo-stats" aria-live="polite"></div>
+            <div class="demo-controls"></div>
+            <p class="demo-caption">En cada paso elegimos la moneda más grande que quepa. Sin retroceder: eso es greedy.</p>
+          </figure>
+
+          <h3>5. Backtracking</h3>
+          <p>
+            Backtracking sigue un ritmo simple: prueba, falla, deshaz, repite.
+            Vas haciendo elecciones una por una, pero cuando una lleva a un
+            callejón sin salida, regresas y pruebas otra. Es más listo que
+            fuerza bruta porque cortas malas ramas pronto en lugar de
+            seguirlas hasta el final.
+          </p>
+          <p>
+            Resolver un laberinto es un buen modelo mental: avanzas hasta un
+            callejón sin salida, luego regresas al último cruce y pruebas otra
+            rama. Sudoku y muchos solucionadores de puzzles funcionan igual. La
+            demo es una cuadrícula chica con inicio y meta; "Resolver
+            (backtrack)" encuentra un camino probando movimientos y
+            retrocediendo cuando se atora.
+          </p>
+          <figure class="algorithm-demo" id="demo-backtrack" aria-labelledby="demo-backtrack-caption">
+            <p class="demo-title" id="demo-backtrack-caption">Backtracking: camino en laberinto</p>
+            <div class="demo-canvas-wrap">
+              <canvas class="demo-canvas" id="algo-backtrack-canvas" width="560" height="240" aria-describedby="demo-backtrack-caption">Cuadrícula con muros; el backtracking encuentra un camino del inicio a la meta.</canvas>
+            </div>
+            <div class="demo-stats" aria-live="polite"></div>
+            <div class="demo-controls"></div>
+            <p class="demo-caption">Haz clic en Resolver para encontrar un camino. El algoritmo prueba una dirección, retrocede si se bloquea y prueba otra.</p>
+          </figure>
+
+          <h3>6. Búsqueda</h3>
+          <p>
+            El paradigma de búsqueda es "encontrar algo en una estructura". Una
+            elección clásica es la <strong>búsqueda binaria</strong>: ir
+            partiendo el espacio de búsqueda a la mitad en una colección
+            <em>ordenada</em>. La búsqueda lineal revisa elemento por elemento;
+            la binaria es mucho más rápida cuando los datos están ordenados
+            porque en cada paso descarta la mitad de los candidatos.
+          </p>
+          <p>
+            Como buscar un nombre en la guía telefónica: en lugar de leer cada
+            página en orden, abres la mitad, luego la mitad de lo que queda, y
+            así. La demo muestra una matriz ordenada de números y ejecuta
+            búsqueda binaria: haz clic en "Poner objetivo al azar" y luego
+            "Ejecutar búsqueda" para ver qué celdas siguen "en juego" y cuáles
+            se descartan (en rojo suave) mientras se reduce el rango.
+          </p>
+          <figure class="algorithm-demo" id="demo-search" aria-labelledby="demo-search-caption">
+            <p class="demo-title" id="demo-search-caption">Búsqueda: búsqueda binaria en una matriz</p>
+            <div class="demo-canvas-wrap">
+              <canvas class="demo-canvas" id="algo-search-canvas" width="560" height="240" aria-describedby="demo-search-caption">Matriz 10×4 ordenada; animación de búsqueda binaria y secciones descartadas en rojo suave.</canvas>
+            </div>
+            <div class="demo-stats" aria-live="polite"></div>
+            <div class="demo-controls"></div>
+            <p class="demo-caption">Haz clic en "Poner objetivo al azar" y luego "Ejecutar búsqueda". La búsqueda binaria va partiendo el rango; las celdas en rojo ya no se consideran.</p>
+          </figure>
+
+          <h3>7. Ordenamiento</h3>
+          <p>
+            Ordenar es poner los datos en un orden definido: de menor a mayor
+            o de la A a la Z. Muchos algoritmos lo hacen. Bubble, inserción,
+            merge y quicksort son algunos, cada uno con sus trade-offs. Merge
+            sort es divide y vencerás. Quicksort usa un pivote y partición.
+            Bubble sort es el más simple: solo compara pares adyacentes y los
+            intercambia cuando están desordenados.
+          </p>
+          <p>
+            En la demo mezclas las barras y ejecutas bubble sort. Mira cómo los
+            valores más grandes "suben" hacia el final mientras se comparan e
+            intercambian pares adyacentes. Una pasada sin intercambios significa
+            que la lista está ordenada. No es el algoritmo más rápido, pero la
+            idea se ve clarito.
+          </p>
+          <figure class="algorithm-demo" id="demo-sort" aria-labelledby="demo-sort-caption">
+            <p class="demo-title" id="demo-sort-caption">Ordenamiento: bubble sort</p>
+            <div class="demo-canvas-wrap">
+              <canvas class="demo-canvas" id="algo-sort-canvas" width="560" height="240" aria-describedby="demo-sort-caption">Las barras se reordenan con bubble sort hasta quedar ascendentes.</canvas>
+            </div>
+            <div class="demo-stats" aria-live="polite"></div>
+            <div class="demo-controls"></div>
+            <p class="demo-caption">Mezcla las barras y ejecuta bubble sort. Se comparan e intercambian pares adyacentes hasta que la lista esté ordenada.</p>
+          </figure>
+
+          <h3>8. Hashing</h3>
+          <p>
+            Imagina que organizas una biblioteca enorme, pero en lugar de
+            buscar en cada estante, tienes una regla simple: tomas el título
+            del libro, lo pasas por un cálculo rápido y te dice exactamente en
+            qué estante buscar. Eso es hashing. Es una forma de acotar al
+            instante dónde debe vivir o buscarse un dato, sin tener que
+            revisar todo: vas directo al lugar correcto. Es lo que hace que
+            buscar cosas en programas se sienta instantáneo, ya sea encontrar
+            un archivo, verificar una contraseña o sacar datos de memoria.
+          </p>
+          <p>
+            La demo muestra una tabla hash con cinco cubetas y 10 palabras en
+            cada una. Haz clic en "Obtener palabra al azar" para elegir una
+            palabra y luego "Buscar" para ver en qué cubeta está. Solo
+            revisamos esa cubeta, no las demás, así que encontrarla sigue
+            siendo rápido.
+          </p>
+          <figure class="algorithm-demo" id="demo-hash" aria-labelledby="demo-hash-caption">
+            <p class="demo-title" id="demo-hash-caption">Hashing: en qué cubeta cae una clave</p>
+            <div class="demo-canvas-wrap">
+              <canvas class="demo-canvas" id="algo-hash-canvas" width="560" height="240" aria-describedby="demo-hash-caption">Tabla hash con cinco cubetas y claves de ejemplo; escribe una clave y encuentra su cubeta.</canvas>
+            </div>
+            <div class="demo-stats" aria-live="polite"></div>
+            <div class="demo-controls"></div>
+            <p class="demo-caption">Escribe una clave y haz clic en "Buscar" para ver el hash y la cubeta. Solo miramos esa cubeta, no toda la tabla.</p>
+          </figure>
+
+          <h3>Ocho paradigmas, incontables algoritmos</h3>
+          <p>
+            No importa cuántos algoritmos concretos te encuentres, casi siempre
+            se apoyan en un conjunto chico de paradigmas: fuerza bruta, divide y
+            vencerás, programación dinámica, greedy, backtracking, búsqueda,
+            ordenamiento y hashing. Cada paradigma es una forma distinta de
+            <em>diseñar</em> una solución: una mentalidad que eliges antes de
+            escribir un ciclo. Cuando los reconoces, dejas de ver solo código
+            y empiezas a ver la idea de fondo. Ese cambio es lo que convierte
+            seguir recetas en diseño de algoritmos de verdad.
+          </p>
+        </div>
+        <blockquote class="closing-quote">
+          Ocho formas de pensar. Incontables formas de programar.
+        </blockquote>
+      </article>
+    </main>
+    <footer class="footer">
+      <nav class="social-links" aria-label="Enlaces sociales">
+        <ul>
+          <li><a href="https://www.reddit.com/user/Lumaenaut_/" target="_blank" rel="noopener noreferrer" title="Reddit"><img src="../../assets/reddit.png" alt="Reddit" width="24" height="24"></a></li>
+          <li><a href="https://x.com/lumaenaut_" target="_blank" rel="noopener noreferrer" title="X"><img src="../../assets/twitter.png" alt="X" width="24" height="24"></a></li>
+          <li><a href="https://github.com/Lumaenaut" target="_blank" rel="noopener noreferrer" title="GitHub"><img src="../../assets/github.png" alt="GitHub" width="24" height="24"></a></li>
+        </ul>
+      </nav>
+      <div class="footer-meta">
+        <p>2026, Lumænaut_ <a href="../privacy-policy.html">Política de privacidad</a></p>
+      </div>
+    </footer>
+  </div>
+  <script src="../../script.js"></script>
+  <script src="../../algorithm-demos.js"></script>
+</body>
+</html>

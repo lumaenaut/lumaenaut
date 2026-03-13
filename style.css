@@ -628,6 +628,10 @@ body {
   box-shadow: 4px 4px 0px #7aa5b8;
 }
 
+.blog-card-list li:nth-child(4) .blog-card {
+  box-shadow: 4px 4px 0px #8DCEA7;
+}
+
 .blog-card:hover {
   transform: translate(2px, 2px);
 }
@@ -642,6 +646,10 @@ body {
 
 .blog-card-list li:nth-child(3) .blog-card:hover {
   box-shadow: 2px 2px 0px #7aa5b8;
+}
+
+.blog-card-list li:nth-child(4) .blog-card:hover {
+  box-shadow: 2px 2px 0px #8DCEA7;
 }
 
 .blog-card-title {

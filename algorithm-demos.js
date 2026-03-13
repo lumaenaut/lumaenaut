@@ -29,6 +29,57 @@
     return container ? container.querySelector(".demo-controls") : null;
   }
 
+  var docLang = (document.documentElement && document.documentElement.getAttribute("lang")) || "en";
+  var isEs = (docLang === "es" || docLang.indexOf("es-") === 0);
+  var L = {
+    tryNext: isEs ? "Siguiente" : "Try next",
+    runUntilUnlock: isEs ? "Ejecutar hasta abrir" : "Run until unlock",
+    reset: isEs ? "Reiniciar" : "Reset",
+    tries: isEs ? "Intentos" : "Tries",
+    target: isEs ? "Objetivo" : "Target",
+    unlocked: isEs ? "¡Abierto!" : "Unlocked!",
+    previous: isEs ? "Anterior" : "Previous",
+    nextStep: isEs ? "Siguiente paso" : "Next step",
+    runAll: isEs ? "Ejecutar todo" : "Run all",
+    shuffle: isEs ? "Mezclar" : "Shuffle",
+    stepOf: isEs ? "Paso %1 de %2" : "Step %1 of %2",
+    divideLabel: isEs ? "Dividir: partir segmento a la mitad" : "Divide: split segment in half",
+    conquerLabel: isEs ? "Vencer: fusionar mitades ordenadas" : "Conquer: merge sorted halves",
+    initialArray: isEs ? "Arreglo inicial" : "Initial array",
+    countCoins: isEs ? "Cantidad: %1 monedas" : "Count: %1 coins",
+    greedyCoinChange: isEs ? "Dar cambio (greedy)" : "Greedy coin change",
+    amountCents: isEs ? "Monto en centavos" : "Amount in cents",
+    solve: isEs ? "Resolver" : "Solve",
+    stepsDash: isEs ? "Pasos: —" : "Steps: —",
+    stepsFound: isEs ? "Pasos: %1 (encontrado en índice %2)" : "Steps: %1 (found at index %2)",
+    stepsNotInArray: isEs ? "Pasos: %1 (no está en el arreglo)" : "Steps: %1 (not in array)",
+    stepsRange: isEs ? "Pasos: %1  ·  Rango: [%2..%3]" : "Steps: %1  ·  Range: [%2..%3]",
+    msgSetRandomThenRun: isEs ? "Haz clic en \"Poner objetivo al azar\" y luego \"Ejecutar búsqueda\" para ver cómo se reduce el rango." : "Click \"Set random target\" to pick a value from the matrix, then \"Run search\" to watch binary search shrink the range.",
+    msgTargetClickRun: isEs ? "Objetivo: %1. Haz clic en \"Ejecutar búsqueda\" para iniciar." : "Target is %1. Click \"Run search\" to start binary search over all 40 cells.",
+    msgFoundAfter: isEs ? "Encontrado %1 en índice %2 después de %3 pasos. Rojo = descartado, verde = encontrado." : "Found %1 at index %2 after %3 steps. Red = discarded, green = found.",
+    msgRangeEmpty: isEs ? "El rango está vacío: el objetivo %1 no está en esta matriz ordenada." : "Search range is empty — target %1 is not in this sorted matrix.",
+    msgRedGreenNext: isEs ? "Rojo = mitad que descartamos. Verde = mitad que conservamos. Siguiente: ir al medio de la mitad verde." : "Red = half we discard. Green = half we keep. Next: move to the middle of the green half.",
+    msgYellowGreenRed: isEs ? "Amarillo = aún considerando. Verde = número actual. Rojo = ya descartado." : "Yellow = still considering. Green = current number. Red = already discarded.",
+    stepConsider: isEs ? "Paso %1: considerar índice medio %2 (valor %3). " : "Step %1: consider middle index %2 (value %3). ",
+    match: isEs ? "¡Coincide!" : "Match!",
+    discardLeftKeepRight: isEs ? "%1 < %2 → descartamos la mitad izquierda (rojo) y conservamos la derecha (verde)." : "%1 < %2 → next we discard the left half (red) and keep the right (green).",
+    discardRightKeepLeft: isEs ? "%1 > %2 → descartamos la mitad derecha (rojo) y conservamos la izquierda (verde)." : "%1 > %2 → next we discard the right half (red) and keep the left (green).",
+    setRandomTarget: isEs ? "Poner objetivo al azar" : "Set random target",
+    runSearch: isEs ? "Ejecutar búsqueda" : "Run search",
+    targetLabelBinary: isEs ? "Objetivo: %1  ·  Búsqueda binaria en matriz ordenada (por filas)" : "Target: %1  ·  Binary search on sorted matrix (row-major)",
+    getRandomWord: isEs ? "Obtener palabra al azar" : "Get random word",
+    lookUp: isEs ? "Buscar" : "Look up",
+    placeholderWord: isEs ? "palabra" : "word",
+    selectedWord: isEs ? "Palabra seleccionada" : "Selected word",
+    msgClickLookUp: isEs ? "Haz clic en \"Buscar\" para ver en qué cubeta está esta palabra." : "Click \"Look up\" to see which bucket contains this word.",
+    msgInBucket: isEs ? "\"%1\" está en la cubeta %2. Solo revisamos esa cubeta." : "\"%1\" is in bucket %2. We only checked that bucket.",
+    hashBucket: isEs ? "hash(\"%1\")  →  cubeta %2" : "hash(\"%1\")  →  bucket %2",
+    eachBucketGetRandom: isEs ? "Cada cubeta tiene 10 palabras. Obtén una palabra al azar y haz clic en \"Buscar\" para ver su cubeta." : "Each bucket has 10 words. Get a random word, then click \"Look up\" to see its bucket.",
+    bucket: isEs ? "Cubeta" : "Bucket",
+    bubbleSort: isEs ? "Bubble sort" : "Bubble sort",
+    wordFallback: isEs ? "palabra" : "word"
+  };
+
   // —— 1. Brute force: 3-digit combination lock ———
   (function () {
     var container = getContainer("demo-brute-force");
@@ -55,9 +106,9 @@
       if (unlocked) {
         ctx.font = "16px ui-monospace, monospace";
         ctx.fillStyle = acc;
-        ctx.fillText("Unlocked!", W / 2, H / 2 + 36);
+        ctx.fillText(L.unlocked, W / 2, H / 2 + 36);
       }
-      if (statsEl) statsEl.textContent = "Tries: " + tries + " | Target: " + String(target).padStart(3, "0");
+      if (statsEl) statsEl.textContent = L.tries + ": " + tries + " | " + L.target + ": " + String(target).padStart(3, "0");
     }
 
     function tick() {
@@ -86,13 +137,13 @@
     if (controlsEl) {
       stepBtn = document.createElement("button");
       stepBtn.type = "button";
-      stepBtn.textContent = "Try next";
+      stepBtn.textContent = L.tryNext;
       stepBtn.addEventListener("click", function () {
         if (!unlocked) tick();
       });
       runBtn = document.createElement("button");
       runBtn.type = "button";
-      runBtn.textContent = "Run until unlock";
+      runBtn.textContent = L.runUntilUnlock;
       runBtn.addEventListener("click", function () {
         if (running || unlocked) return;
         running = true;
@@ -108,7 +159,7 @@
       });
       resetBtn = document.createElement("button");
       resetBtn.type = "button";
-      resetBtn.textContent = "Reset";
+      resetBtn.textContent = L.reset;
       resetBtn.addEventListener("click", reset);
       controlsEl.appendChild(stepBtn);
       controlsEl.appendChild(runBtn);
@@ -253,13 +304,13 @@
       ctx.textAlign = "left";
       var label = step
         ? (step.type === "divide"
-          ? "Divide: split segment in half"
-          : "Conquer: merge sorted halves")
-        : "Initial array";
+          ? L.divideLabel
+          : L.conquerLabel)
+        : L.initialArray;
       ctx.fillText(label, 8, 12);
 
       if (statsEl) {
-        statsEl.textContent = "Step " + (stepIndex + 1) + " of " + (steps.length + 1);
+        statsEl.textContent = L.stepOf.replace("%1", stepIndex + 1).replace("%2", steps.length + 1);
       }
     }
 
@@ -326,22 +377,22 @@
     if (controlsEl) {
       var prevBtn = document.createElement("button");
       prevBtn.type = "button";
-      prevBtn.textContent = "Previous";
+      prevBtn.textContent = L.previous;
       prevBtn.setAttribute("data-dc-prev", "");
       prevBtn.addEventListener("click", stepBack);
       var nextBtn = document.createElement("button");
       nextBtn.type = "button";
-      nextBtn.textContent = "Next step";
+      nextBtn.textContent = L.nextStep;
       nextBtn.setAttribute("data-dc-next", "");
       nextBtn.addEventListener("click", stepForward);
       var runBtn = document.createElement("button");
       runBtn.type = "button";
-      runBtn.textContent = "Run all";
+      runBtn.textContent = L.runAll;
       runBtn.setAttribute("data-dc-run", "");
       runBtn.addEventListener("click", runAll);
       var shuffleBtn = document.createElement("button");
       shuffleBtn.type = "button";
-      shuffleBtn.textContent = "Shuffle";
+      shuffleBtn.textContent = L.shuffle;
       shuffleBtn.addEventListener("click", shuffle);
       controlsEl.appendChild(prevBtn);
       controlsEl.appendChild(nextBtn);
@@ -492,17 +543,17 @@
     if (controlsEl) {
       var prevBtn = document.createElement("button");
       prevBtn.type = "button";
-      prevBtn.textContent = "Previous";
+      prevBtn.textContent = L.previous;
       prevBtn.setAttribute("data-dp-prev", "");
       prevBtn.addEventListener("click", prevStep);
       var nextBtn = document.createElement("button");
       nextBtn.type = "button";
-      nextBtn.textContent = "Next step";
+      nextBtn.textContent = L.nextStep;
       nextBtn.setAttribute("data-dp-next", "");
       nextBtn.addEventListener("click", nextStep);
       var runBtn = document.createElement("button");
       runBtn.type = "button";
-      runBtn.textContent = "Run all";
+      runBtn.textContent = L.runAll;
       runBtn.setAttribute("data-dp-run", "");
       runBtn.addEventListener("click", runAll);
       controlsEl.appendChild(prevBtn);
@@ -549,7 +600,7 @@
         ctx.textAlign = "left";
         x += 34;
       }
-      if (statsEl) statsEl.textContent = "Count: " + chosen.length + " coins";
+      if (statsEl) statsEl.textContent = L.countCoins.replace("%1", chosen.length);
     }
 
     function run() {
@@ -573,10 +624,10 @@
       inputEl.min = 1;
       inputEl.max = 99;
       inputEl.value = "37";
-      inputEl.setAttribute("aria-label", "Amount in cents");
+      inputEl.setAttribute("aria-label", L.amountCents);
       var goBtn = document.createElement("button");
       goBtn.type = "button";
-      goBtn.textContent = "Greedy coin change";
+      goBtn.textContent = L.greedyCoinChange;
       goBtn.addEventListener("click", run);
       controlsEl.appendChild(inputEl);
       controlsEl.appendChild(goBtn);
@@ -787,11 +838,11 @@
     if (controlsEl) {
       var shuffleBtn = document.createElement("button");
       shuffleBtn.type = "button";
-      shuffleBtn.textContent = "Shuffle";
+      shuffleBtn.textContent = L.shuffle;
       shuffleBtn.addEventListener("click", shuffle);
       var solveBtn = document.createElement("button");
       solveBtn.type = "button";
-      solveBtn.textContent = "Solve";
+      solveBtn.textContent = L.solve;
       solveBtn.addEventListener("click", solveAnimated);
       controlsEl.appendChild(shuffleBtn);
       controlsEl.appendChild(solveBtn);
@@ -917,46 +968,46 @@
       ctx.fillStyle = fg;
       ctx.font = "12px ui-monospace, monospace";
       var targetLabel = targetIndex >= 0 ? (targetValue + " (index " + targetIndex + ")") : "—";
-      ctx.fillText("Target: " + targetLabel + "  ·  Binary search on sorted matrix (row-major)", 12, H - 18);
+      ctx.fillText(L.targetLabelBinary.replace("%1", targetLabel), 12, H - 18);
 
       if (statsEl) {
         if (steps === 0 || lo === null || hi === null) {
-          statsEl.textContent = "Steps: —";
+          statsEl.textContent = L.stepsDash;
         } else if (done && foundIndex >= 0) {
-          statsEl.textContent = "Steps: " + steps + " (found at index " + foundIndex + ")";
+          statsEl.textContent = L.stepsFound.replace("%1", steps).replace("%2", foundIndex);
         } else if (done) {
-          statsEl.textContent = "Steps: " + steps + " (not in array)";
+          statsEl.textContent = L.stepsNotInArray.replace("%1", steps);
         } else {
-          statsEl.textContent = "Steps: " + steps + "  ·  Range: [" + lo + ".." + hi + "]";
+          statsEl.textContent = L.stepsRange.replace("%1", steps).replace("%2", lo).replace("%3", hi);
         }
       }
 
       if (messageEl) {
         if (targetIndex < 0) {
-          messageEl.textContent = "Click \"Set random target\" to pick a value from the matrix, then \"Run search\" to watch binary search shrink the range.";
+          messageEl.textContent = L.msgSetRandomThenRun;
         } else if (lo === null || hi === null) {
-          messageEl.textContent = "Target is " + targetValue + ". Click \"Run search\" to start binary search over all 40 cells.";
+          messageEl.textContent = L.msgTargetClickRun.replace("%1", targetValue);
         } else if (done) {
           if (foundIndex >= 0) {
-            messageEl.textContent = "Found " + targetValue + " at index " + foundIndex + " after " + steps + " steps. Red = discarded, green = found.";
+            messageEl.textContent = L.msgFoundAfter.replace("%1", targetValue).replace("%2", foundIndex).replace("%3", steps);
           } else {
-            messageEl.textContent = "Search range is empty — target " + targetValue + " is not in this sorted matrix.";
+            messageEl.textContent = L.msgRangeEmpty.replace("%1", targetValue);
           }
         } else if (phase === "discard") {
-          messageEl.textContent = "Red = half we discard. Green = half we keep. Next: move to the middle of the green half.";
+          messageEl.textContent = L.msgRedGreenNext;
         } else if (mid !== null) {
           var currentVal = arr[mid];
-          var msg = "Step " + steps + ": consider middle index " + mid + " (value " + currentVal + "). ";
+          var msg = L.stepConsider.replace("%1", steps).replace("%2", mid).replace("%3", currentVal);
           if (currentVal === targetValue) {
-            msg += "Match!";
+            msg += L.match;
           } else if (currentVal < targetValue) {
-            msg += currentVal + " < " + targetValue + " → next we discard the left half (red) and keep the right (green).";
+            msg += L.discardLeftKeepRight.replace("%1", currentVal).replace("%2", targetValue);
           } else {
-            msg += currentVal + " > " + targetValue + " → next we discard the right half (red) and keep the left (green).";
+            msg += L.discardRightKeepLeft.replace("%1", currentVal).replace("%2", targetValue);
           }
           messageEl.textContent = msg;
         } else {
-          messageEl.textContent = "Yellow = still considering. Green = current number. Red = already discarded.";
+          messageEl.textContent = L.msgYellowGreenRed;
         }
       }
     }
@@ -1054,12 +1105,12 @@
     if (controlsEl) {
       var randomBtn = document.createElement("button");
       randomBtn.type = "button";
-      randomBtn.textContent = "Set random target";
+      randomBtn.textContent = L.setRandomTarget;
       randomBtn.addEventListener("click", setRandomTarget);
 
       var runBtn = document.createElement("button");
       runBtn.type = "button";
-      runBtn.textContent = "Run search";
+      runBtn.textContent = L.runSearch;
       runBtn.addEventListener("click", runSearch);
 
       controlsEl.appendChild(randomBtn);
@@ -1132,11 +1183,11 @@
     if (controlsEl) {
       var shuffleBtn = document.createElement("button");
       shuffleBtn.type = "button";
-      shuffleBtn.textContent = "Shuffle";
+      shuffleBtn.textContent = L.shuffle;
       shuffleBtn.addEventListener("click", shuffle);
       var sortBtn = document.createElement("button");
       sortBtn.type = "button";
-      sortBtn.textContent = "Bubble sort";
+      sortBtn.textContent = L.bubbleSort;
       sortBtn.addEventListener("click", bubbleSort);
       controlsEl.appendChild(shuffleBtn);
       controlsEl.appendChild(sortBtn);
@@ -1144,17 +1195,21 @@
     drawBars();
   })();
 
-  // —— 8. Hashing: input → hash → bucket ———
+  // —— 8. Hashing: 10 words per bucket, get random word + look up ———
   (function () {
     var container = getContainer("demo-hash");
     var canvas = getCanvas(container);
     if (!canvas || !container) return;
     var ctx = canvas.getContext("2d");
-    var buckets = [[], [], [], [], []];
-    var inputStr = "hello";
+    var numBuckets = 5;
+    var wordsPerBucket = 10;
     var controlsEl = getControls(container);
     var statsEl = getStats(container);
-    var inputEl;
+    var messageEl;
+    var wordDisplayEl;
+    var lastKey = "";
+    var lastHash = null;
+    var lastBucket = null;
 
     function hash(s) {
       var h = 0;
@@ -1165,16 +1220,84 @@
       return h;
     }
 
-    function run() {
-      var s = (inputEl && inputEl.value) ? inputEl.value : inputStr;
-      if (!s) s = "hello";
-      inputStr = s;
-      var h = hash(s);
-      var idx = h % 5;
-      buckets = [[], [], [], [], []];
-      buckets[idx].push({ key: s, hash: h });
+    function buildBuckets() {
+      var pool = isEs
+        ? [
+            "manzana", "plátano", "leche", "pan", "té", "café", "sal", "azúcar", "pera", "pastel",
+            "perro", "gato", "pájaro", "pez", "rana", "león", "oso", "lobo", "venado", "pato",
+            "rojo", "azul", "verde", "negro", "blanco", "oro", "rosa", "gris", "marino", "limón",
+            "correr", "caminar", "saltar", "leer", "escribir", "cantar", "jugar", "cocinar", "dibujar", "nadar",
+            "uno", "dos", "cinco", "nueve", "cero", "medio", "lleno", "pequeño", "grande", "rápido",
+            "libro", "puerta", "lámpara", "escritorio", "llaves", "teléfono", "reloj", "silla", "mesa", "sofá",
+            "sol", "luna", "estrella", "viento", "lluvia", "nieve", "nube", "cielo", "árbol", "hoja",
+            "ciudad", "pueblo", "camino", "parque", "puente", "río", "playa", "cerro", "lago", "puerto",
+            "feliz", "tranquilo", "valiente", "calmado", "fresco", "veloz", "afilado", "suave", "cálido", "frío",
+            "primero", "último", "izquierda", "derecha", "norte", "sur", "este", "oeste", "hoy", "noche"
+          ]
+        : [
+            "apple", "banana", "milk", "bread", "tea", "coffee", "salt", "sugar", "pear", "pie",
+            "dog", "cat", "bird", "fish", "frog", "lion", "bear", "wolf", "deer", "duck",
+            "red", "blue", "green", "black", "white", "gold", "pink", "gray", "navy", "lime",
+            "run", "walk", "jump", "read", "write", "sing", "play", "cook", "draw", "swim",
+            "one", "two", "five", "nine", "zero", "half", "full", "tiny", "huge", "fast",
+            "book", "door", "lamp", "desk", "keys", "phone", "clock", "chair", "table", "couch",
+            "sun", "moon", "star", "wind", "rain", "snow", "cloud", "sky", "tree", "leaf",
+            "city", "town", "road", "park", "bridge", "river", "beach", "hill", "lake", "port",
+            "happy", "quiet", "brave", "calm", "fresh", "quick", "sharp", "soft", "warm", "cool",
+            "first", "last", "left", "right", "north", "south", "east", "west", "today", "night"
+          ];
+      var b = [];
+      for (var i = 0; i < numBuckets; i++) b.push([]);
+      for (var w = 0; w < pool.length; w++) {
+        var h = hash(pool[w]);
+        var idx = h % numBuckets;
+        if (b[idx].length < wordsPerBucket) {
+          b[idx].push({ key: pool[w], hash: h });
+        }
+      }
+      for (var i = 0; i < numBuckets; i++) {
+        while (b[i].length < wordsPerBucket) {
+          var fallback = L.wordFallback + "-" + i + "-" + b[i].length;
+          b[i].push({ key: fallback, hash: hash(fallback) });
+        }
+      }
+      return b;
+    }
+    var buckets = buildBuckets();
+    var allWords = [];
+    for (var i = 0; i < numBuckets; i++) {
+      for (var j = 0; j < buckets[i].length; j++) {
+        allWords.push(buckets[i][j].key);
+      }
+    }
+
+    function getRandomWord() {
+      var w = allWords[Math.floor(Math.random() * allWords.length)];
+      if (wordDisplayEl) wordDisplayEl.value = w;
+      lastBucket = null;
+      lastKey = "";
+      lastHash = null;
       draw();
-      if (statsEl) statsEl.textContent = "hash(\"" + s + "\") = " + h + " → bucket " + idx;
+      if (statsEl) statsEl.textContent = "";
+      if (messageEl) messageEl.textContent = L.msgClickLookUp;
+    }
+
+    function lookUp() {
+      var s = (wordDisplayEl && wordDisplayEl.value) ? String(wordDisplayEl.value).trim() : "";
+      if (!s) {
+        getRandomWord();
+        return;
+      }
+      lastKey = s;
+      lastHash = hash(s);
+      lastBucket = lastHash % numBuckets;
+      draw();
+      if (statsEl) {
+        statsEl.textContent = L.hashBucket.replace("%1", lastKey).replace("%2", lastBucket);
+      }
+      if (messageEl) {
+        messageEl.textContent = L.msgInBucket.replace("%1", lastKey).replace("%2", lastBucket);
+      }
     }
 
     function draw() {
@@ -1182,33 +1305,69 @@
       ctx.fillRect(0, 0, W, H);
       ctx.font = "12px ui-monospace, monospace";
       ctx.fillStyle = fg;
-      var bw = (W - 40) / 5;
-      for (var i = 0; i < 5; i++) {
-        var x = 20 + i * (bw + 4);
-        ctx.strokeStyle = "#444";
-        ctx.strokeRect(x, 50, bw, 80);
-        ctx.fillText("Bucket " + i, x + 4, 68);
-        for (var j = 0; j < buckets[i].length; j++) {
-          ctx.fillStyle = acc;
-          ctx.fillText(buckets[i][j].key + " → " + buckets[i][j].hash, x + 4, 88 + j * 16);
-        }
+      ctx.fillText(L.eachBucketGetRandom, 12, 18);
+      var bw = (W - 24 - (numBuckets - 1) * 4) / numBuckets;
+      var lineH = 14;
+      var maxLines = Math.min(wordsPerBucket, Math.floor((H - 52) / lineH));
+      for (var i = 0; i < numBuckets; i++) {
+        var x = 12 + i * (bw + 4);
+        var isHighlight = lastBucket !== null && i === lastBucket;
+        ctx.fillStyle = isHighlight ? "#8DCEA7" : "#2a2a2c";
+        ctx.fillRect(x, 28, bw, H - 44);
+        ctx.strokeStyle = isHighlight ? "#6ab88a" : "#444";
+        ctx.strokeRect(x, 28, bw, H - 44);
         ctx.fillStyle = fg;
+        ctx.fillText(L.bucket + " " + i, x + 4, 46);
+        for (var j = 0; j < Math.min(buckets[i].length, maxLines); j++) {
+          ctx.fillStyle = acc;
+          ctx.fillText(buckets[i][j].key, x + 4, 62 + j * lineH);
+        }
+        if (buckets[i].length > maxLines) {
+          ctx.fillStyle = fg;
+          ctx.fillText("…", x + 4, 62 + maxLines * lineH);
+        }
+      }
+    }
+
+    if (container) {
+      messageEl = document.createElement("p");
+      messageEl.className = "demo-message";
+      messageEl.setAttribute("aria-live", "polite");
+      messageEl.style.marginTop = "8px";
+      messageEl.style.marginBottom = "8px";
+      messageEl.style.fontSize = "13px";
+      messageEl.style.color = "var(--text-muted, #888)";
+      messageEl.style.minHeight = "2em";
+      var canvasWrap = container.querySelector(".demo-canvas-wrap");
+      if (canvasWrap && canvasWrap.parentNode) {
+        canvasWrap.parentNode.insertBefore(messageEl, canvasWrap.nextSibling);
+      } else {
+        var ctrl = container.querySelector(".demo-controls");
+        if (ctrl) container.insertBefore(messageEl, ctrl);
+        else container.appendChild(messageEl);
       }
     }
 
     if (controlsEl) {
-      inputEl = document.createElement("input");
-      inputEl.type = "text";
-      inputEl.placeholder = "key";
-      inputEl.value = "hello";
-      inputEl.setAttribute("aria-label", "Key to hash");
-      var goBtn = document.createElement("button");
-      goBtn.type = "button";
-      goBtn.textContent = "Hash";
-      goBtn.addEventListener("click", run);
-      controlsEl.appendChild(inputEl);
-      controlsEl.appendChild(goBtn);
+      wordDisplayEl = document.createElement("input");
+      wordDisplayEl.type = "text";
+      wordDisplayEl.readOnly = true;
+      wordDisplayEl.placeholder = L.placeholderWord;
+      wordDisplayEl.setAttribute("aria-label", L.selectedWord);
+      wordDisplayEl.style.background = "#2a2a2c";
+      wordDisplayEl.style.color = fg;
+      var randomBtn = document.createElement("button");
+      randomBtn.type = "button";
+      randomBtn.textContent = L.getRandomWord;
+      randomBtn.addEventListener("click", getRandomWord);
+      var lookupBtn = document.createElement("button");
+      lookupBtn.type = "button";
+      lookupBtn.textContent = L.lookUp;
+      lookupBtn.addEventListener("click", lookUp);
+      controlsEl.appendChild(wordDisplayEl);
+      controlsEl.appendChild(randomBtn);
+      controlsEl.appendChild(lookupBtn);
     }
-    run();
+    draw();
   })();
 })();
