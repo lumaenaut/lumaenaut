@@ -278,28 +278,29 @@
 
           <h3>6. Searching</h3>
           <p>
-            The searching paradigm is "find something in a structure." Two
-            classic design choices: <strong>linear search</strong> — inspect
-            each item one by one — and <strong>binary search</strong> —
-            repeatedly halve the search space (only valid on sorted data).
-            Linear is simple and works on any list; binary is much faster
-            when the data is ordered.
+            The searching paradigm is "find something in a structure." A
+            classic design choice is <strong>binary search</strong> — repeatedly
+            halve the search space in a <em>sorted</em> collection. Linear
+            search inspects each item one by one; binary search is much faster
+            when the data is ordered because it throws out half the remaining
+            candidates on every step.
           </p>
           <p>
-            Like looking for a name in a phone book: you could read every page
-            (linear), or open the middle, then the middle of the right half,
-            and so on (binary). The demo shows a sorted array; set a target,
-            then step through a linear or binary search and watch how many
-            steps each needs.
+            Like looking for a name in a phone book: instead of reading every
+            page in order, you open the middle, then the middle of the
+            remaining half, and so on. The demo lays out a sorted matrix of
+            numbers and runs binary search on it: click "Set random target"
+            and then "Run search" to see which cells remain "in play" and
+            which ones get discarded (shown in soft red) as the range shrinks.
           </p>
           <figure class="algorithm-demo" id="demo-search" aria-labelledby="demo-search-caption">
-            <p class="demo-title" id="demo-search-caption">Searching: linear vs binary</p>
+            <p class="demo-title" id="demo-search-caption">Searching: binary search on a matrix</p>
             <div class="demo-canvas-wrap">
-              <canvas class="demo-canvas" id="algo-search-canvas" width="560" height="240" aria-describedby="demo-search-caption">Sorted array; highlight the current step of a linear or binary search.</canvas>
+              <canvas class="demo-canvas" id="algo-search-canvas" width="560" height="240" aria-describedby="demo-search-caption">Sorted 10×4 matrix; animate a binary search and highlight pruned sections in soft red.</canvas>
             </div>
             <div class="demo-stats" aria-live="polite"></div>
             <div class="demo-controls"></div>
-            <p class="demo-caption">Set a target, then Step with Linear or Binary. Binary uses far fewer steps on sorted data.</p>
+            <p class="demo-caption">Click "Set random target", then "Run search". Binary search keeps halving the range; soft red cells are no longer considered.</p>
           </figure>
 
           <h3>7. Sorting</h3>

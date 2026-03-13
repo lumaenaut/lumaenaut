@@ -601,7 +601,7 @@
     var mazeConfigs = [
       {
         grid: [
-          [0, 0, 0, 1, 1],
+          [0, 0, 0, 1, 0],
           [0, 1, 1, 1, 0],
           [0, 0, 0, 0, 0],
           [1, 1, 1, 1, 0],
@@ -609,8 +609,8 @@
         ],
         paths: {
           "0,4": { wrong: [p(0,0), p(1,0), p(2,0), p(2,1), p(2,2), p(2,3), p(2,4), p(3,4), p(4,4), p(4,3), p(4,2), p(4,1), p(4,0)], correct: [p(0,0), p(1,0), p(2,0), p(2,1), p(2,2), p(2,3), p(2,4), p(1,4), p(0,4)] },
-          "4,0": { wrong: [p(0,0), p(0,1), p(0,2), p(1,2), p(2,2), p(2,3), p(2,4), p(1,4), p(0,4)], correct: [p(0,0), p(1,0), p(2,0), p(3,0), p(4,0)] },
-          "4,4": { wrong: [p(0,0), p(0,1), p(0,2), p(1,2), p(2,2), p(2,3), p(2,4), p(1,4), p(0,4)], correct: [p(0,0), p(1,0), p(2,0), p(2,1), p(2,2), p(2,3), p(2,4), p(3,4), p(4,4)] }
+          "4,0": { wrong: [p(0,0), p(1,0), p(2,0), p(2,1), p(2,2), p(2,3), p(2,4), p(1,4), p(0,4)], correct: [p(0,0), p(1,0), p(2,0), p(2,1), p(2,2), p(2,3), p(2,4), p(3,4), p(4,4), p(4,3), p(4,2), p(4,1), p(4,0)] },
+          "4,4": { wrong: [p(0,0), p(0,1), p(0,2)], correct: [p(0,0), p(1,0), p(2,0), p(2,1), p(2,2), p(2,3), p(2,4), p(3,4), p(4,4)] }
         }
       },
       {
@@ -652,7 +652,7 @@
         paths: {
           "0,4": { wrong: [p(0,0), p(1,0), p(2,0), p(2,1), p(2,2), p(3,2), p(4,2), p(4,1), p(4,0)], correct: [p(0,0), p(1,0), p(2,0), p(2,1), p(2,2), p(1,2), p(0,2), p(0,3), p(0,4)] },
           "4,0": { wrong: [p(0,0), p(1,0), p(2,0), p(2,1), p(2,2), p(1,2), p(0,2), p(0,3), p(0,4)], correct: [p(0,0), p(1,0), p(2,0), p(2,1), p(2,2), p(3,2), p(4,2), p(4,1), p(4,0)] },
-          "4,4": { wrong: [p(0,0), p(1,0), p(2,0), p(2,1), p(2,2), p(1,2), p(0,2), p(0,3), p(0,4)], correct: [p(0,0), p(1,0), p(2,0), p(2,1), p(2,2), p(2,3), p(2,4), p(3,4), p(4,4)] }
+          "4,4": { wrong: [p(0,0), p(1,0), p(2,0), p(2,1), p(2,2), p(1,2), p(0,2), p(0,3), p(0,4)], correct: [p(0,0), p(1,0), p(2,0), p(2,1), p(2,2), p(3,2), p(4,2), p(4,3), p(4,4)] }
         }
       }
     ];
@@ -800,117 +800,272 @@
     drawPath([]);
   })();
 
-  // —— 6. Searching: linear vs binary ———
+  // —— 6. Searching: binary search on a 10×4 matrix ———
   (function () {
     var container = getContainer("demo-search");
     var canvas = getCanvas(container);
     if (!canvas || !container) return;
     var ctx = canvas.getContext("2d");
-    var arr = [2, 5, 8, 12, 16, 19, 23, 27, 31, 34];
-    var target = 19;
-    var stepIndex = -1;
-    var mode = "linear";
+
+    var cols = 10;
+    var rows = 4;
+    var total = cols * rows;
+    var arr = [];
+    for (var i = 0; i < total; i++) {
+      arr.push(i + 1);
+    }
+
+    var targetIndex = -1;
+    var targetValue = null;
+    var lo = null;
+    var hi = null;
+    var mid = null;
+    var steps = 0;
+    var done = false;
+    var foundIndex = -1;
+    var animating = false;
+    // Two-phase animation: "mid" = showing current number; "discard" = showing discarded (red) vs kept (yellow) half
+    var phase = "mid";
+    var discardLeft = false; // true = we're discarding left half [lo..mid]
+    var subStep = 0; // 0 = show mid, 1 = show discard, 2 = apply and move to next
+
+    var colorConsidering = "#f3e08a";    // yellow — still in range
+    var colorCurrent = "#8DCEA7";        // green — current number / found
+    var colorDiscarded = "#4a272f";      // soft red — discarded
+    var colorBase = "#ffffff";           // white — initial background
+    var colorTarget = "#4a7abf";         // blue — chosen target (until found)
+
     var controlsEl = getControls(container);
     var statsEl = getStats(container);
-    var inputEl;
+    var messageEl;
+
+    function resetSearch() {
+      lo = null;
+      hi = null;
+      mid = null;
+      steps = 0;
+      done = false;
+      foundIndex = -1;
+      animating = false;
+      phase = "mid";
+      discardLeft = false;
+      subStep = 0;
+    }
 
     function draw() {
       ctx.fillStyle = bg;
       ctx.fillRect(0, 0, W, H);
-      var n = arr.length;
-      var cellW = (W - (n + 1) * 6) / n;
-      for (var i = 0; i < n; i++) {
-        var x = 6 + i * (cellW + 6);
-        var highlighted = (mode === "linear" && i <= stepIndex) || (mode === "binary" && i === stepIndex);
-        ctx.fillStyle = highlighted ? (arr[i] === target ? hi : acc) : fg;
-        ctx.fillRect(x, 20, cellW, 32);
-        ctx.fillStyle = bg;
-        ctx.font = "14px ui-monospace, monospace";
-        ctx.textAlign = "center";
-        ctx.fillText(String(arr[i]), x + cellW / 2, 42);
-        ctx.textAlign = "left";
+
+      var marginX = 16;
+      var marginY = 24;
+      var gapX = 4;
+      var gapY = 4;
+      var cellW = (W - marginX * 2 - gapX * (cols - 1)) / cols;
+      var cellH = (H - marginY * 2 - 60 - gapY * (rows - 1)) / rows;
+
+      for (var r = 0; r < rows; r++) {
+        for (var c = 0; c < cols; c++) {
+          var idx = r * cols + c;
+          var x = marginX + c * (cellW + gapX);
+          var y = marginY + r * (cellH + gapY);
+
+          var cellColor = colorBase;
+
+          // Final frame: found -> one green, rest red
+          if (done && foundIndex >= 0) {
+            cellColor = (idx === foundIndex) ? colorCurrent : colorDiscarded;
+          } else if (lo !== null && hi !== null) {
+            if (phase === "mid") {
+              if (idx < lo || idx > hi) cellColor = colorDiscarded;
+              else if (mid !== null && idx === mid) cellColor = colorCurrent;
+              else cellColor = colorConsidering;
+            } else {
+              // phase === "discard": discarded half = red, kept half = yellow
+              if (discardLeft) {
+                if (idx >= lo && idx <= mid) cellColor = colorDiscarded;
+                else if (idx > mid && idx <= hi) cellColor = colorConsidering;
+                else if (idx < lo || idx > hi) cellColor = colorDiscarded;
+                else cellColor = colorConsidering;
+              } else {
+                if (idx >= mid && idx <= hi) cellColor = colorDiscarded;
+                else if (idx >= lo && idx < mid) cellColor = colorConsidering;
+                else if (idx < lo || idx > hi) cellColor = colorDiscarded;
+                else cellColor = colorConsidering;
+              }
+            }
+          }
+
+          // Highlight the chosen target (blue) until it is found
+          if (!done && targetIndex >= 0 && idx === targetIndex) {
+            cellColor = colorTarget;
+          }
+
+          ctx.fillStyle = cellColor;
+          ctx.fillRect(x, y, cellW, cellH);
+
+          var textColor;
+          if (cellColor === colorDiscarded) textColor = "#e0d4d4";
+          else textColor = "#111111";
+          ctx.fillStyle = textColor;
+          ctx.font = "14px ui-monospace, monospace";
+          ctx.textAlign = "center";
+          ctx.fillText(String(arr[idx]), x + cellW / 2, y + cellH / 2 + 5);
+          ctx.textAlign = "left";
+        }
       }
+
       ctx.fillStyle = fg;
       ctx.font = "12px ui-monospace, monospace";
-      ctx.fillText("Target: " + target + "  |  Mode: " + mode, 12, H - 12);
+      var targetLabel = targetIndex >= 0 ? (targetValue + " (index " + targetIndex + ")") : "—";
+      ctx.fillText("Target: " + targetLabel + "  ·  Binary search on sorted matrix (row-major)", 12, H - 18);
+
       if (statsEl) {
-        if (mode === "linear" && stepIndex >= 0 && stepIndex < arr.length && arr[stepIndex] === target) {
-          statsEl.textContent = "Steps: " + (stepIndex + 1) + " (found!)";
+        if (steps === 0 || lo === null || hi === null) {
+          statsEl.textContent = "Steps: —";
+        } else if (done && foundIndex >= 0) {
+          statsEl.textContent = "Steps: " + steps + " (found at index " + foundIndex + ")";
+        } else if (done) {
+          statsEl.textContent = "Steps: " + steps + " (not in array)";
         } else {
-          statsEl.textContent = "Steps: " + (stepIndex >= 0 ? stepIndex + 1 : "—");
+          statsEl.textContent = "Steps: " + steps + "  ·  Range: [" + lo + ".." + hi + "]";
+        }
+      }
+
+      if (messageEl) {
+        if (targetIndex < 0) {
+          messageEl.textContent = "Click \"Set random target\" to pick a value from the matrix, then \"Run search\" to watch binary search shrink the range.";
+        } else if (lo === null || hi === null) {
+          messageEl.textContent = "Target is " + targetValue + ". Click \"Run search\" to start binary search over all 40 cells.";
+        } else if (done) {
+          if (foundIndex >= 0) {
+            messageEl.textContent = "Found " + targetValue + " at index " + foundIndex + " after " + steps + " steps. Red = discarded, green = found.";
+          } else {
+            messageEl.textContent = "Search range is empty — target " + targetValue + " is not in this sorted matrix.";
+          }
+        } else if (phase === "discard") {
+          messageEl.textContent = "Red = half we discard. Green = half we keep. Next: move to the middle of the green half.";
+        } else if (mid !== null) {
+          var currentVal = arr[mid];
+          var msg = "Step " + steps + ": consider middle index " + mid + " (value " + currentVal + "). ";
+          if (currentVal === targetValue) {
+            msg += "Match!";
+          } else if (currentVal < targetValue) {
+            msg += currentVal + " < " + targetValue + " → next we discard the left half (red) and keep the right (green).";
+          } else {
+            msg += currentVal + " > " + targetValue + " → next we discard the right half (red) and keep the left (green).";
+          }
+          messageEl.textContent = msg;
+        } else {
+          messageEl.textContent = "Yellow = still considering. Green = current number. Red = already discarded.";
         }
       }
     }
 
-    function stepLinear() {
-      stepIndex++;
-      if (stepIndex >= arr.length || arr[stepIndex] === target) return;
+    function setRandomTarget() {
+      var idx = Math.floor(Math.random() * arr.length);
+      targetIndex = idx;
+      targetValue = arr[idx];
+      resetSearch();
       draw();
     }
 
-    function stepBinary() {
-      var lo = 0, hi = arr.length - 1;
-      var steps = 0;
-      while (lo <= hi) {
-        var mid = Math.floor((lo + hi) / 2);
-        steps++;
-        if (arr[mid] === target) {
-          stepIndex = mid;
-          if (statsEl) statsEl.textContent = "Steps: " + steps;
+    function runSearch() {
+      if (animating) return;
+      if (targetIndex < 0) {
+        setRandomTarget();
+      }
+      resetSearch();
+      lo = 0;
+      hi = arr.length - 1;
+      subStep = 0;
+      phase = "mid";
+      animating = true;
+
+      function step() {
+        if (!animating) return;
+        if (lo > hi) {
+          done = true;
+          mid = null;
+          foundIndex = -1;
+          animating = false;
           draw();
           return;
         }
-        if (arr[mid] < target) lo = mid + 1;
-        else hi = mid - 1;
+        if (subStep === 0) {
+          mid = Math.floor((lo + hi) / 2);
+          steps++;
+          phase = "mid";
+          draw();
+          subStep = 1;
+          setTimeout(step, 550);
+          return;
+        }
+        if (subStep === 1) {
+          var v = arr[mid];
+          if (v === targetValue) {
+            foundIndex = mid;
+            done = true;
+            animating = false;
+            draw();
+            return;
+          }
+          phase = "discard";
+          discardLeft = (v < targetValue);
+          draw();
+          subStep = 2;
+          setTimeout(step, 550);
+          return;
+        }
+        if (subStep === 2) {
+          if (discardLeft) {
+            lo = mid + 1;
+          } else {
+            hi = mid - 1;
+          }
+          mid = null;
+          phase = "mid";
+          subStep = 0;
+          setTimeout(step, 400);
+        }
       }
-      stepIndex = -1;
-      draw();
+
+      step();
     }
 
-    function run() {
-      var t = inputEl ? parseInt(inputEl.value, 10) : target;
-      if (isNaN(t)) t = 19;
-      target = t;
-      stepIndex = -1;
-      if (mode === "linear") stepIndex = -1;
-      draw();
+    if (container) {
+      messageEl = document.createElement("p");
+      messageEl.className = "demo-message";
+      messageEl.setAttribute("aria-live", "polite");
+      messageEl.style.marginTop = "8px";
+      messageEl.style.marginBottom = "8px";
+      messageEl.style.fontSize = "13px";
+      messageEl.style.color = "var(--text-muted, #888)";
+      messageEl.style.minHeight = "2.5em";
+      var canvasWrap = container.querySelector(".demo-canvas-wrap");
+      if (canvasWrap && canvasWrap.parentNode) {
+        canvasWrap.parentNode.insertBefore(messageEl, canvasWrap.nextSibling);
+      } else {
+        var ctrl = container.querySelector(".demo-controls");
+        if (ctrl) container.insertBefore(messageEl, ctrl);
+        else container.appendChild(messageEl);
+      }
     }
 
     if (controlsEl) {
-      inputEl = document.createElement("input");
-      inputEl.type = "number";
-      inputEl.value = "19";
-      inputEl.setAttribute("aria-label", "Target value");
-      var stepBtn = document.createElement("button");
-      stepBtn.type = "button";
-      stepBtn.textContent = "Step";
-      stepBtn.addEventListener("click", function () {
-        if (mode === "linear") {
-          stepIndex++;
-          if (stepIndex < arr.length && arr[stepIndex] === target) {
-            if (statsEl) statsEl.textContent = "Steps: " + (stepIndex + 1) + " (found!)";
-          }
-        } else stepBinary();
-        draw();
-      });
-      var linearBtn = document.createElement("button");
-      linearBtn.type = "button";
-      linearBtn.textContent = "Linear";
-      linearBtn.addEventListener("click", function () { mode = "linear"; stepIndex = -1; draw(); });
-      var binaryBtn = document.createElement("button");
-      binaryBtn.type = "button";
-      binaryBtn.textContent = "Binary";
-      binaryBtn.addEventListener("click", function () { mode = "binary"; stepIndex = -1; draw(); });
-      var goBtn = document.createElement("button");
-      goBtn.type = "button";
-      goBtn.textContent = "Set target";
-      goBtn.addEventListener("click", run);
-      controlsEl.appendChild(inputEl);
-      controlsEl.appendChild(stepBtn);
-      controlsEl.appendChild(linearBtn);
-      controlsEl.appendChild(binaryBtn);
-      controlsEl.appendChild(goBtn);
+      var randomBtn = document.createElement("button");
+      randomBtn.type = "button";
+      randomBtn.textContent = "Set random target";
+      randomBtn.addEventListener("click", setRandomTarget);
+
+      var runBtn = document.createElement("button");
+      runBtn.type = "button";
+      runBtn.textContent = "Run search";
+      runBtn.addEventListener("click", runSearch);
+
+      controlsEl.appendChild(randomBtn);
+      controlsEl.appendChild(runBtn);
     }
+
     draw();
   })();
 
