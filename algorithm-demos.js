@@ -13,8 +13,7 @@
   var hi = "#8DCEA7";
 
   function getContainer(id) {
-    var el = document.getElementById(id);
-    return el ? el : null;
+    return document.getElementById(id);
   }
 
   function getCanvas(container) {
@@ -180,6 +179,7 @@
     var animating = false;
     var controlsEl = getControls(container);
     var statsEl = getStats(container);
+    var dcPrevBtn, dcNextBtn, dcRunBtn;
 
     function mergeTwo(sortedLeft, sortedRight) {
       var out = [];
@@ -320,12 +320,9 @@
 
     function updateButtons() {
       if (!controlsEl) return;
-      var prevBtn = controlsEl.querySelector("[data-dc-prev]");
-      var nextBtn = controlsEl.querySelector("[data-dc-next]");
-      var runBtn = controlsEl.querySelector("[data-dc-run]");
-      if (prevBtn) prevBtn.disabled = stepIndex === 0;
-      if (nextBtn) nextBtn.disabled = !canStepForward();
-      if (runBtn) runBtn.disabled = !canStepForward();
+      if (dcPrevBtn) dcPrevBtn.disabled = stepIndex === 0;
+      if (dcNextBtn) dcNextBtn.disabled = !canStepForward();
+      if (dcRunBtn) dcRunBtn.disabled = !canStepForward();
     }
 
     function stepForward() {
@@ -347,8 +344,7 @@
     function runAll() {
       if (animating || !canStepForward()) return;
       animating = true;
-      var runBtn = controlsEl ? controlsEl.querySelector("[data-dc-run]") : null;
-      if (runBtn) runBtn.disabled = true;
+      if (dcRunBtn) dcRunBtn.disabled = true;
       var id = setInterval(function () {
         if (stepIndex < steps.length) {
           stepIndex++;
@@ -375,28 +371,28 @@
     }
 
     if (controlsEl) {
-      var prevBtn = document.createElement("button");
-      prevBtn.type = "button";
-      prevBtn.textContent = L.previous;
-      prevBtn.setAttribute("data-dc-prev", "");
-      prevBtn.addEventListener("click", stepBack);
-      var nextBtn = document.createElement("button");
-      nextBtn.type = "button";
-      nextBtn.textContent = L.nextStep;
-      nextBtn.setAttribute("data-dc-next", "");
-      nextBtn.addEventListener("click", stepForward);
-      var runBtn = document.createElement("button");
-      runBtn.type = "button";
-      runBtn.textContent = L.runAll;
-      runBtn.setAttribute("data-dc-run", "");
-      runBtn.addEventListener("click", runAll);
+      dcPrevBtn = document.createElement("button");
+      dcPrevBtn.type = "button";
+      dcPrevBtn.textContent = L.previous;
+      dcPrevBtn.setAttribute("data-dc-prev", "");
+      dcPrevBtn.addEventListener("click", stepBack);
+      dcNextBtn = document.createElement("button");
+      dcNextBtn.type = "button";
+      dcNextBtn.textContent = L.nextStep;
+      dcNextBtn.setAttribute("data-dc-next", "");
+      dcNextBtn.addEventListener("click", stepForward);
+      dcRunBtn = document.createElement("button");
+      dcRunBtn.type = "button";
+      dcRunBtn.textContent = L.runAll;
+      dcRunBtn.setAttribute("data-dc-run", "");
+      dcRunBtn.addEventListener("click", runAll);
       var shuffleBtn = document.createElement("button");
       shuffleBtn.type = "button";
       shuffleBtn.textContent = L.shuffle;
       shuffleBtn.addEventListener("click", shuffle);
-      controlsEl.appendChild(prevBtn);
-      controlsEl.appendChild(nextBtn);
-      controlsEl.appendChild(runBtn);
+      controlsEl.appendChild(dcPrevBtn);
+      controlsEl.appendChild(dcNextBtn);
+      controlsEl.appendChild(dcRunBtn);
       controlsEl.appendChild(shuffleBtn);
     }
 
@@ -420,6 +416,7 @@
     var statsEl = getStats(container);
     var animating = false;
     var runAllId = null;
+    var dpPrevBtn, dpNextBtn, dpRunBtn;
 
     function ensureMemoUpTo(k) {
       memo[0] = 0;
@@ -465,13 +462,9 @@
 
     function updateDpButtons() {
       if (!controlsEl) return;
-      var prevBtn = controlsEl.querySelector("[data-dp-prev]");
-      var nextBtn = controlsEl.querySelector("[data-dp-next]");
-      var runBtn = controlsEl.querySelector("[data-dp-run]");
-      // user should not be able to step back from fib(2)
-      if (prevBtn) prevBtn.disabled = currentN <= 2;
-      if (nextBtn) nextBtn.disabled = currentN >= 10;
-      if (runBtn) runBtn.disabled = animating;
+      if (dpPrevBtn) dpPrevBtn.disabled = currentN <= 2;
+      if (dpNextBtn) dpNextBtn.disabled = currentN >= 10;
+      if (dpRunBtn) dpRunBtn.disabled = animating;
     }
 
     function nextStep() {
@@ -541,24 +534,24 @@
     }
 
     if (controlsEl) {
-      var prevBtn = document.createElement("button");
-      prevBtn.type = "button";
-      prevBtn.textContent = L.previous;
-      prevBtn.setAttribute("data-dp-prev", "");
-      prevBtn.addEventListener("click", prevStep);
-      var nextBtn = document.createElement("button");
-      nextBtn.type = "button";
-      nextBtn.textContent = L.nextStep;
-      nextBtn.setAttribute("data-dp-next", "");
-      nextBtn.addEventListener("click", nextStep);
-      var runBtn = document.createElement("button");
-      runBtn.type = "button";
-      runBtn.textContent = L.runAll;
-      runBtn.setAttribute("data-dp-run", "");
-      runBtn.addEventListener("click", runAll);
-      controlsEl.appendChild(prevBtn);
-      controlsEl.appendChild(nextBtn);
-      controlsEl.appendChild(runBtn);
+      dpPrevBtn = document.createElement("button");
+      dpPrevBtn.type = "button";
+      dpPrevBtn.textContent = L.previous;
+      dpPrevBtn.setAttribute("data-dp-prev", "");
+      dpPrevBtn.addEventListener("click", prevStep);
+      dpNextBtn = document.createElement("button");
+      dpNextBtn.type = "button";
+      dpNextBtn.textContent = L.nextStep;
+      dpNextBtn.setAttribute("data-dp-next", "");
+      dpNextBtn.addEventListener("click", nextStep);
+      dpRunBtn = document.createElement("button");
+      dpRunBtn.type = "button";
+      dpRunBtn.textContent = L.runAll;
+      dpRunBtn.setAttribute("data-dp-run", "");
+      dpRunBtn.addEventListener("click", runAll);
+      controlsEl.appendChild(dpPrevBtn);
+      controlsEl.appendChild(dpNextBtn);
+      controlsEl.appendChild(dpRunBtn);
     }
 
     // Initial view: show fib(0), fib(1), and fib(2), with arrows on 0 and 1,
@@ -1096,8 +1089,7 @@
       if (canvasWrap && canvasWrap.parentNode) {
         canvasWrap.parentNode.insertBefore(messageEl, canvasWrap.nextSibling);
       } else {
-        var ctrl = container.querySelector(".demo-controls");
-        if (ctrl) container.insertBefore(messageEl, ctrl);
+        if (controlsEl) container.insertBefore(messageEl, controlsEl);
         else container.appendChild(messageEl);
       }
     }
@@ -1342,8 +1334,7 @@
       if (canvasWrap && canvasWrap.parentNode) {
         canvasWrap.parentNode.insertBefore(messageEl, canvasWrap.nextSibling);
       } else {
-        var ctrl = container.querySelector(".demo-controls");
-        if (ctrl) container.insertBefore(messageEl, ctrl);
+        if (controlsEl) container.insertBefore(messageEl, controlsEl);
         else container.appendChild(messageEl);
       }
     }
