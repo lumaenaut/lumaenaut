@@ -23,12 +23,12 @@
       var lang = navigator.language || navigator.userLanguage || "";
       var preferred = (navigator.languages && navigator.languages[0]) || lang;
       var useSpanish = /^es\b/i.test(preferred) || /^es\b/i.test(lang);
-      window.location.replace(useSpanish ? "/esp-LAT/" : "/eng-US/");
+      window.location.replace(useSpanish ? "/esp-LAT/indice.html" : "/eng-US/");
     })();
   </script>
   <meta http-equiv="refresh" content="1; url=/eng-US/">
 </head>
 <body>
-  <p>Redirecting… <a href="/eng-US/">English</a> · <a href="/esp-LAT/">Español</a></p>
+  <p>Redirecting… <a href="/eng-US/">English</a> · <a href="/esp-LAT/indice.html">Español</a></p>
 </body>
 </html>

@@ -277,20 +277,63 @@
   var dropdown = document.querySelector(".lang-switcher-dropdown");
   if (!btn || !dropdown) return;
 
-  // Derive English and Spanish paths from current URL (swap locale segment or default to /eng-US/ or /esp-LAT/)
+  // Derive English and Spanish paths from current URL.
+  // Spanish filenames differ from English ones (e.g. indice.html vs index.html),
+  // so we map special cases and blog post slugs explicitly.
   var pathname = window.location.pathname || "";
   var base = window.location.origin;
   var isEng = pathname.indexOf("/esp-LAT") !== 0;
-  var engPath = pathname.startsWith("/esp-LAT")
-    ? pathname.replace(/^\/esp-LAT/, "/eng-US")
-    : pathname.startsWith("/eng-US")
-    ? pathname
-    : "/eng-US/" + (pathname === "/" || pathname === "" ? "" : pathname.replace(/^\//, ""));
-  var espPath = pathname.startsWith("/eng-US")
-    ? pathname.replace(/^\/eng-US/, "/esp-LAT")
-    : pathname.startsWith("/esp-LAT")
-    ? pathname
-    : "/esp-LAT/" + (pathname === "/" || pathname === "" ? "" : pathname.replace(/^\//, ""));
+
+  var blogEspToEng = {
+    "blog/los-8-paradigmas-de-algoritmos.html": "blog/the-8-algorithm-paradigms.html",
+    "blog/asi-funciona-el-ciclo-del-videojuego.html": "blog/how-a-game-loop-works.html",
+    "blog/todo-lo-que-no-se-sobre-bloggear.html": "blog/everything-i-dont-know-about-blogging.html",
+    "blog/aspirante-nomada-digital.html": "blog/aspiring-digital-nomad.html",
+  };
+
+  var blogEngToEsp = {
+    "blog/the-8-algorithm-paradigms.html": "blog/los-8-paradigmas-de-algoritmos.html",
+    "blog/how-a-game-loop-works.html": "blog/asi-funciona-el-ciclo-del-videojuego.html",
+    "blog/everything-i-dont-know-about-blogging.html": "blog/todo-lo-que-no-se-sobre-bloggear.html",
+    "blog/aspiring-digital-nomad.html": "blog/aspirante-nomada-digital.html",
+  };
+
+  function espToEngPath(espPathname) {
+    // Input example: /esp-LAT/indice.html
+    // Output example: /eng-US/ (homepage)
+    var rest = espPathname.replace(/^\/esp-LAT\/?/, "");
+
+    if (!rest || rest === "/") return "/eng-US/";
+    if (rest === "indice.html") return "/eng-US/";
+    if (rest === "politica-de-privacidad.html") return "/eng-US/privacy-policy.html";
+    if (rest === "blog/blog-indice.html") return "/eng-US/blog/blog-index.html";
+
+    var mappedBlog = blogEspToEng[rest];
+    if (mappedBlog) return "/eng-US/" + mappedBlog;
+
+    // Fallback: keep the relative path after the locale prefix.
+    return "/eng-US/" + rest.replace(/^\/+/, "");
+  }
+
+  function engToEspPath(engPathname) {
+    // Input example: /eng-US/privacy-policy.html
+    // Output example: /esp-LAT/politica-de-privacidad.html
+    var rest = engPathname.replace(/^\/eng-US\/?/, "");
+
+    if (!rest || rest === "/") return "/esp-LAT/indice.html";
+    if (rest === "index.html") return "/esp-LAT/indice.html";
+    if (rest === "privacy-policy.html") return "/esp-LAT/politica-de-privacidad.html";
+    if (rest === "blog/blog-index.html") return "/esp-LAT/blog/blog-indice.html";
+
+    var mappedBlog = blogEngToEsp[rest];
+    if (mappedBlog) return "/esp-LAT/" + mappedBlog;
+
+    // Fallback: keep the relative path after the locale prefix.
+    return "/esp-LAT/" + rest.replace(/^\/+/, "");
+  }
+
+  var engPath = isEng ? pathname : espToEngPath(pathname);
+  var espPath = isEng ? engToEspPath(pathname) : pathname;
 
   // Update displayed language label and link hrefs
   var label = btn.querySelector(".lang-switcher-label");
