@@ -69,14 +69,16 @@
     var cols = matrix[0].length;
     var total = rows * cols;
     var indices = [];
-    var i, r, idx, chosen = [];
-    // Linear indices 0 .. total-1; we'll pick from these without replacement
+    var i, j, tmp, idx, chosen = [];
+    var picks = Math.min(count, total);
     for (i = 0; i < total; i++) indices.push(i);
-    for (i = 0; i < count && indices.length > 0; i++) {
-      r = Math.floor(Math.random() * indices.length);
-      idx = indices[r];
-      indices.splice(r, 1);
-      // Convert linear index back to row, col
+    // Partial Fisher–Yates: same uniform distribution as pick-without-replacement, O(picks) instead of O(picks²) splice
+    for (i = 0; i < picks; i++) {
+      j = i + Math.floor(Math.random() * (total - i));
+      tmp = indices[i];
+      indices[i] = indices[j];
+      indices[j] = tmp;
+      idx = indices[i];
       chosen.push({ row: Math.floor(idx / cols), col: idx % cols });
     }
     return chosen;
