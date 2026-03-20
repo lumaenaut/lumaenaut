@@ -704,6 +704,11 @@ body {
   color: var(--text-main);
 }
 
+.home-greeting {
+  /* The welcome greeting is the first element in the section. */
+  margin-top: 0;
+}
+
 .hero-name {
   font-size: 1.75rem;
   font-weight: 600;
