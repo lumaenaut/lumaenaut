@@ -287,15 +287,15 @@
   var blogEspToEng = {
     "blog/los-8-paradigmas-de-algoritmos.html": "blog/the-8-algorithm-paradigms.html",
     "blog/asi-funciona-el-ciclo-del-videojuego.html": "blog/how-a-game-loop-works.html",
-    "blog/todo-lo-que-no-se-sobre-bloggear.html": "blog/everything-i-dont-know-about-blogging.html",
-    "blog/aspirante-nomada-digital.html": "blog/aspiring-digital-nomad.html",
+    "blog/ep-2-todo-lo-que-no-se-sobre-bloggear.html": "blog/ch-2-everything-i-dont-know-about-blogging.html",
+    "blog/ep-1-aspirante-nomada-digital.html": "blog/ch-1-aspiring-digital-nomad.html",
   };
 
   var blogEngToEsp = {
     "blog/the-8-algorithm-paradigms.html": "blog/los-8-paradigmas-de-algoritmos.html",
     "blog/how-a-game-loop-works.html": "blog/asi-funciona-el-ciclo-del-videojuego.html",
-    "blog/everything-i-dont-know-about-blogging.html": "blog/todo-lo-que-no-se-sobre-bloggear.html",
-    "blog/aspiring-digital-nomad.html": "blog/aspirante-nomada-digital.html",
+    "blog/ch-2-everything-i-dont-know-about-blogging.html": "blog/ep-2-todo-lo-que-no-se-sobre-bloggear.html",
+    "blog/ch-1-aspiring-digital-nomad.html": "blog/ep-1-aspirante-nomada-digital.html",
   };
 
   function espToEngPath(espPathname) {

@@ -38,20 +38,20 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://lumaenaut.com/eng-US/blog/everything-i-dont-know-about-blogging.html</loc>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://lumaenaut.com/eng-US/blog/everything-i-dont-know-about-blogging.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://lumaenaut.com/eng-US/blog/everything-i-dont-know-about-blogging.html"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://lumaenaut.com/esp-LAT/blog/todo-lo-que-no-se-sobre-bloggear.html"/>
-    <lastmod>2026-03-07</lastmod>
+    <loc>https://lumaenaut.com/eng-US/blog/ch-2-everything-i-dont-know-about-blogging.html</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lumaenaut.com/eng-US/blog/ch-2-everything-i-dont-know-about-blogging.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://lumaenaut.com/eng-US/blog/ch-2-everything-i-dont-know-about-blogging.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://lumaenaut.com/esp-LAT/blog/ep-2-todo-lo-que-no-se-sobre-bloggear.html"/>
+    <lastmod>2026-03-20</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://lumaenaut.com/esp-LAT/blog/todo-lo-que-no-se-sobre-bloggear.html</loc>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://lumaenaut.com/eng-US/blog/everything-i-dont-know-about-blogging.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://lumaenaut.com/eng-US/blog/everything-i-dont-know-about-blogging.html"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://lumaenaut.com/esp-LAT/blog/todo-lo-que-no-se-sobre-bloggear.html"/>
-    <lastmod>2026-03-10</lastmod>
+    <loc>https://lumaenaut.com/esp-LAT/blog/ep-2-todo-lo-que-no-se-sobre-bloggear.html</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lumaenaut.com/eng-US/blog/ch-2-everything-i-dont-know-about-blogging.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://lumaenaut.com/eng-US/blog/ch-2-everything-i-dont-know-about-blogging.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://lumaenaut.com/esp-LAT/blog/ep-2-todo-lo-que-no-se-sobre-bloggear.html"/>
+    <lastmod>2026-03-20</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -92,20 +92,20 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://lumaenaut.com/eng-US/blog/aspiring-digital-nomad.html</loc>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://lumaenaut.com/eng-US/blog/aspiring-digital-nomad.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://lumaenaut.com/eng-US/blog/aspiring-digital-nomad.html"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://lumaenaut.com/esp-LAT/blog/aspirante-nomada-digital.html"/>
-    <lastmod>2026-03-01</lastmod>
+    <loc>https://lumaenaut.com/eng-US/blog/ch-1-aspiring-digital-nomad.html</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lumaenaut.com/eng-US/blog/ch-1-aspiring-digital-nomad.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://lumaenaut.com/eng-US/blog/ch-1-aspiring-digital-nomad.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://lumaenaut.com/esp-LAT/blog/ep-1-aspirante-nomada-digital.html"/>
+    <lastmod>2026-03-20</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://lumaenaut.com/esp-LAT/blog/aspirante-nomada-digital.html</loc>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://lumaenaut.com/eng-US/blog/aspiring-digital-nomad.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://lumaenaut.com/eng-US/blog/aspiring-digital-nomad.html"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://lumaenaut.com/esp-LAT/blog/aspirante-nomada-digital.html"/>
-    <lastmod>2026-03-10</lastmod>
+    <loc>https://lumaenaut.com/esp-LAT/blog/ep-1-aspirante-nomada-digital.html</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lumaenaut.com/eng-US/blog/ch-1-aspiring-digital-nomad.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://lumaenaut.com/eng-US/blog/ch-1-aspiring-digital-nomad.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://lumaenaut.com/esp-LAT/blog/ep-1-aspirante-nomada-digital.html"/>
+    <lastmod>2026-03-20</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>

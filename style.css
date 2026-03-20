@@ -693,7 +693,7 @@ body {
 .home-intro {
   max-width: 38rem;
   margin: 0 auto;
-  padding: 2rem 0;
+  padding: 1rem 0 2rem;
 }
 
 .home-intro h2 {
@@ -725,7 +725,7 @@ body {
 
 .hero-portrait-wrap {
   text-align: center;
-  margin: 0 auto 0;
+  margin: 1.5rem auto 1.5rem;
 }
 
 .hero-portrait {
