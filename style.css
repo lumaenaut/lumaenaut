@@ -17,6 +17,7 @@ body {
   min-height: 100vh;
   font-family: system-ui, sans-serif;
   background-color: var(--background-color);
+  overflow: hidden; /* Keep scrolling inside the `.content` panel only. */
 }
 
 .skip-link {
@@ -38,13 +39,14 @@ body {
 
 .page-wrapper {
   max-width: 42rem;
-  height: 100vh;
+  height: 100dvh;
   width: calc(100% - 1.5rem);
   padding: 0.5rem 0;
   margin: 0 auto;
 
   display: flex;
   flex-direction: column;
+  overflow: hidden; /* Prevent outer document scroll (header/footer move together). */
 }
 
 .header {
@@ -199,7 +201,11 @@ body {
   border-right: 5px solid var(--contrast);
   background-color: var(--background-color);
 
+  /* Let the flex layout contain the scroll inside this panel only. */
+  flex: 1 1 auto;
+  min-height: 0;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .floating-controls {
