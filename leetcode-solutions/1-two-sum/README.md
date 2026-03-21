@@ -1,14 +1,25 @@
 # 1. Two Sum
 
-LeetCode problem 1: given `nums` and `target`, return the two indices whose values sum to `target`.
+[LeetCode 1 — Two Sum](https://leetcode.com/problems/two-sum/)
 
-Each file in this folder is a commented solution in one language. All use the optimal **O(n)** time, **O(n)** extra space hash-map approach unless noted.
+Given an integer array `nums` and an integer `target`, return **indices** `i` and `j` such that `nums[i] + nums[j] == target`. Each input has exactly one solution; you may not use the same element twice.
+
+## Approach
+
+Solutions here use a single pass with a **hash map** (dictionary / unordered map): for each index `i`, check whether `target - nums[i]` was seen before; if yes, return the stored index and `i`. Otherwise store `nums[i] → i`.
+
+- **Time:** O(n)  
+- **Space:** O(n) for the map  
+
+Each source file is commented and self-contained.
+
+## Files
 
 | File | Language |
 |------|----------|
-| `solution.py` | Python 3 |
-| `solution.js` | JavaScript |
-| `solution.cpp` | C++ |
-| `solution.go` | Go |
-| `solution.kt` | Kotlin |
-| `solution.swift` | Swift |
+| `python.py` | Python 3 |
+| `javascript.js` | JavaScript |
+| `cpp.cpp` | C++ |
+| `go.go` | Go |
+| `kotlin.kt` | Kotlin |
+| `swift.swift` | Swift |
