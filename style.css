@@ -441,6 +441,18 @@ body {
   background: transparent;
 }
 
+/* Pseudocode / flow blocks: lighter than real code blocks (`.post-body pre`). */
+.post-body pre.post-pseudocode {
+  background: #e3ddd2;
+  color: #252522;
+  border: 1px solid #cfc7ba;
+}
+
+.post-body pre.post-pseudocode code {
+  color: #252522;
+  background: transparent;
+}
+
 .post-body code {
   font-family: ui-monospace, monospace;
   font-size: 0.9em;
@@ -463,8 +475,21 @@ body {
   margin-top: 0.35rem;
 }
 
+.post-body ol {
+  margin-top: 1rem;
+  margin-bottom: 1.25rem;
+  padding-left: 2.25rem;
+  list-style-position: outside;
+}
+
+.post-body ol li {
+  margin-top: 0.35rem;
+  padding-left: 0.35rem;
+}
+
 .post-aside {
-  margin-top: 4rem;
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
   padding-left: 1.5rem;
   border-left: 2px solid #bbb;
   color: var(--text-muted);
@@ -638,6 +663,15 @@ body {
   box-shadow: 4px 4px 0px #8DCEA7;
 }
 
+.blog-card-list li:nth-child(5) .blog-card {
+  box-shadow: 4px 4px 0px #b8a082;
+}
+
+/* LeetCode series — distinct from position-based palette */
+.blog-card-list li.blog-card-item--leetcode .blog-card {
+  box-shadow: 4px 4px 0px #b5654b;
+}
+
 .blog-card:hover {
   transform: translate(2px, 2px);
 }
@@ -656,6 +690,14 @@ body {
 
 .blog-card-list li:nth-child(4) .blog-card:hover {
   box-shadow: 2px 2px 0px #8DCEA7;
+}
+
+.blog-card-list li:nth-child(5) .blog-card:hover {
+  box-shadow: 2px 2px 0px #b8a082;
+}
+
+.blog-card-list li.blog-card-item--leetcode .blog-card:hover {
+  box-shadow: 2px 2px 0px #b5654b;
 }
 
 .blog-card-title {

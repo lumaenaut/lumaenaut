@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-TLP7F5XM');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#F9F5EC">
+  <meta name="description" content="Grinding LeetCode, Day 1: Two Sum. From brute force to a one-pass hash map, with math, edge cases, JS/Java, and references. By Alberto Del Valle.">
+  <title>Grinding LeetCode. Day 1: Two Sum</title>
+  <link rel="canonical" href="https://lumaenaut.com/eng-US/blog/grinding-leetcode/day-1-two-sum.html">
+  <link rel="alternate" hreflang="x-default" href="https://lumaenaut.com/eng-US/blog/grinding-leetcode/day-1-two-sum.html">
+  <link rel="alternate" hreflang="en" href="https://lumaenaut.com/eng-US/blog/grinding-leetcode/day-1-two-sum.html">
+  <link rel="alternate" hreflang="es" href="https://lumaenaut.com/esp-LAT/blog/puliendo-leetcode/dia-1-two-sum.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Grinding LeetCode. Day 1: Two Sum">
+  <meta property="og:description" content="From brute force to O(n) with a hash map: Two Sum for beginners, with code, math, and pitfalls. By Alberto Del Valle.">
+  <meta property="og:url" content="https://lumaenaut.com/eng-US/blog/grinding-leetcode/day-1-two-sum.html">
+  <meta property="og:image" content="https://lumaenaut.com/images/outdated-computer-ascii.png">
+  <meta property="og:image:alt" content="ASCII art: an outdated computer on a desk with a bookshelf in the background, evoking classic coding practice.">
+  <meta property="og:image:width" content="1840">
+  <meta property="og:image:height" content="1690">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="es_MX">
+  <meta property="article:published_time" content="2026-03-21">
+  <meta property="article:modified_time" content="2026-03-19">
+  <meta property="article:author" content="Alberto Del Valle">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://lumaenaut.com/images/outdated-computer-ascii.png">
+  <meta name="twitter:title" content="Grinding LeetCode. Day 1: Two Sum">
+  <meta name="twitter:description" content="Two Sum: brute force, hash map, complexity, edge cases, and code in Python, JavaScript, and Java.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%94%A5%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../../../style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Grinding LeetCode. Day 1: Two Sum",
+    "alternativeHeadline": "From brute force to O(n) with a hash map",
+    "description": "Grinding LeetCode, Day 1: Two Sum. Brute force, hash map, math, edge cases, JS/Java. By Alberto Del Valle.",
+    "url": "https://lumaenaut.com/eng-US/blog/grinding-leetcode/day-1-two-sum.html",
+    "mainEntityOfPage": { "@id": "https://lumaenaut.com/eng-US/blog/grinding-leetcode/day-1-two-sum.html" },
+    "image": "https://lumaenaut.com/images/outdated-computer-ascii.png",
+    "inLanguage": "en-US",
+    "datePublished": "2026-03-21",
+    "dateModified": "2026-03-19",
+    "author": {
+      "@type": "Person",
+      "name": "Alberto Del Valle",
+      "url": "https://lumaenaut.com/eng-US/"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Alberto Del Valle"
+    }
+  }
+  </script>
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TLP7F5XM"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <div class="page-wrapper">
+    <header class="header">
+      <div class="header-left">
+        <div class="logo-div">
+          <pre class="logo-ascii" id="logo-container" aria-hidden="true"></pre>
+        </div>
+      </div>
+      <div class="header-center">
+        <h1>Lumænaut_</h1>
+        <nav class="main-nav" aria-label="Main navigation">
+          <ul>
+            <li><a class="home-btn" href="../../index.html">home</a></li>
+            <li><a class="blog-btn" href="../blog-index.html">blog</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="header-right">
+        <div class="logo-div-mirror" aria-hidden="true"></div>
+        <button type="button" class="share-btn" aria-label="Share this page"><img src="../../../assets/share.png" alt="" class="share-btn-icon" data-ios-src="../../../assets/ios share.png" width="20" height="20"></button>
+      </div>
+    </header>
+    <main id="main-content" class="content">
+      <div class="floating-controls">
+        <div class="lang-switcher">
+          <button type="button" class="lang-switcher-btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Select language"><img src="../../../assets/translate.png" alt="" class="lang-switcher-icon"><span class="lang-switcher-label">eng (US)</span></button>
+          <ul class="lang-switcher-dropdown" role="listbox" aria-label="Language options">
+            <li><a href="#" data-lang="eng-US" role="option">eng (US)</a></li>
+            <li><a href="#" data-lang="esp-LAT" role="option">esp (LAT)</a></li>
+          </ul>
+        </div>
+      </div>
+      <article class="post" aria-labelledby="post-title">
+        <header class="post-header">
+          <h2 id="post-title" class="post-title">Grinding LeetCode.<br>Day 1: Two Sum</h2>
+          <p class="post-subtitle">From brute force to O(n) — a friendly journey for beginners</p>
+          <p class="post-meta">
+            By <span class="author">Alberto Del Valle</span><br>
+            <time datetime="2026-03-21">March 21, 2026</time><br>
+            <span class="post-read-time">(Est. read time ~18 min.)</span>
+          </p>
+        </header>
+        <figure class="post-featured-image" aria-labelledby="two-sum-feature-caption">
+          <img
+            src="../../../images/outdated-computer-ascii.png"
+            alt="ASCII art: an outdated computer on a desk with a bookshelf in the background, suggesting a classic coding workspace."
+            title="ASCII art — outdated computer on a desk with bookshelf"
+            width="1840"
+            height="1690"
+            decoding="async"
+            loading="eager"
+            class="post-featured-img">
+          <figcaption id="two-sum-feature-caption" class="visually-hidden">Featured illustration in ASCII art style: an outdated computer on a desk with a bookshelf behind it.</figcaption>
+        </figure>
+        <div class="post-body">
+          <p>
+            Welcome, brave coder. If you are starting your LeetCode journey, <strong>Two Sum</strong> is almost certainly the first problem you will meet. It is like the “hello world” of algorithmic interviews — simple on the surface, but packed with lessons that will echo through your entire coding career. In this post, we will unwrap it together. No scary jargon, no skipping steps. We will begin with the most naive solution, laugh at its flaws, and then transform it into something beautiful and fast. Grab a cup of coffee (or tea, we do not judge), and let’s go.
+          </p>
+
+          <h3>The problem — Two Sum (LeetCode 1)</h3>
+          <p>Before diving into solutions, let’s read the original problem statement:</p>
+          <blockquote cite="https://leetcode.com/problems/two-sum/">
+            <p>
+              Given an array of integers <code>nums</code> and an integer <code>target</code>, return <strong>indices</strong> of the two numbers such that they add up to <code>target</code>.
+            </p>
+            <p>
+              You may assume that each input would have <strong>exactly one solution</strong>, and you may not use the same element twice.
+            </p>
+            <p>
+              You can return the answer in any order.
+            </p>
+          </blockquote>
+
+          <h3>Rewriting in plain English</h3>
+          <p>
+            Imagine you have a list of numbers (like <code>[2, 7, 11, 15]</code>) and a goal number (like <code>9</code>). You need to find <strong>two numbers inside the list that add up to the goal</strong>. Then you give back their positions (indices) — not the numbers themselves. Also, each element can only be used once. And the puzzle guarantees that <strong>there is exactly one valid pair</strong> hiding in there. That means you will never get stuck wondering “which combination is right?” — there is only one correct answer.
+          </p>
+          <aside class="post-aside" aria-label="Indexing note">
+            <p>
+              <strong>Indexing note.</strong> In programming, list indices usually start from 0. So the first number sits at index 0, the second at index 1, and so on.
+            </p>
+          </aside>
+
+          <h3>Examples from the problem</h3>
+          <ul>
+            <li><strong>Example 1:</strong> <code>nums = [2,7,11,15], target = 9</code> → Output: <code>[0,1]</code> because 2 + 7 = 9.</li>
+            <li><strong>Example 2:</strong> <code>nums = [3,2,4], target = 6</code> → Output: <code>[1,2]</code> because 2 + 4 = 6 (indices 1 and 2).</li>
+            <li><strong>Example 3:</strong> <code>nums = [3,3], target = 6</code> → Output: <code>[0,1]</code>. The two 3’s are at different positions.</li>
+          </ul>
+          <p>Simple, right? Yet the real challenge is <strong>how fast</strong> can we find them when the array gets huge — up to 10,000 numbers. That is where the fun begins.</p>
+
+          <h3>The naive way: brute force (“checking every couple”)</h3>
+          <p>
+            Let’s be honest: when we first see a problem like this, our brains instinctively go: “I’ll take the first number, and then try adding it to every other number after it. If it matches the target, done!” That is the brute force approach. It is simple, it is honest, and it works. But it is also the slowest.
+          </p>
+          <pre class="post-pseudocode"><code>Brute force flow:
+For i = 0 to n-1:
+  For j = i+1 to n-1:
+    If nums[i] + nums[j] == target → return [i, j]</code></pre>
+          <p><strong>Code (Python).</strong></p>
+          <pre><code class="language-python">def twoSum_bruteforce(nums, target):
+    n = len(nums)
+    for i in range(n):
+        for j in range(i + 1, n):
+            if nums[i] + nums[j] == target:
+                return [i, j]
+    return []  # never reached because one solution exists</code></pre>
+
+          <h3>Complexity — the bad news</h3>
+          <p>
+            If the array has <code>n</code> elements, the outer loop runs <code>n</code> times, and the inner loop runs about <code>n/2</code> times on average. That gives us roughly <code>n * (n-1)/2</code> operations, which in Big O notation is <code>O(n²)</code>. For n = 10,000, that is about 50 million comparisons! Your computer can handle it, but in an interview, they will ask: <em>Can you do better?</em>
+          </p>
+          <p>
+            But the brute force approach is still important — it is the foundation. We always start with the simplest working solution, then optimize.
+          </p>
+
+          <h3>The “aha!” moment: using a memory (hash map)</h3>
+          <p>
+            Here is the key insight: Instead of checking every pair, we can <strong>remember what numbers we have seen</strong> and ask a simple question: <em>“Do I need a specific number to complete the target?”</em>
+          </p>
+          <p>
+            Let’s break it: For each number <code>x</code>, the complement is <code>target - x</code>. If we have already seen that complement somewhere in the array, we found our pair! We just need a way to store the numbers we have passed and quickly look them up. That is where a <strong>hash map</strong> (also called hash table or dictionary) comes in — a data structure that lets you store key-value pairs and check if a key exists in <code>O(1)</code> average time. Lightning fast.
+          </p>
+          <aside class="post-aside" aria-label="Hash map in simple terms">
+            <p>
+              <strong>Hash map in simple terms.</strong> Think of a magic notebook. When you read a number, you write it down with its index. Later, if you need to check if a number has been seen before, you just glance at your notebook. No scanning the whole list again.
+            </p>
+          </aside>
+
+          <h3>The smart algorithm (one pass)</h3>
+          <p>We walk through the array once. For each element <code>nums[i]</code>:</p>
+          <ol>
+            <li>Calculate <code>complement = target - nums[i]</code>.</li>
+            <li>Check if the complement already exists in our hash map. If yes → return <code>[map[complement], i]</code>.</li>
+            <li>Otherwise, store the current number and its index in the map: <code>map[nums[i]] = i</code>.</li>
+          </ol>
+          <pre class="post-pseudocode"><code>One-pass hash map flow:
+map = {}
+for i in 0..n-1:
+  complement = target - nums[i]
+  if complement in map: return [map[complement], i]
+  else: map[nums[i]] = i
+# done</code></pre>
+          <p><strong>Code implementation.</strong></p>
+          <pre><code class="language-python">def twoSum_hashmap(nums, target):
+    seen = {}  # key = number, value = index
+    for i, num in enumerate(nums):
+        complement = target - num
+        if complement in seen:
+            return [seen[complement], i]
+        seen[num] = i
+    return []</code></pre>
+          <p>Let’s trace example <code>nums = [3,2,4], target = 6</code>:</p>
+          <ul>
+            <li><code>i=0</code>, <code>num=3</code>, <code>complement=3</code>. <code>seen</code> is empty → store <code>{3:0}</code></li>
+            <li><code>i=1</code>, <code>num=2</code>, <code>complement=4</code>. <code>seen</code> has <code>{3:0}</code>, 4 not there → store <code>{3:0, 2:1}</code></li>
+            <li><code>i=2</code>, <code>num=4</code>, <code>complement=2</code>. <code>seen</code> has 2? Yes! → return <code>[seen[2]=1, 2]</code> → <code>[1,2]</code></li>
+          </ul>
+          <p>Beautiful, is it not? We only pass through the array once.</p>
+
+          <h3>Complexity analysis: why it is a game-changer</h3>
+          <p>
+            <strong>Time complexity:</strong> O(n) — we traverse the array once, and each hash map operation (insertion and lookup) is O(1) on average.<br>
+            <strong>Space complexity:</strong> O(n) — in worst case we store almost all elements in the hash map before finding the pair.
+          </p>
+          <p>
+            For n = 10,000, the brute force does up to 50 million operations; the hash map solution does about 10,000. That is the difference between waiting 2 seconds and 0.001 seconds.
+          </p>
+
+          <h3>The math section — understanding the core equation</h3>
+          <p>Let’s formalize the problem with math. We are given:</p>
+          <blockquote>
+            <p>
+              <strong>Problem restatement.</strong> Find indices <code>i</code> and <code>j</code>, <code>i ≠ j</code>, such that<br>
+              <code>nums[i] + nums[j] = target</code><br>
+              Equivalent to: <code>nums[i] = target - nums[j]</code>
+            </p>
+          </blockquote>
+          <p>
+            If we think of it as an equation: for each index <code>j</code>, we want to find an earlier index <code>i</code> satisfying <code>nums[i] = target - nums[j]</code>. This is like solving for a missing addend. The naive method checks all pairs; the hash map method precomputes the set of earlier numbers, turning the problem into a constant-time lookup.
+          </p>
+          <p>
+            Another mathematical viewpoint: Consider the function <code>f(x) = target - x</code>. For each number in the array, its complement is defined. Two numbers form a valid pair if one is the image of the other under <code>f</code>. That is all we are doing — searching for complement pairs in one pass.
+          </p>
+          <p>
+            We can also visualize it as: draw a number line. For each <code>x</code>, the desired partner is <code>target - x</code>. As we scan, we leave “breadcrumbs” in a hash map. The moment we step on a breadcrumb left by a previous number, we have our solution. It is like a treasure hunt with a perfect memory.
+          </p>
+
+          <h3>Follow-up: can we do better than O(n²)?</h3>
+          <p>
+            The problem’s follow-up asks: <em>“Can you come up with an algorithm that is less than O(n²) time complexity?”</em> And yes — we just did! O(n) with a hash map is dramatically faster. Could we do O(n log n)? Possibly with sorting and two-pointer technique, but that would lose original indices unless we store them. The hash map approach remains the most elegant for this specific problem.
+          </p>
+          <p>
+            If you are curious about the sorting method: You could sort the array (with indices attached) and then use two pointers (left and right) to find the pair. That is O(n log n) but often used when you need to avoid extra space. However, for Two Sum, the hash map method is the interview favorite.
+          </p>
+
+          <h3>A bit of history: where does this problem come from?</h3>
+          <p>
+            The Two Sum problem became famous largely because it was one of the first problems on LeetCode (launched in 2015). But the idea of finding two numbers that sum to a target goes back decades. It is essentially a special case of the <strong>subset sum problem</strong> from computer science theory. Companies like Google, Facebook, and Amazon love it because it tests both basic coding ability and the transition from naive to optimal thinking — a core skill in software engineering.
+          </p>
+          <p>
+            There is also a direct line to <strong>hash table usage</strong>, which revolutionized how we handle lookups in programming. The idea of using a hash map to remember past values is a common design pattern in algorithm interviews (you will see it again in problems like “Subarray Sum Equals K” or “Contains Duplicate”).
+          </p>
+
+          <h3>Testing our solution with edge cases</h3>
+          <p>Let’s check some tricky scenarios that might break a naive approach:</p>
+          <ul>
+            <li><strong>Duplicates:</strong> <code>nums = [1, 1, 2], target = 2</code> → Output: <code>[0,1]</code> because 1+1=2. Our hash map works: when i=1, complement=1, seen already has 1 from index 0 → returns <code>[0,1]</code>.</li>
+            <li><strong>Negative numbers:</strong> <code>nums = [-1, -2, -3, -4], target = -6</code> → Output: <code>[1,3]</code> because -2 + (-4) = -6. Complement logic still holds.</li>
+            <li><strong>Large numbers:</strong> Up to 10^9, but our integer arithmetic works fine.</li>
+          </ul>
+          <p>
+            One common beginner mistake: using the same element twice. For example, if <code>nums = [3, 2, 4], target = 6</code>, complement for 3 is 3, but we can’t use the same 3 again. That is why we store numbers <strong>after</strong> checking the complement, not before. The algorithm ensures we only pair current element with previously seen ones.
+          </p>
+
+          <h3>Diagram — seeing the one-pass magic</h3>
+          <pre class="post-pseudocode"><code>Visual walkthrough for nums = [2,7,11,15], target = 9
+
+Step 0: seen = {}
+Step 1 (i=0, num=2): complement = 7. 7 in seen? No. Add {2:0}
+Step 2 (i=1, num=7): complement = 2. 2 in seen? Yes! seen[2] = 0 → return [0,1]. Done.
+We never even looked at 11 and 15.</code></pre>
+          <p>It is like the algorithm has super vision — it spots the answer at the earliest possible moment.</p>
+
+          <h3>Other languages and slight variations</h3>
+          <p>While we wrote Python-style pseudocode, the same logic applies to JavaScript, Java, C++, etc.</p>
+          <p><strong>JavaScript example (using Map).</strong></p>
+          <pre><code class="language-javascript">var twoSum = function(nums, target) {
+    const map = new Map();
+    for (let i = 0; i &lt; nums.length; i++) {
+        const complement = target - nums[i];
+        if (map.has(complement)) return [map.get(complement), i];
+        map.set(nums[i], i);
+    }
+};</code></pre>
+          <p><strong>Java example (using HashMap).</strong></p>
+          <pre><code class="language-java">public int[] twoSum(int[] nums, int target) {
+    Map&lt;Integer, Integer&gt; map = new HashMap&lt;&gt;();
+    for (int i = 0; i &lt; nums.length; i++) {
+        int complement = target - nums[i];
+        if (map.containsKey(complement)) {
+            return new int[] {map.get(complement), i};
+        }
+        map.put(nums[i], i);
+    }
+    return new int[] {};
+}</code></pre>
+
+          <h3>Common pitfalls and how to avoid them</h3>
+          <ul>
+            <li><strong>Forgetting the order:</strong> Always check complement <em>before</em> storing current number. Otherwise, you might pair an element with itself (when complement equals current number).</li>
+            <li><strong>Using array search instead of hash map:</strong> Some beginners try <code>index()</code> or linear search for complement inside the loop, turning it back to O(n²).</li>
+            <li><strong>Returning numbers instead of indices:</strong> The problem expects indices. Double-check the output format.</li>
+            <li><strong>Assuming the array is sorted:</strong> Not given. So two-pointer without storing indices would be messy.</li>
+          </ul>
+
+          <h3>Why this problem matters beyond the interview</h3>
+          <p>
+            Two Sum teaches you the art of <strong>trade-offs</strong>. The brute force is easy to write but slow. The hash map version uses a bit more memory but gives you speed. In real-world engineering, you constantly balance time vs. space. This simple problem encapsulates that fundamental decision. Plus, the pattern of “complement lookup” will appear again in problems like 3Sum, 4Sum, and many others.
+          </p>
+          <p>
+            One joke, as promised: <em>Why did the programmer quit his job? Because he didn’t get arrays — he kept trying to index with negative numbers.</em>
+          </p>
+
+          <h3>References and further reading</h3>
+          <p>If you want to dive deeper, here are some awesome resources:</p>
+          <ul>
+            <li><a href="https://leetcode.com/problems/two-sum/" rel="noopener noreferrer">LeetCode Two Sum Problem Page</a> — official problem and discussion forums.</li>
+            <li><a href="https://en.wikipedia.org/wiki/Hash_table" rel="noopener noreferrer">Wikipedia: Hash Table</a> — learn about the data structure we used.</li>
+            <li><a href="https://www.geeksforgeeks.org/two-sum/" rel="noopener noreferrer">GeeksforGeeks — Two Sum</a> — additional explanations and code in multiple languages.</li>
+            <li><a href="https://www.youtube.com/watch?v=KLlXCFG5TnA" rel="noopener noreferrer">YouTube: Two Sum by NeetCode</a> — visual explanation (highly recommended for visual learners).</li>
+            <li><a href="https://bigocheatsheet.com/" rel="noopener noreferrer">Big-O Cheat Sheet</a> — to understand complexity analysis better.</li>
+          </ul>
+
+          <h3>Final thoughts</h3>
+          <p>
+            We started from the most naive double loop, endured the pain of O(n²), and then leveled up to a one-pass hash map solution that is elegant, fast, and easy to remember. That is the spirit of algorithmic thinking: always iterate, always optimize, and never be afraid to use extra memory if it gives you massive speed gains.
+          </p>
+          <p>
+            Two Sum might be your first LeetCode problem, but it will not be your last. The patterns you learn here will stick with you. So next time you see a coding challenge, ask yourself: <em>“Can I use a hash map to remember things?”</em> It is often the key.
+          </p>
+          <p>Happy coding, and may your complexity always be low.</p>
+        </div>
+        <blockquote class="closing-quote">
+          Grinding LeetCode — Day 1: Two Sum. Written with curiosity.
+        </blockquote>
+      </article>
+    </main>
+    <footer class="footer">
+      <nav class="social-links" aria-label="Social links">
+        <ul>
+          <li><a href="https://www.reddit.com/user/Lumaenaut_/" target="_blank" rel="noopener noreferrer" title="Reddit"><img src="../../../assets/reddit.png" alt="Reddit" width="24" height="24"></a></li>
+          <li><a href="https://x.com/lumaenaut_" target="_blank" rel="noopener noreferrer" title="X"><img src="../../../assets/twitter.png" alt="X" width="24" height="24"></a></li>
+          <li><a href="https://github.com/Lumaenaut" target="_blank" rel="noopener noreferrer" title="GitHub"><img src="../../../assets/github.png" alt="GitHub" width="24" height="24"></a></li>
+        </ul>
+      </nav>
+      <div class="footer-meta">
+        <p>2026, Lumænaut_ <a href="../../privacy-policy.html">Privacy Policy</a></p>
+      </div>
+    </footer>
+  </div>
+  <script src="../../../scripts/script.js"></script>
+</body>
+</html>
