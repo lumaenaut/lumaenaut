@@ -11,15 +11,15 @@ Solutions here use a single pass with a **hash map** (dictionary / unordered map
 - **Time:** O(n)  
 - **Space:** O(n) for the map  
 
-Each source file is commented and self-contained.
+Each `solution.*` file is commented and self-contained. Pick the language you need and copy the class/function into LeetCode’s editor (filename on disk is always `solution` plus the language extension).
 
 ## Files
 
 | File | Language |
 |------|----------|
-| `python.py` | Python 3 |
-| `javascript.js` | JavaScript |
-| `cpp.cpp` | C++ |
-| `go.go` | Go |
-| `kotlin.kt` | Kotlin |
-| `swift.swift` | Swift |
+| `solution.py` | Python 3 |
+| `solution.js` | JavaScript |
+| `solution.cpp` | C++ |
+| `solution.go` | Go |
+| `solution.kt` | Kotlin |
+| `solution.swift` | Swift |
