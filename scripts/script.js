@@ -292,6 +292,7 @@
     "blog/ep-2-todo-lo-que-no-se-sobre-bloggear.html": "blog/ch-2-everything-i-dont-know-about-blogging.html",
     "blog/ep-1-aspirante-nomada-digital.html": "blog/ch-1-aspiring-digital-nomad.html",
     "blog/puliendo-leetcode/dia-1-two-sum.html": "blog/grinding-leetcode/day-1-two-sum.html",
+    "blog/puliendo-leetcode/dia-2-add-two-numbers.html": "blog/grinding-leetcode/day-2-add-two-numbers.html",
   };
 
   var blogEngToEsp = {
@@ -300,6 +301,7 @@
     "blog/ch-2-everything-i-dont-know-about-blogging.html": "blog/ep-2-todo-lo-que-no-se-sobre-bloggear.html",
     "blog/ch-1-aspiring-digital-nomad.html": "blog/ep-1-aspirante-nomada-digital.html",
     "blog/grinding-leetcode/day-1-two-sum.html": "blog/puliendo-leetcode/dia-1-two-sum.html",
+    "blog/grinding-leetcode/day-2-add-two-numbers.html": "blog/puliendo-leetcode/dia-2-add-two-numbers.html",
   };
 
   function espToEngPath(espPathname) {

@@ -487,6 +487,88 @@ body {
   padding-left: 0.35rem;
 }
 
+/* LeetCode series: simulation tables, math blocks, multi-language solution cards */
+.post-body h4 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 0.4rem;
+  color: var(--text-main);
+}
+
+.post-body .simulation-table {
+  background: #fff;
+  border: 1px solid #cfc7ba;
+  border-radius: 12px;
+  padding: 1rem;
+  margin: 1.5rem 0;
+  overflow-x: auto;
+}
+
+.post-body .simulation-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: ui-monospace, monospace;
+  font-size: 0.8rem;
+}
+
+.post-body .simulation-table th,
+.post-body .simulation-table td {
+  border: 1px solid #cfc7ba;
+  padding: 8px 6px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.post-body .simulation-table th {
+  background: #e8e4dc;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.post-body .simulation-table td.highlight {
+  background: #dbeafe;
+  font-weight: 600;
+}
+
+.post-body .step-caption {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-top: 0.65rem;
+  text-align: center;
+}
+
+.post-body .math {
+  background: #e8e4dc;
+  padding: 1rem;
+  border-radius: 8px;
+  margin: 1.25rem 0;
+  font-family: ui-monospace, monospace;
+  font-size: 0.92rem;
+  overflow-x: auto;
+  border: 1px solid #cfc7ba;
+}
+
+.post-body .solution-card {
+  border: 1px solid #cfc7ba;
+  border-radius: 12px;
+  padding: 1.1rem;
+  margin: 1.5rem 0;
+  background: #fdfaf5;
+}
+
+.post-body .lang-tag {
+  display: inline-block;
+  background: var(--contrast);
+  color: var(--background-color);
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.65rem;
+}
+
 .post-aside {
   margin-top: 1.25rem;
   margin-bottom: 1.25rem;

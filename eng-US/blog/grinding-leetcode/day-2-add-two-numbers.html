@@ -1,0 +1,542 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-TLP7F5XM');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#F9F5EC">
+  <meta name="description" content="Grinding LeetCode, Day 2: Add Two Numbers. Grade-school carry, linked lists, simulations, six languages, complexity, and references. By Alberto Del Valle.">
+  <title>Grinding LeetCode. Day 2: Add Two Numbers</title>
+  <link rel="canonical" href="https://lumaenaut.com/eng-US/blog/grinding-leetcode/day-2-add-two-numbers.html">
+  <link rel="alternate" hreflang="x-default" href="https://lumaenaut.com/eng-US/blog/grinding-leetcode/day-2-add-two-numbers.html">
+  <link rel="alternate" hreflang="en" href="https://lumaenaut.com/eng-US/blog/grinding-leetcode/day-2-add-two-numbers.html">
+  <link rel="alternate" hreflang="es" href="https://lumaenaut.com/esp-LAT/blog/puliendo-leetcode/dia-2-add-two-numbers.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Grinding LeetCode. Day 2: Add Two Numbers">
+  <meta property="og:description" content="From grade-school addition to linked lists: Add Two Numbers with carry simulation, code in six languages, and pitfalls. By Alberto Del Valle.">
+  <meta property="og:url" content="https://lumaenaut.com/eng-US/blog/grinding-leetcode/day-2-add-two-numbers.html">
+  <meta property="og:image" content="https://lumaenaut.com/images/outdated-computer-ascii.png">
+  <meta property="og:image:alt" content="ASCII art: an outdated computer on a desk with a bookshelf in the background, evoking classic coding practice.">
+  <meta property="og:image:width" content="1840">
+  <meta property="og:image:height" content="1690">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="es_MX">
+  <meta property="article:published_time" content="2026-03-22">
+  <meta property="article:modified_time" content="2026-03-22">
+  <meta property="article:author" content="Alberto Del Valle">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://lumaenaut.com/images/outdated-computer-ascii.png">
+  <meta name="twitter:title" content="Grinding LeetCode. Day 2: Add Two Numbers">
+  <meta name="twitter:description" content="Add Two Numbers: naive vs carry simulation, tables, math, edge cases, Python/JS/C++/Go/Kotlin/Swift.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%94%A5%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../../../style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Grinding LeetCode. Day 2: Add Two Numbers",
+    "alternativeHeadline": "From grade-school addition to linked list mastery",
+    "description": "Grinding LeetCode, Day 2: Add Two Numbers. Carry simulation, linked lists, six languages, complexity. By Alberto Del Valle.",
+    "url": "https://lumaenaut.com/eng-US/blog/grinding-leetcode/day-2-add-two-numbers.html",
+    "mainEntityOfPage": { "@id": "https://lumaenaut.com/eng-US/blog/grinding-leetcode/day-2-add-two-numbers.html" },
+    "image": "https://lumaenaut.com/images/outdated-computer-ascii.png",
+    "inLanguage": "en-US",
+    "datePublished": "2026-03-22",
+    "dateModified": "2026-03-22",
+    "author": {
+      "@type": "Person",
+      "name": "Alberto Del Valle",
+      "url": "https://lumaenaut.com/eng-US/"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Alberto Del Valle"
+    }
+  }
+  </script>
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TLP7F5XM"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <div class="page-wrapper">
+    <header class="header">
+      <div class="header-left">
+        <div class="logo-div">
+          <pre class="logo-ascii" id="logo-container" aria-hidden="true"></pre>
+        </div>
+      </div>
+      <div class="header-center">
+        <h1>Lumænaut_</h1>
+        <nav class="main-nav" aria-label="Main navigation">
+          <ul>
+            <li><a class="home-btn" href="../../index.html">home</a></li>
+            <li><a class="blog-btn" href="../blog-index.html">blog</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="header-right">
+        <div class="logo-div-mirror" aria-hidden="true"></div>
+        <button type="button" class="share-btn" aria-label="Share this page"><img src="../../../assets/share.png" alt="" class="share-btn-icon" data-ios-src="../../../assets/ios share.png" width="20" height="20"></button>
+      </div>
+    </header>
+    <main id="main-content" class="content">
+      <div class="floating-controls">
+        <div class="lang-switcher">
+          <button type="button" class="lang-switcher-btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Select language"><img src="../../../assets/translate.png" alt="" class="lang-switcher-icon"><span class="lang-switcher-label">eng (US)</span></button>
+          <ul class="lang-switcher-dropdown" role="listbox" aria-label="Language options">
+            <li><a href="#" data-lang="eng-US" role="option">eng (US)</a></li>
+            <li><a href="#" data-lang="esp-LAT" role="option">esp (LAT)</a></li>
+          </ul>
+        </div>
+      </div>
+      <article class="post" aria-labelledby="post-title">
+        <header class="post-header">
+          <h2 id="post-title" class="post-title">Grinding LeetCode.<br>Day 2: Add Two Numbers</h2>
+          <p class="post-subtitle">From grade-school addition to linked list mastery</p>
+          <p class="post-meta">
+            By <span class="author">Alberto Del Valle</span><br>
+            <time datetime="2026-03-22">March 22, 2026</time><br>
+            <span class="post-read-time">(Est. read time ~21 min.)</span>
+          </p>
+        </header>
+        <figure class="post-featured-image" aria-labelledby="add-two-numbers-feature-caption">
+          <img
+            src="../../../images/outdated-computer-ascii.png"
+            alt="ASCII art: an outdated computer on a desk with a bookshelf in the background, suggesting a classic coding workspace."
+            title="ASCII art — outdated computer on a desk with bookshelf"
+            width="1840"
+            height="1690"
+            decoding="async"
+            loading="eager"
+            class="post-featured-img">
+          <figcaption id="add-two-numbers-feature-caption" class="visually-hidden">Featured illustration in ASCII art style: an outdated computer on a desk with a bookshelf behind it.</figcaption>
+        </figure>
+        <div class="post-body">
+          <h3>Problem Statement</h3>
+          <p>You are given two <strong>non-empty linked lists</strong> representing two non-negative integers. The digits are stored in <strong>reverse order</strong>, and each node contains a single digit. Add the two numbers and return the sum as a linked list.</p>
+          <p>You may assume the two numbers do not contain any leading zero, except the number 0 itself.</p>
+
+          <pre>
+          Input: l1 = [2,4,3], l2 = [5,6,4]
+          Output: [7,0,8]
+          Explanation: 342 + 465 = 807.
+
+          Input: l1 = [0], l2 = [0]
+          Output: [0]
+
+          Input: l1 = [9,9,9,9,9,9,9], l2 = [9,9,9,9]
+          Output: [8,9,9,9,0,0,0,1]
+          </pre>
+
+          <p><strong>Constraints:</strong></p>
+          <ul>
+            <li>The number of nodes in each linked list is in the range [1, 100].</li>
+            <li>0 <= Node.val <= 9</li>
+            <li>It is guaranteed that the list represents a number that does not have leading zeros.</li>
+          </ul>
+
+          <h3>Rewriting in Simple Terms</h3>
+          <p>Imagine you have two numbers written <em>backwards</em>. For instance, 342 is stored as 2 → 4 → 3. You’re asked to add them digit by digit from left to right, just like we did in elementary school, but with the lists reversed. The twist? The result also has to be a reversed linked list. So instead of dealing with big integers, we simulate manual addition with a carry. That’s all there is to it — except we need to do it efficiently while traversing two linked lists that might have different lengths.</p>
+
+          <h3>Historical Context: From Abacus to Linked Lists</h3>
+          <p>The art of addition is ancient. The Sumerians used clay tokens for accounting as early as 3000 BCE <a href="https://www.metmuseum.org/toah/hd/wrtg/hd_wrtg.htm" target="_blank">(Metropolitan Museum of Art – Origins of Writing)</a>. The Chinese invented the abacus (suanpan) around 1200 BCE, and it remains one of the earliest calculating tools <a href="https://www.britannica.com/technology/abacus-calculating-device" target="_blank">(Britannica – Abacus)</a>. Gottfried Wilhelm Leibniz dreamed of mechanical calculators in the 17th century and developed the stepped reckoner, a machine capable of performing addition, subtraction, multiplication, and division <a href="https://www.britannica.com/biography/Gottfried-Wilhelm-Leibniz" target="_blank">(Britannica – Leibniz)</a>.</p>
+          <p>The <em>digital</em> addition algorithm we use today (binary addition with carry) was formalized during the 1940s by pioneers like John von Neumann, who described the architecture of stored-program computers, where arithmetic logic units (ALUs) perform digit-wise addition with a carry flag <a href="https://ieeexplore.ieee.org/document/5392441" target="_blank">(IEEE – Von Neumann’s First Draft)</a>.</p>
+          <p>Linked lists as a data structure were popularized in the late 1950s by Allen Newell, Cliff Shaw, and Herbert Simon with the Information Processing Language (IPL). They used linked structures to represent symbolic expressions and lists in AI research <a href="https://dl.acm.org/doi/10.1145/367177.367199" target="_blank">(ACM – IPL paper, 1956)</a>. The combination of linked lists and addition simulates how a CPU adds two numbers stored in memory: byte by byte (or digit by digit) with a carry flag.</p>
+          <p>This specific LeetCode problem became a staple because it tests your ability to handle pointer manipulation, edge cases (different lengths, final carry), and the mental model of reversing digits. Many embedded systems and big integer libraries use a similar approach — they store numbers in reverse order to make addition and multiplication trivial. For instance, the GNU Multiple Precision Arithmetic Library (GMP) stores numbers in an array of “limbs” with the least significant limb first <a href="https://gmplib.org/manual/Integer-Internals" target="_blank">(GMP Manual – Integer Internals)</a>.</p>
+
+          <h3>Road to Optimal: From Naive to Masterful</h3>
+
+          <h4>Step 1 – The Naive Approach: Convert to Numbers</h4>
+          <p>The most straightforward idea: traverse each linked list, build the actual integer (by reversing digit order), add them, then convert the sum back to a reversed linked list. In Python that might look like:</p>
+          <pre><code>def get_number(head):
+              num = 0
+              place = 1
+              while head:
+                  num += head.val * place
+                  place *= 10
+                  head = head.next
+              return num
+          # Then do addition and reconstruct</code></pre>
+          <p>This works, but it's fatally flawed when numbers exceed 64-bit integers. Since each linked list can have up to 100 digits, the integer can be as large as 10^100 — Python’s big ints can handle it, but in languages like C++ or Java, we would overflow. Also, the problem explicitly intends to train us on linked list traversal and carry management, not big number libraries. So this naive method is inefficient both conceptually and in spirit.</p>
+
+          <h4>Step 2 – Simulation with Carry (The Standard Approach)</h4>
+          <p>The insight: addition is performed digit by digit from the least significant digit (which is the head of the list, thanks to reverse order). So we walk through both lists simultaneously, sum the current digits plus a carry, store the digit (sum % 10) in a new node, and propagate the carry (sum // 10). We continue until both lists are exhausted and the carry becomes 0.</p>
+
+          <div class="simulation-table">
+              <strong>Step-by-Step Simulation: l1 = [2,4,3] , l2 = [5,6,4]</strong>
+              <table>
+                  <thead>
+                      <tr>
+                          <th>Step</th>
+                          <th>l1 current digit</th>
+                          <th>l2 current digit</th>
+                          <th>Carry from previous</th>
+                          <th>Sum (digit + digit + carry)</th>
+                          <th>New digit (sum % 10)</th>
+                          <th>New carry (sum // 10)</th>
+                          <th>Result list so far</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr>
+                          <td>1</td>
+                          <td>2</td>
+                          <td>5</td>
+                          <td>0</td>
+                          <td>7</td>
+                          <td class="highlight">7</td>
+                          <td>0</td>
+                          <td>[7]</td>
+                      </tr>
+                      <tr>
+                          <td>2</td>
+                          <td>4</td>
+                          <td>6</td>
+                          <td>0</td>
+                          <td>10</td>
+                          <td class="highlight">0</td>
+                          <td>1</td>
+                          <td>[7, 0]</td>
+                      </tr>
+                      <tr>
+                          <td>3</td>
+                          <td>3</td>
+                          <td>4</td>
+                          <td>1</td>
+                          <td>8</td>
+                          <td class="highlight">8</td>
+                          <td>0</td>
+                          <td>[7, 0, 8]</td>
+                      </tr>
+                      <tr>
+                          <td>4</td>
+                          <td>None (0)</td>
+                          <td>None (0)</td>
+                          <td>0</td>
+                          <td>0</td>
+                          <td>-</td>
+                          <td>0</td>
+                          <td>Finished → [7,0,8]</td>
+                      </tr>
+                  </tbody>
+              </table>
+              <div class="step-caption">Each row corresponds to one iteration. Notice the carry that appears in step 2 and gets consumed in step 3. The final carry remains 0, so we stop.</div>
+          </div>
+
+          <div class="simulation-table">
+              <strong>Edge case: l1 = [9,9,9,9,9,9,9] , l2 = [9,9,9,9] (final carry)</strong>
+              <table>
+                  <thead>
+                      <tr>
+                          <th>Step</th>
+                          <th>l1 digit</th>
+                          <th>l2 digit</th>
+                          <th>Carry in</th>
+                          <th>Sum</th>
+                          <th>Digit out</th>
+                          <th>Carry out</th>
+                          <th>Result list</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr><td>1</td><td>9</td><td>9</td><td>0</td><td>18</td><td>8</td><td>1</td><td>[8]</td></tr>
+                      <tr><td>2</td><td>9</td><td>9</td><td>1</td><td>19</td><td>9</td><td>1</td><td>[8,9]</td></tr>
+                      <tr><td>3</td><td>9</td><td>9</td><td>1</td><td>19</td><td>9</td><td>1</td><td>[8,9,9]</td></tr>
+                      <tr><td>4</td><td>9</td><td>9</td><td>1</td><td>19</td><td>9</td><td>1</td><td>[8,9,9,9]</td></tr>
+                      <tr><td>5</td><td>9</td><td>None</td><td>1</td><td>10</td><td>0</td><td>1</td><td>[8,9,9,9,0]</td></tr>
+                      <tr><td>6</td><td>9</td><td>None</td><td>1</td><td>10</td><td>0</td><td>1</td><td>[8,9,9,9,0,0]</td></tr>
+                      <tr><td>7</td><td>9</td><td>None</td><td>1</td><td>10</td><td>0</td><td>1</td><td>[8,9,9,9,0,0,0]</td></tr>
+                      <tr><td>8</td><td>None</td><td>None</td><td>1</td><td>1</td><td>1</td><td>0</td><td>[8,9,9,9,0,0,0,1]</td></tr>
+                  </tbody>
+              </table>
+              <div class="step-caption">After exhausting both lists, we still have a carry of 1, so we add an extra node with value 1. This matches the expected output [8,9,9,9,0,0,0,1].</div>
+          </div>
+
+          <p>This algorithm runs in <strong>O(max(m, n))</strong> time, where m and n are lengths of the lists, and O(max(m, n)) space for the result list (if we ignore output, it's optimal). The key is the dummy head trick that simplifies edge cases — you never have to treat the first node specially.</p>
+
+          <h4>Step 3 – Optimizing for Memory and Edge Cases</h4>
+          <p>Could we avoid creating a new list? In theory, we could reuse one of the input lists to store the result, modifying nodes in place. This would bring space complexity down to O(1) besides the answer. However, it's messy because we might need to extend a list if the final carry adds a new node. Usually interviewers and LeetCode accept the simpler new-list construction because it's cleaner. The real optimization is recognizing we must handle the final carry separately.</p>
+
+          <h3>Mathematical Formulation</h3>
+          <div class="math">
+          Let the numbers be represented as:<br>
+          A = Σ (a_i * 10^i) , where a_0 is the head of l1 (least significant digit).<br>
+          B = Σ (b_i * 10^i) , where b_0 is the head of l2.<br>
+          Sum S = A + B = Σ (s_i * 10^i) , with 0 ≤ s_i ≤ 9, and carry propagation:<br>
+          <br>
+          For each position i, define total_i = a_i + b_i + carry_i,<br>
+          where carry_0 = 0,<br>
+          s_i = total_i mod 10,<br>
+          carry_{i+1} = floor(total_i / 10).<br>
+          <br>
+          The final result has digits [s_0, s_1, ..., s_k] in a linked list, where k is the largest index with s_k ≠ 0 or carry_{k+1} = 1 (then we append one more node with digit 1).<br>
+          <br>
+          This is exactly the elementary school addition algorithm, formalized for base 10.
+          </div>
+
+          <h3>Code Solutions in Multiple Languages</h3>
+          <p>Below you’ll find clean implementations of the optimal algorithm in six languages. Each uses the dummy head pattern and runs in O(n) time.</p>
+
+          <div class="solution-card">
+              <div class="lang-tag">Python 3</div>
+              <pre><code># Definition for singly-linked list.
+          # class ListNode:
+          #     def __init__(self, val=0, next=None):
+          #         self.val = val
+          #         self.next = next
+          class Solution:
+              def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+                  dummy = ListNode()
+                  current = dummy
+                  carry = 0
+
+                  while l1 or l2 or carry:
+                      val1 = l1.val if l1 else 0
+                      val2 = l2.val if l2 else 0
+                      total = val1 + val2 + carry
+                      carry = total // 10
+                      current.next = ListNode(total % 10)
+                      current = current.next
+
+                      if l1: l1 = l1.next
+                      if l2: l2 = l2.next
+
+                  return dummy.next</code></pre>
+              <p>Python’s dynamic typing makes this code extremely readable. The dummy node avoids checking if the result list is empty. The ternary operators elegantly handle the case where one list is exhausted.</p>
+          </div>
+
+          <div class="solution-card">
+              <div class="lang-tag">JavaScript</div>
+              <pre><code>/**
+           * Definition for singly-linked list.
+           * function ListNode(val, next) {
+           *     this.val = (val===undefined ? 0 : val)
+           *     this.next = (next===undefined ? null : next)
+           * }
+           */
+          var addTwoNumbers = function(l1, l2) {
+              let dummy = new ListNode(0);
+              let current = dummy;
+              let carry = 0;
+
+              while (l1 !== null || l2 !== null || carry !== 0) {
+                  const val1 = l1 ? l1.val : 0;
+                  const val2 = l2 ? l2.val : 0;
+                  const sum = val1 + val2 + carry;
+                  carry = Math.floor(sum / 10);
+                  current.next = new ListNode(sum % 10);
+                  current = current.next;
+
+                  if (l1) l1 = l1.next;
+                  if (l2) l2 = l2.next;
+              }
+
+              return dummy.next;
+          };</code></pre>
+              <p>JavaScript version: note the explicit <code>Math.floor</code> for integer division. The rest is identical in spirit. Great for front-end engineers brushing up on linked list manipulation.</p>
+          </div>
+
+          <div class="solution-card">
+              <div class="lang-tag">C++</div>
+              <pre><code>/**
+           * Definition for singly-linked list.
+           * struct ListNode {
+           *     int val;
+           *     ListNode *next;
+           *     ListNode() : val(0), next(nullptr) {}
+           *     ListNode(int x) : val(x), next(nullptr) {}
+           *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+           * };
+           */
+          class Solution {
+          public:
+              ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+                  ListNode* dummy = new ListNode(0);
+                  ListNode* current = dummy;
+                  int carry = 0;
+
+                  while (l1 != nullptr || l2 != nullptr || carry != 0) {
+                      int val1 = (l1 != nullptr) ? l1->val : 0;
+                      int val2 = (l2 != nullptr) ? l2->val : 0;
+                      int sum = val1 + val2 + carry;
+                      carry = sum / 10;
+                      current->next = new ListNode(sum % 10);
+                      current = current->next;
+
+                      if (l1 != nullptr) l1 = l1->next;
+                      if (l2 != nullptr) l2 = l2->next;
+                  }
+
+                  ListNode* result = dummy->next;
+                  delete dummy;
+                  return result;
+              }
+          };</code></pre>
+              <p>C++ demands careful memory management. Here we create nodes with <code>new</code>. The dummy node is deleted after extracting the result. This code showcases modern C++ pointers and the conditional operator.</p>
+          </div>
+
+          <div class="solution-card">
+              <div class="lang-tag">Go</div>
+              <pre><code>/**
+           * Definition for singly-linked list.
+           * type ListNode struct {
+           *     Val int
+           *     Next *ListNode
+           * }
+           */
+          func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
+              dummy := &ListNode{0, nil}
+              current := dummy
+              carry := 0
+
+              for l1 != nil || l2 != nil || carry != 0 {
+                  val1, val2 := 0, 0
+                  if l1 != nil {
+                      val1 = l1.Val
+                      l1 = l1.Next
+                  }
+                  if l2 != nil {
+                      val2 = l2.Val
+                      l2 = l2.Next
+                  }
+                  sum := val1 + val2 + carry
+                  carry = sum / 10
+                  current.Next = &ListNode{sum % 10, nil}
+                  current = current.Next
+              }
+              return dummy.Next
+          }</code></pre>
+              <p>Go’s explicit <code>nil</code> checks and struct initialization make the algorithm clear. The dummy head pattern translates well. This is idiomatic Go — no classes, just structs with methods when needed.</p>
+          </div>
+
+          <div class="solution-card">
+              <div class="lang-tag">Kotlin</div>
+              <pre><code>/**
+           * Example:
+           * var li = ListNode(5)
+           * var v = li.`val`
+           * Definition for singly-linked list.
+           * class ListNode(var `val`: Int) {
+           *     var next: ListNode? = null
+           * }
+           */
+          class Solution {
+              fun addTwoNumbers(l1: ListNode?, l2: ListNode?): ListNode? {
+                  val dummy = ListNode(0)
+                  var current: ListNode? = dummy
+                  var carry = 0
+                  var p = l1
+                  var q = l2
+
+                  while (p != null || q != null || carry != 0) {
+                      val x = p?.`val` ?: 0
+                      val y = q?.`val` ?: 0
+                      val sum = x + y + carry
+                      carry = sum / 10
+                      current?.next = ListNode(sum % 10)
+                      current = current?.next
+
+                      if (p != null) p = p.next
+                      if (q != null) q = q.next
+                  }
+
+                  return dummy.next
+              }
+          }</code></pre>
+              <p>Kotlin’s safe calls (<code>?.</code>) and Elvis operator (<code>?:</code>) reduce boilerplate. The code reads similarly to Python but with static typing. The dummy node still shines.</p>
+          </div>
+
+          <div class="solution-card">
+              <div class="lang-tag">Swift</div>
+              <pre><code>/**
+           * Definition for singly-linked list.
+           * public class ListNode {
+           *     public var val: Int
+           *     public var next: ListNode?
+           *     public init() { self.val = 0; self.next = nil; }
+           *     public init(_ val: Int) { self.val = val; self.next = nil; }
+           *     public init(_ val: Int, _ next: ListNode?) { self.val = val; self.next = next; }
+           * }
+           */
+          class Solution {
+              func addTwoNumbers(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
+                  let dummy = ListNode(0)
+                  var current: ListNode? = dummy
+                  var carry = 0
+                  var p = l1
+                  var q = l2
+
+                  while p != nil || q != nil || carry != 0 {
+                      let x = p?.val ?? 0
+                      let y = q?.val ?? 0
+                      let sum = x + y + carry
+                      carry = sum / 10
+                      current?.next = ListNode(sum % 10)
+                      current = current?.next
+
+                      p = p?.next
+                      q = q?.next
+                  }
+
+                  return dummy.next
+              }
+          }</code></pre>
+              <p>Swift uses optional chaining and nil-coalescing (<code>??</code>) to keep the code concise. The logic is identical across all languages, demonstrating the universality of the addition algorithm.</p>
+          </div>
+
+          <h3>Edge Cases & Pitfalls</h3>
+          <ul>
+              <li><strong>Different list lengths:</strong> The algorithm gracefully handles this by defaulting missing nodes to 0.</li>
+              <li><strong>Final carry:</strong> e.g., 999 + 1 = 1000 → output list [0,0,0,1]. Our loop condition includes <code>carry != 0</code> to add that extra node.</li>
+              <li><strong>One list empty (though problem says non-empty, but in follow-ups):</strong> Just returns the other list with possible carry addition.</li>
+              <li><strong>Large numbers:</strong> The solution works for 100-digit numbers because it never converts to integer — it only deals with digits and carry.</li>
+          </ul>
+
+          <h3>Complexity Analysis</h3>
+          <p><strong>Time Complexity:</strong> O(max(m, n)) where m, n are lengths of l1 and l2. We traverse each node at most once.</p>
+          <p><strong>Space Complexity:</strong> O(max(m, n)) for the new list. If we disregard the output, it’s O(1) auxiliary space (only a few variables). Some solutions reuse one of the input lists to achieve O(1) extra space but at the cost of mutating inputs — it’s a tradeoff.</p>
+
+          <h3>Lessons Learned & Historical Relevance</h3>
+          <p>The “Add Two Numbers” problem is a microcosm of how digital computers perform arithmetic. Every CPU uses a similar algorithm at the hardware level: add two numbers byte by byte with carry. Linked list traversal mimics a memory walk. And the reversed digit storage? That’s how big integers are often implemented in libraries like GMP (GNU Multiple Precision Arithmetic Library) <a href="https://gmplib.org/manual/Integer-Internals" target="_blank">(GMP Internals)</a>. So you’re not just solving a coding puzzle — you’re recreating a fundamental piece of computational history.</p>
+          <p>Notable implementations: In 1964, the IBM System/360 introduced a family of computers with a powerful “add with carry” instruction that influenced later CPU designs <a href="https://www.ibm.com/ibm/history/exhibits/mainframe/mainframe_PC360.html" target="_blank">(IBM Archives – System/360)</a>. Today, cryptographic libraries such as OpenSSL rely on this exact method for multi-precision arithmetic to handle large keys <a href="https://www.openssl.org/docs/man1.1.1/man3/BN_add.html" target="_blank">(OpenSSL BN_add documentation)</a>. Even blockchain smart contracts sometimes implement big integer addition in a similar fashion due to gas limitations.</p>
+
+          <h3>Further References & Resources</h3>
+          <ul>
+              <li><a href="https://leetcode.com/problems/add-two-numbers/" target="_blank">Original LeetCode Problem</a></li>
+              <li><a href="https://en.wikipedia.org/wiki/Elementary_arithmetic#Addition" target="_blank">Wikipedia – Elementary arithmetic addition</a></li>
+              <li><a href="https://en.wikipedia.org/wiki/Carry_(arithmetic)" target="_blank">Carry (arithmetic) – the mechanism that makes it work</a></li>
+              <li><a href="https://gmplib.org/" target="_blank">GMP – GNU Multiple Precision Arithmetic Library</a></li>
+              <li><a href="https://github.com/TheAlgorithms" target="_blank">TheAlgorithms – open source implementations in many languages</a></li>
+              <li><a href="https://www.geeksforgeeks.org/add-two-numbers-represented-by-linked-lists/" target="_blank">GeeksforGeeks: Add two numbers represented by linked lists</a></li>
+          </ul>
+        </div>
+        <blockquote class="closing-quote">
+          With love for those grinding LeetCode, one day at a time. Master the basics, and the rest will follow.
+        </blockquote>
+      </article>
+    </main>
+    <footer class="footer">
+      <nav class="social-links" aria-label="Social links">
+        <ul>
+          <li><a href="https://www.reddit.com/user/Lumaenaut_/" target="_blank" rel="noopener noreferrer" title="Reddit"><img src="../../../assets/reddit.png" alt="Reddit" width="24" height="24"></a></li>
+          <li><a href="https://x.com/lumaenaut_" target="_blank" rel="noopener noreferrer" title="X"><img src="../../../assets/twitter.png" alt="X" width="24" height="24"></a></li>
+          <li><a href="https://github.com/Lumaenaut" target="_blank" rel="noopener noreferrer" title="GitHub"><img src="../../../assets/github.png" alt="GitHub" width="24" height="24"></a></li>
+        </ul>
+      </nav>
+      <div class="footer-meta">
+        <p>2026, Lumænaut_ <a href="../../privacy-policy.html">Privacy Policy</a></p>
+      </div>
+    </footer>
+  </div>
+  <script src="../../../scripts/script.js"></script>
+</body>
+</html>
