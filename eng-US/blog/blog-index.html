@@ -12,12 +12,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#F9F5EC">
   <meta name="description" content="Browse blog posts by Alberto Del Valle on digital nomadism, algorithms, computer science, and videogames. Lumænaut_ — a traveler of light.">
+  <meta name="author" content="Alberto Del Valle">
   <title>Blog — Lumænaut_</title>
   <link rel="canonical" href="https://lumaenaut.com/eng-US/blog/blog-index.html">
   <link rel="alternate" hreflang="x-default" href="https://lumaenaut.com/eng-US/blog/blog-index.html">
   <link rel="alternate" hreflang="en" href="https://lumaenaut.com/eng-US/blog/blog-index.html">
   <link rel="alternate" hreflang="es" href="https://lumaenaut.com/esp-LAT/blog/blog-indice.html">
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Lumænaut_">
   <meta property="og:title" content="Blog — Lumænaut_">
   <meta property="og:description" content="Browse blog posts by Alberto Del Valle on digital nomadism, algorithms, computer science, and videogames. Lumænaut_ — a traveler of light.">
   <meta property="og:url" content="https://lumaenaut.com/eng-US/blog/blog-index.html">
@@ -28,6 +30,7 @@
   <meta property="og:locale" content="en_US">
   <meta property="og:locale:alternate" content="es">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:creator" content="@lumaenaut_">
   <meta name="twitter:image" content="https://lumaenaut.com/images/alberto-portrait-ascii.png">
   <meta name="twitter:title" content="Blog — Lumænaut_">
   <meta name="twitter:description" content="Browse blog posts by Alberto Del Valle on digital nomadism, algorithms, computer science, and videogames. Lumænaut_ — a traveler of light.">
@@ -37,6 +40,7 @@
   {
     "@context": "https://schema.org",
     "@type": "Blog",
+    "@id": "https://lumaenaut.com/eng-US/blog/blog-index.html",
     "name": "Blog — Lumænaut_",
     "url": "https://lumaenaut.com/eng-US/blog/blog-index.html",
     "mainEntityOfPage": { "@id": "https://lumaenaut.com/eng-US/blog/blog-index.html" },
@@ -49,45 +53,51 @@
     "blogPost": [
       {
         "@type": "BlogPosting",
-        "headline": "Grinding LeetCode. Day 1: Two Sum",
-        "url": "https://lumaenaut.com/eng-US/blog/grinding-leetcode/day-1-two-sum.html",
-        "datePublished": "2026-03-21",
-        "image": "https://lumaenaut.com/images/outdated-computer-ascii.png"
-      },
-      {
-        "@type": "BlogPosting",
         "headline": "Grinding LeetCode. Day 2: Add Two Numbers",
         "url": "https://lumaenaut.com/eng-US/blog/grinding-leetcode/day-2-add-two-numbers.html",
         "datePublished": "2026-03-23",
-        "image": "https://lumaenaut.com/images/outdated-computer-ascii.png"
+        "image": "https://lumaenaut.com/images/outdated-computer-ascii.png",
+        "isPartOf": { "@id": "https://lumaenaut.com/eng-US/blog/blog-index.html" }
+      },
+      {
+        "@type": "BlogPosting",
+        "headline": "Grinding LeetCode. Day 1: Two Sum",
+        "url": "https://lumaenaut.com/eng-US/blog/grinding-leetcode/day-1-two-sum.html",
+        "datePublished": "2026-03-21",
+        "image": "https://lumaenaut.com/images/outdated-computer-ascii.png",
+        "isPartOf": { "@id": "https://lumaenaut.com/eng-US/blog/blog-index.html" }
       },
       {
         "@type": "BlogPosting",
         "headline": "The 8 Algorithm Paradigms",
         "url": "https://lumaenaut.com/eng-US/blog/the-8-algorithm-paradigms.html",
         "datePublished": "2026-03-13",
-        "image": "https://lumaenaut.com/images/people-walking-in-european-city-aascii.png"
+        "image": "https://lumaenaut.com/images/people-walking-in-european-city-aascii.png",
+        "isPartOf": { "@id": "https://lumaenaut.com/eng-US/blog/blog-index.html" }
       },
       {
         "@type": "BlogPosting",
         "headline": "How the Game Loop works",
         "url": "https://lumaenaut.com/eng-US/blog/how-a-game-loop-works.html",
         "datePublished": "2026-03-11",
-        "image": "https://lumaenaut.com/images/runners-on-futuristic-track-ascii.png"
+        "image": "https://lumaenaut.com/images/runners-on-futuristic-track-ascii.png",
+        "isPartOf": { "@id": "https://lumaenaut.com/eng-US/blog/blog-index.html" }
       },
       {
         "@type": "BlogPosting",
         "headline": "Chapter 2: Everything I Don't Know About Blogging",
         "url": "https://lumaenaut.com/eng-US/blog/ch-2-everything-i-dont-know-about-blogging.html",
         "datePublished": "2026-03-07",
-        "image": "https://lumaenaut.com/images/hands-typing-on-keyboard-ascii.png"
+        "image": "https://lumaenaut.com/images/hands-typing-on-keyboard-ascii.png",
+        "isPartOf": { "@id": "https://lumaenaut.com/eng-US/blog/blog-index.html" }
       },
       {
         "@type": "BlogPosting",
         "headline": "Chapter 1: Aspiring Digital Nomad",
         "url": "https://lumaenaut.com/eng-US/blog/ch-1-aspiring-digital-nomad.html",
         "datePublished": "2026-03-01",
-        "image": "https://lumaenaut.com/images/birds-flying-to-the-horizon-ascii.png"
+        "image": "https://lumaenaut.com/images/birds-flying-to-the-horizon-ascii.png",
+        "isPartOf": { "@id": "https://lumaenaut.com/eng-US/blog/blog-index.html" }
       }
     ]
   }
@@ -135,22 +145,22 @@
         <p class="blog-menu-intro">Pick a heading: dev logs, code currents, or nomadic tales.</p>
         <ul class="blog-card-list" aria-label="Blog posts">
           <li class="blog-card-item--leetcode">
-            <a class="blog-card" href="grinding-leetcode/day-1-two-sum.html">
-              <h3 class="blog-card-title">Grinding LeetCode. Day 1: Two Sum</h3>
-              <p class="blog-card-subtitle">From brute force to O(n) — a friendly journey for beginners</p>
-              <p class="blog-card-meta">
-                <span class="blog-card-author">Alberto Del Valle</span>
-                <time class="blog-card-date" datetime="2026-03-21">March 21, 2026</time>
-              </p>
-            </a>
-          </li>
-          <li class="blog-card-item--leetcode">
             <a class="blog-card" href="grinding-leetcode/day-2-add-two-numbers.html">
               <h3 class="blog-card-title">Grinding LeetCode. Day 2: Add Two Numbers</h3>
               <p class="blog-card-subtitle">From grade-school addition to linked list mastery</p>
               <p class="blog-card-meta">
                 <span class="blog-card-author">Alberto Del Valle</span>
                 <time class="blog-card-date" datetime="2026-03-23">March 23, 2026</time>
+              </p>
+            </a>
+          </li>
+          <li class="blog-card-item--leetcode">
+            <a class="blog-card" href="grinding-leetcode/day-1-two-sum.html">
+              <h3 class="blog-card-title">Grinding LeetCode. Day 1: Two Sum</h3>
+              <p class="blog-card-subtitle">From brute force to O(n) — a friendly journey for beginners</p>
+              <p class="blog-card-meta">
+                <span class="blog-card-author">Alberto Del Valle</span>
+                <time class="blog-card-date" datetime="2026-03-21">March 21, 2026</time>
               </p>
             </a>
           </li>

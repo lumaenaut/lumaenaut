@@ -749,6 +749,10 @@ body {
   box-shadow: 4px 4px 0px #b8a082;
 }
 
+.blog-card-list li:nth-child(6) .blog-card {
+  box-shadow: 4px 4px 0px #c4a574;
+}
+
 /* LeetCode series — distinct from position-based palette */
 .blog-card-list li.blog-card-item--leetcode .blog-card {
   box-shadow: 4px 4px 0px #b5654b;
@@ -776,6 +780,10 @@ body {
 
 .blog-card-list li:nth-child(5) .blog-card:hover {
   box-shadow: 2px 2px 0px #b8a082;
+}
+
+.blog-card-list li:nth-child(6) .blog-card:hover {
+  box-shadow: 2px 2px 0px #c4a574;
 }
 
 .blog-card-list li.blog-card-item--leetcode .blog-card:hover {

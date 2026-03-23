@@ -88,7 +88,6 @@
   var matrix = toMatrix(logoSource);
   var rows = matrix.length;
   var cols = matrix[0].length;
-  var colorMatrix = [];
   var spanMatrix = [];
   var container = document.getElementById("logo-container");
   if (!container) return;
@@ -96,12 +95,10 @@
   // Create one span per character, grouped by line; store refs for animation
   var r, c, lineEl, charSpan;
   for (r = 0; r < rows; r++) {
-    colorMatrix[r] = [];
     spanMatrix[r] = [];
     lineEl = document.createElement("span");
     lineEl.className = "logo-line";
     for (c = 0; c < cols; c++) {
-      colorMatrix[r][c] = null;
       charSpan = document.createElement("span");
       charSpan.className = "logo-char";
       charSpan.setAttribute("data-row", r);
@@ -125,7 +122,6 @@
     for (i = 0; i < cells.length; i++) {
       cell = cells[i];
       color = randomColor();
-      colorMatrix[cell.row][cell.col] = color;
       spanMatrix[cell.row][cell.col].style.color = color;
     }
   }, 1000);
