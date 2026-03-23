@@ -1,5 +1,5 @@
-<!doctype html>
-<html lang="es-MX">
+<!DOCTYPE html>
+<html lang="es">
 <head>
   <!-- Google Tag Manager -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -11,48 +11,48 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#F9F5EC">
-  <meta name="description" content="Puliendo LeetCode, Día 2: Suma Dos Números. Acarreo escolar, listas enlazadas, simulaciones, seis lenguajes, complejidad y referencias. Por Alberto Del Valle.">
-  <title>Puliendo LeetCode. Día 2: Suma Dos Números</title>
+  <meta name="description" content="Puliendo LeetCode, Día 2: Suma de Dos Números. Acarreo de primaria, listas enlazadas, simulaciones, seis lenguajes, complejidad y referencias. Por Alberto Del Valle.">
+  <title>Puliendo LeetCode. Día 2: Suma de Dos Números</title>
   <link rel="canonical" href="https://lumaenaut.com/esp-LAT/blog/puliendo-leetcode/dia-2-add-two-numbers.html">
   <link rel="alternate" hreflang="x-default" href="https://lumaenaut.com/eng-US/blog/grinding-leetcode/day-2-add-two-numbers.html">
   <link rel="alternate" hreflang="en" href="https://lumaenaut.com/eng-US/blog/grinding-leetcode/day-2-add-two-numbers.html">
   <link rel="alternate" hreflang="es" href="https://lumaenaut.com/esp-LAT/blog/puliendo-leetcode/dia-2-add-two-numbers.html">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Puliendo LeetCode. Día 2: Suma Dos Números">
-  <meta property="og:description" content="De la suma de primaria a listas enlazadas: Suma Dos Números con simulación de acarreo, código en seis lenguajes y trampas. Por Alberto Del Valle.">
+  <meta property="og:title" content="Puliendo LeetCode. Día 2: Suma de Dos Números">
+  <meta property="og:description" content="De la suma de primaria a listas enlazadas: Suma de Dos Números con simulación de acarreo, código en seis lenguajes y trampas. Por Alberto Del Valle.">
   <meta property="og:url" content="https://lumaenaut.com/esp-LAT/blog/puliendo-leetcode/dia-2-add-two-numbers.html">
   <meta property="og:image" content="https://lumaenaut.com/images/outdated-computer-ascii.png">
-  <meta property="og:image:alt" content="Arte ASCII: computadora antigua sobre un escritorio con librero al fondo, evocando un espacio clásico de programación.">
+  <meta property="og:image:alt" content="Arte ASCII: una computadora antigua en un escritorio con un librero al fondo, evocando la práctica clásica de programación.">
   <meta property="og:image:width" content="1840">
   <meta property="og:image:height" content="1690">
   <meta property="og:locale" content="es_MX">
   <meta property="og:locale:alternate" content="en_US">
-  <meta property="article:published_time" content="2026-03-22">
-  <meta property="article:modified_time" content="2026-03-22">
+  <meta property="article:published_time" content="2026-03-23">
+  <meta property="article:modified_time" content="2026-03-23">
   <meta property="article:author" content="Alberto Del Valle">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://lumaenaut.com/images/outdated-computer-ascii.png">
-  <meta name="twitter:title" content="Puliendo LeetCode. Día 2: Suma Dos Números">
-  <meta name="twitter:description" content="Suma Dos Números: ingenuo vs simulación con acarreo, tablas, matemáticas, casos borde, Python/JS/C++/Go/Kotlin/Swift.">
+  <meta name="twitter:title" content="Puliendo LeetCode. Día 2: Suma de Dos Números">
+  <meta name="twitter:description" content="Suma de Dos Números: enfoque ingenuo vs simulación de acarreo, tablas, matemáticas, casos extremos, Python/JS/C++/Go/Kotlin/Swift.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%94%A5%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="../../../style.css">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    "headline": "Puliendo LeetCode. Día 2: Suma Dos Números",
-    "alternativeHeadline": "De la suma de primaria al dominio de listas enlazadas",
-    "description": "Puliendo LeetCode, Día 2: Suma Dos Números. Simulación con acarreo, listas enlazadas, seis lenguajes, complejidad. Por Alberto Del Valle.",
+    "headline": "Puliendo LeetCode. Día 2: Suma de Dos Números",
+    "alternativeHeadline": "De la suma de primaria a la maestría en listas enlazadas",
+    "description": "Puliendo LeetCode, Día 2: Suma de Dos Números. Simulación de acarreo, listas enlazadas, seis lenguajes, complejidad. Por Alberto Del Valle.",
     "url": "https://lumaenaut.com/esp-LAT/blog/puliendo-leetcode/dia-2-add-two-numbers.html",
     "mainEntityOfPage": { "@id": "https://lumaenaut.com/esp-LAT/blog/puliendo-leetcode/dia-2-add-two-numbers.html" },
     "image": "https://lumaenaut.com/images/outdated-computer-ascii.png",
     "inLanguage": "es-MX",
-    "datePublished": "2026-03-22",
-    "dateModified": "2026-03-22",
+    "datePublished": "2026-03-23",
+    "dateModified": "2026-03-23",
     "author": {
       "@type": "Person",
       "name": "Alberto Del Valle",
-      "url": "https://lumaenaut.com/esp-LAT/indice.html"
+      "url": "https://lumaenaut.com/eng-US/"
     },
     "publisher": {
       "@type": "Person",
@@ -78,8 +78,8 @@
         <h1>Lumænaut_</h1>
         <nav class="main-nav" aria-label="Navegación principal">
           <ul>
-            <li><a class="home-btn" href="../../indice.html">inicio</a></li>
-            <li><a class="blog-btn" href="../blog-indice.html">blog</a></li>
+            <li><a class="home-btn" href="../../index.html">inicio</a></li>
+            <li><a class="blog-btn" href="../blog-index.html">blog</a></li>
           </ul>
         </nav>
       </div>
@@ -100,76 +100,78 @@
       </div>
       <article class="post" aria-labelledby="post-title">
         <header class="post-header">
-          <h2 id="post-title" class="post-title">Puliendo LeetCode.<br>Día 2: Suma Dos Números</h2>
-          <p class="post-subtitle">De la suma de primaria al dominio de listas enlazadas</p>
+          <h2 id="post-title" class="post-title">Puliendo LeetCode.<br>Día 2: Suma de Dos Números</h2>
+          <p class="post-subtitle">De la suma de primaria a la maestría en listas enlazadas</p>
           <p class="post-meta">
             Por <span class="author">Alberto Del Valle</span><br>
-            <time datetime="2026-03-22">22 de marzo de 2026</time><br>
-            <span class="post-read-time">(Tiempo de lectura ~22 min.)</span>
+            <time datetime="2026-03-23">23 de marzo de 2026</time><br>
+            <span class="post-read-time">(Tiempo de lectura aprox. ~19 min.)</span>
           </p>
         </header>
-        <figure class="post-featured-image" aria-labelledby="add-two-numbers-feature-caption-es">
+        <figure class="post-featured-image" aria-labelledby="add-two-numbers-feature-caption">
           <img
             src="../../../images/outdated-computer-ascii.png"
-            alt="Arte ASCII: computadora antigua sobre un escritorio con librero al fondo, sugiriendo un espacio clásico de programación."
+            alt="Arte ASCII: una computadora antigua en un escritorio con un librero al fondo, sugiriendo un espacio de trabajo clásico de programación."
             title="Arte ASCII — computadora antigua en escritorio con librero"
             width="1840"
             height="1690"
             decoding="async"
             loading="eager"
             class="post-featured-img">
-          <figcaption id="add-two-numbers-feature-caption-es" class="visually-hidden">Ilustración destacada en estilo arte ASCII: computadora antigua sobre un escritorio con librero al fondo.</figcaption>
+          <figcaption id="add-two-numbers-feature-caption" class="visually-hidden">Ilustración destacada en estilo arte ASCII: una computadora antigua en un escritorio con un librero detrás.</figcaption>
         </figure>
         <div class="post-body">
-          <h3>Planteamiento del Problema</h3>
-          <p>Se te dan dos <strong>listas enlazadas no vacías</strong> que representan dos enteros no negativos. Los dígitos están almacenados en <strong>orden inverso</strong>, y cada nodo contiene un solo dígito. Suma los dos números y devuelve el resultado como una lista enlazada.</p>
-          <p>Puedes asumir que los dos números no contienen ningún cero a la izquierda, excepto el mismo número 0.</p>
+          <h3>Declaración del Problema</h3>
+          <p>
+            Se te proporcionan dos <strong>listas enlazadas no vacías</strong> 
+            que representan dos enteros no negativos. Los dígitos están almacenados en 
+            <strong>orden inverso</strong>, y cada nodo contiene un solo 
+            dígito. Suma los dos números y devuelve la suma como una lista enlazada.</p>
+          <p>
+            Puedes asumir que los dos números no contienen ningún cero a la izquierda, 
+            excepto el propio número 0.
+          </p>
 
           <pre>
-          Entrada: l1 = [2,4,3], l2 = [5,6,4]
-          Salida: [7,0,8]
-          Explicación: 342 + 465 = 807.
+Entrada: l1 = [2,4,3], l2 = [5,6,4]
+Salida: [7,0,8]
+Explicación: 342 + 465 = 807.
 
-          Entrada: l1 = [0], l2 = [0]
-          Salida: [0]
+Entrada: l1 = [0], l2 = [0]
+Salida: [0]
 
-          Entrada: l1 = [9,9,9,9,9,9,9], l2 = [9,9,9,9]
-          Salida: [8,9,9,9,0,0,0,1]
+Entrada: l1 = [9,9,9,9,9,9,9], l2 = [9,9,9,9]
+Salida: [8,9,9,9,0,0,0,1]
           </pre>
-
           <p><strong>Restricciones:</strong></p>
           <ul>
             <li>El número de nodos en cada lista enlazada está en el rango [1, 100].</li>
-            <li>0 <= Node.val <= 9</li>
-            <li>Se garantiza que la lista representa un número sin ceros a la izquierda.</li>
+            <li>0 <= Nodo.val <= 9</li>
+            <li>Se garantiza que la lista representa un número que no tiene ceros a la izquierda.</li>
           </ul>
 
-          <h3>Reescribiendo en Términos Sencillos</h3>
-          <p>Imagina que tienes dos números escritos <em>al revés</em>. Por ejemplo, 342 se almacena como 2 → 4 → 3. Se te pide sumarlos dígito por dígito de izquierda a derecha, tal como lo hacíamos en la primaria, pero con las listas invertidas. ¿El detalle? El resultado también debe ser una lista enlazada invertida. Así que en lugar de lidiar con enteros enormes, simulamos la suma manual con un acarreo. Eso es todo — solo que debemos hacerlo de forma eficiente mientras recorremos dos listas que quizás tengan longitudes diferentes.</p>
+          <h3>Reescribiendo en Términos Simples</h3>
+          <p>Imagina que tienes dos números escritos <em>al revés</em>. Por ejemplo, 342 se almacena como 2 → 4 → 3. Se te pide sumarlos dígito por dígito de izquierda a derecha, tal como lo hacíamos en la primaria, pero con las listas invertidas. ¿El truco? El resultado también debe ser una lista enlazada invertida. Así que, en lugar de lidiar con enteros grandes, simulamos la suma manual con un acarreo. Eso es todo — excepto que debemos hacerlo eficientemente mientras recorremos dos listas enlazadas que pueden tener longitudes diferentes.</p>
 
-          <h3>Contexto Histórico: Del Ábaco a las Listas Enlazadas</h3>
-          <p>El arte de la suma es ancestral. Los sumerios usaban fichas de arcilla para contabilidad desde el 3000 a. C. <a href="https://www.metmuseum.org/toah/hd/wrtg/hd_wrtg.htm" target="_blank">(Metropolitan Museum of Art – Orígenes de la escritura)</a>. Los chinos inventaron el ábaco (suanpan) alrededor del 1200 a. C., y sigue siendo una de las herramientas de cálculo más antiguas <a href="https://www.britannica.com/technology/abacus-calculating-device" target="_blank">(Britannica – Ábaco)</a>. Gottfried Wilhelm Leibniz soñó con calculadoras mecánicas en el siglo XVII y desarrolló la “stepped reckoner”, una máquina capaz de sumar, restar, multiplicar y dividir <a href="https://www.britannica.com/biography/Gottfried-Wilhelm-Leibniz" target="_blank">(Britannica – Leibniz)</a>.</p>
-          <p>El algoritmo de suma <em>digital</em> que usamos hoy (suma binaria con acarreo) se formalizó en la década de 1940 por pioneros como John von Neumann, quien describió la arquitectura de las computadoras de programa almacenado, donde las unidades aritmético lógicas (ALU) realizan la suma dígito por dígito con un indicador de acarreo <a href="https://ieeexplore.ieee.org/document/5392441" target="_blank">(IEEE – Primer borrador de Von Neumann)</a>.</p>
-          <p>Las listas enlazadas como estructura de datos fueron popularizadas a finales de los años 50 por Allen Newell, Cliff Shaw y Herbert Simon con el Information Processing Language (IPL). Usaban estructuras enlazadas para representar expresiones simbólicas y listas en la investigación de inteligencia artificial <a href="https://dl.acm.org/doi/10.1145/367177.367199" target="_blank">(ACM – artículo de IPL, 1956)</a>. La combinación de listas enlazadas y suma simula cómo una CPU suma dos números almacenados en memoria: byte por byte (o dígito por dígito) con un indicador de acarreo.</p>
-          <p>Este problema de LeetCode se volvió un clásico porque pone a prueba tu capacidad para manipular punteros, manejar casos extremos (longitudes diferentes, acarreo final) y entender el modelo mental de los dígitos invertidos. Muchos sistemas embebidos y bibliotecas de enteros grandes usan un enfoque similar — almacenan números en orden inverso para que la suma y multiplicación sean triviales. Por ejemplo, la Biblioteca de Aritmética de Múltiple Precisión de GNU (GMP) almacena números en un arreglo de “miembros” (limbs) con el miembro menos significativo primero <a href="https://gmplib.org/manual/Integer-Internals" target="_blank">(Manual de GMP – Detalles internos de enteros)</a>.</p>
-
-          <h3>Camino a la Solución Óptima: De lo Ingenuo a lo Magistral</h3>
+          <h3>Camino hacia lo Óptimo: De lo Ingenuo a lo Magistral</h3>
 
           <h4>Paso 1 – El Enfoque Ingenuo: Convertir a Números</h4>
-          <p>La idea más directa: recorrer cada lista enlazada, construir el número entero (invirtiendo el orden de los dígitos), sumarlos y luego convertir la suma de nuevo a una lista enlazada invertida. En Python podría verse así:</p>
-          <pre><code>def obtener_numero(cabeza):
-              num = 0
-              posicion = 1
-              while cabeza:
-                  num += cabeza.val * posicion
-                  posicion *= 10
-                  cabeza = cabeza.next
-              return num
-          # Luego sumar y reconstruir</code></pre>
-          <p>Esto funciona, pero tiene un problema fatal cuando los números exceden los enteros de 64 bits. Dado que cada lista puede tener hasta 100 dígitos, el entero puede ser tan grande como 10^100 — los enteros grandes de Python pueden manejarlo, pero en lenguajes como C++ o Java habría desbordamiento. Además, el problema busca entrenarnos en recorrido de listas enlazadas y manejo de acarreo, no en bibliotecas de números grandes. Por lo tanto, este método ingenuo es ineficiente tanto conceptualmente como en espíritu.</p>
+          <p>La idea más directa: recorrer cada lista enlazada, construir el entero real (invirtiendo el orden de los dígitos), sumarlos y luego convertir la suma de nuevo a una lista enlazada invertida. En Python podría verse así:</p>
+          <pre><code>
+def obtener_numero(cabeza):
+    num = 0
+    lugar = 1
+    while cabeza:
+        num += cabeza.val * lugar
+        lugar *= 10
+        cabeza = cabeza.next
+    return num
+# Luego hacer la suma y reconstruir
+          </code></pre>
+          <p>Esto funciona, pero tiene un problema fatal cuando los números exceden los enteros de 64 bits. Dado que cada lista enlazada puede tener hasta 100 dígitos, el entero puede ser tan grande como 10^100 — los enteros grandes de Python pueden manejarlo, pero en lenguajes como C++ o Java, habría desbordamiento. Además, el problema pretende explícitamente entrenarnos en el recorrido de listas enlazadas y la gestión del acarreo, no en bibliotecas de números grandes. Así que este método ingenuo es ineficiente conceptualmente.</p>
 
           <h4>Paso 2 – Simulación con Acarreo (El Enfoque Estándar)</h4>
-          <p>La clave: la suma se realiza dígito por dígito desde el dígito menos significativo (que es la cabeza de la lista, gracias al orden inverso). Entonces recorremos ambas listas simultáneamente, sumamos los dígitos actuales más un acarreo, almacenamos el dígito (suma % 10) en un nuevo nodo, y propagamos el acarreo (suma // 10). Continuamos hasta que ambas listas se agoten y el acarreo sea 0.</p>
+          <p>La idea clave: la suma se realiza dígito por dígito desde el dígito menos significativo (que es la cabeza de la lista, gracias al orden inverso). Así que recorremos ambas listas simultáneamente, sumamos los dígitos actuales más un acarreo, almacenamos el dígito (suma % 10) en un nuevo nodo y propagamos el acarreo (suma // 10). Continuamos hasta que ambas listas se agoten y el acarreo sea 0.</p>
 
           <div class="simulation-table">
               <strong>Simulación Paso a Paso: l1 = [2,4,3] , l2 = [5,6,4]</strong>
@@ -177,8 +179,8 @@
                   <thead>
                       <tr>
                           <th>Paso</th>
-                          <th>Dígito actual l1</th>
-                          <th>Dígito actual l2</th>
+                          <th>dígito actual l1</th>
+                          <th>dígito actual l2</th>
                           <th>Acarreo anterior</th>
                           <th>Suma (dígito + dígito + acarreo)</th>
                           <th>Nuevo dígito (suma % 10)</th>
@@ -187,7 +189,7 @@
                       </tr>
                   </thead>
                   <tbody>
-                      <tr>
+                       <tr>
                           <td>1</td>
                           <td>2</td>
                           <td>5</td>
@@ -196,8 +198,8 @@
                           <td class="highlight">7</td>
                           <td>0</td>
                           <td>[7]</td>
-                      </tr>
-                      <tr>
+                       </tr>
+                       <tr>
                           <td>2</td>
                           <td>4</td>
                           <td>6</td>
@@ -206,8 +208,8 @@
                           <td class="highlight">0</td>
                           <td>1</td>
                           <td>[7, 0]</td>
-                      </tr>
-                      <tr>
+                       </tr>
+                       <tr>
                           <td>3</td>
                           <td>3</td>
                           <td>4</td>
@@ -216,59 +218,59 @@
                           <td class="highlight">8</td>
                           <td>0</td>
                           <td>[7, 0, 8]</td>
-                      </tr>
-                      <tr>
+                       </tr>
+                       <tr>
                           <td>4</td>
-                          <td>None (0)</td>
-                          <td>None (0)</td>
+                          <td>Ninguno (0)</td>
+                          <td>Ninguno (0)</td>
                           <td>0</td>
                           <td>0</td>
                           <td>-</td>
                           <td>0</td>
-                          <td>Terminado → [7,0,8]</td>
-                      </tr>
+                          <td>Finalizado → [7,0,8]</td>
+                       </tr>
                   </tbody>
-              </table>
-              <div class="step-caption">Cada fila corresponde a una iteración. Observa el acarreo que aparece en el paso 2 y se consume en el paso 3. El acarreo final permanece en 0, así que paramos.</div>
+               </table>
+              <div class="step-caption">Cada fila corresponde a una iteración. Observa el acarreo que aparece en el paso 2 y se consume en el paso 3. El acarreo final sigue siendo 0, por lo que nos detenemos.</div>
           </div>
 
           <div class="simulation-table">
               <strong>Caso extremo: l1 = [9,9,9,9,9,9,9] , l2 = [9,9,9,9] (acarreo final)</strong>
-              <table>
+               <table>
                   <thead>
-                      <tr>
+                       <tr>
                           <th>Paso</th>
-                          <th>Dígito l1</th>
-                          <th>Dígito l2</th>
+                          <th>dígito l1</th>
+                          <th>dígito l2</th>
                           <th>Acarreo entrante</th>
                           <th>Suma</th>
-                          <th>Dígito de salida</th>
+                          <th>Dígito saliente</th>
                           <th>Acarreo saliente</th>
                           <th>Lista resultado</th>
-                      </tr>
+                       </tr>
                   </thead>
                   <tbody>
-                      <tr><td>1</td><td>9</td><td>9</td><td>0</td><td>18</td><td>8</td><td>1</td><td>[8]</td></tr>
-                      <tr><td>2</td><td>9</td><td>9</td><td>1</td><td>19</td><td>9</td><td>1</td><td>[8,9]</td></tr>
-                      <tr><td>3</td><td>9</td><td>9</td><td>1</td><td>19</td><td>9</td><td>1</td><td>[8,9,9]</td></tr>
-                      <tr><td>4</td><td>9</td><td>9</td><td>1</td><td>19</td><td>9</td><td>1</td><td>[8,9,9,9]</td></tr>
-                      <tr><td>5</td><td>9</td><td>None</td><td>1</td><td>10</td><td>0</td><td>1</td><td>[8,9,9,9,0]</td></tr>
-                      <tr><td>6</td><td>9</td><td>None</td><td>1</td><td>10</td><td>0</td><td>1</td><td>[8,9,9,9,0,0]</td></tr>
-                      <tr><td>7</td><td>9</td><td>None</td><td>1</td><td>10</td><td>0</td><td>1</td><td>[8,9,9,9,0,0,0]</td></tr>
-                      <tr><td>8</td><td>None</td><td>None</td><td>1</td><td>1</td><td>1</td><td>0</td><td>[8,9,9,9,0,0,0,1]</td></tr>
+                       <tr><td>1</td><td>9</td><td>9</td><td>0</td><td>18</td><td>8</td><td>1</td><td>[8]</td></tr>
+                       <tr><td>2</td><td>9</td><td>9</td><td>1</td><td>19</td><td>9</td><td>1</td><td>[8,9]</td></tr>
+                       <tr><td>3</td><td>9</td><td>9</td><td>1</td><td>19</td><td>9</td><td>1</td><td>[8,9,9]</td></tr>
+                       <tr><td>4</td><td>9</td><td>9</td><td>1</td><td>19</td><td>9</td><td>1</td><td>[8,9,9,9]</td></tr>
+                       <tr><td>5</td><td>9</td><td>Ninguno</td><td>1</td><td>10</td><td>0</td><td>1</td><td>[8,9,9,9,0]</td></tr>
+                       <tr><td>6</td><td>9</td><td>Ninguno</td><td>1</td><td>10</td><td>0</td><td>1</td><td>[8,9,9,9,0,0]</td></tr>
+                       <tr><td>7</td><td>9</td><td>Ninguno</td><td>1</td><td>10</td><td>0</td><td>1</td><td>[8,9,9,9,0,0,0]</td></tr>
+                       <tr><td>8</td><td>Ninguno</td><td>Ninguno</td><td>1</td><td>1</td><td>1</td><td>0</td><td>[8,9,9,9,0,0,0,1]</td></tr>
                   </tbody>
-              </table>
-              <div class="step-caption">Después de agotar ambas listas, aún tenemos un acarreo de 1, así que agregamos un nodo extra con valor 1. Esto coincide con la salida esperada [8,9,9,9,0,0,0,1].</div>
+               </table>
+              <div class="step-caption">Después de agotar ambas listas, todavía tenemos un acarreo de 1, así que agregamos un nodo extra con valor 1. Esto coincide con la salida esperada [8,9,9,9,0,0,0,1].</div>
           </div>
 
-          <p>Este algoritmo se ejecuta en <strong>O(max(m, n))</strong> de tiempo, donde m y n son las longitudes de las listas, y O(max(m, n)) de espacio para la lista resultado (si ignoramos la salida, es óptimo). La clave es el truco del nodo ficticio (dummy) que simplifica los casos extremos — nunca tienes que tratar el primer nodo de manera especial.</p>
+          <p>Este algoritmo se ejecuta en <strong>O(max(m, n))</strong> tiempo, donde m y n son las longitudes de las listas, y O(max(m, n)) espacio para la lista resultado (si ignoramos la salida, es óptimo). La clave es el truco del nodo ficticio que simplifica los casos extremos — nunca tienes que tratar el primer nodo de manera especial.</p>
 
           <h4>Paso 3 – Optimizando Memoria y Casos Extremos</h4>
-          <p>¿Podríamos evitar crear una nueva lista? En teoría, podríamos reutilizar una de las listas de entrada para almacenar el resultado, modificando los nodos en su lugar. Esto reduciría la complejidad espacial a O(1) además de la respuesta. Sin embargo, es más complicado porque podríamos necesitar extender una lista si el acarreo final agrega un nuevo nodo. Por lo general, los entrevistadores y LeetCode aceptan la construcción con nueva lista porque es más limpia. La verdadera optimización es reconocer que debemos manejar el acarreo final por separado.</p>
+          <p>¿Podríamos evitar crear una nueva lista? En teoría, podríamos reutilizar una de las listas de entrada para almacenar el resultado, modificando los nodos en su lugar. Esto reduciría la complejidad espacial a O(1) además de la respuesta. Sin embargo, es complicado porque podríamos necesitar extender una lista si el acarreo final agrega un nuevo nodo. Por lo general, los entrevistadores y LeetCode aceptan la construcción de una nueva lista porque es más limpia. La verdadera optimización es reconocer que debemos manejar el acarreo final por separado.</p>
 
           <h3>Formulación Matemática</h3>
           <div class="math">
-          Representemos los números como:<br>
+          Sean los números representados como:<br>
           A = Σ (a_i * 10^i) , donde a_0 es la cabeza de l1 (dígito menos significativo).<br>
           B = Σ (b_i * 10^i) , donde b_0 es la cabeza de l2.<br>
           Suma S = A + B = Σ (s_i * 10^i) , con 0 ≤ s_i ≤ 9, y propagación del acarreo:<br>
@@ -278,249 +280,261 @@
           s_i = total_i mod 10,<br>
           acarreo_{i+1} = piso(total_i / 10).<br>
           <br>
-          El resultado final tiene los dígitos [s_0, s_1, ..., s_k] en una lista enlazada, donde k es el índice más grande con s_k ≠ 0 o acarreo_{k+1} = 1 (entonces agregamos un nodo más con dígito 1).<br>
+          El resultado final tiene dígitos [s_0, s_1, ..., s_k] en una lista enlazada, donde k es el índice más grande con s_k ≠ 0 o acarreo_{k+1} = 1 (entonces agregamos un nodo más con dígito 1).<br>
           <br>
-          Esto es exactamente el algoritmo de suma de la escuela primaria, formalizado para base 10.
+          Este es exactamente el algoritmo de suma de la escuela primaria, formalizado para base 10.
           </div>
 
           <h3>Soluciones en Múltiples Lenguajes</h3>
-          <p>A continuación encontrarás implementaciones limpias del algoritmo óptimo en seis lenguajes. Cada una usa el patrón del nodo ficticio y se ejecuta en O(n) de tiempo.</p>
+          <p>A continuación encontrarás implementaciones limpias del algoritmo óptimo en seis lenguajes. Cada una usa el patrón del nodo ficticio y se ejecuta en O(n) tiempo.</p>
 
           <div class="solution-card">
               <div class="lang-tag">Python 3</div>
-              <pre><code># Definition for singly-linked list.
-          # class ListNode:
-          #     def __init__(self, val=0, next=None):
-          #         self.val = val
-          #         self.next = next
-          class Solution:
-              def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
-                  dummy = ListNode()
-                  current = dummy
-                  carry = 0
+              <pre><code>
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+        dummy = ListNode()
+        current = dummy
+        carry = 0
 
-                  while l1 or l2 or carry:
-                      val1 = l1.val if l1 else 0
-                      val2 = l2.val if l2 else 0
-                      total = val1 + val2 + carry
-                      carry = total // 10
-                      current.next = ListNode(total % 10)
-                      current = current.next
+        while l1 or l2 or carry:
+            val1 = l1.val if l1 else 0
+            val2 = l2.val if l2 else 0
+            total = val1 + val2 + carry
+            carry = total // 10
+            current.next = ListNode(total % 10)
+            current = current.next
 
-                      if l1: l1 = l1.next
-                      if l2: l2 = l2.next
+            if l1: l1 = l1.next
+            if l2: l2 = l2.next
 
-                  return dummy.next</code></pre>
-              <p>El tipado dinámico de Python hace que este código sea extremadamente legible. El nodo ficticio evita tener que verificar si la lista resultado está vacía. Los operadores ternarios manejan elegantemente el caso donde una lista se agota.</p>
+        return dummy.next
+              </code></pre>
+              <p>El tipado dinámico de Python hace que este código sea extremadamente legible. El nodo ficticio evita verificar si la lista resultado está vacía. Los operadores ternarios manejan elegantemente el caso donde una lista se agota.</p>
           </div>
 
           <div class="solution-card">
               <div class="lang-tag">JavaScript</div>
-              <pre><code>/**
-           * Definition for singly-linked list.
-           * function ListNode(val, next) {
-           *     this.val = (val===undefined ? 0 : val)
-           *     this.next = (next===undefined ? null : next)
-           * }
-           */
-          var addTwoNumbers = function(l1, l2) {
-              let dummy = new ListNode(0);
-              let current = dummy;
-              let carry = 0;
+              <pre><code>
+/**
+* Definition for singly-linked list.
+* function ListNode(val, next) {
+*     this.val = (val===undefined ? 0 : val)
+*     this.next = (next===undefined ? null : next)
+* }
+*/
+var addTwoNumbers = function(l1, l2) {
+    let dummy = new ListNode(0);
+    let current = dummy;
+    let carry = 0;
 
-              while (l1 !== null || l2 !== null || carry !== 0) {
-                  const val1 = l1 ? l1.val : 0;
-                  const val2 = l2 ? l2.val : 0;
-                  const sum = val1 + val2 + carry;
-                  carry = Math.floor(sum / 10);
-                  current.next = new ListNode(sum % 10);
-                  current = current.next;
+    while (l1 !== null || l2 !== null || carry !== 0) {
+        const val1 = l1 ? l1.val : 0;
+        const val2 = l2 ? l2.val : 0;
+        const sum = val1 + val2 + carry;
+        carry = Math.floor(sum / 10);
+        current.next = new ListNode(sum % 10);
+        current = current.next;
 
-                  if (l1) l1 = l1.next;
-                  if (l2) l2 = l2.next;
-              }
+        if (l1) l1 = l1.next;
+        if (l2) l2 = l2.next;
+    }
 
-              return dummy.next;
-          };</code></pre>
-              <p>Versión en JavaScript: nota el uso explícito de <code>Math.floor</code> para la división entera. El resto es idéntico en espíritu. Excelente para ingenieros front-end repasando manipulación de listas enlazadas.</p>
+    return dummy.next;
+};  
+              </code></pre>
+              <p>Versión en JavaScript: nota el <code>Math.floor</code> explícito para la división entera. El resto es idéntico en espíritu. Ideal para ingenieros de front-end repasando la manipulación de listas enlazadas.</p>
           </div>
 
           <div class="solution-card">
               <div class="lang-tag">C++</div>
-              <pre><code>/**
-           * Definition for singly-linked list.
-           * struct ListNode {
-           *     int val;
-           *     ListNode *next;
-           *     ListNode() : val(0), next(nullptr) {}
-           *     ListNode(int x) : val(x), next(nullptr) {}
-           *     ListNode(int x, ListNode *next) : val(x), next(next) {}
-           * };
-           */
-          class Solution {
-          public:
-              ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-                  ListNode* dummy = new ListNode(0);
-                  ListNode* current = dummy;
-                  int carry = 0;
+              <pre><code>
+/**
+* Definition for singly-linked list.
+* struct ListNode {
+*     int val;
+*     ListNode *next;
+*     ListNode() : val(0), next(nullptr) {}
+*     ListNode(int x) : val(x), next(nullptr) {}
+*     ListNode(int x, ListNode *next) : val(x), next(next) {}
+* };
+*/
+class Solution {
+public:
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        ListNode* dummy = new ListNode(0);
+        ListNode* current = dummy;
+        int carry = 0;
 
-                  while (l1 != nullptr || l2 != nullptr || carry != 0) {
-                      int val1 = (l1 != nullptr) ? l1->val : 0;
-                      int val2 = (l2 != nullptr) ? l2->val : 0;
-                      int sum = val1 + val2 + carry;
-                      carry = sum / 10;
-                      current->next = new ListNode(sum % 10);
-                      current = current->next;
+        while (l1 != nullptr || l2 != nullptr || carry != 0) {
+            int val1 = (l1 != nullptr) ? l1->val : 0;
+            int val2 = (l2 != nullptr) ? l2->val : 0;
+            int sum = val1 + val2 + carry;
+            carry = sum / 10;
+            current->next = new ListNode(sum % 10);
+            current = current->next;
 
-                      if (l1 != nullptr) l1 = l1->next;
-                      if (l2 != nullptr) l2 = l2->next;
-                  }
+            if (l1 != nullptr) l1 = l1->next;
+            if (l2 != nullptr) l2 = l2->next;
+        }
 
-                  ListNode* result = dummy->next;
-                  delete dummy;
-                  return result;
-              }
-          };</code></pre>
-              <p>C++ exige un manejo cuidadoso de la memoria. Aquí creamos nodos con <code>new</code>. El nodo ficticio se elimina después de extraer el resultado. Este código muestra los punteros modernos de C++ y el operador condicional.</p>
+        ListNode* result = dummy->next;
+        delete dummy;
+        return result;
+    }
+};
+        </code></pre>
+              <p>C++ exige un manejo cuidadoso de la memoria. Aquí creamos nodos con <code>new</code>. El nodo ficticio se elimina después de extraer el resultado. Este código muestra punteros modernos de C++ y el operador condicional.</p>
           </div>
 
           <div class="solution-card">
               <div class="lang-tag">Go</div>
-              <pre><code>/**
-           * Definition for singly-linked list.
-           * type ListNode struct {
-           *     Val int
-           *     Next *ListNode
-           * }
-           */
-          func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
-              dummy := &ListNode{0, nil}
-              current := dummy
-              carry := 0
+              <pre><code>
+/**
+* Definition for singly-linked list.
+* type ListNode struct {
+*     Val int
+*     Next *ListNode
+* }
+*/
+func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
+    dummy := &ListNode{0, nil}
+    current := dummy
+    carry := 0
 
-              for l1 != nil || l2 != nil || carry != 0 {
-                  val1, val2 := 0, 0
-                  if l1 != nil {
-                      val1 = l1.Val
-                      l1 = l1.Next
-                  }
-                  if l2 != nil {
-                      val2 = l2.Val
-                      l2 = l2.Next
-                  }
-                  sum := val1 + val2 + carry
-                  carry = sum / 10
-                  current.Next = &ListNode{sum % 10, nil}
-                  current = current.Next
-              }
-              return dummy.Next
-          }</code></pre>
-              <p>Las comprobaciones explícitas de <code>nil</code> de Go y la inicialización de estructuras hacen que el algoritmo sea claro. El patrón del nodo ficticio se traduce bien. Es Go idiomático — sin clases, solo structs con métodos cuando se necesitan.</p>
+    for l1 != nil || l2 != nil || carry != 0 {
+        val1, val2 := 0, 0
+        if l1 != nil {
+            val1 = l1.Val
+            l1 = l1.Next
+        }
+        if l2 != nil {
+            val2 = l2.Val
+            l2 = l2.Next
+        }
+        sum := val1 + val2 + carry
+        carry = sum / 10
+        current.Next = &ListNode{sum % 10, nil}
+        current = current.Next
+    }
+    return dummy.Next
+}
+              </code></pre>
+              <p>Las comprobaciones explícitas de <code>nil</code> de Go y la inicialización de estructuras hacen que el algoritmo sea claro. El patrón del nodo ficticio se traduce bien. Es Go idiomático — sin clases, solo estructuras con métodos cuando es necesario.</p>
           </div>
 
           <div class="solution-card">
               <div class="lang-tag">Kotlin</div>
-              <pre><code>/**
-           * Example:
-           * var li = ListNode(5)
-           * var v = li.`val`
-           * Definition for singly-linked list.
-           * class ListNode(var `val`: Int) {
-           *     var next: ListNode? = null
-           * }
-           */
-          class Solution {
-              fun addTwoNumbers(l1: ListNode?, l2: ListNode?): ListNode? {
-                  val dummy = ListNode(0)
-                  var current: ListNode? = dummy
-                  var carry = 0
-                  var p = l1
-                  var q = l2
+              <pre><code>
+/**
+* Example:
+* var li = ListNode(5)
+* var v = li.`val`
+* Definition for singly-linked list.
+* class ListNode(var `val`: Int) {
+*     var next: ListNode? = null
+* }
+*/
+class Solution {
+    fun addTwoNumbers(l1: ListNode?, l2: ListNode?): ListNode? {
+        val dummy = ListNode(0)
+        var current: ListNode? = dummy
+        var carry = 0
+        var p = l1
+        var q = l2
 
-                  while (p != null || q != null || carry != 0) {
-                      val x = p?.`val` ?: 0
-                      val y = q?.`val` ?: 0
-                      val sum = x + y + carry
-                      carry = sum / 10
-                      current?.next = ListNode(sum % 10)
-                      current = current?.next
+        while (p != null || q != null || carry != 0) {
+            val x = p?.`val` ?: 0
+            val y = q?.`val` ?: 0
+            val sum = x + y + carry
+            carry = sum / 10
+            current?.next = ListNode(sum % 10)
+            current = current?.next
 
-                      if (p != null) p = p.next
-                      if (q != null) q = q.next
-                  }
+            if (p != null) p = p.next
+            if (q != null) q = q.next
+        }
 
-                  return dummy.next
-              }
-          }</code></pre>
+        return dummy.next
+    }
+}
+              </code></pre>
               <p>Las llamadas seguras (<code>?.</code>) y el operador Elvis (<code>?:</code>) de Kotlin reducen el código repetitivo. El código se lee de manera similar a Python pero con tipado estático. El nodo ficticio sigue brillando.</p>
           </div>
 
           <div class="solution-card">
               <div class="lang-tag">Swift</div>
-              <pre><code>/**
-           * Definition for singly-linked list.
-           * public class ListNode {
-           *     public var val: Int
-           *     public var next: ListNode?
-           *     public init() { self.val = 0; self.next = nil; }
-           *     public init(_ val: Int) { self.val = val; self.next = nil; }
-           *     public init(_ val: Int, _ next: ListNode?) { self.val = val; self.next = next; }
-           * }
-           */
-          class Solution {
-              func addTwoNumbers(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
-                  let dummy = ListNode(0)
-                  var current: ListNode? = dummy
-                  var carry = 0
-                  var p = l1
-                  var q = l2
+              <pre><code>
+/**
+* Definition for singly-linked list.
+* public class ListNode {
+*     public var val: Int
+*     public var next: ListNode?
+*     public init() { self.val = 0; self.next = nil; }
+*     public init(_ val: Int) { self.val = val; self.next = nil; }
+*     public init(_ val: Int, _ next: ListNode?) { self.val = val; self.next = next; }
+* }
+*/
+class Solution {
+    func addTwoNumbers(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
+        let dummy = ListNode(0)
+        var current: ListNode? = dummy
+        var carry = 0
+        var p = l1
+        var q = l2
 
-                  while p != nil || q != nil || carry != 0 {
-                      let x = p?.val ?? 0
-                      let y = q?.val ?? 0
-                      let sum = x + y + carry
-                      carry = sum / 10
-                      current?.next = ListNode(sum % 10)
-                      current = current?.next
+        while p != nil || q != nil || carry != 0 {
+            let x = p?.val ?? 0
+            let y = q?.val ?? 0
+            let sum = x + y + carry
+            carry = sum / 10
+            current?.next = ListNode(sum % 10)
+            current = current?.next
 
-                      p = p?.next
-                      q = q?.next
-                  }
+            p = p?.next
+            q = q?.next
+        }
 
-                  return dummy.next
-              }
-          }</code></pre>
-              <p>Swift usa encadenamiento opcional y el operador de coalescencia nula (<code>??</code>) para mantener el código conciso. La lógica es idéntica en todos los lenguajes, demostrando la universalidad del algoritmo de suma.</p>
+        return dummy.next
+    }
+}
+              </code></pre>
+              <p>Swift usa encadenamiento opcional y coalescencia nula (<code>??</code>) para mantener el código conciso. La lógica es idéntica en todos los lenguajes, demostrando la universalidad del algoritmo de suma.</p>
           </div>
 
           <h3>Casos Extremos y Trampas</h3>
           <ul>
-              <li><strong>Longitudes diferentes:</strong> El algoritmo maneja esto elegantemente asignando 0 a los nodos faltantes.</li>
-              <li><strong>Acarreo final:</strong> Por ejemplo, 999 + 1 = 1000 → lista de salida [0,0,0,1]. Nuestra condición de ciclo incluye <code>carry != 0</code> para agregar ese nodo extra.</li>
-              <li><strong>Una lista vacía (aunque el problema dice no vacías, pero en seguimientos):</strong> Simplemente devuelve la otra lista con posible adición de acarreo.</li>
-              <li><strong>Números grandes:</strong> La solución funciona para números de 100 dígitos porque nunca convierte a entero — solo trabaja con dígitos y acarreo.</li>
+              <li><strong>Longitudes de lista diferentes:</strong> El algoritmo maneja esto elegantemente asignando 0 a los nodos faltantes.</li>
+              <li><strong>Acarreo final:</strong> ej., 999 + 1 = 1000 → lista de salida [0,0,0,1]. Nuestra condición de bucle incluye <code>carry != 0</code> para agregar ese nodo extra.</li>
+              <li><strong>Una lista vacía (aunque el problema dice no vacías, pero en seguimientos):</strong> Simplemente devuelve la otra lista con la posible adición de acarreo.</li>
+              <li><strong>Números grandes:</strong> La solución funciona para números de 100 dígitos porque nunca los convierte a enteros — solo trabaja con dígitos y acarreo.</li>
           </ul>
 
           <h3>Análisis de Complejidad</h3>
-          <p><strong>Complejidad temporal:</strong> O(max(m, n)) donde m y n son las longitudes de l1 y l2. Recorremos cada nodo una sola vez.</p>
-          <p><strong>Complejidad espacial:</strong> O(max(m, n)) para la nueva lista. Si no consideramos la salida, es O(1) de espacio auxiliar (solo algunas variables). Algunas soluciones reutilizan una de las listas de entrada para lograr O(1) de espacio extra pero a costa de mutar las entradas — es una compensación.</p>
+          <p><strong>Complejidad de Tiempo:</strong> O(max(m, n)) donde m, n son las longitudes de l1 y l2. Recorremos cada nodo como máximo una vez.</p>
+          <p><strong>Complejidad de Espacio:</strong> O(max(m, n)) para la nueva lista. Si ignoramos la salida, es O(1) de espacio auxiliar (solo unas pocas variables). Algunas soluciones reutilizan una de las listas de entrada para lograr O(1) de espacio extra, pero a costa de mutar las entradas — es un compromiso.</p>
 
-          <h3>Lecciones Aprendidas y Relevancia Histórica</h3>
-          <p>El problema “Suma Dos Números” es un microcosmos de cómo las computadoras digitales realizan operaciones aritméticas. Cada CPU usa un algoritmo similar a nivel de hardware: suma dos números byte por byte con acarreo. El recorrido de listas enlazadas imita un recorrido de memoria. ¿Y el almacenamiento de dígitos invertidos? Así es como a menudo se implementan los enteros grandes en bibliotecas como GMP (GNU Multiple Precision Arithmetic Library) <a href="https://gmplib.org/manual/Integer-Internals" target="_blank">(Internals de GMP)</a>. Por lo tanto, no solo estás resolviendo un acertijo de programación — estás recreando una pieza fundamental de la historia computacional.</p>
-          <p>Implementaciones notables: En 1964, el IBM System/360 introdujo una familia de computadoras con una potente instrucción “add with carry” que influyó en diseños de CPU posteriores <a href="https://www.ibm.com/ibm/history/exhibits/mainframe/mainframe_PC360.html" target="_blank">(Archivos de IBM – System/360)</a>. Hoy, bibliotecas criptográficas como OpenSSL dependen de este método exacto para la aritmética de múltiple precisión y manejar claves grandes <a href="https://www.openssl.org/docs/man1.1.1/man3/BN_add.html" target="_blank">(Documentación de OpenSSL BN_add)</a>. Incluso los contratos inteligentes de blockchain a veces implementan la suma de enteros grandes de manera similar debido a limitaciones de gas.</p>
+          <h3>Lecciones Aprendidas y Aplicaciones Prácticas</h3>
+          <p>El problema “Suma de Dos Números” es un microcosmos de cómo funciona la aritmética de bajo nivel en todo sistema digital. El algoritmo de propagación de acarreo que implementas aquí es el mismo bloque fundamental utilizado en bibliotecas aritméticas de precisión arbitraria, módulos criptográficos e incluso ALUs de hardware. Al dominar este patrón, obtienes una visión de cómo el software maneja números más allá de los tamaños de palabra nativos de la máquina.</p>
+          <p>Más allá de las entrevistas, esta técnica aparece en escenarios del mundo real: implementar aritmética de enteros grandes en contratos inteligentes de blockchain donde los costos de gas exigen operaciones dígito por dígito eficientes, construir software financiero de alto rendimiento que requiere aritmética decimal exacta, u optimizar sistemas embebidos donde la memoria es limitada. El patrón del nodo ficticio también enseña una estrategia reutilizable para la construcción de listas enlazadas — un patrón que se aplica para fusionar listas ordenadas, particionar listas y más.</p>
 
           <h3>Referencias y Recursos Adicionales</h3>
           <ul>
-              <li><a href="https://leetcode.com/problems/add-two-numbers/" target="_blank">Problema original en LeetCode</a></li>
-              <li><a href="https://es.wikipedia.org/wiki/Suma" target="_blank">Wikipedia – Suma (aritmética elemental)</a></li>
-              <li><a href="https://es.wikipedia.org/wiki/Acarreo" target="_blank">Acarreo – el mecanismo que hace que funcione</a></li>
-              <li><a href="https://gmplib.org/" target="_blank">GMP – Biblioteca de Aritmética de Múltiple Precisión de GNU</a></li>
+              <li><a href="https://leetcode.com/problems/add-two-numbers/" target="_blank">Problema Original en LeetCode</a></li>
+              <li><a href="https://en.wikipedia.org/wiki/Elementary_arithmetic#Addition" target="_blank">Wikipedia – Aritmética elemental (suma)</a></li>
+              <li><a href="https://en.wikipedia.org/wiki/Carry_(arithmetic)" target="_blank">Acarreo (aritmética) – el mecanismo que lo hace funcionar</a></li>
+              <li><a href="https://gmplib.org/" target="_blank">GMP – Biblioteca Aritmética de Múltiple Precisión GNU</a></li>
               <li><a href="https://github.com/TheAlgorithms" target="_blank">TheAlgorithms – implementaciones de código abierto en muchos lenguajes</a></li>
-              <li><a href="https://www.geeksforgeeks.org/add-two-numbers-represented-by-linked-lists/" target="_blank">GeeksforGeeks: Sumar dos números representados por listas enlazadas</a></li>
+              <li><a href="https://www.geeksforgeeks.org/add-two-numbers-represented-by-linked-lists/" target="_blank">GeeksforGeeks: Suma dos números representados por listas enlazadas</a></li>
           </ul>
         </div>
         <blockquote class="closing-quote">
-          Con cariño para quienes están practicando LeetCode, un día a la vez. Domina lo básico y el resto vendrá solo.
+          Con cariño para aquellos que están puliendo LeetCode, un día a la vez. Domina lo básico y el resto seguirá.
         </blockquote>
       </article>
     </main>
@@ -533,7 +547,7 @@
         </ul>
       </nav>
       <div class="footer-meta">
-        <p>2026, Lumænaut_ <a href="../../politica-de-privacidad.html">Política de privacidad</a></p>
+        <p>2026, Lumænaut_ <a href="../../privacy-policy.html">Política de Privacidad</a></p>
       </div>
     </footer>
   </div>
