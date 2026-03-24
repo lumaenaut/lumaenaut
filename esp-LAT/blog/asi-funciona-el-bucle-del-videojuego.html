@@ -11,20 +11,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#F9F5EC">
-  <meta name="description" content="Así funciona el ciclo del videojuego: input, actualizar, renderizar y tiempo delta — el latido del videojuego. Por Alberto Del Valle.">
+  <meta name="description" content="Así funciona el bucle del videojuego: input, actualizar, renderizar y tiempo delta — el latido del videojuego. Por Alberto Del Valle.">
   <meta name="author" content="Alberto Del Valle">
-  <title>Así funciona el ciclo del videojuego</title>
-  <link rel="canonical" href="https://lumaenaut.com/esp-LAT/blog/asi-funciona-el-ciclo-del-videojuego.html">
+  <title>Así funciona el bucle del videojuego</title>
+  <link rel="canonical" href="https://lumaenaut.com/esp-LAT/blog/asi-funciona-el-bucle-del-videojuego.html">
   <link rel="alternate" hreflang="x-default" href="https://lumaenaut.com/eng-US/blog/how-a-game-loop-works.html">
   <link rel="alternate" hreflang="en" href="https://lumaenaut.com/eng-US/blog/how-a-game-loop-works.html">
-  <link rel="alternate" hreflang="es" href="https://lumaenaut.com/esp-LAT/blog/asi-funciona-el-ciclo-del-videojuego.html">
+  <link rel="alternate" hreflang="es" href="https://lumaenaut.com/esp-LAT/blog/asi-funciona-el-bucle-del-videojuego.html">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="Lumænaut_">
-  <meta property="og:title" content="Así funciona el ciclo del videojuego">
-  <meta property="og:description" content="Así funciona el ciclo del videojuego: input, actualizar, renderizar y tiempo delta — el latido del videojuego. Por Alberto Del Valle.">
-  <meta property="og:url" content="https://lumaenaut.com/esp-LAT/blog/asi-funciona-el-ciclo-del-videojuego.html">
+  <meta property="og:title" content="Así funciona el bucle del videojuego">
+  <meta property="og:description" content="Así funciona el bucle del videojuego: input, actualizar, renderizar y tiempo delta — el latido del videojuego. Por Alberto Del Valle.">
+  <meta property="og:url" content="https://lumaenaut.com/esp-LAT/blog/asi-funciona-el-bucle-del-videojuego.html">
   <meta property="og:image" content="https://lumaenaut.com/images/runners-on-futuristic-track-ascii.png">
-  <meta property="og:image:alt" content="Arte ASCII: corredores corriendo por una pista futurista, formando un circuito repetido que representa el ritmo constante del ciclo del juego (input, actualizar, renderizar).">
+  <meta property="og:image:alt" content="Arte ASCII: corredores corriendo por una pista futurista, formando un circuito repetido que representa el ritmo constante del bucle del juego (input, actualizar, renderizar).">
   <meta property="og:image:width" content="1840">
   <meta property="og:image:height" content="1690">
   <meta property="og:locale" content="es">
@@ -35,19 +35,19 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:creator" content="@lumaenaut_">
   <meta name="twitter:image" content="https://lumaenaut.com/images/runners-on-futuristic-track-ascii.png">
-  <meta name="twitter:title" content="Así funciona el ciclo del videojuego">
-  <meta name="twitter:description" content="Así funciona el ciclo del videojuego: input, actualizar, renderizar y tiempo delta — el latido del videojuego. Por Alberto Del Valle.">
+  <meta name="twitter:title" content="Así funciona el bucle del videojuego">
+  <meta name="twitter:description" content="Así funciona el bucle del videojuego: input, actualizar, renderizar y tiempo delta — el latido del videojuego. Por Alberto Del Valle.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%94%A5%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="../../style.css">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    "headline": "Así funciona el ciclo del videojuego",
+    "headline": "Así funciona el bucle del videojuego",
     "alternativeHeadline": "Input, actualizar, renderizar — el latido del videojuego",
-    "description": "Así funciona el ciclo del videojuego: input, actualizar, renderizar y tiempo delta — el latido del videojuego. Por Alberto Del Valle.",
-    "url": "https://lumaenaut.com/esp-LAT/blog/asi-funciona-el-ciclo-del-videojuego.html",
-    "mainEntityOfPage": { "@id": "https://lumaenaut.com/esp-LAT/blog/asi-funciona-el-ciclo-del-videojuego.html" },
+    "description": "Así funciona el bucle del videojuego: input, actualizar, renderizar y tiempo delta — el latido del videojuego. Por Alberto Del Valle.",
+    "url": "https://lumaenaut.com/esp-LAT/blog/asi-funciona-el-bucle-del-videojuego.html",
+    "mainEntityOfPage": { "@id": "https://lumaenaut.com/esp-LAT/blog/asi-funciona-el-bucle-del-videojuego.html" },
     "image": "https://lumaenaut.com/images/runners-on-futuristic-track-ascii.png",
     "datePublished": "2026-03-11",
     "dateModified": "2026-03-20",
@@ -104,7 +104,7 @@
       </div>
       <article class="post" aria-labelledby="post-title">
         <header class="post-header">
-          <h2 id="post-title" class="post-title">Así funciona el ciclo del videojuego</h2>
+          <h2 id="post-title" class="post-title">Así funciona el bucle del videojuego</h2>
           <p class="post-subtitle">Input, actualizar, renderizar — el latido del videojuego</p>
           <p class="post-meta">
             Por <span class="author">Alberto Del Valle</span><br>
@@ -115,28 +115,28 @@
         <figure class="post-featured-image" aria-labelledby="game-loop-featured-caption">
           <img
             src="../../images/runners-on-futuristic-track-ascii.png"
-            alt="Arte ASCII a color: corredores corriendo en una pista futurista, sugiriendo un circuito repetido; el movimiento representa el latido del ciclo del juego, donde el input, el actualizar y el renderizar se suceden continuamente."
+            alt="Arte ASCII a color: corredores corriendo en una pista futurista, sugiriendo un circuito repetido; el movimiento representa el latido del bucle del juego, donde el input, el actualizar y el renderizar se suceden continuamente."
             title="Arte ASCII — corredores en pista futurista"
             width="1840"
             height="1690"
             decoding="async"
             loading="eager"
             class="post-featured-img">
-          <figcaption id="game-loop-featured-caption" class="visually-hidden">Ilustración en estilo arte ASCII: corredores compitiendo en una pista futurista que forma un circuito repetido, evocando el ritmo constante del ciclo del juego (input, actualizar, renderizar).</figcaption>
+          <figcaption id="game-loop-featured-caption" class="visually-hidden">Ilustración en estilo arte ASCII: corredores compitiendo en una pista futurista que forma un circuito repetido, evocando el ritmo constante del bucle del juego (input, actualizar, renderizar).</figcaption>
         </figure>
         <div class="post-body">
           <p>
             Cada videojuego que has jugado — desde el Pong hasta el último 
             éxito de mundo abierto — lo mueve un solo latido: el 
-            <strong>ciclo del juego</strong>. El bloque de código que no se 
-            detiene. Mientras el ciclo corre, el juego está vivo. Cuando se 
+            <strong>bucle del juego</strong>. El bloque de código que no se 
+            detiene. Mientras el bucle corre, el juego está vivo. Cuando se 
             detiene, el juego termina. Entender cómo funciona es el primer paso 
             para hacer tus propios videojuegos.
           </p>
 
-          <h3>El ciclo más simple</h3>
+          <h3>El bucle más simple</h3>
           <p>
-            En el núcleo, un ciclo de juego hace tres cosas, una y otra vez: 
+            En el núcleo, un bucle de juego hace tres cosas, una y otra vez: 
             revisa el <strong>input</strong>, <strong>actualiza</strong> el 
             estado del juego (posiciones, puntajes, física) y 
             <strong>renderiza</strong> el siguiente cuadro en pantalla. En 
@@ -148,7 +148,7 @@
   render();  // Renderiza el siguiente cuadro en pantalla
 }</code></pre>
           <p>
-            Eso es todo. Sin magia. El ciclo corre tan rápido como la máquina 
+            Eso es todo. Sin magia. El bucle corre tan rápido como la máquina 
             lo permita (o como tú lo limites). Cada vuelta es un “tic” del 
             reloj del juego. Mueves al jugador, actualizas a los enemigos, 
             resuelves colisiones y pintas el resultado. Repites hasta que el 
@@ -188,21 +188,21 @@
             sea estable y la imagen varíe.
           </p>
 
-          <h3>El ciclo en el navegador</h3>
+          <h3>El bucle en el navegador</h3>
           <p>
             En el navegador no escribes <code>while (true)</code>. El navegador 
             te da <strong><code>requestAnimationFrame</code></strong> (a veces 
             abreviado <code>rAF</code>). Le pasas una función; el navegador la 
             llama antes del siguiente refresco, casi siempre al ritmo de la 
-            pantalla (60 o 120 Hz). Tu “ciclo” es: pedir el siguiente cuadro y 
+            pantalla (60 o 120 Hz). Tu “bucle” es: pedir el siguiente cuadro y 
             en esa función hacer tu actualización y tu render. Una llamada por 
             cuadro, con un tiempo que puedes medir para obtener <code>dt</code>.
           </p>
 
           <figure class="game-loop-demo" id="game-loop-demo" aria-labelledby="game-loop-demo-caption">
-            <p class="demo-title" id="game-loop-demo-caption">Mira el ciclo en acción</p>
+            <p class="demo-title" id="game-loop-demo-caption">Mira el bucle en acción</p>
             <div class="demo-canvas-wrap">
-              <canvas class="demo-canvas" id="game-loop-canvas" width="640" height="360" aria-describedby="game-loop-demo-caption">Demostración: una pelota se mueve y rebota; el ciclo corre con requestAnimationFrame.</canvas>
+              <canvas class="demo-canvas" id="game-loop-canvas" width="640" height="360" aria-describedby="game-loop-demo-caption">Demostración: una pelota se mueve y rebota; el bucle corre con requestAnimationFrame.</canvas>
             </div>
             <div class="demo-stats" aria-live="polite">
               <span id="demo-frame">Cuadro: 0</span>
@@ -214,7 +214,7 @@
               <button type="button" id="demo-step" disabled>Avanzar 1 cuadro</button>
             </div>
             <p class="demo-caption">
-              Es el mismo ciclo: en cada cuadro actualizamos la posición de la 
+              Es el mismo bucle: en cada cuadro actualizamos la posición de la 
               pelota con el tiempo delta y luego renderizamos. Pausa y usa 
               “Avanzar 1 cuadro” para hacer una actualización y un render a 
               la vez.
@@ -226,8 +226,8 @@
             <code>position += velocity * dt</code>. Su velocidad está en 
             “unidades por segundo”, no “unidades por cuadro”. Los números 
             muestran el cuadro actual, los FPS y el tiempo delta. Al pausar se 
-            detiene el ciclo; “Avanzar 1 cuadro” hace una actualización y un 
-            render para que veas el ciclo dar un solo tic.
+            detiene el bucle; “Avanzar 1 cuadro” hace una actualización y un 
+            render para que veas el bucle dar un solo tic.
           </p>
 
           <h3>Paso fijo vs paso variable</h3>
@@ -243,18 +243,18 @@
             profesionales suelen mezclar (física fija, render variable).
           </p>
 
-          <h3>Un solo ciclo para todos</h3>
+          <h3>Un solo bucle para todos</h3>
           <p>
             No importa qué tan grande sea el juego, la idea es la misma: un 
-            ciclo, input → actualizar → renderizar, con el tiempo (tiempo delta) 
+            bucle, input → actualizar → renderizar, con el tiempo (tiempo delta) 
             impulsando los cambios. Cuando lo ves así, puedes entrar a sistemas 
             de entrada, pipelines de renderizado y motores de física sabiendo 
-            que todos se conectan a este latido. Dominar el ciclo es tener la 
+            que todos se conectan a este latido. Dominar el bucle es tener la 
             base sobre la que se construye todo lo demás.
           </p>
         </div>
         <blockquote class="closing-quote">
-          Un ciclo. Input, actualizar, renderizar. Repetir.
+          Un bucle. Input, actualizar, renderizar. Repetir.
         </blockquote>
       </article>
     </main>
