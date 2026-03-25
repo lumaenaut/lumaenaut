@@ -11,7 +11,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#F9F5EC">
-  <meta name="description" content="Fuzzy string search with Bitap: from naive to optimal. A Cassidy Williams (Cassioo) interview brain-teaser walkthrough, with math and Python code. By Alberto Del Valle.">
+  <meta name="description" content="Fuzzy string search with Bitap: from naive to efficient. A Cassidy Williams (Cassioo) interview brain-teaser walkthrough, with math and Python code. By Alberto Del Valle.">
   <meta name="author" content="Alberto Del Valle">
   <title>QOTW (Cassidoo) #1: Fuzzy string search with Bitap</title>
   <link rel="canonical" href="https://lumaenaut.com/eng-US/blog/question-of-the-week/qotw-cassidoo-1.html">
@@ -21,7 +21,7 @@
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="Lumænaut_">
   <meta property="og:title" content="QOTW (Cassidoo) #1: Fuzzy string search with Bitap">
-  <meta property="og:description" content="Fuzzy string search with Bitap: from naive to optimal. From brute force to the bit-parallel Bitap algorithm, with math and code. By Alberto Del Valle.">
+  <meta property="og:description" content="Fuzzy string search with Bitap: from naive to efficient. From brute force to the bit-parallel Bitap algorithm, with math and code. By Alberto Del Valle.">
   <meta property="og:url" content="https://lumaenaut.com/eng-US/blog/question-of-the-week/qotw-cassidoo-1.html">
   <meta property="og:image" content="https://lumaenaut.com/images/keyboard-infront-of-nebula-ascii.png">
   <meta property="og:image:alt" content="ASCII art: RGB-lit keyboard in outer space with a soft yellow nebula in the background.">
@@ -36,7 +36,7 @@
   <meta name="twitter:creator" content="@lumaenaut_">
   <meta name="twitter:image" content="https://lumaenaut.com/images/keyboard-infront-of-nebula-ascii.png">
   <meta name="twitter:title" content="QOTW (Cassidoo) #1: Fuzzy string search with Bitap">
-  <meta name="twitter:description" content="Fuzzy string search with Bitap: from naive to optimal — the Bitap algorithm, explained with math and code.">
+  <meta name="twitter:description" content="Fuzzy string search with Bitap: from naive to efficient — the Bitap algorithm, explained with math and code.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%94%A5%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="../../../style.css">
   <script type="application/ld+json">
@@ -44,8 +44,8 @@
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     "headline": "QOTW (Cassidoo) #1: Fuzzy string search with Bitap",
-    "alternativeHeadline": "From naive to optimal",
-    "description": "Fuzzy string search with Bitap: from naive to optimal. A Cassidy Williams (Cassioo) interview brain-teaser walkthrough, with math and Python code. By Alberto Del Valle.",
+    "alternativeHeadline": "From naive to efficient",
+    "description": "Fuzzy string search with Bitap: from naive to efficient. A Cassidy Williams (Cassioo) interview brain-teaser walkthrough, with math and Python code. By Alberto Del Valle.",
     "url": "https://lumaenaut.com/eng-US/blog/question-of-the-week/qotw-cassidoo-1.html",
     "mainEntityOfPage": { "@id": "https://lumaenaut.com/eng-US/blog/question-of-the-week/qotw-cassidoo-1.html" },
     "image": "https://lumaenaut.com/images/keyboard-infront-of-nebula-ascii.png",
@@ -125,7 +125,7 @@
           <figcaption id="qotw-feature-caption" class="visually-hidden">Featured illustration in ASCII art style: an RGB-lit keyboard in outer space with a soft yellow nebula behind it.</figcaption>
         </figure>
         <div class="post-body">
-          <h3>Fuzzy string search with bitap: from naive to optimal</h3>
+          <h3>Fuzzy string search with Bitap: from naive to efficient</h3>
           <p>
             <strong>
               A big shoutout to 
@@ -144,7 +144,8 @@
           <p>
             If you're here to level up your string algorithms game, buckle up. 
             We’ll write Python you can trust — readable, testable, and tied to 
-            the same Levenshtein scoring function Bitap accelerates — and 
+            the same Levenshtein <strong>distance model</strong> that production 
+            bit-parallel matchers are built to honor — and 
             along the way, we’ll make sure you actually understand 
             <em>why</em> Bitap works.
           </p>
@@ -171,6 +172,13 @@
 > [{ "position": 0, "errors": 3 }, { "position": 4, "errors": 3 }]
           </code></pre>
           <p>
+            (<strong>Note:</strong> With <code>k = 3</code>, both matches align 
+            <code>"cool"</code> against the length-4 slice of text starting at 
+            that index using three edits. Levenshtein allows substitutions and 
+            gaps; a match is <em>not</em> the same as finding <code>"cool"</code> 
+            as a literal unchanged substring.)
+          </p>
+          <p>
             At first glance, this is like a “search with typos allowed”. But 
             instead of returning just a boolean, we need exact match positions 
             along with the error count for each match. The 
@@ -184,12 +192,16 @@
               into bitwise operations — essentially simulating a nondeterministic 
               finite automaton (NFA) in parallel. For <strong>exact</strong> 
               matching (zero errors), classic shift-or Bitap does <strong>O(n)</strong> 
-              work over the text when the pattern fits in a machine word. For 
-              <strong>fuzzy</strong> matching with edit distance, practical 
-              bit-parallel methods still spend <strong>O(n)</strong> time per 
-              text character up to factors in <strong>k</strong> and 
-              <strong>m</strong>, with constants that are tiny compared to 
-              redoing dynamic programming from scratch at every step.
+              work over the text when the pattern fits in a single machine word. 
+              For <strong>fuzzy</strong> matching with up to <code>k</code> 
+              errors, bit-parallel Bitap-style methods typically run in 
+              <strong>O(n &middot; k)</strong> time for a pattern that fits in 
+              one word, or <strong>O(n &middot; k &middot; ⌈m / w⌉)</strong> 
+              when the bit-vector is split across words of size <code>w</code> 
+              — still with very small constants compared to recomputing full 
+              dynamic programming at every step. Other approaches (for example 
+              Myers’s or Ukkonen’s) offer different tradeoffs; Bitap is fast 
+              and elegant, not the only asymptotic game in town.
             </p>
           </aside>
           <h3>Restating in plain English</h3>
@@ -263,25 +275,37 @@ def levenshtein(a, b):
           <h4>2. Enter Bitap — the shift-or algorithm (exact match)</h4>
           <p>
             Before tackling fuzzy search, let's understand exact matching 
-            with Bitap. The idea: represent the set of “active states” 
-            (prefixes matched so far) as bits in a machine word. For a 
-            pattern of length m, we maintain an <strong>R</strong> bitmask 
-            where bit j (0-indexed from LSB) is 1 if the first j+1 
-            characters of the pattern match the current suffix of the text.
+            with Bitap. The idea: track which prefixes of the pattern can still 
+            line up with the recent suffix of the text using a bit-vector 
+            <strong>R</strong> in a machine word — the NFA simulation runs in 
+            parallel along those bits.
           </p>
           <p>
-            For each new character <code>c</code> in text:
+            <strong>Mask convention (shift-OR).</strong> For each text character 
+            <code>c</code>, precompute <code>pattern_mask[c]</code> with a 
+            <strong>0</strong> at bit positions where the pattern has character 
+            <code>c</code>, and <strong>1</strong> elsewhere (mismatch). For 
+            each new <code>c</code> from the text:
             <ul>
-                <li>Update <code>R = ((R << 1) | 1) & pattern_mask[c]</code></li>
+                <li><code>R = ((R << 1) | 1) & pattern_mask[c]</code></li>
             </ul>
-            Where <code>pattern_mask[c]</code> is a bitmask with 0 at positions 
-            where pattern character equals c (1 elsewhere). Wait, careful: The 
-            classic shift-or uses complement bits — but I'll present the most 
-            common variant.
+            The shift advances candidate prefixes; the AND clears bits wherever 
+            the new character disagrees with the pattern. Some textbooks store 
+            inverted masks or describe an equivalent <strong>shift-AND</strong> 
+            update — same underlying automaton, different bit polarity. When 
+            you implement from a paper, keep <em>one</em> convention end-to-end.
           </p>
           <p>
-            But for fuzzy search we need to count errors — that’s where we 
-            extend state to track error counts.
+            <strong>Word size.</strong> You need <code>m</code> bits for a 
+            length-<code>m</code> pattern (plus bookkeeping). If 
+            <code>m</code> exceeds the hardware word size <code>w</code> (often 
+            64), the vector is split across several words and each step costs on 
+            the order of <strong>⌈m / w⌉</strong> word updates instead of one — 
+            fuzzy variants that keep several masks per error tier scale the same way.
+          </p>
+          <p>
+            For fuzzy search we need to count errors — that’s where state 
+            grows beyond a single <strong>R</strong>.
           </p>
           <h4>3. Bitap for fuzzy search (with ≤ k errors)</h4>
           <p>
@@ -292,6 +316,12 @@ def levenshtein(a, b):
             needs the Manber–Wu / Baeza-Yates–Navarro style extensions; the 
             exact bitwise layouts differ from the exact matcher because delete 
             and insert are no longer a single “xor with the mask” story.
+          </p>
+          <p>
+            Extending this to the <em>full</em> Levenshtein model is <strong>not</strong> 
+            a small tweak: you must combine several bitmasks per error level 
+            with a precise recurrence — easy to get wrong, which is why serious 
+            writeups rely on those published layouts instead of a half-page sketch.
           </p>
           <p>
             Rather than paste a brittle skeleton that is easy to get wrong 
@@ -308,8 +338,8 @@ def levenshtein(a, b):
           <p>
             This returns <code>{position, errors}</code> objects in the shape 
             of the prompt. It is intentionally plain: correctness and clarity 
-            first; Bitap is the fast path that realizes the same scoring 
-            function.
+            first; Bitap is the fast path that implements the same distance 
+            scoring as this baseline.
           </p>
           <pre><code>
 def levenshtein(a, b):
@@ -362,9 +392,12 @@ if __name__ == "__main__":
             The reference implementation above costs Θ((<code>n</code> − 
             <code>m</code> + 1) &middot; <code>m</code><sup>2</sup>) time in 
             the worst case — exactly the kind of redundancy Bitap-class algorithms 
-            eliminate. Production fuzzy matchers preserve the same Levenshtein 
-            semantics but drive the cost down with bit-parallel updates so each 
-            text character only touches a handful of machine words.
+            eliminate. A careful fuzzy Bitap stays <strong>linear in 
+            <code>n</code></strong> up to factors of <code>k</code> and 
+            <strong>⌈m / w⌉</strong> (several machine words when the pattern is 
+            long), instead of Θ(<code>m</code><sup>2</sup>) DP work per sliding 
+            window. Production fuzzy matchers preserve the same Levenshtein 
+            semantics but drive the cost down with those bit-parallel updates.
           </p>
           <p>
             Where is Bitap used? The <code>agrep</code> Unix command, grep’s 
@@ -413,6 +446,10 @@ if __name__ == "__main__":
             <li>
               <a href="https://en.wikipedia.org/wiki/Bitap_algorithm" target="_blank" rel="noopener noreferrer">Bitap algorithm (Wikipedia)</a>
               — compact overview of exact and fuzzy variants, with the usual bit-mask intuition.
+            </li>
+            <li>
+              <a href="https://doi.org/10.1145/263867.263869" target="_blank" rel="noopener noreferrer">Gene Myers — “A fast bit-vector algorithm for approximate string matching based on dynamic programming”</a>
+              — classic bit-vector treatment; useful context next to shift-or Bitap.
             </li>
           </ul>
           <h3>Can't get enough from Lumænaut_? Read this...</h3>

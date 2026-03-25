@@ -11,7 +11,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#F9F5EC">
-  <meta name="description" content="Búsqueda difusa de cadenas con Bitap: de lo ingenuo a lo óptimo. Un acertijo de Cassidy Williams (Cassioo), con matemáticas y código en Python. Por Alberto Del Valle.">
+  <meta name="description" content="Búsqueda difusa de cadenas con Bitap: de lo ingenuo a lo eficiente. Un acertijo de Cassidy Williams (Cassioo), con matemáticas y código en Python. Por Alberto Del Valle.">
   <meta name="author" content="Alberto Del Valle">
   <title>PDLS (Cassidoo) #1: Búsqueda difusa con Bitap</title>
   <link rel="canonical" href="https://lumaenaut.com/esp-LAT/blog/pregunta-de-la-semana/pdls-cassidoo-1.html">
@@ -21,7 +21,7 @@
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="Lumænaut_">
   <meta property="og:title" content="PDLS (Cassidoo) #1: Búsqueda difusa con Bitap">
-  <meta property="og:description" content="Búsqueda difusa de cadenas con Bitap: de lo ingenuo a lo óptimo. De fuerza bruta a Bitap, con matemáticas y código. Por Alberto Del Valle.">
+  <meta property="og:description" content="Búsqueda difusa de cadenas con Bitap: de lo ingenuo a lo eficiente. De fuerza bruta a Bitap, con matemáticas y código. Por Alberto Del Valle.">
   <meta property="og:url" content="https://lumaenaut.com/esp-LAT/blog/pregunta-de-la-semana/pdls-cassidoo-1.html">
   <meta property="og:image" content="https://lumaenaut.com/images/keyboard-infront-of-nebula-ascii.png">
   <meta property="og:image:alt" content="Arte ASCII: teclado con iluminación RGB en el espacio, con una nebulosa amarilla suave al fondo.">
@@ -36,7 +36,7 @@
   <meta name="twitter:creator" content="@lumaenaut_">
   <meta name="twitter:image" content="https://lumaenaut.com/images/keyboard-infront-of-nebula-ascii.png">
   <meta name="twitter:title" content="PDLS (Cassidoo) #1: Búsqueda difusa con Bitap">
-  <meta name="twitter:description" content="Búsqueda difusa con Bitap: de lo ingenuo a lo óptimo — matemáticas y código en Python.">
+  <meta name="twitter:description" content="Búsqueda difusa con Bitap: de lo ingenuo a lo eficiente — matemáticas y código en Python.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%94%A5%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="../../../style.css">
   <script type="application/ld+json">
@@ -44,8 +44,8 @@
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     "headline": "PDLS (Cassidoo) #1: Búsqueda difusa con Bitap",
-    "alternativeHeadline": "De lo ingenuo a lo óptimo",
-    "description": "Búsqueda difusa de cadenas con Bitap: de lo ingenuo a lo óptimo. Un acertijo de Cassidy Williams (Cassioo), con matemáticas y código en Python. Por Alberto Del Valle.",
+    "alternativeHeadline": "De lo ingenuo a lo eficiente",
+    "description": "Búsqueda difusa de cadenas con Bitap: de lo ingenuo a lo eficiente. Un acertijo de Cassidy Williams (Cassioo), con matemáticas y código en Python. Por Alberto Del Valle.",
     "url": "https://lumaenaut.com/esp-LAT/blog/pregunta-de-la-semana/pdls-cassidoo-1.html",
     "mainEntityOfPage": { "@id": "https://lumaenaut.com/esp-LAT/blog/pregunta-de-la-semana/pdls-cassidoo-1.html" },
     "image": "https://lumaenaut.com/images/keyboard-infront-of-nebula-ascii.png",
@@ -125,7 +125,7 @@
           <figcaption id="pdls-feature-caption" class="visually-hidden">Ilustración destacada en estilo arte ASCII: teclado con iluminación RGB en el espacio, con nebulosa amarilla suave al fondo.</figcaption>
         </figure>
         <div class="post-body">
-          <h3>Búsqueda difusa de cadenas con bitap: de lo ingenuo a lo óptimo</h3>
+          <h3>Búsqueda difusa de cadenas con Bitap: de lo ingenuo a lo eficiente</h3>
           <p>
             <strong>
               Un gran agradecimiento a 
@@ -143,8 +143,9 @@
           </p>
           <p>
             Si vas a subir de nivel con algoritmos de cadenas, ponte el cinturón. 
-            Escribiremos Python en el que puedas confiar — legible, comprobable y ligado a 
-            la misma función de puntuación Levenshtein que Bitap acelera — y 
+            Escribiremos Python en el que puedas confiar — legible, comprobable y ligado al 
+            mismo <strong>modelo de distancia Levenshtein</strong> que los matchers 
+            bit-paralelos de producción se comprometen a respetar — y 
             de paso nos aseguraremos de que entiendas de verdad 
             <em>por qué</em> Bitap funciona.
           </p>
@@ -170,6 +171,13 @@
 > [{ "position": 0, "errors": 3 }, { "position": 4, "errors": 3 }]
           </code></pre>
           <p>
+            (<strong>Nota:</strong> Con <code>k = 3</code>, ambas coincidencias alinean 
+            <code>"cool"</code> con el trozo de texto de longitud 4 que empieza en ese 
+            índice usando tres ediciones. Levenshtein admite sustituciones y huecos; una 
+            coincidencia <em>no</em> es lo mismo que encontrar <code>"cool"</code> como 
+            subcadena literal idéntica.)
+          </p>
+          <p>
             A primera vista, esto es como una “búsqueda con errores tipográficos permitidos”. Pero 
             en lugar de devolver solo un booleano, necesitamos posiciones exactas de coincidencia 
             junto al recuento de errores de cada una. El 
@@ -183,11 +191,14 @@
               en operaciones bit a bit — en esencia simula un autómata finito no determinista (NFA) 
               en paralelo. Para la coincidencia <strong>exacta</strong> (cero errores), el shift-or 
               clásico hace trabajo <strong>O(n)</strong> sobre el texto cuando el patrón cabe en 
-              una palabra de máquina. Para la coincidencia <strong>difusa</strong> con distancia de 
-              edición, los métodos bit-paralelos prácticos siguen dedicando tiempo <strong>O(n)</strong> 
-              por carácter de texto, salvo factores en <strong>k</strong> y 
-              <strong>m</strong>, con constantes mínimas frente a rehacer programación 
-              dinámica desde cero en cada paso.
+              una sola palabra de máquina. Para la coincidencia <strong>difusa</strong> con hasta 
+              <code>k</code> errores, los métodos tipo Bitap bit-paralelos suelen ejecutarse en 
+              tiempo <strong>O(n &middot; k)</strong> si el patrón cabe en una palabra, o en 
+              <strong>O(n &middot; k &middot; ⌈m / w⌉)</strong> cuando el vector de bits se reparte 
+              en palabras de tamaño <code>w</code> — aun así con constantes muy pequeñas frente a 
+              recalcular programación dinámica completa en cada paso. Otros enfoques (por ejemplo 
+              los de Myers o Ukkonen) plantean otros equilibrios; Bitap es rápido y elegante, no la 
+              única opción asintóticamente interesante.
             </p>
           </aside>
           <h3>Reformulando en palabras sencillas</h3>
@@ -261,24 +272,38 @@ def levenshtein(a, b):
           <h4>2. Entra Bitap — el algoritmo shift-or (coincidencia exacta)</h4>
           <p>
             Antes de la búsqueda difusa, entendamos la coincidencia exacta 
-            con Bitap. La idea: representar el conjunto de “estados activos” 
-            (prefijos coincidentes hasta ahora) como bits en una palabra de máquina. Para un 
-            patrón de longitud m, mantenemos una máscara de bits <strong>R</strong> 
-            donde el bit j (indexado desde el LSB como 0) vale 1 si los primeros j+1 
-            caracteres del patrón coinciden con el sufijo actual del texto.
+            con Bitap. La idea: llevar la cuenta de qué prefijos del patrón 
+            todavía pueden alinearse con el sufijo reciente del texto mediante un 
+            vector de bits <strong>R</strong> en una palabra de máquina; la 
+            simulación del NFA avanza en paralelo sobre esos bits.
           </p>
           <p>
-            Para cada carácter nuevo <code>c</code> en el texto:
+            <strong>Convención de máscaras (shift-OR).</strong> Para cada carácter 
+            <code>c</code> del texto, precalcula <code>pattern_mask[c]</code> con un 
+            <strong>0</strong> en las posiciones de bit donde el patrón tiene el 
+            carácter <code>c</code>, y <strong>1</strong> en el resto (mismatch). Para 
+            cada <code>c</code> nuevo del texto:
             <ul>
-                <li>Actualizar <code>R = ((R << 1) | 1) & pattern_mask[c]</code></li>
+                <li><code>R = ((R << 1) | 1) & pattern_mask[c]</code></li>
             </ul>
-            Donde <code>pattern_mask[c]</code> es una máscara con 0 en las posiciones 
-            donde el carácter del patrón coincide con c (1 en el resto). Atención: el 
-            shift-or clásico usa bits complementarios — pero presento la variante más habitual.
+            El desplazamiento avanza los candidatos; el AND borra bits donde el 
+            nuevo carácter no cuadra con el patrón. Algunos textos guardan máscaras 
+            invertidas o describen una actualización equivalente 
+            <strong>shift-AND</strong> — mismo autómata, otra polaridad de bits. Al 
+            implementarlo a partir de un artículo, mantén <em>una</em> convención de 
+            punta a punta.
           </p>
           <p>
-            En la búsqueda difusa hace falta contar errores — ahí 
-            extendemos el estado para llevar los niveles de error.
+            <strong>Tamaño de palabra.</strong> Hacen falta <code>m</code> bits para 
+            un patrón de longitud <code>m</code> (más contabilidad). Si 
+            <code>m</code> supera el tamaño de palabra del hardware <code>w</code> 
+            (a menudo 64), el vector se reparte en varias palabras y cada paso cuesta 
+            del orden de <strong>⌈m / w⌉</strong> actualizaciones en lugar de una; 
+            las variantes difusas con varias máscaras por nivel de error escalan igual.
+          </p>
+          <p>
+            En la búsqueda difusa hace falta contar errores — ahí el 
+            estado ya no cabe en un solo <strong>R</strong>.
           </p>
           <h4>3. Bitap para búsqueda difusa (con ≤ k errores)</h4>
           <p>
@@ -289,6 +314,12 @@ def levenshtein(a, b):
             exige las extensiones estilo Manber–Wu / Baeza-Yates–Navarro; los 
             diseños bit a bit exactos difieren del matcher exacto porque borrar 
             e insertar ya no son un único “xor con la máscara”.
+          </p>
+          <p>
+            Llevar esto al modelo Levenshtein <em>completo</em> <strong>no</strong> es 
+            un detalle menor: hay que combinar varias máscaras por nivel de error con una 
+            recurrencia precisa — fácil de equivocar, por eso los textos serios apoyan 
+            los diseños publicados en lugar de un bosquejo de medio folio.
           </p>
           <p>
             En lugar de pegar un esqueleto frágil que se rompe con facilidad 
@@ -305,7 +336,8 @@ def levenshtein(a, b):
           <p>
             Devuelve objetos <code>{position, errors}</code> con la forma 
             del enunciado. Es deliberadamente sobria: primero corrección y claridad; 
-            Bitap es la vía rápida que materializa la misma función de puntuación.
+            Bitap es la vía rápida que implementa la misma puntuación por distancia 
+            que esta línea base.
           </p>
           <pre><code>
 def levenshtein(a, b):
@@ -358,9 +390,13 @@ if __name__ == "__main__":
             La implementación de referencia anterior cuesta tiempo Θ((<code>n</code> − 
             <code>m</code> + 1) &middot; <code>m</code><sup>2</sup>) en 
             el peor caso — justo la redundancia que los algoritmos tipo Bitap pretenden 
-            eliminar. Los matchers difusos de producción conservan la misma semántica Levenshtein 
-            pero bajan el coste con actualizaciones bit-paralelas para que cada 
-            carácter de texto solo toque unos pocos enteros de máquina.
+            eliminar. Un Bitap difuso bien hecho se mantiene <strong>lineal en 
+            <code>n</code></strong> salvo factores en <code>k</code> y en 
+            <strong>⌈m / w⌉</strong> (varias palabras de máquina cuando el patrón es 
+            largo), en lugar del trabajo DP Θ(<code>m</code><sup>2</sup>) por ventana 
+            deslizante del código de referencia. Los matchers difusos de producción 
+            conservan la misma semántica Levenshtein pero aplican esas actualizaciones 
+            bit-paralelas.
           </p>
           <p>
             ¿Dónde se usa Bitap? El comando Unix <code>agrep</code>, el pariente difuso de 
@@ -408,6 +444,10 @@ if __name__ == "__main__":
             <li>
               <a href="https://en.wikipedia.org/wiki/Bitap_algorithm" target="_blank" rel="noopener noreferrer">Algoritmo Bitap (Wikipedia)</a>
               — panorámica breve de variantes exactas y difusas, con la intuición habitual de las máscaras.
+            </li>
+            <li>
+              <a href="https://doi.org/10.1145/263867.263869" target="_blank" rel="noopener noreferrer">Gene Myers — «A fast bit-vector algorithm for approximate string matching based on dynamic programming»</a>
+              — tratamiento clásico con vectores de bits; buen contexto junto al shift-or Bitap.
             </li>
           </ul>
           <h3>¿Aún no tienes suficiente de Lumænaut_? Lee esto...</h3>
