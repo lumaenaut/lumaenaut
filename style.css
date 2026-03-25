@@ -761,8 +761,35 @@ article.post .where-to-start p + p {
   color: inherit;
   cursor: pointer;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.18);
 }
 
+.blog-card--with-thumb {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.blog-card-thumb {
+  border-bottom: 2px solid var(--contrast);
+  overflow: hidden;
+  line-height: 0;
+  flex-shrink: 0;
+}
+
+.blog-card-thumb img {
+  width: 100%;
+  display: block;
+  height: 108px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.blog-card--with-thumb .blog-card-body {
+  padding: 0.85rem 1rem;
+}
+
+/* Position palette (seven cards: featured QOTW + existing six) */
 .blog-card-list li:nth-child(1) .blog-card {
   box-shadow: 4px 4px 0px #c4a574;
 }
@@ -776,15 +803,24 @@ article.post .where-to-start p + p {
 }
 
 .blog-card-list li:nth-child(4) .blog-card {
-  box-shadow: 4px 4px 0px #8DCEA7;
+  box-shadow: 4px 4px 0px #7aa5b8;
 }
 
 .blog-card-list li:nth-child(5) .blog-card {
-  box-shadow: 4px 4px 0px #b8a082;
+  box-shadow: 4px 4px 0px #8DCEA7;
 }
 
 .blog-card-list li:nth-child(6) .blog-card {
+  box-shadow: 4px 4px 0px #b8a082;
+}
+
+.blog-card-list li:nth-child(7) .blog-card {
   box-shadow: 4px 4px 0px #c4a574;
+}
+
+/* Question of the week (Cassidoo) — warm yellow–gold, theme-consistent */
+.blog-card-list li.blog-card-item--qotw .blog-card {
+  box-shadow: 4px 4px 0px #c9a227;
 }
 
 /* LeetCode series — distinct from position-based palette */
@@ -809,15 +845,23 @@ article.post .where-to-start p + p {
 }
 
 .blog-card-list li:nth-child(4) .blog-card:hover {
-  box-shadow: 2px 2px 0px #8DCEA7;
+  box-shadow: 2px 2px 0px #7aa5b8;
 }
 
 .blog-card-list li:nth-child(5) .blog-card:hover {
-  box-shadow: 2px 2px 0px #b8a082;
+  box-shadow: 2px 2px 0px #8DCEA7;
 }
 
 .blog-card-list li:nth-child(6) .blog-card:hover {
+  box-shadow: 2px 2px 0px #b8a082;
+}
+
+.blog-card-list li:nth-child(7) .blog-card:hover {
   box-shadow: 2px 2px 0px #c4a574;
+}
+
+.blog-card-list li.blog-card-item--qotw .blog-card:hover {
+  box-shadow: 2px 2px 0px #c9a227;
 }
 
 .blog-card-list li.blog-card-item--leetcode .blog-card:hover {
