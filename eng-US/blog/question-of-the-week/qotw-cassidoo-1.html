@@ -11,7 +11,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#F9F5EC">
-  <meta name="description" content="Fuzzy string search with Bitap: from naive to efficient. A Cassidy Williams (Cassioo) interview brain-teaser walkthrough, with math and Python code. By Alberto Del Valle.">
+  <meta name="description" content="Fuzzy string search with Bitap: from naive to efficient. A Cassidy Williams (Cassidoo) interview brain-teaser walkthrough, with math and Python code. By Alberto Del Valle.">
   <meta name="author" content="Alberto Del Valle">
   <title>QOTW (Cassidoo) #1: Fuzzy string search with Bitap</title>
   <link rel="canonical" href="https://lumaenaut.com/eng-US/blog/question-of-the-week/qotw-cassidoo-1.html">
@@ -45,7 +45,7 @@
     "@type": "BlogPosting",
     "headline": "QOTW (Cassidoo) #1: Fuzzy string search with Bitap",
     "alternativeHeadline": "From naive to efficient",
-    "description": "Fuzzy string search with Bitap: from naive to efficient. A Cassidy Williams (Cassioo) interview brain-teaser walkthrough, with math and Python code. By Alberto Del Valle.",
+    "description": "Fuzzy string search with Bitap: from naive to efficient. A Cassidy Williams (Cassidoo) interview brain-teaser walkthrough, with math and Python code. By Alberto Del Valle.",
     "url": "https://lumaenaut.com/eng-US/blog/question-of-the-week/qotw-cassidoo-1.html",
     "mainEntityOfPage": { "@id": "https://lumaenaut.com/eng-US/blog/question-of-the-week/qotw-cassidoo-1.html" },
     "image": "https://lumaenaut.com/images/keyboard-infront-of-nebula-ascii.png",
@@ -131,7 +131,7 @@
               A big shoutout to 
               <a href="https://cassidoo.co/" target="_blank" rel="noopener noreferrer">Cassidy Williams</a> 
               (and her incredible 
-              <a href="https://cassidoo.co/newsletter/" target="_blank" rel="noopener noreferrer">Cassioo newsletter</a>
+              <a href="https://cassidoo.co/newsletter/" target="_blank" rel="noopener noreferrer">Cassidoo newsletter</a>
               )
             </strong> 
             for this week’s interview brain-teaser. The challenge? Implement 
@@ -209,8 +209,13 @@
             Imagine you're building a “did you mean?” feature. The user types 
             <code>"cassidoo"</code> and looks for <code>"cool"</code>. With 
             <code>k=3</code>, you allow up to three edits (Levenshtein style). 
-            Bitap efficiently computes, at each text position, whether the 
-            pattern ends there with ≤ k errors, and also how many errors.
+            A production Bitap engine efficiently decides, while streaming the 
+            text, whether the pattern aligns within <strong>≤ k</strong> errors.
+            Carrying the <em>exact</em> error count in lockstep may require extra 
+            bitmask lanes or a tie-breaking pass; our interview shape asks for 
+            that count explicitly, so the clearest reference is still the DP slice 
+            below — while the masks handle the yes/no “within budget?” question at 
+            full text speed.
           </p>
           <p>Our job:</p>
           <ul>
@@ -220,10 +225,18 @@
               pattern matches the current suffix.
             </li>
             <li>
-              For each position, if the state shows a match within <code>k</code> 
-              errors, record <code>{position, errors}</code>.
+              For each window start <code>i</code>, record 
+              <code>{position, errors}</code> when the Levenshtein distance between 
+              <code>pattern</code> and <code>text[i : i+m]</code> is ≤ <code>k</code>.
             </li>
           </ul>
+          <p>
+            <strong>Indexing convention.</strong> The prompt uses the 
+            <strong>start index</strong> <code>i</code> of a fixed-length slice 
+            <code>text[i : i+m]</code>. Many streaming Bitap write-ups report the 
+            <strong>end</strong> of a hit instead; they differ by 
+            <code>m - 1</code> once you know the pattern length.
+          </p>
           <h3>From naive to bit magic: a journey</h3>
           <h4>1. The brute-force baseline (Levenshtein distance at every window)</h4>
           <p>
@@ -294,6 +307,11 @@ def levenshtein(a, b):
             inverted masks or describe an equivalent <strong>shift-AND</strong> 
             update — same underlying automaton, different bit polarity. When 
             you implement from a paper, keep <em>one</em> convention end-to-end.
+            The <strong>exact <code>k = 0</code> listing</strong> below uses the 
+            equivalent <strong>OR-then-shift</strong> update from classic C 
+            sources (<code>R |= pattern_mask[c]; R &lt;&lt;= 1</code>), not the 
+            shift-then-AND line shown above — same automaton, different bookkeeping 
+            around the shift.
           </p>
           <p>
             <strong>Word size.</strong> You need <code>m</code> bits for a 
@@ -382,22 +400,118 @@ if __name__ == "__main__":
     print(fuzzy_search("cassidoo", "cool", 3))
     # [{'position': 0, 'errors': 3}, {'position': 4, 'errors': 3}]
           </code></pre>
+          <h3>Precise Bitap (<code>k = 0</code>) — minimal shift-or in Python</h3>
           <p>
-            Drop these functions next to a bit-parallel version in your editor 
-            and fuzz both on random strings — if the scores diverge, the bug is 
-            always in the fast path.
+            This is a compact, standard <strong>shift-or</strong> implementation: 
+            character masks use <strong>cleared</strong> bits (0) where the pattern 
+            matches, and the machine word <code>R</code> is updated with 
+            <code>|</code> then <code>&lt;&lt; 1</code> on each text character. 
+            It finds every <strong>start index</strong> where an exact length-<code>m</code> 
+            slice equals <code>pattern</code>. Requires <code>m + 1</code> bits 
+            of headroom (pattern lengths in the dozens are typical on real CPUs).
+          </p>
+          <pre><code>
+def bitap_exact_positions(text, pattern):
+    """Shift-or exact match: all start indices i with text[i : i + m] == pattern."""
+    m = len(pattern)
+    if m == 0:
+        return []
+    # (m + 1) bits; bit m is the sentinel (BYG / Wikipedia layout).
+    mask_all = (1 &lt;&lt; (m + 1)) - 1
+    alphabet = set(text) | set(pattern)
+    pattern_mask = {c: mask_all for c in alphabet}
+    for j in range(m):
+        pattern_mask[pattern[j]] &amp;= ~(1 &lt;&lt; j)
+
+    R = mask_all ^ 1  # low bit 0, bits 1..m set — same role as ~1 in fixed-width C
+    out = []
+    for idx, ch in enumerate(text):
+        R |= pattern_mask.get(ch, mask_all)
+        R = (R &lt;&lt; 1) &amp; mask_all
+        if (R &amp; (1 &lt;&lt; m)) == 0:
+            start = idx - m + 1
+            if start &gt;= 0:
+                out.append(start)
+    return out
+
+
+if __name__ == "__main__":
+    sample = "the cat sat on the mat"
+    assert bitap_exact_positions(sample, "cat") == [
+        hit["position"] for hit in fuzzy_search(sample, "cat", 0)
+    ]
+          </code></pre>
+          <h3>When <code>k = 1</code> on length-<code>m</code> windows</h3>
+          <p>
+            Full Levenshtein fuzzy Bitap (<code>k &gt; 0</code>) needs the 
+            Wu–Manber / Baeza-Yates–Navarro recurrence on several masks. For 
+            the <strong>interview window model</strong> — two strings of equal 
+            length <code>m</code> — you can still certify 
+            <strong>distance ≤ 1</strong> in <strong>O(m)</strong> time with a 
+            tiny three-way check (try one substitution, one delete from the left, 
+            one delete from the right). It agrees with <code>levenshtein</code> 
+            on whether the distance is 0 or 1; if it reports “above 1”, call the 
+            full DP only when you need the exact larger value.
+          </p>
+          <pre><code>
+def levenshtein_leq1_equal_len(a, b):
+    """
+    If len(a) == len(b) and Levenshtein(a, b) &lt;= 1, return that distance (0 or 1).
+    Otherwise return None. O(m) time; easy to audit and fuzz-test.
+    """
+    if len(a) != len(b):
+        raise ValueError("expected equal-length slices for this fast path")
+    n = len(a)
+    i = 0
+    while i &lt; n and a[i] == b[i]:
+        i += 1
+    if i == n:
+        return 0
+    if a[i + 1 :] == b[i + 1 :]:
+        return 1
+    if a[i + 1 :] == b[i:]:
+        return 1
+    if a[i:] == b[i + 1 :]:
+        return 1
+    return None
+
+
+def fuzzy_search_k1_equal_windows(text, pattern):
+    m = len(pattern)
+    if m == 0:
+        return []
+    results = []
+    for i in range(len(text) - m + 1):
+        d = levenshtein_leq1_equal_len(pattern, text[i : i + m])
+        if d is not None:
+            results.append({"position": i, "errors": d})
+    return results
+
+
+if __name__ == "__main__":
+    assert fuzzy_search_k1_equal_windows("cassidoo", "cool") == fuzzy_search(
+        "cassidoo", "cool", 1
+    )
+          </code></pre>
+          <p>
+            Drop these snippets next to a full fuzzy bitmask engine in your editor 
+            and fuzz on random strings — if the scores diverge, the bug is always 
+            in the parallel layer you added last.
           </p>
           <h3>Complexity & real-world usage</h3>
           <p>
             The reference implementation above costs Θ((<code>n</code> − 
             <code>m</code> + 1) &middot; <code>m</code><sup>2</sup>) time in 
             the worst case — exactly the kind of redundancy Bitap-class algorithms 
-            eliminate. A careful fuzzy Bitap stays <strong>linear in 
-            <code>n</code></strong> up to factors of <code>k</code> and 
-            <strong>⌈m / w⌉</strong> (several machine words when the pattern is 
-            long), instead of Θ(<code>m</code><sup>2</sup>) DP work per sliding 
-            window. Production fuzzy matchers preserve the same Levenshtein 
-            semantics but drive the cost down with those bit-parallel updates.
+            eliminate. A careful fuzzy Bitap runs in 
+            <strong>O(<code>n</code> &middot; <code>k</code> &middot; ⌈<code>m</code> / <code>w</code>⌉)</strong> 
+            word operations for text length <code>n</code>, edit budget 
+            <code>k</code>, pattern length <code>m</code>, and machine word 
+            <code>w</code> — i.e. <strong>linear in <code>n</code></strong> with 
+            multiplicative factors in <code>k</code> and ⌈<code>m</code>/<code>w</code>⌉, 
+            instead of Θ(<code>m</code><sup>2</sup>) DP work per sliding window. 
+            Production fuzzy matchers preserve the same Levenshtein semantics but 
+            drive the cost down with those bit-parallel updates.
           </p>
           <p>
             Where is Bitap used? The <code>agrep</code> Unix command, grep’s 
@@ -407,12 +521,13 @@ if __name__ == "__main__":
           <h3>Wrapping up</h3>
           <p>
             We started with brute force, zoomed in on how shift-or packs NFA 
-            states into integers, and finished with a <strong>verifiable</strong> 
-            Python baseline that mirrors the interview’s scoring model. Pair 
-            the intuition with code you can fuzz-test; once the baseline is 
-            trusted, any bit-parallel shortcut has to match it bit-for-bit on 
-            the distances. Next time you see a “Did you mean …?” feature, you’ll 
-            know one way it might be implemented.
+            states into integers, added a <strong>working exact Bitap</strong> 
+            plus a <strong>tight <code>k = 1</code> window check</strong>, and 
+            kept the full DP slice as the interview’s <strong>verifiable</strong> 
+            scoring model. Pair the intuition with code you can fuzz-test; once 
+            the baseline is trusted, any bit-parallel shortcut has to match it 
+            bit-for-bit on the distances. Next time you see a “Did you mean …?” 
+            feature, you’ll know one way it might be implemented.
           </p>
           <p>
             Happy coding, and may your searches always be fuzzy in the right way!

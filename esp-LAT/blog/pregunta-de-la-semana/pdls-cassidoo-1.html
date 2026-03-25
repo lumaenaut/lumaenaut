@@ -11,7 +11,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#F9F5EC">
-  <meta name="description" content="Búsqueda difusa de cadenas con Bitap: de lo ingenuo a lo eficiente. Un acertijo de Cassidy Williams (Cassioo), con matemáticas y código en Python. Por Alberto Del Valle.">
+  <meta name="description" content="Búsqueda difusa de cadenas con Bitap: de lo ingenuo a lo eficiente. Un acertijo de Cassidy Williams (Cassidoo), con matemáticas y código en Python. Por Alberto Del Valle.">
   <meta name="author" content="Alberto Del Valle">
   <title>PDLS (Cassidoo) #1: Búsqueda difusa con Bitap</title>
   <link rel="canonical" href="https://lumaenaut.com/esp-LAT/blog/pregunta-de-la-semana/pdls-cassidoo-1.html">
@@ -45,7 +45,7 @@
     "@type": "BlogPosting",
     "headline": "PDLS (Cassidoo) #1: Búsqueda difusa con Bitap",
     "alternativeHeadline": "De lo ingenuo a lo eficiente",
-    "description": "Búsqueda difusa de cadenas con Bitap: de lo ingenuo a lo eficiente. Un acertijo de Cassidy Williams (Cassioo), con matemáticas y código en Python. Por Alberto Del Valle.",
+    "description": "Búsqueda difusa de cadenas con Bitap: de lo ingenuo a lo eficiente. Un acertijo de Cassidy Williams (Cassidoo), con matemáticas y código en Python. Por Alberto Del Valle.",
     "url": "https://lumaenaut.com/esp-LAT/blog/pregunta-de-la-semana/pdls-cassidoo-1.html",
     "mainEntityOfPage": { "@id": "https://lumaenaut.com/esp-LAT/blog/pregunta-de-la-semana/pdls-cassidoo-1.html" },
     "image": "https://lumaenaut.com/images/keyboard-infront-of-nebula-ascii.png",
@@ -131,7 +131,7 @@
               Un gran agradecimiento a 
               <a href="https://cassidoo.co/" target="_blank" rel="noopener noreferrer">Cassidy Williams</a> 
               (y su increíble 
-              <a href="https://cassidoo.co/newsletter/" target="_blank" rel="noopener noreferrer">boletín Cassioo</a>
+              <a href="https://cassidoo.co/newsletter/" target="_blank" rel="noopener noreferrer">boletín Cassidoo</a>
               )
             </strong> 
             por el acertijo de entrevista de esta semana. ¿El reto? Implementar 
@@ -206,8 +206,13 @@
             Imagina que construyes un “¿quisiste decir?”. El usuario escribe 
             <code>"cassidoo"</code> y busca <code>"cool"</code>. Con 
             <code>k=3</code>, permites hasta tres ediciones (estilo Levenshtein). 
-            Bitap calcula, en cada posición del texto, si el 
-            patrón termina ahí con ≤ k errores y también cuántos errores hay.
+            Un motor Bitap de producción decide eficientemente, al recorrer el 
+            texto en flujo, si el patrón encaja con <strong>≤ k</strong> errores. 
+            Llevar el recuento <em>exacto</em> de errores al mismo ritmo puede exigir 
+            carriles extra de máscaras o un repaso final; el enunciado pide ese 
+            número explícitamente, así que la referencia más clara sigue siendo el 
+            trozo por DP que verás abajo — mientras las máscaras responden el sí/no 
+            «¿dentro del presupuesto?» a velocidad de texto completo.
           </p>
           <p>Nuestro trabajo:</p>
           <ul>
@@ -217,10 +222,18 @@
               patrón coincide con el sufijo actual.
             </li>
             <li>
-              En cada posición, si el estado muestra una coincidencia con ≤ <code>k</code> 
-              errores, registrar <code>{position, errors}</code>.
+              Para cada inicio de ventana <code>i</code>, registrar 
+              <code>{position, errors}</code> cuando la distancia de Levenshtein entre 
+              <code>pattern</code> y <code>text[i : i+m]</code> sea ≤ <code>k</code>.
             </li>
           </ul>
+          <p>
+            <strong>Convención de índices.</strong> El enunciado usa el 
+            <strong>índice de inicio</strong> <code>i</code> del trozo fijo 
+            <code>text[i : i+m]</code>. Muchas descripciones de Bitap en flujo 
+            dan el <strong>final</strong> de una coincidencia; se relacionan con 
+            <code>m - 1</code> cuando ya conoces la longitud del patrón.
+          </p>
           <h3>De lo ingenuo a la magia de los bits: un viaje</h3>
           <h4>1. La línea base de fuerza bruta (distancia de Levenshtein en cada ventana)</h4>
           <p>
@@ -292,6 +305,11 @@ def levenshtein(a, b):
             <strong>shift-AND</strong> — mismo autómata, otra polaridad de bits. Al 
             implementarlo a partir de un artículo, mantén <em>una</em> convención de 
             punta a punta.
+            El <strong>listado exacto con <code>k = 0</code></strong> más abajo usa la 
+            actualización equivalente <strong>OR y luego desplazamiento</strong> de 
+            las fuentes clásicas en C (<code>R |= pattern_mask[c]; R &lt;&lt;= 1</code>), 
+            no la línea «desplaza y AND» mostrada arriba — mismo autómata, otro orden 
+            contable alrededor del desplazamiento.
           </p>
           <p>
             <strong>Tamaño de palabra.</strong> Hacen falta <code>m</code> bits para 
@@ -380,23 +398,118 @@ if __name__ == "__main__":
     print(fuzzy_search("cassidoo", "cool", 3))
     # [{'position': 0, 'errors': 3}, {'position': 4, 'errors': 3}]
           </code></pre>
+          <h3>Bitap exacto (<code>k = 0</code>) — shift-or mínimo en Python</h3>
           <p>
-            Coloca estas funciones junto a una versión bit-paralela en tu editor 
-            y haz <em>fuzz</em> sobre cadenas aleatorias — si las puntuaciones divergen, el fallo está 
-            siempre en la vía rápida.
+            Implementación compacta de <strong>shift-or</strong>: las máscaras de 
+            carácter usan bits en <strong>0</strong> donde el patrón coincide, y 
+            el registro <code>R</code> se actualiza con <code>|</code> y luego 
+            <code>&lt;&lt; 1</code> por carácter de texto. Devuelve cada 
+            <strong>índice de inicio</strong> donde un trozo de longitud 
+            <code>m</code> coincide exactamente con <code>pattern</code>. Hacen falta 
+            <code>m + 1</code> bits de margen (patrones de decenas encajan holgado 
+            en CPUs de 64 bits).
+          </p>
+          <pre><code>
+def bitap_exact_positions(text, pattern):
+    """Shift-or exacto: índices i con text[i : i + m] == pattern."""
+    m = len(pattern)
+    if m == 0:
+        return []
+    mask_all = (1 &lt;&lt; (m + 1)) - 1
+    alphabet = set(text) | set(pattern)
+    pattern_mask = {c: mask_all for c in alphabet}
+    for j in range(m):
+        pattern_mask[pattern[j]] &amp;= ~(1 &lt;&lt; j)
+
+    R = mask_all ^ 1
+    out = []
+    for idx, ch in enumerate(text):
+        R |= pattern_mask.get(ch, mask_all)
+        R = (R &lt;&lt; 1) &amp; mask_all
+        if (R &amp; (1 &lt;&lt; m)) == 0:
+            start = idx - m + 1
+            if start &gt;= 0:
+                out.append(start)
+    return out
+
+
+if __name__ == "__main__":
+    sample = "the cat sat on the mat"
+    assert bitap_exact_positions(sample, "cat") == [
+        hit["position"] for hit in fuzzy_search(sample, "cat", 0)
+    ]
+          </code></pre>
+          <h3>Cuando <code>k = 1</code> en ventanas de longitud <code>m</code></h3>
+          <p>
+            La Bitap difusa Levenshtein completa (<code>k &gt; 0</code>) exige la 
+            recurrencia Wu–Manber / Baeza-Yates–Navarro sobre varias máscaras. Para 
+            el <strong>modelo del enunciado</strong> — dos cadenas de igual longitud 
+            <code>m</code> — puedes comprobar distancia <strong>≤ 1</strong> en 
+            tiempo <strong>O(m)</strong> con una verificación triple (una sustitución, 
+            un borrado a la izquierda, un borrado a la derecha). Coincide 
+            exactamante con <code>Levenshtein</code> cuando la distancia es ≤ 1; 
+            si devuelve «por encima de 1», usa el DP completo solo cuando 
+            necesites el valor exacto mayor.
+          </p>
+          <pre><code>
+def levenshtein_leq1_equal_len(a, b):
+    """
+    Si len(a) == len(b) y Levenshtein(a, b) &lt;= 1, devuelve esa distancia (0 ó 1).
+    Si no, devuelve None. Tiempo O(m); fácil de auditar y hacer fuzz.
+    """
+    if len(a) != len(b):
+        raise ValueError("se esperan trozos de igual longitud en este camino rápido")
+    n = len(a)
+    i = 0
+    while i &lt; n and a[i] == b[i]:
+        i += 1
+    if i == n:
+        return 0
+    if a[i + 1 :] == b[i + 1 :]:
+        return 1
+    if a[i + 1 :] == b[i:]:
+        return 1
+    if a[i:] == b[i + 1 :]:
+        return 1
+    return None
+
+
+def fuzzy_search_k1_equal_windows(text, pattern):
+    m = len(pattern)
+    if m == 0:
+        return []
+    results = []
+    for i in range(len(text) - m + 1):
+        d = levenshtein_leq1_equal_len(pattern, text[i : i + m])
+        if d is not None:
+            results.append({"position": i, "errors": d})
+    return results
+
+
+if __name__ == "__main__":
+    assert fuzzy_search_k1_equal_windows("cassidoo", "cool") == fuzzy_search(
+        "cassidoo", "cool", 1
+    )
+          </code></pre>
+          <p>
+            Junta estos listados con un motor difuso bitmask completo en tu editor 
+            y haz <em>fuzz</em> sobre cadenas aleatorias: si las puntuaciones 
+            divergen, el fallo está en la capa bit-paralela que añadiste al final.
           </p>
           <h3>Complejidad y uso en el mundo real</h3>
           <p>
             La implementación de referencia anterior cuesta tiempo Θ((<code>n</code> − 
             <code>m</code> + 1) &middot; <code>m</code><sup>2</sup>) en 
             el peor caso — justo la redundancia que los algoritmos tipo Bitap pretenden 
-            eliminar. Un Bitap difuso bien hecho se mantiene <strong>lineal en 
-            <code>n</code></strong> salvo factores en <code>k</code> y en 
-            <strong>⌈m / w⌉</strong> (varias palabras de máquina cuando el patrón es 
-            largo), en lugar del trabajo DP Θ(<code>m</code><sup>2</sup>) por ventana 
-            deslizante del código de referencia. Los matchers difusos de producción 
-            conservan la misma semántica Levenshtein pero aplican esas actualizaciones 
-            bit-paralelas.
+            eliminar. Un Bitap difuso cuidadoso ejecuta 
+            <strong>O(<code>n</code> &middot; <code>k</code> &middot; ⌈<code>m</code> / <code>w</code>⌉)</strong> 
+            operaciones de palabra para longitud de texto <code>n</code>, presupuesto 
+            de ediciones <code>k</code>, longitud de patrón <code>m</code> y palabra de 
+            máquina <code>w</code> — es decir, <strong>lineal en <code>n</code></strong> 
+            con factores multiplicativos en <code>k</code> y ⌈<code>m</code>/<code>w</code>⌉, 
+            en lugar del trabajo DP Θ(<code>m</code><sup>2</sup>) por ventana del código 
+            de referencia. Los matchers difusos de producción conservan la misma semántica 
+            Levenshtein pero aplican esas actualizaciones bit-paralelas.
           </p>
           <p>
             ¿Dónde se usa Bitap? El comando Unix <code>agrep</code>, el pariente difuso de 
@@ -405,9 +518,12 @@ if __name__ == "__main__":
           </p>
           <h3>Para terminar</h3>
           <p>
-            Partimos de la fuerza bruta, acercamos la lente a cómo shift-or empaqueta estados de un NFA 
-            en enteros y cerramos con una línea base <strong>verificable</strong> en Python que refleja el modelo de puntuación del 
-            acertijo. Junta la intuición con código que puedas probar por <em>fuzz</em>; cuando esa base sea 
+            Partimos de la fuerza bruta, acercamos la lente a cómo shift-or empaqueta 
+            estados de un NFA en enteros, añadimos un <strong>Bitap exacto que 
+            funciona</strong> más una <strong>comprobación <code>k = 1</code> en 
+            ventanas</strong>, y mantuvimos el trozo completo por DP como modelo de 
+            puntuación <strong>verificable</strong> del acertijo. Junta la intuición 
+            con código que puedas probar por <em>fuzz</em>; cuando esa base sea 
             confiable, cualquier atajo bit-paralelo tiene que igualarla bit a bit en 
             las distancias. La próxima vez que veas un “¿quisiste decir …?”, 
             conocerás una forma en que podría implementarse.
