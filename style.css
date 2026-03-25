@@ -418,6 +418,30 @@ body {
   margin-top: 1.25rem;
 }
 
+/* Further reading inside posts (e.g. logbook chapters): mirrors home “where to start” */
+article.post .where-to-start {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+article.post .where-to-start-title {
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: var(--text-main);
+}
+
+article.post .where-to-start p {
+  line-height: 1.7;
+  font-size: 1rem;
+  color: var(--text-muted);
+}
+
+article.post .where-to-start p + p {
+  margin-top: 1rem;
+}
+
 .post-body h3 {
   font-size: 1.2rem;
   font-weight: 600;

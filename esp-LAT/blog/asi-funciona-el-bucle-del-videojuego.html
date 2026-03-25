@@ -30,7 +30,7 @@
   <meta property="og:locale" content="es">
   <meta property="og:locale:alternate" content="en_US">
   <meta property="article:published_time" content="2026-03-11">
-  <meta property="article:modified_time" content="2026-03-24">
+  <meta property="article:modified_time" content="2026-03-25">
   <meta property="article:author" content="Alberto Del Valle">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:creator" content="@lumaenaut_">
@@ -50,7 +50,7 @@
     "mainEntityOfPage": { "@id": "https://lumaenaut.com/esp-LAT/blog/asi-funciona-el-bucle-del-videojuego.html" },
     "image": "https://lumaenaut.com/images/runners-on-futuristic-track-ascii.png",
     "datePublished": "2026-03-11",
-    "dateModified": "2026-03-24",
+    "dateModified": "2026-03-25",
     "inLanguage": "es",
     "author": {
       "@type": "Person",
@@ -256,6 +256,40 @@
         <blockquote class="closing-quote">
           Un bucle. Input, actualizar, renderizar. Repetir.
         </blockquote>
+        <hr class="home-intro-divider" aria-hidden="true">
+        <div class="post-body">
+          <p>
+            Aplico las mismas ideas en <strong>Second Runner</strong>, una extensión 
+            de Chrome de estilo arcade que escribí en JavaScript. Cada minijuego 
+            corre con <code>requestAnimationFrame</code>: leemos la entrada 
+            (posición del ratón), avanzamos la simulación (pelota y paletas) 
+            usando el tiempo transcurrido para que el movimiento sea estable aunque 
+            cambien los FPS, y luego dibujamos en el canvas — el mismo ritmo 
+            entrada → actualizar → renderizar que describe este post. Puedes 
+            instalarla desde 
+            <a href="https://chromewebstore.google.com/detail/ljjaokgbhlgifgoigeaijhpgonlapinm" target="_blank" rel="noopener noreferrer">Chrome Web Store — Second Runner</a>.
+          </p>
+
+          <h3>Lecturas adicionales y referencias</h3>
+          <ul>
+            <li>
+              <a href="https://qastack.mx/gamedev/tagged/game-loop/" target="_blank" rel="noopener noreferrer">Preguntas etiquetadas «game-loop» (QA Stack)</a>
+              — hilos en español sobre el bucle central del juego: paso de tiempo fijo o variable, render independiente de la actualización, arquitectura y más.
+            </li>
+            <li>
+              <a href="https://elhacker.info/manuales/Lenguajes%20de%20Programacion/Videojuegos/Videojuegos%20con%20C%20y%20C%2B%2B/Programacion%20de%20Videojuegos%20con%20SDL.pdf" target="_blank" rel="noopener noreferrer"><em>Programación de videojuegos con SDL</em> (PDF)</a>
+              — manual práctico con C/C++ y SDL; el bucle del juego aparece en el contexto de un proyecto real y el ciclo de actualización y dibujo.
+            </li>
+            <li>
+              <a href="https://gamebytebite.com/view_tutorial.php?id=18" target="_blank" rel="noopener noreferrer">Fundamentos de programación de videojuegos (Game Byte Bite)</a>
+              — tutorial introductorio en español: fases de entrada, actualización y renderizado, y la relación con los FPS.
+            </li>
+            <li>
+              <a href="https://java-design-patterns.com/es/patterns/game-loop/#explicacion" target="_blank" rel="noopener noreferrer">Patrón Game Loop (Java Design Patterns, español)</a>
+              — propósito del patrón, ejemplo con código y variantes (por fotogramas, paso variable, paso fijo).
+            </li>
+          </ul>
+        </div>
       </article>
     </main>
     <footer class="footer">

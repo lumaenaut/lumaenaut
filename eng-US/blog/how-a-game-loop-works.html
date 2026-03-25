@@ -254,6 +254,43 @@
         <blockquote class="closing-quote">
           One loop. Input, update, render. Repeat.
         </blockquote>
+        <hr class="home-intro-divider" aria-hidden="true">
+        <div class="post-body">
+          <p>
+            I use the same fundamentals in <strong>Second Runner</strong>, a 
+            small arcade-style Chrome extension I built using JavaScript. Each 
+            mini-game runs on <code>requestAnimationFrame</code>: we read 
+            input (mouse position), advance the simulation (ball and paddles) 
+            using elapsed time so motion stays consistent when the frame rate 
+            shifts, then draw the canvas — the same input → update → render 
+            rhythm this post describes. You can install it from the
+            <a href="https://chromewebstore.google.com/detail/ljjaokgbhlgifgoigeaijhpgonlapinm" target="_blank" rel="noopener noreferrer">Chrome Web Store — Second Runner</a>.
+          </p>
+
+          <h3>Further reading and references</h3>
+          <ul>
+            <li>
+              <a href="https://www.meshy.ai/blog/game-loop" target="_blank" rel="noopener noreferrer">Game Loop Fundamentals (Meshy)</a>
+              — a wide-angle look at loop architecture, performance, and patterns for modern games.
+            </li>
+            <li>
+              <a href="https://www.cs.vassar.edu/~cs203/gedi/tutorials/Tutorial1.htm" target="_blank" rel="noopener noreferrer">Game Loop Tutorial (Vassar / Gedi)</a>
+              — walks through update and render as the core of each frame, plus double buffering in a real graphics setup.
+            </li>
+            <li>
+              <a href="https://csharpgamedev.com/wiki/Game_Loop" target="_blank" rel="noopener noreferrer">Game Loop (C# Gamedev Wiki)</a>
+              — simple loops, fixed vs variable timestep, and splitting fixed logic from display-rate rendering.
+            </li>
+            <li>
+              <a href="https://architectural-patterns.net/game-loop" target="_blank" rel="noopener noreferrer">Game Loop (Architectural Patterns)</a>
+              — short pattern sketch: periodic input, state update, and redraw for smooth animation.
+            </li>
+            <li>
+              <a href="https://algomaster.io/learn/lld/game-loop" target="_blank" rel="noopener noreferrer">Game Loop Pattern (AlgoMaster)</a>
+              — the loop as a design pattern: why continuous simulation beats a purely event-driven model for real-time play.
+            </li>
+          </ul>
+        </div>
       </article>
     </main>
     <footer class="footer">
