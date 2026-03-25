@@ -129,7 +129,7 @@
           <figcaption id="pdls-feature-caption" class="visually-hidden">Ilustración destacada en estilo arte ASCII: computadora antigua sobre un escritorio con librero al fondo.</figcaption>
         </figure>
         <div class="post-body">
-<h1>Búsqueda difusa de cadenas con Bitap: de lo ingenuo a lo óptimo</h1>
+<h3>Búsqueda difusa de cadenas con Bitap: de lo ingenuo a lo óptimo</h3>
 
 <p>
     <strong>Un agradecimiento enorme a <a href="https://cassidoo.co/" target="_blank">Cassidy Williams</a> (y su increíble <a href="https://cassidoo.co/newsletter/" target="_blank">boletín Cassioo</a>)</strong> por el acertijo de entrevista de esta semana. 
@@ -144,7 +144,7 @@
 
 <hr>
 
-<h2>El planteamiento del problema (la versión del boletín)</h2>
+<h3>El planteamiento del problema (la versión del boletín)</h3>
 
 <p>
     <em>“Dada una cadena de texto y un patrón, implementa una búsqueda difusa de cadenas utilizando el algoritmo Bitap que encuentre todas las posiciones en el texto donde el patrón coincida con un máximo de k errores (inserciones, eliminaciones o sustituciones). Devuelve un arreglo de objetos que contengan la posición y el número de errores en esa coincidencia.”</em>
@@ -171,7 +171,7 @@
     Para las CPUs modernas, esto es extremadamente rápido.
 </div>
 
-<h2>Reformulando en español sencillo</h2>
+<h3>Reformulando en español sencillo</h3>
 
 <p>
     Imagina que estás construyendo una funcionalidad de “¿quisiste decir?”. El usuario escribe <code>"cassidoo"</code> y busca <code>"cool"</code>. 
@@ -186,9 +186,9 @@
     <li>Para cada posición, si el estado muestra una coincidencia dentro de <code>k</code> errores, registrar <code>{position, errors}</code>.</li>
 </ul>
 
-<h2>De lo ingenuo a la magia de los bits: un viaje</h2>
+<h3>De lo ingenuo a la magia de los bits: un viaje</h3>
 
-<h3>1. La línea base de fuerza bruta (distancia de Levenshtein en cada ventana)</h3>
+<h4>1. La línea base de fuerza bruta (distancia de Levenshtein en cada ventana)</h4>
 
 <p>
     El enfoque más directo: deslizar una ventana de tamaño <code>len(pattern)</code> sobre el texto, calcular la distancia de Levenshtein entre 
@@ -226,7 +226,7 @@ def levenshtein(a, b):
     Esto hace el trabajo, pero cada comparación cuesta \(O(m^2)\) y se repite hasta \(n\) veces — lejos de ser ideal para documentos grandes.
 </p>
 
-<h3>2. Presentamos Bitap — el algoritmo shift-or (coincidencia exacta)</h3>
+<h4>2. Presentamos Bitap — el algoritmo shift-or (coincidencia exacta)</h4>
 
 <p>
     Antes de abordar la búsqueda difusa, entendamos la coincidencia exacta con Bitap. La idea: representar el conjunto de “estados activos” (prefijos coincidentes hasta ahora) 
@@ -245,7 +245,7 @@ def levenshtein(a, b):
 
 <p>Pero para la búsqueda difusa necesitamos contar errores — ahí es donde extendemos el estado para rastrear los conteos de error.</p>
 
-<h3>3. Bitap para búsqueda difusa (con ≤ k errores)</h3>
+<h4>3. Bitap para búsqueda difusa (con ≤ k errores)</h4>
 
 <p>
     La genialidad del algoritmo Bitap difuso es mantener <strong>k+1 vectores de estado</strong> <code>R[0..k]</code>, donde <code>R[e]</code> 
@@ -291,7 +291,7 @@ para e en 1..k:
     implementaremos una versión conocida-correcta en Python abajo.
 </p>
 
-<h2>Una implementación limpia en Python (Bitap con k errores)</h2>
+<h3>Una implementación limpia en Python (Bitap con k errores)</h3>
 
 <p>
     Implementaremos el algoritmo de manera que devuelva objetos <code>{position, errors}</code> exactamente como pide el enunciado.
@@ -352,7 +352,7 @@ if __name__ == "__main__":
 
 <p>Esto coincide exactamente con los resultados esperados.</p>
 
-<h2>Complejidad y uso en el mundo real</h2>
+<h3>Complejidad y uso en el mundo real</h3>
 
 <p>
     La complejidad temporal de Bitap difuso es \(O(n \cdot k)\) con constantes muy pequeñas (operaciones de bits). En la práctica, cuando \(k \ll m\) y \(m\) cabe en una palabra de máquina, es extremadamente rápido.  
@@ -361,7 +361,7 @@ if __name__ == "__main__":
 
 <p>¿Dónde se usa Bitap? El comando Unix <code>agrep</code>, el hermano difuso de grep, lo utiliza internamente. Además, algunos editores de código y herramientas de búsqueda dependen de algoritmos similares para la búsqueda tolerante a errores tipográficos.</p>
 
-<h2>Concluyendo</h2>
+<h3>Concluyendo</h3>
 
 <p>
     Comenzamos con una solución de fuerza bruta, exploramos la idea shift-or y finalmente creamos una implementación rápida de Bitap difuso. 
@@ -373,7 +373,7 @@ if __name__ == "__main__":
     ¡Feliz codificación, y que tus búsquedas siempre sean difusas de la manera correcta!
 </p>
 
-<h2>Referencias y lecturas adicionales</h2>
+<h3>Referencias y lecturas adicionales</h3>
 
 <ul>
     <li>
