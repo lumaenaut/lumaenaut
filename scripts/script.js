@@ -289,6 +289,7 @@
     "blog/ep-1-aspirante-nomada-digital.html": "blog/ch-1-aspiring-digital-nomad.html",
     "blog/puliendo-leetcode/dia-1-two-sum.html": "blog/grinding-leetcode/day-1-two-sum.html",
     "blog/puliendo-leetcode/dia-2-add-two-numbers.html": "blog/grinding-leetcode/day-2-add-two-numbers.html",
+    "blog/pregunta-de-la-semana/pdls-cassidoo-1.html": "blog/question-of-the-week/qotw-cassidoo-1.html",
   };
 
   var blogEngToEsp = {
@@ -298,6 +299,7 @@
     "blog/ch-1-aspiring-digital-nomad.html": "blog/ep-1-aspirante-nomada-digital.html",
     "blog/grinding-leetcode/day-1-two-sum.html": "blog/puliendo-leetcode/dia-1-two-sum.html",
     "blog/grinding-leetcode/day-2-add-two-numbers.html": "blog/puliendo-leetcode/dia-2-add-two-numbers.html",
+    "blog/question-of-the-week/qotw-cassidoo-1.html": "blog/pregunta-de-la-semana/pdls-cassidoo-1.html",
   };
 
   function espToEngPath(espPathname) {
