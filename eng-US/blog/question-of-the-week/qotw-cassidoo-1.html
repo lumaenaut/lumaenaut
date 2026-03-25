@@ -352,15 +352,12 @@ if __name__ == "__main__":
     print(fuzzy_search("cassidoo", "cool", 3))
     # [{'position': 0, 'errors': 3}, {'position': 4, 'errors': 3}]
           </code></pre>
-
           <p>
             Drop these functions next to a bit-parallel version in your editor 
             and fuzz both on random strings — if the scores diverge, the bug is 
             always in the fast path.
           </p>
-
           <h3>Complexity & real-world usage</h3>
-
           <p>
             The reference implementation above costs Θ((<code>n</code> − 
             <code>m</code> + 1) &middot; <code>m</code><sup>2</sup>) time in 
@@ -369,7 +366,6 @@ if __name__ == "__main__":
             semantics but drive the cost down with bit-parallel updates so each 
             text character only touches a handful of machine words.
           </p>
-
           <p>
             Where is Bitap used? The <code>agrep</code> Unix command, grep’s 
             fuzzy sibling, uses it under the hood. Also, some code editors and 
