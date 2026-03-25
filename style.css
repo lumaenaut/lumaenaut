@@ -783,6 +783,14 @@ article.post .where-to-start p + p {
   height: 108px;
   object-fit: cover;
   object-position: center;
+  opacity: 0.72;
+  filter: saturate(0.9) contrast(0.95);
+  transition: opacity 0.15s ease, filter 0.15s ease;
+}
+
+.blog-card:hover .blog-card-thumb img {
+  opacity: 0.82;
+  filter: saturate(1) contrast(1);
 }
 
 .blog-card--with-thumb .blog-card-body {
