@@ -49,7 +49,7 @@
     greedyCoinChange: isEs ? "Dar cambio (greedy)" : "Greedy coin change",
     amountCents: isEs ? "Monto en centavos" : "Amount in cents",
     solve: isEs ? "Resolver" : "Solve",
-    stepsDash: isEs ? "Pasos: —" : "Steps: —",
+    stepsDash: isEs ? "Pasos: — " : "Steps: — ",
     stepsFound: isEs ? "Pasos: %1 (encontrado en índice %2)" : "Steps: %1 (found at index %2)",
     stepsNotInArray: isEs ? "Pasos: %1 (no está en el arreglo)" : "Steps: %1 (not in array)",
     stepsRange: isEs ? "Pasos: %1  ·  Rango: [%2..%3]" : "Steps: %1  ·  Range: [%2..%3]",
@@ -79,7 +79,7 @@
     wordFallback: isEs ? "palabra" : "word"
   };
 
-  // —— 1. Brute force: 3-digit combination lock ———
+  // — — 1. Brute force: 3-digit combination lock — — —
   (function () {
     var container = getContainer("demo-brute-force");
     var canvas = getCanvas(container);
@@ -167,7 +167,7 @@
     draw();
   })();
 
-  // —— 2. Divide and conquer: merge sort step-by-step ———
+  // — — 2. Divide and conquer: merge sort step-by-step — — —
   (function () {
     var container = getContainer("demo-divide-conquer");
     var canvas = getCanvas(container);
@@ -401,7 +401,7 @@
     updateButtons();
   })();
 
-  // —— 3. Dynamic programming: Fibonacci with memo (f(0)..f(10), step-by-step) ———
+  // — — 3. Dynamic programming: Fibonacci with memo (f(0)..f(10), step-by-step) — — —
   (function () {
     var container = getContainer("demo-dp");
     var canvas = getCanvas(container);
@@ -438,7 +438,7 @@
         var isFilled = val !== undefined;
         var isArrow = arrowAt && arrowAt.indexOf(i) !== -1;
         ctx.fillStyle = isArrow ? hi : (isFilled ? acc : fg);
-        var text = "fib(" + i + ") = " + (isFilled ? String(val) : "—");
+        var text = "fib(" + i + ") = " + (isFilled ? String(val) : " — ");
         var rowY = y + i * 18;
         ctx.fillText(text, 20, rowY);
         var arrowX = 20 + ctx.measureText(text).width + 4;
@@ -456,7 +456,7 @@
       if (statsEl) {
         ctx.font = "14px ui-monospace, monospace";
         statsEl.textContent = "fib(" + currentN + ") = " +
-          (memo[currentN] !== undefined ? memo[currentN] : "—");
+          (memo[currentN] !== undefined ? memo[currentN] : " — ");
       }
     }
 
@@ -564,7 +564,7 @@
     updateDpButtons();
   })();
 
-  // —— 4. Greedy: coin change ———
+  // — — 4. Greedy: coin change — — —
   (function () {
     var container = getContainer("demo-greedy");
     var canvas = getCanvas(container);
@@ -582,7 +582,7 @@
       ctx.fillRect(0, 0, W, H);
       ctx.font = "14px ui-monospace, monospace";
       ctx.fillStyle = fg;
-      ctx.fillText("Amount: " + amount + "¢  →  Coins (greedy): " + (chosen.length ? chosen.join(", ") : "—"), 12, 28);
+      ctx.fillText("Amount: " + amount + "¢  →  Coins (greedy): " + (chosen.length ? chosen.join(", ") : " — "), 12, 28);
       var x = 20;
       for (var i = 0; i < chosen.length; i++) {
         ctx.fillStyle = acc;
@@ -628,7 +628,7 @@
     run();
   })();
 
-  // —— 5. Backtracking: animated maze (preplanned wrong turn + correct path) ———
+  // — — 5. Backtracking: animated maze (preplanned wrong turn + correct path) — — —
   (function () {
     var container = getContainer("demo-backtrack");
     var canvas = getCanvas(container);
@@ -844,7 +844,7 @@
     drawPath([]);
   })();
 
-  // —— 6. Searching: binary search on a 10×4 matrix ———
+  // — — 6. Searching: binary search on a 10×4 matrix — — —
   (function () {
     var container = getContainer("demo-search");
     var canvas = getCanvas(container);
@@ -960,7 +960,7 @@
 
       ctx.fillStyle = fg;
       ctx.font = "12px ui-monospace, monospace";
-      var targetLabel = targetIndex >= 0 ? (targetValue + " (index " + targetIndex + ")") : "—";
+      var targetLabel = targetIndex >= 0 ? (targetValue + " (index " + targetIndex + ")") : " — ";
       ctx.fillText(L.targetLabelBinary.replace("%1", targetLabel), 12, H - 18);
 
       if (statsEl) {
@@ -1112,7 +1112,7 @@
     draw();
   })();
 
-  // —— 7. Sorting: bubble sort bars ———
+  // — — 7. Sorting: bubble sort bars — — —
   (function () {
     var container = getContainer("demo-sort");
     var canvas = getCanvas(container);
@@ -1187,7 +1187,7 @@
     drawBars();
   })();
 
-  // —— 8. Hashing: 10 words per bucket, get random word + look up ———
+  // — — 8. Hashing: 10 words per bucket, get random word + look up — — —
   (function () {
     var container = getContainer("demo-hash");
     var canvas = getCanvas(container);

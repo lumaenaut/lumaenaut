@@ -418,16 +418,6 @@ body {
   margin-top: 1.25rem;
 }
 
-/* Prototype blocks used in QOTW/PDLS posts */
-.post-body .highlight {
-  background: #f8fafc;
-  border-left: 4px solid rgba(0, 0, 0, 0.28);
-  padding: 0.85rem 1rem;
-  margin: 1.5rem 0;
-  border-radius: 6px;
-  color: var(--text-main);
-}
-
 .post-body .footnote {
   margin-top: 2rem;
   background: #f8fafc;

@@ -172,7 +172,7 @@ def obtener_numero(cabeza):
     return num
 # Luego hacer la suma y reconstruir
           </code></pre>
-          <p>Esto funciona, pero tiene un problema fatal cuando los números exceden los enteros de 64 bits. Dado que cada lista enlazada puede tener hasta 100 dígitos, el entero puede ser tan grande como 10^100 — los enteros grandes de Python pueden manejarlo, pero en lenguajes como C++ o Java, habría desbordamiento. Además, el problema pretende explícitamente entrenarnos en el recorrido de listas enlazadas y la gestión del acarreo, no en bibliotecas de números grandes. Así que este método ingenuo es ineficiente conceptualmente.</p>
+          <p>Esto funciona, pero tiene un problema fatal cuando los números exceden los enteros de 64 bits. Dado que cada lista enlazada puede tener hasta 100 dígitos, el entero puede ser tan grande como 10<sup>100</sup> — los enteros grandes de Python pueden manejarlo, pero en lenguajes como C++ o Java, habría desbordamiento. Además, el problema pretende explícitamente entrenarnos en el recorrido de listas enlazadas y la gestión del acarreo, no en bibliotecas de números grandes. Así que este método ingenuo es ineficiente conceptualmente.</p>
 
           <h4>Paso 2 – Simulación con Acarreo (El Enfoque Estándar)</h4>
           <p>La idea clave: la suma se realiza dígito por dígito desde el dígito menos significativo (que es la cabeza de la lista, gracias al orden inverso). Así que recorremos ambas listas simultáneamente, sumamos los dígitos actuales más un acarreo, almacenamos el dígito (suma % 10) en un nuevo nodo y propagamos el acarreo (suma // 10). Continuamos hasta que ambas listas se agoten y el acarreo sea 0.</p>
@@ -275,9 +275,9 @@ def obtener_numero(cabeza):
           <h3>Formulación Matemática</h3>
           <div class="math">
           Sean los números representados como:<br>
-          A = Σ (a_i * 10^i) , donde a_0 es la cabeza de l1 (dígito menos significativo).<br>
-          B = Σ (b_i * 10^i) , donde b_0 es la cabeza de l2.<br>
-          Suma S = A + B = Σ (s_i * 10^i) , con 0 ≤ s_i ≤ 9, y propagación del acarreo:<br>
+          A = Σ (a_i * 10<sup>i</sup>) , donde a_0 es la cabeza de l1 (dígito menos significativo).<br>
+          B = Σ (b_i * 10<sup>i</sup>) , donde b_0 es la cabeza de l2.<br>
+          Suma S = A + B = Σ (s_i * 10<sup>i</sup>) , con 0 ≤ s_i ≤ 9, y propagación del acarreo:<br>
           <br>
           Para cada posición i, definimos total_i = a_i + b_i + acarreo_i,<br>
           donde acarreo_0 = 0,<br>

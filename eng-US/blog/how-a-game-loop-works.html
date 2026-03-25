@@ -133,7 +133,6 @@
             game is over. Understanding how it works is the first step to 
             making games yourself.
           </p>
-
           <h3>The simplest loop</h3>
           <p>
             At its core, a game loop does three things, over and over: it 
@@ -142,18 +141,19 @@
             <strong>draws</strong> the next frame to the screen. In pseudocode 
             it looks like this:
           </p>
-          <pre><code>while (gameIsRunning) {
-  processInput();
-  update();
-  render();
-}</code></pre>
+          <pre><code>
+while (gameIsRunning) {
+    processInput();
+    update();
+    render();
+}
+          </code></pre>
           <p>
             That's it. No magic. The loop runs as fast as the machine allows 
             (or as fast as you cap it). Each iteration is one “tick” of the 
             game’s clock. Move the player, update the enemies, resolve 
             collisions, then paint the result. Repeat until the player quits.
           </p>
-
           <h3>Why frame rate isn’t fixed</h3>
           <p>
             Old arcade machines and consoles used fixed hardware where game 
@@ -174,7 +174,6 @@
             distance per second regardless of how many frames the machine can 
             draw. The game is <strong>frame-rate independent</strong>.
           </p>
-
           <h3>Update vs render</h3>
           <p>
             It’s useful to keep “update” and “render” separate in your head. 
@@ -186,7 +185,6 @@
             do “update at 60 Hz, render when possible” so physics stays stable 
             while the picture can vary.
           </p>
-
           <h3>The loop in the browser</h3>
           <p>
             In a browser, you don’t write <code>while (true)</code>. The 
@@ -197,7 +195,6 @@
             schedule the next frame, then in the callback run your update and 
             draw. One call per frame, with timing you can measure to get <code>dt</code>.
           </p>
-
           <figure class="game-loop-demo" id="game-loop-demo" aria-labelledby="game-loop-demo-caption">
             <p class="demo-title" id="game-loop-demo-caption">See the loop in action</p>
             <div class="demo-canvas-wrap">
@@ -205,7 +202,7 @@
             </div>
             <div class="demo-stats" aria-live="polite">
               <span id="demo-frame">Frame: 0</span>
-              <span id="demo-fps">FPS: —</span>
+              <span id="demo-fps">FPS: — </span>
               <span id="demo-dt">Δt: — ms</span>
             </div>
             <div class="demo-controls">
@@ -218,7 +215,6 @@
               + render at a time.
             </p>
           </figure>
-
           <p>
             In the demo above, the ball’s position is updated with 
             <code>position += velocity * dt</code>. So its speed is in “units 
@@ -227,7 +223,6 @@
             “Step 1 frame” runs one update and one render so you can see the 
             loop tick once.
           </p>
-
           <h3>Fixed vs variable timestep</h3>
           <p>
             Some games use a <strong>fixed timestep</strong> for physics (e.g. 
@@ -240,7 +235,6 @@
             Professional engines often use a mix (fixed physics, variable 
             rendering).
           </p>
-
           <h3>One loop to rule them all</h3>
           <p>
             No matter how big the game is, the idea is the same: one loop, 
@@ -266,7 +260,6 @@
             rhythm this post describes. You can install it from the
             <a href="https://chromewebstore.google.com/detail/ljjaokgbhlgifgoigeaijhpgonlapinm" target="_blank" rel="noopener noreferrer">Chrome Web Store — Second Runner</a>.
           </p>
-
           <h3>References & further reading</h3>
           <ul>
             <li>

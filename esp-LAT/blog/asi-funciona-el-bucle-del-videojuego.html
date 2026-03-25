@@ -133,7 +133,6 @@
             detiene, el juego termina. Entender cómo funciona es el primer paso 
             para hacer tus propios videojuegos.
           </p>
-
           <h3>El bucle más simple</h3>
           <p>
             En el núcleo, un bucle de juego hace tres cosas, una y otra vez: 
@@ -142,11 +141,13 @@
             <strong>renderiza</strong> el siguiente cuadro en pantalla. En 
             pseudocódigo se ve así:
           </p>
-          <pre><code>while (gameIsRunning) {  // Mientras el juego esté corriendo
-  processInput();  // Procesa el input
-  update();  // Actualiza el estado del juego
-  render();  // Renderiza el siguiente cuadro en pantalla
-}</code></pre>
+          <pre><code>
+while (gameIsRunning) {  // Mientras el juego esté corriendo
+    processInput();  // Procesa el input
+    update();  // Actualiza el estado del juego
+    render();  // Renderiza el siguiente cuadro en pantalla
+}
+          </code></pre>
           <p>
             Eso es todo. Sin magia. El bucle corre tan rápido como la máquina 
             lo permita (o como tú lo limites). Cada vuelta es un “tic” del 
@@ -154,7 +155,6 @@
             resuelves colisiones y pintas el resultado. Repites hasta que el 
             jugador cierra.
           </p>
-
           <h3>Por qué los cuadros por segundo no son fijos</h3>
           <p>
             En las máquinas arcade y consolas viejas la lógica corría a un 
@@ -175,7 +175,6 @@
             distancia por segundo sin importar cuántos cuadros renderice la 
             máquina. El juego queda <strong>independiente del framerate</strong>.
           </p>
-
           <h3>Actualizar vs renderizar</h3>
           <p>
             Conviene tener claro la diferencia entre “actualizar” y “renderizar”. 
@@ -187,7 +186,6 @@
             “actualizar a 60 Hz, renderizar cuando se pueda” para que la física 
             sea estable y la imagen varíe.
           </p>
-
           <h3>El bucle en el navegador</h3>
           <p>
             En el navegador no escribes <code>while (true)</code>. El navegador 
@@ -198,7 +196,6 @@
             en esa función hacer tu actualización y tu render. Una llamada por 
             cuadro, con un tiempo que puedes medir para obtener <code>dt</code>.
           </p>
-
           <figure class="game-loop-demo" id="game-loop-demo" aria-labelledby="game-loop-demo-caption">
             <p class="demo-title" id="game-loop-demo-caption">Mira el bucle en acción</p>
             <div class="demo-canvas-wrap">
@@ -206,7 +203,7 @@
             </div>
             <div class="demo-stats" aria-live="polite">
               <span id="demo-frame">Cuadro: 0</span>
-              <span id="demo-fps">FPS: —</span>
+              <span id="demo-fps">FPS: — </span>
               <span id="demo-dt">Δt: — ms</span>
             </div>
             <div class="demo-controls">
@@ -220,7 +217,6 @@
               la vez.
             </p>
           </figure>
-
           <p>
             En la demo de arriba la posición de la pelota se actualiza con 
             <code>position += velocity * dt</code>. Su velocidad está en 
@@ -229,7 +225,6 @@
             detiene el bucle; “Avanzar 1 cuadro” hace una actualización y un 
             render para que veas el bucle dar un solo tic.
           </p>
-
           <h3>Paso fijo vs paso variable</h3>
           <p>
             Algunos juegos usan un <strong>paso fijo</strong> para la física 
@@ -242,7 +237,6 @@
             variable es más simple y es suficiente para muchos juegos. Los motores 
             profesionales suelen mezclar (física fija, render variable).
           </p>
-
           <h3>Un solo bucle para todos</h3>
           <p>
             No importa qué tan grande sea el juego, la idea es la misma: un 
@@ -269,7 +263,6 @@
             instalarla desde 
             <a href="https://chromewebstore.google.com/detail/ljjaokgbhlgifgoigeaijhpgonlapinm" target="_blank" rel="noopener noreferrer">Chrome Web Store — Second Runner</a>.
           </p>
-
           <h3>Referencias & lecturas adicionales</h3>
           <ul>
             <li>
@@ -289,7 +282,6 @@
               — propósito del patrón, ejemplo con código y variantes (por fotogramas, paso variable, paso fijo).
             </li>
           </ul>
-
           <h3>¿Aún no tienes suficiente de Lumænaut_? Lee esto...</h3>
           <ul>
             <li>

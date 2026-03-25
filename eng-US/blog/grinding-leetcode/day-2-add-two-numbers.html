@@ -172,7 +172,7 @@ def get_number(head):
     return num
 # Then do addition and reconstruct
           </code></pre>
-          <p>This works, but it's fatally flawed when numbers exceed 64-bit integers. Since each linked list can have up to 100 digits, the integer can be as large as 10^100 — Python’s big ints can handle it, but in languages like C++ or Java, we would overflow. Also, the problem explicitly intends to train us on linked list traversal and carry management, not big number libraries. So this naive method is inefficient both conceptually and in spirit.</p>
+          <p>This works, but it's fatally flawed when numbers exceed 64-bit integers. Since each linked list can have up to 100 digits, the integer can be as large as 10<sup>100</sup> — Python’s big ints can handle it, but in languages like C++ or Java, we would overflow. Also, the problem explicitly intends to train us on linked list traversal and carry management, not big number libraries. So this naive method is inefficient both conceptually and in spirit.</p>
 
           <h4>Step 2 – Simulation with Carry (The Standard Approach)</h4>
           <p>The insight: addition is performed digit by digit from the least significant digit (which is the head of the list, thanks to reverse order). So we walk through both lists simultaneously, sum the current digits plus a carry, store the digit (sum % 10) in a new node, and propagate the carry (sum // 10). We continue until both lists are exhausted and the carry becomes 0.</p>
@@ -275,9 +275,9 @@ def get_number(head):
           <h3>Mathematical Formulation</h3>
           <div class="math">
           Let the numbers be represented as:<br>
-          A = Σ (a_i * 10^i) , where a_0 is the head of l1 (least significant digit).<br>
-          B = Σ (b_i * 10^i) , where b_0 is the head of l2.<br>
-          Sum S = A + B = Σ (s_i * 10^i) , with 0 ≤ s_i ≤ 9, and carry propagation:<br>
+          A = Σ (a_i * 10<sup>i</sup>) , where a_0 is the head of l1 (least significant digit).<br>
+          B = Σ (b_i * 10<sup>i</sup>) , where b_0 is the head of l2.<br>
+          Sum S = A + B = Σ (s_i * 10<sup>i</sup>) , with 0 ≤ s_i ≤ 9, and carry propagation:<br>
           <br>
           For each position i, define total_i = a_i + b_i + carry_i,<br>
           where carry_0 = 0,<br>

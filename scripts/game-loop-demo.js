@@ -87,8 +87,8 @@
 
     // Update on-screen stats (frame count, FPS, delta time)
     if (frameEl) frameEl.textContent = frameLabel + frameCount;
-    if (fpsEl) fpsEl.textContent = fpsLabel + (paused ? "—" : fps);
-    if (dtEl) dtEl.textContent = dtLabel + (paused ? "—" : (dt * 1000).toFixed(2)) + " ms";
+    if (fpsEl) fpsEl.textContent = fpsLabel + (paused ? " — " : fps);
+    if (dtEl) dtEl.textContent = dtLabel + (paused ? " — " : (dt * 1000).toFixed(2)) + " ms";
 
     if (stepBtn) stepBtn.disabled = !paused;
     if (pauseBtn) pauseBtn.textContent = paused ? resumeText : pauseText;
@@ -117,7 +117,7 @@
       frameCount++;
       render();
       if (frameEl) frameEl.textContent = frameLabel + frameCount;
-      if (fpsEl) fpsEl.textContent = fpsLabel + "—";
+      if (fpsEl) fpsEl.textContent = fpsLabel + " — ";
       if (dtEl) dtEl.textContent = dtLabel + (dt * 1000).toFixed(2) + " ms";
     });
   }

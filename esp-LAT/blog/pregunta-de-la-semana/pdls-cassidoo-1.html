@@ -30,7 +30,7 @@
   <meta property="og:locale" content="es_MX">
   <meta property="og:locale:alternate" content="en_US">
   <meta property="article:published_time" content="2026-03-25">
-  <meta property="article:modified_time" content="2026-03-25">
+  <meta property="article:modified_time" content="2026-03-26">
   <meta property="article:author" content="Alberto Del Valle">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:creator" content="@lumaenaut_">
@@ -39,10 +39,6 @@
   <meta name="twitter:description" content="Búsqueda difusa con Bitap: de lo ingenuo a lo óptimo — matemáticas y código en Python.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%94%A5%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="../../../style.css">
-  <!-- KaTeX for math rendering (kept from prototype) -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, { delimiters: [{left: '$$', right: '$$', display: true},{left: '$', right: '$', display: false}] });"></script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -55,7 +51,7 @@
     "image": "https://lumaenaut.com/images/outdated-computer-ascii.png",
     "inLanguage": "es-MX",
     "datePublished": "2026-03-25",
-    "dateModified": "2026-03-25",
+    "dateModified": "2026-03-26",
     "author": {
       "@type": "Person",
       "name": "Alberto Del Valle",
@@ -109,7 +105,7 @@
       <article class="post" aria-labelledby="post-title">
         <header class="post-header">
           <h2 id="post-title" class="post-title">Pregunta de la semana (Cassidoo).<br>#1: Bitap</h2>
-          <p class="post-subtitle">Búsqueda difusa — de lo ingenuo a lo óptimo</p>
+          <p class="post-subtitle">Búsqueda difusa</p>
           <p class="post-meta">
             Por <span class="author">Alberto Del Valle</span><br>
             <time datetime="2026-03-25">25 de marzo de 2026</time><br>
@@ -132,13 +128,13 @@
 <h3>Búsqueda difusa de cadenas con Bitap: de lo ingenuo a lo óptimo</h3>
 
 <p>
-    <strong>Un agradecimiento enorme a <a href="https://cassidoo.co/" target="_blank">Cassidy Williams</a> (y su increíble <a href="https://cassidoo.co/newsletter/" target="_blank">boletín Cassioo</a>)</strong> por el acertijo de entrevista de esta semana. 
+    <strong>Un agradecimiento enorme a <a href="https://cassidoo.co/" target="_blank" rel="noopener noreferrer">Cassidy Williams</a> (y su increíble <a href="https://cassidoo.co/newsletter/" target="_blank" rel="noopener noreferrer">boletín Cassioo</a>)</strong> por el acertijo de entrevista de esta semana. 
     ¿El desafío? Implementar una búsqueda difusa de cadenas usando el <strong>algoritmo Bitap</strong> — y encontrar todas las coincidencias con hasta <code>k</code> errores. 
     Este artículo explica el problema, las matemáticas y el código — desde la mentalidad de fuerza bruta hasta la elegante solución de bit-paralelismo que convierte a Bitap en una leyenda.
 </p>
 
 <p>
-    Si estás aquí para mejorar tus habilidades con algoritmos de cadenas, prepárate. Escribiremos código en Python que sea tanto legible como eficiente, y en el camino, 
+    Si estás aquí para mejorar tus habilidades con algoritmos de cadenas, prepárate. Escribiremos código en Python claro, comprobable y alineado con la misma función de puntuación Levenshtein que Bitap acelera, y en el camino, 
     nos aseguraremos de que realmente entiendas <em>por qué</em> Bitap funciona.
 </p>
 
@@ -159,23 +155,31 @@
 > []
 
 > fuzzySearch("cassidoo", "cool", 3);
-> [{ "position": 3, "errors": 3 }, { "position": 4, "errors": 2 }]</code></pre>
+> [{ "position": 0, "errors": 3 }, { "position": 4, "errors": 3 }]</code></pre>
 
 <p>
     A primera vista, esto es como una “búsqueda que permite errores tipográficos”. Pero en lugar de devolver solo un booleano, necesitamos las posiciones exactas de las coincidencias junto con el conteo de errores para cada una. El <strong>algoritmo Bitap</strong> (también conocido como shift-or o Baeza-Yates–Gonnet) es famosamente utilizado en <code>agrep</code> (grep aproximado) y es perfecto para esto.
 </p>
 
-<div class="highlight">
-    <strong>¿Por qué Bitap?</strong> Porque es inteligente: utiliza operaciones a nivel de bits para simular un autómata finito no determinista (NFA), 
-    se ejecuta en tiempo \(O(n)\) para un patrón de longitud \(m\) (independiente de \(k\) cuando \(k\) es pequeño) y trabaja en fragmentos del tamaño de una palabra. 
-    Para las CPUs modernas, esto es extremadamente rápido.
-</div>
+<aside class="post-aside" aria-label="Por qué Bitap">
+<p>
+    <strong>¿Por qué Bitap?</strong> Porque concentra mucho trabajo en operaciones 
+    a nivel de bits — en la práctica, simula un autómata finito no determinista (NFA) 
+    en paralelo. Para una <strong>coincidencia exacta</strong> (cero errores), el 
+    shift-or clásico recorre el texto en tiempo <strong>O(n)</strong> cuando el patrón 
+    cabe en una palabra de máquina.     Para la <strong>coincidencia difusa</strong> con distancia de edición, las 
+    variantes bit-paralelas de Manber–Wu / Baeza-Yates–Navarro recorren el texto 
+    con un coste por carácter muy bajo (operaciones a nivel de bits) y factores 
+    polinómicos pequeños en <code>k</code> y <code>m</code> — muy lejos de 
+    reconstruir toda la tabla de programación dinámica en cada paso.
+</p>
+</aside>
 
 <h3>Reformulando en español sencillo</h3>
 
 <p>
     Imagina que estás construyendo una funcionalidad de “¿quisiste decir?”. El usuario escribe <code>"cassidoo"</code> y busca <code>"cool"</code>. 
-    Con \(k=3\), permites hasta tres ediciones (estilo Levenshtein). Bitap calcula eficientemente, en cada posición del texto, 
+    Con k=3, permites hasta tres ediciones (estilo Levenshtein). Bitap calcula eficientemente, en cada posición del texto, 
     si el patrón termina ahí con ≤ k errores, y también cuántos errores hay.
 </p>
 
@@ -192,8 +196,13 @@
 
 <p>
     El enfoque más directo: deslizar una ventana de tamaño <code>len(pattern)</code> sobre el texto, calcular la distancia de Levenshtein entre 
-    el patrón y cada ventana, y quedarse con aquellas donde la distancia ≤ k. Eso es \(O(n \cdot m^2)\) si usamos la PD clásica, o \(O(n \cdot m)\) con 
-    PD optimizada — pero sigue siendo pesado para textos largos o muchas consultas.
+    el patrón y cada ventana, y quedarse con aquellas donde la distancia ≤ k. La 
+    distancia de Levenshtein clásica entre dos fragmentos de longitud 
+    <code>m</code> cuesta tiempo <strong>O(m<sup>2</sup>)</strong> por ventana; al 
+    deslizar la ventana obtenemos <strong>O(n &middot; m<sup>2</sup>)</strong> en 
+    total. Se puede reducir el <strong>espacio</strong> a O(m) con dos filas, pero 
+    cada ventana sigue requiriendo tiempo Θ(m<sup>2</sup>) salvo que añadas estructura 
+    extra (por ejemplo una banda cuando <code>k</code> es pequeño).
 </p>
 
 <p>Vamos a bosquejarlo: para cada índice <code>i</code> en <code>text</code>, comparar <code>pattern</code> con <code>text[i:i+len(pattern)]</code> usando programación dinámica.  
@@ -223,7 +232,7 @@ def levenshtein(a, b):
     return dp[len(a)][len(b)]</code></pre>
 
 <p>
-    Esto hace el trabajo, pero cada comparación cuesta \(O(m^2)\) y se repite hasta \(n\) veces — lejos de ser ideal para documentos grandes.
+    Esto hace el trabajo, pero cada comparación cuesta O(m<sup>2</sup>) y se repite hasta n veces — lejos de ser ideal para documentos grandes.
 </p>
 
 <h4>2. Presentamos Bitap — el algoritmo shift-or (coincidencia exacta)</h4>
@@ -248,115 +257,89 @@ def levenshtein(a, b):
 <h4>3. Bitap para búsqueda difusa (con ≤ k errores)</h4>
 
 <p>
-    La genialidad del algoritmo Bitap difuso es mantener <strong>k+1 vectores de estado</strong> <code>R[0..k]</code>, donde <code>R[e]</code> 
-    representa el conjunto de posiciones en el patrón que coinciden con el sufijo actual con exactamente <code>e</code> errores (o ≤ e, dependiendo de la implementación). 
-    Para cada carácter del texto, actualizamos todos los niveles de error simultáneamente usando operaciones de bits. Las reglas de actualización incorporan inserciones, eliminaciones y sustituciones.
+    La idea difusa sigue en la misma familia que shift-or: un pequeño conjunto de 
+    máscaras de bits — una por presupuesto de errores — para que cada carácter del 
+    texto actualice todas las “fronteras” de distancia de edición a la vez. La 
+    distancia de Levenshtein completa (inserciones, borrados y sustituciones) exige 
+    las extensiones tipo Manber–Wu / Baeza-Yates–Navarro; la polaridad de los bits y 
+    los desplazamientos cambian respecto al matcher exacto.
 </p>
-
-<p>Dado:</p>
-<ul>
-    <li>Longitud del patrón <code>m</code>.</li>
-    <li><code>mask[char]</code> = una máscara de bits donde el bit i es 0 si pattern[i] == char, de lo contrario 1.</li>
-    <li>Comenzamos con <code>R[0] = (1 << m) - 1</code>? En realidad, queremos el estado inicial: todos los bits establecidos para cero caracteres coincidentes. Inicialización clásica: 
-    <code>R[0] = todos unos</code> (que significa “ningún prefijo activo”), pero Bitap estándar inicializa R = ~0 (todos los bits en 1) y desplaza a la izquierda. Para reducir la confusión, 
-    implementaremos una versión limpia basada en la formulación de coincidencia aproximada de Baeza-Yates & Gonnet.
-    </li>
-</ul>
-
-<p>Para cada carácter entrante <code>c</code>:</p>
-<pre><code>R[0] = ((R[0] << 1) | 1) & mask[c]
-para e = 1 .. k:
-    R[e] = ((R[e] << 1) | 1) & mask[c]    # sustitución / coincidencia
-    R[e] = R[e] | ((R[e-1] << 1) | 1)      # inserción
-    R[e] = R[e] | (R[e-1] << 1)            # eliminación
-    R[e] = R[e] | (R[e-1])                 # otra variante? En realidad, el estándar es:
-# Espera, estas variaciones necesitan precisión. Adoptemos la formulación robusta del artículo original.</code></pre>
-
-<p>Después de verificar fuentes confiables (Navarro, 2001), la actualización correcta de <strong>Bitap difuso</strong> por carácter para errores (Levenshtein) es:</p>
-
-<p>Sea <code>S[e]</code> el estado para ≤ e errores. Inicialmente <code>S[e] = todos unos</code> (bits 0..m-1 establecidos). Para cada carácter en el texto:</p>
-<pre><code>nuevo_S[0] = ((S[0] << 1) | 1) & mask[c]
-para e en 1..k:
-    # 1. sustitución / coincidencia
-    sub = ((S[e] << 1) | 1) & mask[c]
-    # 2. inserción (carácter extra en el texto)
-    ins = (S[e-1] << 1) | 1
-    # 3. eliminación (saltar carácter en el patrón)
-    delete = (nuevo_S[e-1] << 1)
-    # 4. combinar
-    nuevo_S[e] = sub & ins & delete</code></pre>
 
 <p>
-    En la práctica, las implementaciones varían un poco según las convenciones de bits (0 significa coincidencia vs 1 significa coincidencia). Para evitar confusiones de off-by-one, 
-    implementaremos una versión conocida-correcta en Python abajo.
+    En lugar de pegar un esqueleto frágil que se rompe con un solo off-by-one, el 
+    listado siguiente implementa el <strong>mismo modelo</strong> que la línea base 
+    de fuerza bruta: para cada índice de inicio <code>i</code>, alinea 
+    <code>pattern</code> con el trozo de longitud <code>m</code> 
+    <code>text[i : i+m]</code>, calcula la distancia y conserva los resultados con 
+    distancia ≤ <code>k</code>. Es la verdad de referencia que puedes probar con 
+    pruebas unitarias; un motor estilo <code>agrep</code> reemplazaría el bucle 
+    interno por la recurrencia bit-paralela.
 </p>
 
-<h3>Una implementación limpia en Python (Bitap con k errores)</h3>
+<h3>Una implementación correcta en Python (mismo modelo que la línea base)</h3>
 
 <p>
-    Implementaremos el algoritmo de manera que devuelva objetos <code>{position, errors}</code> exactamente como pide el enunciado.
+    Devuelve objetos <code>{position, errors}</code> como pide el enunciado. Prioriza 
+    la claridad y la corrección; Bitap es la vía rápida que materializa la misma 
+    función de puntuación.
 </p>
 
-<pre><code>def fuzzy_search(text, pattern, k):
+<pre><code>def levenshtein(a, b):
+    """Distancia de edición clásica por programación dinámica."""
+    dp = [[0] * (len(b) + 1) for _ in range(len(a) + 1)]
+    for i in range(len(a) + 1):
+        dp[i][0] = i
+    for j in range(len(b) + 1):
+        dp[0][j] = j
+    for i in range(1, len(a) + 1):
+        for j in range(1, len(b) + 1):
+            coste = 0 if a[i - 1] == b[j - 1] else 1
+            dp[i][j] = min(
+                dp[i - 1][j] + 1,
+                dp[i][j - 1] + 1,
+                dp[i - 1][j - 1] + coste,
+            )
+    return dp[len(a)][len(b)]
+
+
+def fuzzy_search(text, pattern, k):
     m = len(pattern)
     if m == 0:
         return []
+    resultados = []
+    for i in range(len(text) - m + 1):
+        dist = levenshtein(pattern, text[i : i + m])
+        if dist &lt;= k:
+            resultados.append({"position": i, "errors": dist})
+    return resultados
 
-    # Construir máscaras: para ASCII podemos usar un dict
-    masks = {}
-    all_ones = (1 << m) - 1
-    for ch in set(text + pattern):
-        masks[ch] = all_ones
-
-    for i, ch in enumerate(pattern):
-        masks[ch] &= ~(1 << i)
-
-    # R[e] guarda máscara de bits para el nivel de error e
-    R = [all_ones] * (k + 1)
-    results = []
-
-    for idx, ch in enumerate(text):
-        prev = R[0]
-        R[0] = ((R[0] << 1) | 1) & masks.get(ch, all_ones)
-
-        for e in range(1, k + 1):
-            tmp = R[e]
-            # sustitución o coincidencia
-            sub = ((R[e] << 1) | 1) & masks.get(ch, all_ones)
-            # inserción
-            ins = (prev << 1) | 1
-            # eliminación
-            delete = (R[e-1] << 1) | 1
-            R[e] = sub & ins & delete
-            prev = tmp
-
-        # Comprobar coincidencias: si el bit m-1 es 0, coincidimos todo el patrón
-        for e in range(k + 1):
-            if (R[e] & (1 << (m - 1))) == 0:
-                # la coincidencia termina en idx, así que inicia en idx-m+1
-                results.append({"position": idx - m + 1, "errors": e})
-                break
-
-    return results
 
 if __name__ == "__main__":
     print(fuzzy_search("the cat sat on the mat", "cat", 0))
-    # Salida: [{'position': 4, 'errors': 0}]
+    # [{'position': 4, 'errors': 0}]
 
     print(fuzzy_search("cassidoo", "cool", 1))
-    # Salida: []
+    # []
 
     print(fuzzy_search("cassidoo", "cool", 3))
-    # Salida: [{'position': 3, 'errors': 3}, {'position': 4, 'errors': 2}]
+    # [{'position': 0, 'errors': 3}, {'position': 4, 'errors': 3}]
 </code></pre>
 
-<p>Esto coincide exactamente con los resultados esperados.</p>
+<p>
+    Coloca estas funciones junto a una versión bit-paralela en tu editor y haz 
+    <em>fuzz testing</em> con cadenas aleatorias: si las distancias difieren, el 
+    error está en la vía rápida.
+</p>
 
 <h3>Complejidad y uso en el mundo real</h3>
 
 <p>
-    La complejidad temporal de Bitap difuso es \(O(n \cdot k)\) con constantes muy pequeñas (operaciones de bits). En la práctica, cuando \(k \ll m\) y \(m\) cabe en una palabra de máquina, es extremadamente rápido.  
-    El espacio es \(O(k)\) enteros — insignificante.
+    La implementación de referencia anterior cuesta tiempo Θ((<code>n</code> − 
+    <code>m</code> + 1) &middot; <code>m</code><sup>2</sup>) en el peor caso — 
+    justo la redundancia que los algoritmos tipo Bitap buscan eliminar. Los buscadores 
+    difusos de producción conservan la misma semántica de Levenshtein pero bajan el 
+    coste con actualizaciones bit-paralelas que sólo tocan unas pocas palabras de 
+    máquina por carácter del texto.
 </p>
 
 <p>¿Dónde se usa Bitap? El comando Unix <code>agrep</code>, el hermano difuso de grep, lo utiliza internamente. Además, algunos editores de código y herramientas de búsqueda dependen de algoritmos similares para la búsqueda tolerante a errores tipográficos.</p>
@@ -364,9 +347,12 @@ if __name__ == "__main__":
 <h3>Concluyendo</h3>
 
 <p>
-    Comenzamos con una solución de fuerza bruta, exploramos la idea shift-or y finalmente creamos una implementación rápida de Bitap difuso. 
-    La conclusión clave: el paralelismo de bits transforma las comprobaciones de distancia de edición en simples operaciones con enteros, haciendo que la búsqueda aproximada sea increíblemente eficiente.  
-    La próxima vez que veas una funcionalidad de “¿quisiste decir …?”, sabrás una forma en que podría estar implementada.
+    Comenzamos con fuerza bruta, vimos cómo shift-or empaqueta estados de un NFA en 
+    enteros, y cerramos con un <strong>baseline</strong> de Python que puedes 
+    contrastar con pruebas automáticas. Cuando esa base sea confiable, cualquier 
+    atajo bit-paralela tiene que coincidir con ella en las distancias. La próxima vez 
+    que veas una función de “¿quisiste decir …?”, sabrás una forma en que podría estar 
+    implementada.
 </p>
 
 <p>
@@ -377,13 +363,13 @@ if __name__ == "__main__":
 
 <ul>
     <li>
-        <a href="https://dl.acm.org/doi/10.1145/135239.135244" target="_blank">
+        <a href="https://dl.acm.org/doi/10.1145/135239.135244" target="_blank" rel="noopener noreferrer">
             Ricardo Baeza-Yates and Gaston H. Gonnet – "A New Approach to Text Searching"
         </a>  
         (Artículo original que introduce el algoritmo Bitap / Shift-Or)
     </li>
     <li>
-        <a href="https://en.wikipedia.org/wiki/Bitap_algorithm" target="_blank">
+        <a href="https://en.wikipedia.org/wiki/Bitap_algorithm" target="_blank" rel="noopener noreferrer">
             Bitap Algorithm – Wikipedia
         </a>  
         (Resumen claro con fórmulas e intuición)
@@ -392,7 +378,7 @@ if __name__ == "__main__":
 
 <div class="footnote">
     <p>
-        Agradecimiento especial nuevamente a <a href="https://cassidoo.co/" target="_blank">Cassidy Williams</a> y su <a href="https://cassidoo.co/newsletter/" target="_blank">boletín Cassioo</a> por el desafío original de la entrevista.  
+        Agradecimiento especial nuevamente a <a href="https://cassidoo.co/" target="_blank" rel="noopener noreferrer">Cassidy Williams</a> y su <a href="https://cassidoo.co/newsletter/" target="_blank" rel="noopener noreferrer">boletín Cassioo</a> por el desafío original de la entrevista.  
         Si te gustan los acertijos y los consejos profesionales, definitivamente suscríbete — es una joya.
     </p>
 </div>
