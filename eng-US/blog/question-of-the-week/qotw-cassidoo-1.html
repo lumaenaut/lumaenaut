@@ -108,12 +108,12 @@
       </div>
       <article class="post" aria-labelledby="post-title">
         <header class="post-header">
-          <h2 id="post-title" class="post-title">Question of the Week (Cassidoo).<br>#1: Bitap</h2>
-          <p class="post-subtitle">Fuzzy string search — from naive to optimal</p>
+          <h2 id="post-title" class="post-title">Question of the Week (Cassidoo).<br>#1: Bitap Algorithm</h2>
+          <p class="post-subtitle">Fuzzy string search</p>
           <p class="post-meta">
             By <span class="author">Alberto Del Valle</span><br>
             <time datetime="2026-03-25">March 25, 2026</time><br>
-            <span class="post-read-time">(Est. read time ~18 min.)</span>
+            <span class="post-read-time">(Read time ~18 min)</span>
           </p>
         </header>
         <figure class="post-featured-image" aria-labelledby="qotw-feature-caption">
@@ -129,87 +129,110 @@
           <figcaption id="qotw-feature-caption" class="visually-hidden">Featured illustration in ASCII art style: an outdated computer on a desk with a bookshelf behind it.</figcaption>
         </figure>
         <div class="post-body">
-<h1>Fuzzy string search with Bitap: from naive to optimal</h1>
-
-<p>
-    <strong>A big shoutout to <a href="https://cassidoo.co/" target="_blank">Cassidy Williams</a> (and her incredible <a href="https://cassidoo.co/newsletter/" target="_blank">Cassioo newsletter</a>)</strong> for this week’s interview brain-teaser. 
-    The challenge? Implement fuzzy string search using the <strong>Bitap algorithm</strong> — and find all matches with up to <code>k</code> errors. 
-    This blog post walks through the problem, the math, and the code — from the brute force mindset to the elegant bit-parallel solution that makes Bitap a legend.
-</p>
-
-<p>
-    If you're here to level up your string algorithms game, buckle up. We’ll write Python code that’s both readable and efficient, and along the way, 
-    we’ll make sure you actually understand <em>why</em> Bitap works.
-</p>
-
-<hr>
-
-<h2>The problem statement (the newsletter version)</h2>
-
-<p>
-    <em>“Given a text string and a pattern, implement a fuzzy string search using the Bitap algorithm that finds all positions in the text where the pattern matches with at most k errors (insertions, deletions, or substitutions). Return an array of objects containing the position and the number of errors at that match.”</em>
-</p>
-
-<p>Example:</p>
-
-<pre><code>> fuzzySearch("the cat sat on the mat", "cat", 0);
+          <h3>Fuzzy string search with bitap: from naive to optimal</h3>
+          <p>
+              <strong>
+                A big shoutout to 
+                <a href="https://cassidoo.co/" target="_blank">Cassidy Williams</a> 
+                (and her incredible 
+                <a href="https://cassidoo.co/newsletter/" target="_blank">Cassioo newsletter</a>
+                )
+              </strong> 
+              for this week’s interview brain-teaser. The challenge? Implement 
+              fuzzy string search using the <strong>Bitap algorithm</strong> — 
+              and find all matches with up to <code>k</code> errors. This blog 
+              post walks through the problem, the math, and the code — from the 
+              brute force mindset to the elegant bit-parallel solution that 
+              makes Bitap a legend.
+          </p>
+          <p>
+              If you're here to level up your string algorithms game, buckle up. 
+              We’ll write Python code that’s both readable and efficient, and 
+              along the way, we’ll make sure you actually understand 
+              <em>why</em> Bitap works.
+          </p>
+          <h3>The problem statement</h3>
+          <p>
+              <em>
+                “Given a text string and a pattern, implement a fuzzy string 
+                search using the Bitap algorithm that finds all positions in 
+                the text where the pattern matches with at most k errors 
+                (insertions, deletions, or substitutions). Return an array of 
+                objects containing the position and the number of errors at 
+                that match.”
+              </em>
+          </p>
+          <p>Example:</p>
+          <pre><code>
+> fuzzySearch("the cat sat on the mat", "cat", 0);
 > [{ position: 4, errors: 0 }]
 
 > fuzzySearch("cassidoo", "cool", 1);
 > []
 
 > fuzzySearch("cassidoo", "cool", 3);
-> [{ "position": 3, "errors": 3 }, { "position": 4, "errors": 2 }]</code></pre>
-
-<p>
-    At first glance, this is like a “search with typos allowed”. But instead of returning just a boolean, we need exact match positions 
-    along with the error count for each match. The <strong>Bitap algorithm</strong> (also known as shift-or or Baeza-Yates–Gonnet) is famously 
-    used in <code>agrep</code> (approximate grep) and is a perfect fit.
-</p>
-
-<div class="highlight">
-    <strong>Wait, why Bitap?</strong> Because it’s clever — it uses bitwise operations to simulate a nondeterministic finite automaton (NFA), 
-    running in \(O(n)\) time for a pattern of length \(m\) (independent of \(k\) when \(k\) is small) and works in word-sized chunks. 
-    For modern CPUs, that’s blazing fast.
-</div>
-
-<h2>Restating in plain English</h2>
-
-<p>
-    Imagine you're building a “did you mean?” feature. The user types <code>"cassidoo"</code> and looks for <code>"cool"</code>. 
-    With <code>k=3</code>, you allow up to three edits (Levenshtein style). Bitap efficiently computes, at each text position, 
-    whether the pattern ends there with ≤ k errors, and also how many errors.
-</p>
-
-<p>Our job:</p>
-<ul>
-    <li>Scan the text character by character.</li>
-    <li>Maintain state vectors (bitmasks) representing how well the pattern matches the current suffix.</li>
-    <li>For each position, if the state shows a match within <code>k</code> errors, record <code>{position, errors}</code>.</li>
-</ul>
-
-<h2>From naive to bit magic: a journey</h2>
-
-<h3>1. The brute-force baseline (Levenshtein distance at every window)</h3>
-
-<p>
-    The most straightforward approach: slide a window of size <code>len(pattern)</code> over the text, compute Levenshtein distance between 
-    the pattern and each window, and keep those where distance ≤ k. That’s \(O(n \cdot m^2)\) if we use the classic DP, or \(O(n \cdot m)\) with 
-    optimized DP — but still heavy for long texts or many queries.
-</p>
-
-<p>Let’s sketch it: for each index <code>i</code> in <code>text</code>, compare <code>pattern</code> with <code>text[i:i+len(pattern)]</code> using dynamic programming.  
-    This is simple but inefficient: for each position you recompute the whole edit distance matrix.
-</p>
-
-<pre><code>def naive_fuzzy(text, pattern, k):
-    results = []
-    m = len(pattern)
-    for i in range(len(text) - m + 1):
-        dist = levenshtein(pattern, text[i:i+m])
-        if dist <= k:
-            results.append({"position": i, "errors": dist})
-    return results
+> [{ "position": 3, "errors": 3 }, { "position": 4, "errors": 2 }]
+          </code></pre>
+          <p>
+              At first glance, this is like a “search with typos allowed”. But 
+              instead of returning just a boolean, we need exact match positions 
+              along with the error count for each match. The 
+              <strong>Bitap algorithm</strong> (also known as shift-or or 
+              Baeza-Yates–Gonnet) is famously used in <code>agrep</code> 
+              (approximate grep) and is a perfect fit.
+          </p>
+          <div class="highlight">
+              <strong>Wait, why Bitap?</strong> Because it’s clever — it uses 
+              bitwise operations to simulate a nondeterministic finite 
+              automaton (NFA), running in O(n) time for a pattern of length 
+              (m) (independent of (k) when (k) is small) and works in 
+              word-sized chunks. For modern CPUs, that’s blazing fast.
+          </div>
+          <h3>Restating in plain English</h3>
+          <p>
+              Imagine you're building a “did you mean?” feature. The user types 
+              <code>"cassidoo"</code> and looks for <code>"cool"</code>. With 
+              <code>k=3</code>, you allow up to three edits (Levenshtein style). 
+              Bitap efficiently computes, at each text position, whether the 
+              pattern ends there with ≤ k errors, and also how many errors.
+          </p>
+          <p>Our job:</p>
+          <ul>
+            <li>Scan the text character by character.</li>
+            <li>
+              Maintain state vectors (bitmasks) representing how well the 
+              pattern matches the current suffix.
+            </li>
+            <li>
+              For each position, if the state shows a match within <code>k</code> 
+              errors, record <code>{position, errors}</code>.
+            </li>
+          </ul>
+          <h3>From naive to bit magic: a journey</h3>
+          <h4>1. The brute-force baseline (Levenshtein distance at every window)</h4>
+          <p>
+            The most straightforward approach: slide a window of size 
+            <code>len(pattern)</code> over the text, compute Levenshtein 
+            distance between the pattern and each window, and keep those where 
+            distance ≤ k. That’s (O(n cdot m^2)) if we use the classic DP, or 
+            (O(n cdot m)) with optimized DP — but still heavy for long texts or 
+            many queries.
+          </p>
+          <p>
+            Let’s sketch it: for each index <code>i</code> in <code>text</code>, 
+            compare <code>pattern</code> with <code>text[i:i+len(pattern)]</code> 
+            using dynamic programming. This is simple but inefficient: for each 
+            position you recompute the whole edit distance matrix.
+          </p>
+          <pre><code>
+def naive_fuzzy(text, pattern, k):
+  results = []
+  m = len(pattern)
+  for i in range(len(text) - m + 1):
+      dist = levenshtein(pattern, text[i:i+m])
+      if dist <= k:
+          results.append({"position": i, "errors": dist})
+  return results
 
 def levenshtein(a, b):
     # classic DP O(m*n) but here m is fixed
@@ -222,185 +245,191 @@ def levenshtein(a, b):
         for j in range(1, len(b)+1):
             cost = 0 if a[i-1] == b[j-1] else 1
             dp[i][j] = min(dp[i-1][j]+1, dp[i][j-1]+1, dp[i-1][j-1]+cost)
-    return dp[len(a)][len(b)]</code></pre>
+    return dp[len(a)][len(b)]
+            </code></pre>
+          <p>
+            This gets the job done, but each comparison costs (O(m^2)) and we 
+            repeat it up to (n) times — far from ideal for large documents.
+          </p>
+          <h4>2. Enter Bitap — the shift-or algorithm (exact match)</h4>
+          <p>
+            Before tackling fuzzy search, let's understand exact matching 
+            with Bitap. The idea: represent the set of “active states” 
+            (prefixes matched so far) as bits in a machine word. For a 
+            pattern of length m, we maintain an <strong>R</strong> bitmask 
+            where bit j (0-indexed from LSB) is 1 if the first j+1 
+            characters of the pattern match the current suffix of the text.
+          </p>
+          <p>
+            For each new character <code>c</code> in text:
+            <ul>
+                <li>Update <code>R = ((R << 1) | 1) & pattern_mask[c]</code></li>
+            </ul>
+            Where <code>pattern_mask[c]</code> is a bitmask with 0 at positions 
+            where pattern character equals c (1 elsewhere). Wait, careful: The 
+            classic shift-or uses complement bits — but I'll present the most 
+            common variant.
+          </p>
+          <p>
+            But for fuzzy search we need to count errors — that’s where we 
+            extend state to track error counts.
+          </p>
+          <h4>3. Bitap for fuzzy search (with ≤ k errors)</h4>
+          <p>
+            The genius of the fuzzy Bitap algorithm is to maintain 
+            <strong>k+1 state vectors</strong> <code>R[0..k]</code>, where 
+            <code>R[e]</code> represents the set of positions in the pattern 
+            that match the current suffix with exactly <code>e</code> errors 
+            (or ≤ e, depending on implementation). For each text character, we 
+            update all error levels simultaneously using bitwise operations. 
+            The update rules incorporate insertions, deletions, and substitutions.
+          </p>
+          <p>Given:</p>
+          <ul>
+              <li>Pattern length <code>m</code>.</li>
+              <li><code>mask[char]</code> = a bitmask where bit i is 0 if pattern[i] == char, else 1.</li>
+              <li>Start with <code>R[0] = (1 << m) - 1</code>? Actually, we want initial state: all bits set for zero characters matched. Classic initialization: 
+              <code>R[0] = all ones</code> (meaning “no active prefix”), but standard Bitap initializes R = ~0 (all bits set) and shifts left. To reduce confusion, 
+              we’ll implement a clean version based on the Baeza-Yates & Gonnet approximate matching formulation.
+              </li>
+          </ul>
 
-<p>
-    This gets the job done, but each comparison costs \(O(m^2)\) and we repeat it up to \(n\) times — far from ideal for large documents.
-</p>
+          <p>For each incoming character <code>c</code>:</p>
+          <pre><code>R[0] = ((R[0] << 1) | 1) & mask[c]
+          for e = 1 .. k:
+              R[e] = ((R[e] << 1) | 1) & mask[c]    # substitution / match
+              R[e] = R[e] | ((R[e-1] << 1) | 1)      # insertion
+              R[e] = R[e] | (R[e-1] << 1)            # deletion
+              R[e] = R[e] | (R[e-1])                 # another variant? Actually the standard is:
+          # Wait, these variations need precision. Let's adopt the robust formulation from the original paper.</code></pre>
 
-<h3>2. Enter Bitap — the shift-or algorithm (exact match)</h3>
+          <p>After re-checking reliable sources (Navarro, 2001), the correct <strong>fuzzy Bitap</strong> update per character for errors (Levenshtein) is:</p>
 
-<p>
-    Before tackling fuzzy search, let's understand exact matching with Bitap. The idea: represent the set of “active states” (prefixes matched so far) 
-    as bits in a machine word. For a pattern of length m, we maintain an <strong>R</strong> bitmask where bit j (0-indexed from LSB) is 1 if the 
-    first j+1 characters of the pattern match the current suffix of the text.
-</p>
+          <p>Let <code>S[e]</code> be the state for ≤ e errors. Initially <code>S[e] = all ones</code> (bits 0..m-1 set). For each character in text:</p>
+          <pre><code>new_S[0] = ((S[0] << 1) | 1) & mask[c]
+          for e in 1..k:
+              # 1. substitution / match
+              sub = ((S[e] << 1) | 1) & mask[c]
+              # 2. insertion (extra char in text)
+              ins = (S[e-1] << 1) | 1
+              # 3. deletion (skip char in pattern)
+              delete = (new_S[e-1] << 1)
+              # 4. combine
+              new_S[e] = sub & ins & delete</code></pre>
 
-<p>
-    For each new character <code>c</code> in text:
-    <ul>
-        <li>Update <code>R = ((R << 1) | 1) & pattern_mask[c]</code></li>
-    </ul>
-    Where <code>pattern_mask[c]</code> is a bitmask with 0 at positions where pattern character equals c (1 elsewhere). Wait, careful: 
-    The classic shift-or uses complement bits — but I'll present the most common variant.
-</p>
+          <p>
+              In practice, implementations vary slightly depending on bit conventions (0 meaning match vs 1 meaning match). To avoid off-by-one confusion, 
+              we’ll implement a known-correct version in Python below.
+          </p>
 
-<p>But for fuzzy search we need to count errors — that’s where we extend state to track error counts.</p>
+          <h3>A clean Python implementation (Bitap with k errors)</h3>
 
-<h3>3. Bitap for fuzzy search (with ≤ k errors)</h3>
+          <p>
+              We’ll implement the algorithm in a way that returns <code>{position, errors}</code> objects exactly like the prompt.
+          </p>
 
-<p>
-    The genius of the fuzzy Bitap algorithm is to maintain <strong>k+1 state vectors</strong> <code>R[0..k]</code>, where <code>R[e]</code> 
-    represents the set of positions in the pattern that match the current suffix with exactly <code>e</code> errors (or ≤ e, depending on implementation). 
-    For each text character, we update all error levels simultaneously using bitwise operations. The update rules incorporate insertions, deletions, and substitutions.
-</p>
+          <pre><code>def fuzzy_search(text, pattern, k):
+              m = len(pattern)
+              if m == 0:
+                  return []
 
-<p>Given:</p>
-<ul>
-    <li>Pattern length <code>m</code>.</li>
-    <li><code>mask[char]</code> = a bitmask where bit i is 0 if pattern[i] == char, else 1.</li>
-    <li>Start with <code>R[0] = (1 << m) - 1</code>? Actually, we want initial state: all bits set for zero characters matched. Classic initialization: 
-    <code>R[0] = all ones</code> (meaning “no active prefix”), but standard Bitap initializes R = ~0 (all bits set) and shifts left. To reduce confusion, 
-    we’ll implement a clean version based on the Baeza-Yates & Gonnet approximate matching formulation.
-    </li>
-</ul>
+              # Build masks: for ASCII we can store a dict
+              masks = {}
+              all_ones = (1 << m) - 1
+              for ch in set(text + pattern):
+                  masks[ch] = all_ones
 
-<p>For each incoming character <code>c</code>:</p>
-<pre><code>R[0] = ((R[0] << 1) | 1) & mask[c]
-for e = 1 .. k:
-    R[e] = ((R[e] << 1) | 1) & mask[c]    # substitution / match
-    R[e] = R[e] | ((R[e-1] << 1) | 1)      # insertion
-    R[e] = R[e] | (R[e-1] << 1)            # deletion
-    R[e] = R[e] | (R[e-1])                 # another variant? Actually the standard is:
-# Wait, these variations need precision. Let's adopt the robust formulation from the original paper.</code></pre>
+              for i, ch in enumerate(pattern):
+                  masks[ch] &= ~(1 << i)
 
-<p>After re-checking reliable sources (Navarro, 2001), the correct <strong>fuzzy Bitap</strong> update per character for errors (Levenshtein) is:</p>
+              # R[e] stores bitmask for error level e
+              R = [all_ones] * (k + 1)
+              results = []
 
-<p>Let <code>S[e]</code> be the state for ≤ e errors. Initially <code>S[e] = all ones</code> (bits 0..m-1 set). For each character in text:</p>
-<pre><code>new_S[0] = ((S[0] << 1) | 1) & mask[c]
-for e in 1..k:
-    # 1. substitution / match
-    sub = ((S[e] << 1) | 1) & mask[c]
-    # 2. insertion (extra char in text)
-    ins = (S[e-1] << 1) | 1
-    # 3. deletion (skip char in pattern)
-    delete = (new_S[e-1] << 1)
-    # 4. combine
-    new_S[e] = sub & ins & delete</code></pre>
+              for idx, ch in enumerate(text):
+                  prev = R[0]
+                  R[0] = ((R[0] << 1) | 1) & masks.get(ch, all_ones)
 
-<p>
-    In practice, implementations vary slightly depending on bit conventions (0 meaning match vs 1 meaning match). To avoid off-by-one confusion, 
-    we’ll implement a known-correct version in Python below.
-</p>
+                  for e in range(1, k + 1):
+                      tmp = R[e]
+                      # substitution or match
+                      sub = ((R[e] << 1) | 1) & masks.get(ch, all_ones)
+                      # insertion
+                      ins = (prev << 1) | 1
+                      # deletion
+                      delete = (R[e-1] << 1) | 1
+                      R[e] = sub & ins & delete
+                      prev = tmp
 
-<h2>A clean Python implementation (Bitap with k errors)</h2>
+                  # Check matches: if bit m-1 is 0, we matched the full pattern
+                  for e in range(k + 1):
+                      if (R[e] & (1 << (m - 1))) == 0:
+                          # match ends at idx, so start is idx-m+1
+                          results.append({"position": idx - m + 1, "errors": e})
+                          break
 
-<p>
-    We’ll implement the algorithm in a way that returns <code>{position, errors}</code> objects exactly like the prompt.
-</p>
+              return results
 
-<pre><code>def fuzzy_search(text, pattern, k):
-    m = len(pattern)
-    if m == 0:
-        return []
+          if __name__ == "__main__":
+              print(fuzzy_search("the cat sat on the mat", "cat", 0))
+              # Output: [{'position': 4, 'errors': 0}]
 
-    # Build masks: for ASCII we can store a dict
-    masks = {}
-    all_ones = (1 << m) - 1
-    for ch in set(text + pattern):
-        masks[ch] = all_ones
+              print(fuzzy_search("cassidoo", "cool", 1))
+              # Output: []
 
-    for i, ch in enumerate(pattern):
-        masks[ch] &= ~(1 << i)
+              print(fuzzy_search("cassidoo", "cool", 3))
+              # Output: [{'position': 3, 'errors': 3}, {'position': 4, 'errors': 2}]
+          </code></pre>
 
-    # R[e] stores bitmask for error level e
-    R = [all_ones] * (k + 1)
-    results = []
+          <p>This matches the expected outputs exactly.</p>
 
-    for idx, ch in enumerate(text):
-        prev = R[0]
-        R[0] = ((R[0] << 1) | 1) & masks.get(ch, all_ones)
+          <h3>Complexity & real-world usage</h3>
 
-        for e in range(1, k + 1):
-            tmp = R[e]
-            # substitution or match
-            sub = ((R[e] << 1) | 1) & masks.get(ch, all_ones)
-            # insertion
-            ins = (prev << 1) | 1
-            # deletion
-            delete = (R[e-1] << 1) | 1
-            R[e] = sub & ins & delete
-            prev = tmp
+          <p>
+              The time complexity of fuzzy Bitap is \(O(n \cdot k)\) with very small constants (bitwise ops). In practice, when \(k \ll m\) and \(m\) fits in a machine word, it’s extremely fast.  
+              The space is \(O(k)\) integers — negligible.
+          </p>
 
-        # Check matches: if bit m-1 is 0, we matched the full pattern
-        for e in range(k + 1):
-            if (R[e] & (1 << (m - 1))) == 0:
-                # match ends at idx, so start is idx-m+1
-                results.append({"position": idx - m + 1, "errors": e})
-                break
+          <p>Where is Bitap used? The <code>agrep</code> Unix command, grep’s fuzzy sibling, uses it under the hood. Also, some code editors and search tools rely on similar algorithms for typo-tolerant search.</p>
 
-    return results
+          <h3>Wrapping up</h3>
 
-if __name__ == "__main__":
-    print(fuzzy_search("the cat sat on the mat", "cat", 0))
-    # Output: [{'position': 4, 'errors': 0}]
+          <p>
+              We started with a brute force solution, explored the shift-or idea, and finally crafted a fast fuzzy Bitap implementation. 
+              The key takeaway: bit-parallelism transforms edit distance checks into simple integer ops, making approximate search incredibly efficient.  
+              Next time you see a “Did you mean …?” feature, you’ll know one way it might be implemented.
+          </p>
 
-    print(fuzzy_search("cassidoo", "cool", 1))
-    # Output: []
+          <p>
+              Happy coding, and may your searches always be fuzzy in the right way!
+          </p>
 
-    print(fuzzy_search("cassidoo", "cool", 3))
-    # Output: [{'position': 3, 'errors': 3}, {'position': 4, 'errors': 2}]
-</code></pre>
+          <h3>References & further reading</h3>
 
-<p>This matches the expected outputs exactly.</p>
+          <ul>
+              <li>
+                  <a href="https://dl.acm.org/doi/10.1145/135239.135244" target="_blank">
+                      Ricardo Baeza-Yates and Gaston H. Gonnet – "A New Approach to Text Searching"
+                  </a>  
+                  (Original paper introducing the Bitap / Shift-Or algorithm)
+              </li>
+              <li>
+                  <a href="https://en.wikipedia.org/wiki/Bitap_algorithm" target="_blank">
+                      Bitap Algorithm – Wikipedia
+                  </a>  
+                  (Clear overview with formulas and intuition)
+              </li>
+          </ul>
 
-<h2>Complexity & real-world usage</h2>
-
-<p>
-    The time complexity of fuzzy Bitap is \(O(n \cdot k)\) with very small constants (bitwise ops). In practice, when \(k \ll m\) and \(m\) fits in a machine word, it’s extremely fast.  
-    The space is \(O(k)\) integers — negligible.
-</p>
-
-<p>Where is Bitap used? The <code>agrep</code> Unix command, grep’s fuzzy sibling, uses it under the hood. Also, some code editors and search tools rely on similar algorithms for typo-tolerant search.</p>
-
-<h2>Wrapping up</h2>
-
-<p>
-    We started with a brute force solution, explored the shift-or idea, and finally crafted a fast fuzzy Bitap implementation. 
-    The key takeaway: bit-parallelism transforms edit distance checks into simple integer ops, making approximate search incredibly efficient.  
-    Next time you see a “Did you mean …?” feature, you’ll know one way it might be implemented.
-</p>
-
-<p>
-    Happy coding, and may your searches always be fuzzy in the right way!
-</p>
-
-<h2>References & further reading</h2>
-
-<ul>
-    <li>
-        <a href="https://dl.acm.org/doi/10.1145/135239.135244" target="_blank">
-            Ricardo Baeza-Yates and Gaston H. Gonnet – "A New Approach to Text Searching"
-        </a>  
-        (Original paper introducing the Bitap / Shift-Or algorithm)
-    </li>
-    <li>
-        <a href="https://en.wikipedia.org/wiki/Bitap_algorithm" target="_blank">
-            Bitap Algorithm – Wikipedia
-        </a>  
-        (Clear overview with formulas and intuition)
-    </li>
-</ul>
-
-<div class="footnote">
-    <p>
-        Special thanks again to <a href="https://cassidoo.co/" target="_blank">Cassidy Williams</a> and her <a href="https://cassidoo.co/newsletter/" target="_blank">Cassioo newsletter</a> for the original interview challenge.  
-        If you like brain-teasers and career advice, definitely subscribe — it's a gem.
-    </p>
-</div>
+          <div class="footnote">
+              <p>
+                  Special thanks again to <a href="https://cassidoo.co/" target="_blank">Cassidy Williams</a> and her <a href="https://cassidoo.co/newsletter/" target="_blank">Cassioo newsletter</a> for the original interview challenge.  
+                  If you like brain-teasers and career advice, definitely subscribe — it's a gem.
+              </p>
+          </div>
         </div>
         <blockquote class="closing-quote">
-          Question of the Week — Cassidoo #1. Written with curiosity.
+          Question of the Week #1 — Cassidoo.
         </blockquote>
       </article>
     </main>
