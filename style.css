@@ -625,6 +625,45 @@ article.post .where-to-start p + p {
   opacity: 0.8;
 }
 
+.next-chap-nav {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.prev-chap-nav {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.next-chap-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 2px solid var(--contrast);
+  background-color: var(--background-color);
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.4);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+}
+
+.next-chap-btn:hover {
+  opacity: 0.9;
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.4);
+}
+
+.next-chap-btn img {
+  display: block;
+}
+
 /* Game loop demo + algorithm demos (blog post interactive) */
 .game-loop-demo,
 .algorithm-demo {
