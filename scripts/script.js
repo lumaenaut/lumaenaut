@@ -283,6 +283,7 @@
   var isEng = pathname.indexOf("/esp-LAT") !== 0;
 
   var blogEspToEng = {
+    "blog/el-arte-del-codigo-lento.html": "blog/the-art-of-slow-code.html",
     "blog/los-8-paradigmas-de-algoritmos.html": "blog/the-8-algorithm-paradigms.html",
     "blog/asi-funciona-el-bucle-del-videojuego.html": "blog/how-a-game-loop-works.html",
     "blog/ep-2-todo-lo-que-no-se-sobre-bloggear.html": "blog/ch-2-everything-i-dont-know-about-blogging.html",
@@ -293,6 +294,7 @@
   };
 
   var blogEngToEsp = {
+    "blog/the-art-of-slow-code.html": "blog/el-arte-del-codigo-lento.html",
     "blog/the-8-algorithm-paradigms.html": "blog/los-8-paradigmas-de-algoritmos.html",
     "blog/how-a-game-loop-works.html": "blog/asi-funciona-el-bucle-del-videojuego.html",
     "blog/ch-2-everything-i-dont-know-about-blogging.html": "blog/ep-2-todo-lo-que-no-se-sobre-bloggear.html",

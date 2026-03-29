@@ -583,6 +583,58 @@ article.post .where-to-start p + p {
   border: 1px solid #cfc7ba;
 }
 
+/* Big O / complexity article (prototype-derived): math lines, callouts, reference list */
+.post-body .math-block {
+  background: var(--bg-subtle, #f5f1ea);
+  border-left: 4px solid var(--contrast);
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+  border-radius: 8px;
+  font-family: ui-monospace, monospace;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--text-main);
+  overflow-x: auto;
+}
+
+.post-body .warning-note {
+  background: #fff8e6;
+  border-left: 4px solid #c9a227;
+  padding: 0.85rem 1.1rem;
+  border-radius: 8px;
+  margin: 1.25rem 0;
+  font-size: 0.98rem;
+  color: var(--text-main);
+}
+
+.post-body .insight-box {
+  background: #e8eef8;
+  border-left: 4px solid #99b4ea;
+  padding: 0.85rem 1.1rem;
+  border-radius: 8px;
+  margin: 1.25rem 0;
+  font-size: 0.98rem;
+  color: var(--text-main);
+}
+
+.post-body ol.footnote-refs {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #cfc7ba;
+  font-size: 0.92rem;
+  color: var(--text-muted);
+}
+
+.post-body ol.footnote-refs a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.post-body ol.footnote-refs a:hover {
+  opacity: 0.85;
+}
+
 .post-body .solution-card {
   border: 1px solid #cfc7ba;
   border-radius: 12px;
@@ -836,7 +888,7 @@ article.post .where-to-start p + p {
   padding: 0.85rem 1rem;
 }
 
-/* Position palette (seven cards: featured QOTW + existing six) */
+/* Position palette (eight cards; QOTW / LeetCode overrides below) */
 .blog-card-list li:nth-child(1) .blog-card {
   box-shadow: 4px 4px 0px #c4a574;
 }
@@ -863,6 +915,10 @@ article.post .where-to-start p + p {
 
 .blog-card-list li:nth-child(7) .blog-card {
   box-shadow: 4px 4px 0px #c4a574;
+}
+
+.blog-card-list li:nth-child(8) .blog-card {
+  box-shadow: 4px 4px 0px #9a8bb5;
 }
 
 /* Question of the week (Cassidoo) — warm yellow–gold, theme-consistent */
@@ -905,6 +961,10 @@ article.post .where-to-start p + p {
 
 .blog-card-list li:nth-child(7) .blog-card:hover {
   box-shadow: 2px 2px 0px #c4a574;
+}
+
+.blog-card-list li:nth-child(8) .blog-card:hover {
+  box-shadow: 2px 2px 0px #9a8bb5;
 }
 
 .blog-card-list li.blog-card-item--qotw .blog-card:hover {
