@@ -926,6 +926,11 @@ article.post .where-to-start p + p {
   box-shadow: 4px 4px 0px #c9a227;
 }
 
+/* Slow Code feature — muted deep teal, distinct but on-palette */
+.blog-card-list li.blog-card-item--slowcode .blog-card {
+  box-shadow: 4px 4px 0px #4f7f8a;
+}
+
 /* LeetCode series — distinct from position-based palette */
 .blog-card-list li.blog-card-item--leetcode .blog-card {
   box-shadow: 4px 4px 0px #b5654b;
@@ -969,6 +974,10 @@ article.post .where-to-start p + p {
 
 .blog-card-list li.blog-card-item--qotw .blog-card:hover {
   box-shadow: 2px 2px 0px #c9a227;
+}
+
+.blog-card-list li.blog-card-item--slowcode .blog-card:hover {
+  box-shadow: 2px 2px 0px #4f7f8a;
 }
 
 .blog-card-list li.blog-card-item--leetcode .blog-card:hover {

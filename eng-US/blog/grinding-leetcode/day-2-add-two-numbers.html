@@ -274,19 +274,19 @@ def get_number(head):
 
           <h3>Mathematical Formulation</h3>
           <div class="math">
-          Let the numbers be represented as:<br>
-          A = Σ (a_i * 10<sup>i</sup>) , where a_0 is the head of l1 (least significant digit).<br>
-          B = Σ (b_i * 10<sup>i</sup>) , where b_0 is the head of l2.<br>
-          Sum S = A + B = Σ (s_i * 10<sup>i</sup>) , with 0 ≤ s_i ≤ 9, and carry propagation:<br>
-          <br>
-          For each position i, define total_i = a_i + b_i + carry_i,<br>
-          where carry_0 = 0,<br>
-          s_i = total_i mod 10,<br>
-          carry_{i+1} = floor(total_i / 10).<br>
-          <br>
-          The final result has digits [s_0, s_1, ..., s_k] in a linked list, where k is the largest index with s_k ≠ 0 or carry_{k+1} = 1 (then we append one more node with digit 1).<br>
-          <br>
-          This is exactly the elementary school addition algorithm, formalized for base 10.
+            Let the numbers be represented as:<br>
+            A = Σ (a_i * 10<sup>i</sup>) , where a_0 is the head of l1 (least significant digit).<br>
+            B = Σ (b_i * 10<sup>i</sup>) , where b_0 is the head of l2.<br>
+            Sum S = A + B = Σ (s_i * 10<sup>i</sup>) , with 0 ≤ s_i ≤ 9, and carry propagation:<br>
+            <br>
+            For each position i, define total_i = a_i + b_i + carry_i,<br>
+            where carry_0 = 0,<br>
+            s_i = total_i mod 10,<br>
+            carry_{i+1} = floor(total_i / 10).<br>
+            <br>
+            The final result has digits [s_0, s_1, ..., s_k] in a linked list, where k is the largest index with s_k ≠ 0 or carry_{k+1} = 1 (then we append one more node with digit 1).<br>
+            <br>
+            This is exactly the elementary school addition algorithm, formalized for base 10.
           </div>
 
           <h3>Code Solutions in Multiple Languages</h3>

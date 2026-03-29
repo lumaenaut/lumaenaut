@@ -44,7 +44,7 @@
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     "headline": "El arte del código lento: una guía sobre complejidad algorítmica y Big O",
-    "alternativeHeadline": "Un viaje con matemáticas a través de la complejidad algorítmica y la notación Big O",
+    "alternativeHeadline": "Un viaje a través de la complejidad algorítmica y la notación Big O",
     "description": "El arte del código lento: notación Big O, complejidad algorítmica y las matemáticas detrás de bucles y recursión — una guía práctica. Por Alberto Del Valle.",
     "url": "https://lumaenaut.com/esp-LAT/blog/el-arte-del-codigo-lento.html",
     "mainEntityOfPage": { "@id": "https://lumaenaut.com/esp-LAT/blog/el-arte-del-codigo-lento.html" },
@@ -105,11 +105,11 @@
       <article class="post" aria-labelledby="post-title">
         <header class="post-header">
           <h2 id="post-title" class="post-title">El arte del código lento</h2>
-          <p class="post-subtitle">Un viaje con matemáticas a través de la complejidad algorítmica y la notación Big O</p>
+          <p class="post-subtitle">Un viaje a través de la complejidad algorítmica y la notación Big O</p>
           <p class="post-meta">
             Por <span class="author">Alberto Del Valle</span><br>
             <time datetime="2026-03-28">28 de marzo de 2026</time><br>
-            <span class="post-read-time">(Tiempo de lectura ~21 min.)</span>
+            <span class="post-read-time">(Tiempo de lectura ~20 min.)</span>
           </p>
         </header>
         <figure class="post-featured-image" aria-labelledby="slow-code-featured-caption-es">
@@ -137,9 +137,11 @@
 
           <p>Imagina que estás organizando una fiesta. Necesitas encontrar a un amigo llamado "Alex" en una lista de invitados. Si escaneas cada nombre uno por uno, eso es como una <code>búsqueda lineal</code>. Si tienes 10 invitados, está tranquilo. Si tienes 10,000 invitados, podrías perderte la fiesta tú mismo. La complejidad nos da el lenguaje para describir que "escaneando empeora proporcionalmente con más invitados".</p>
 
-          <div class="warning-note">
+          <aside class="post-aside" aria-label="Dato curioso sobre Big O">
+            <p>
               <strong>Dato curioso:</strong> Un algoritmo con un Big O "malo" puede ser más rápido para entradas pequeñas que uno "bueno". Los factores constantes importan en el mundo real. Pero cuando el tamaño de la entrada se dispara, Big O es el rey.
-          </div>
+            </p>
+          </aside>
 
           <h3>Notación Big O: La Celebridad de la Complejidad</h3>
 
@@ -157,26 +159,30 @@
 
           <p>Veámoslos en forma de código (Python3). Observa cómo se comportan los bucles.</p>
 
-          <pre><code># O(1) — tiempo constante
-          def obtener_primer_elemento(arr):
-              return arr[0]                             # sin importar el tamaño del arreglo, es un paso
+          <div class="solution-card">
+              <div class="lang-tag">Python 3</div>
+              <pre><code>
+# O(1) — tiempo constante
+def obtener_primer_elemento(arr):
+    return arr[0]                             # sin importar el tamaño del arreglo, es un paso
 
-          # O(n) — lineal
-          def encontrar_maximo(arr):
-              max_val = arr[0]
-              for num in arr:                           # iteramos una vez sobre 'n' elementos
-                  if num > max_val:
-                      max_val = num
-              return max_val
+# O(n) — lineal
+def encontrar_maximo(arr):
+    max_val = arr[0]
+    for num in arr:                           # iteramos una vez sobre 'n' elementos
+        if num > max_val:
+            max_val = num
+    return max_val
 
-          # O(n²) — cuadrático
-          def todos_los_pares(arr):
-              resultado = []
-              for i in range(len(arr)):                 # n iteraciones
-                  for j in range(len(arr)):             # n iteraciones por cada iteración externa
-                      resultado.append((arr[i], arr[j]))
-              return resultado
-          </code></pre>
+# O(n²) — cuadrático
+def todos_los_pares(arr):
+    resultado = []
+    for i in range(len(arr)):                 # n iteraciones
+        for j in range(len(arr)):             # n iteraciones por cada iteración externa
+            resultado.append((arr[i], arr[j]))
+    return resultado
+              </code></pre>
+          </div>
 
           <p>¿La función <code>todos_los_pares</code>? Si le das 10 elementos, crea 100 pares. Si le das 10,000 elementos… 100 millones de pares. Tu memoria pedirá el divorcio.</p>
 
@@ -190,10 +196,14 @@
 
           <p>Supón que tienes un doble bucle simple:</p>
 
-          <pre><code>for i in range(n):
-              for j in range(i, n):
-                  # hacer trabajo O(1)
-          </code></pre>
+          <div class="solution-card">
+              <div class="lang-tag">Python 3</div>
+              <pre><code>
+for i in range(n):
+    for j in range(i, n):
+        # hacer trabajo O(1)
+              </code></pre>
+          </div>
 
           <p>Analicemos exactamente cómo convertimos ese bucle en una fórmula limpia. Aquí es donde ocurre la magia.</p>
 
@@ -236,10 +246,10 @@
               S = n(n+1) / 2
           </div>
 
-          <p><strong>Paso 4 — Conecta con Big O.</strong><br>
-
-          Expande la fórmula: 
-
+          <p>
+            <strong>Paso 4 — Conecta con Big O.</strong><br>
+            Expande la fórmula:
+          </p>
           <div class="math-block">
               S = (1/2)n² + (1/2)n
           </div>
@@ -250,18 +260,22 @@
 
           <p>Ahora, ¿qué hay de la <strong>complejidad logarítmica</strong>? Considera la búsqueda binaria:</p>
 
-          <pre><code>def busqueda_binaria(arr, objetivo):
-              izquierda, derecha = 0, len(arr)-1
-              while izquierda <= derecha:
-                  medio = (izquierda + derecha)//2
-                  if arr[medio] == objetivo:
-                      return medio
-                  elif arr[medio] < objetivo:
-                      izquierda = medio + 1
-                  else:
-                      derecha = medio - 1
-              return -1
-          </code></pre>
+          <div class="solution-card">
+              <div class="lang-tag">Python 3</div>
+              <pre><code>
+def busqueda_binaria(arr, objetivo):
+    izquierda, derecha = 0, len(arr)-1
+    while izquierda <= derecha:
+        medio = (izquierda + derecha)//2
+        if arr[medio] == objetivo:
+            return medio
+        elif arr[medio] < objetivo:
+            izquierda = medio + 1
+        else:
+            derecha = medio - 1
+    return -1
+              </code></pre>
+          </div>
 
           <p>Ahora apliquemos el mismo pensamiento paso a paso a la búsqueda binaria. En lugar de bucles anidados, tenemos un bucle que corta repetidamente el problema a la mitad. Rastreemos exactamente qué sucede.</p>
 
@@ -395,11 +409,15 @@
 
           <p>Considera calcular el n-ésimo número de Fibonacci. La secuencia de Fibonacci comienza 0, 1, 1, 2, 3, 5, 8, … donde cada número es la suma de los dos anteriores. Hay una forma recursiva clásica de escribir esto, y es bellamente simple. Pero veamos qué le hace a nuestra memoria.</p>
 
-          <pre><code>def fibonacci_recursivo(n):
-              if n <= 1:
-                  return n
-              return fibonacci_recursivo(n-1) + fibonacci_recursivo(n-2)
-          </code></pre>
+          <div class="solution-card">
+              <div class="lang-tag">Python 3</div>
+              <pre><code>
+def fibonacci_recursivo(n):
+    if n <= 1:
+        return n
+    return fibonacci_recursivo(n-1) + fibonacci_recursivo(n-2)
+              </code></pre>
+          </div>
 
           <p>Esto se ve elegante, pero observa qué sucede cuando llamamos a <code>fibonacci_recursivo(5)</code>. La computadora no hace una sola llamada — hace todo un árbol de llamadas. Llama a <code>fibonacci_recursivo(4)</code> y <code>fibonacci_recursivo(3)</code>. Cada una de esas hace más llamadas, y así sucesivamente. La clave para la complejidad espacial es: ¿qué tan profunda es esta cadena de llamadas pendientes antes de que comencemos a devolver respuestas?</p>
 
@@ -417,12 +435,16 @@
 
           <p>Ahora mira la versión iterativa:</p>
 
-          <pre><code>def fibonacci_iterativo(n):
-              a, b = 0, 1
-              for _ in range(n):
-                  a, b = b, a+b
-              return a
-          </code></pre>
+          <div class="solution-card">
+              <div class="lang-tag">Python 3</div>
+              <pre><code>
+def fibonacci_iterativo(n):
+    a, b = 0, 1
+    for _ in range(n):
+        a, b = b, a+b
+    return a
+              </code></pre>
+          </div>
 
           <p>Esta versión usa solo dos variables: <code>a</code> y <code>b</code>. No importa si <code>n</code> es 10 o 10,000, nunca necesita más que esos dos números en memoria. No hay pila de llamadas acumulándose, ni arreglos extra. Esto se ejecuta en <strong>O(1) espacio extra</strong> — espacio constante.</p>
 
@@ -449,31 +471,39 @@
 
           <p>Imagina que necesitas agrupar palabras por su primera letra. Una solución ingenua podría ser:</p>
 
-          <pre><code>def agrupar_palabras_ingenua(palabras):
-              resultado = []
-              for palabra in palabras:                  # O(n)
-                  encontrada = False
-                  for grupo in resultado:               # puede ser hasta O(n) en el peor caso
-                      if grupo[0][0] == palabra[0]:
-                          grupo.append(palabra)
-                          encontrada = True
-                          break
-                  if not encontrada:
-                      resultado.append([palabra])
-              return resultado
-          </code></pre>
+          <div class="solution-card">
+              <div class="lang-tag">Python 3</div>
+              <pre><code>
+def agrupar_palabras_ingenua(palabras):
+    resultado = []
+    for palabra in palabras:                  # O(n)
+        encontrada = False
+        for grupo in resultado:               # puede ser hasta O(n) en el peor caso
+            if grupo[0][0] == palabra[0]:
+                grupo.append(palabra)
+                encontrada = True
+                break
+        if not encontrada:
+            resultado.append([palabra])
+    return resultado
+              </code></pre>
+          </div>
 
           <p>Peor caso: cada palabra tiene una primera letra diferente, por lo que el bucle interno crece linealmente: O(n²). Pero con un diccionario, bajamos a tiempo O(n) y espacio O(k) donde k es el número de primeras letras distintas:</p>
 
-          <pre><code>def agrupar_palabras_rapida(palabras):
-              grupos = {}
-              for palabra in palabras:
-                  primera_letra = palabra[0]
-                  if primera_letra not in grupos:
-                      grupos[primera_letra] = []
-                  grupos[primera_letra].append(palabra)
-              return list(grupos.values())
-          </code></pre>
+          <div class="solution-card">
+              <div class="lang-tag">Python 3</div>
+              <pre><code>
+def agrupar_palabras_rapida(palabras):
+    grupos = {}
+    for palabra in palabras:
+        primera_letra = palabra[0]
+        if primera_letra not in grupos:
+            grupos[primera_letra] = []
+        grupos[primera_letra].append(palabra)
+    return list(grupos.values())
+              </code></pre>
+          </div>
 
           <p>Ese es el poder de elegir la estructura de datos correcta — pasamos de O(n²) a O(n).</p>
 
@@ -515,24 +545,41 @@
 
           <p>Si quieres profundizar más, aprende sobre <strong>análisis amortizado</strong>, <strong>NP-completitud</strong>, o explora cómo el hardware moderno (caché, predicción de ramas) puede hacer sonrojar a la teoría de la complejidad. La teoría es genial, pero medir el tiempo de ejecución real es el jefe final.</p>
 
-          <div class="insight-box">
+          <aside class="post-aside" aria-label="Ojo con la brecha: rendimiento real vs Big O">
+            <p>
               <strong>Ojo con la brecha:</strong> El rendimiento en el mundo real está influenciado por el caché de la CPU, los patrones de acceso a memoria y la sobrecarga del lenguaje. Un algoritmo O(n) que agota el caché puede ser más lento que un algoritmo O(n log n) con un acceso a memoria amigable. La complejidad es tu mapa, pero los benchmarks son el terreno.
-          </div>
+            </p>
+          </aside>
+
+          <blockquote class="closing-quote">
+            La complejidad es la brújula. El profiling es el camino.
+          </blockquote>
 
           <hr class="home-intro-divider" aria-hidden="true">
+          <h3>Referencias y lecturas adicionales</h3>
+          <ul>
+            <li><a href="https://www.bigocheatsheet.com/" target="_blank" rel="noopener">Big-O Cheat Sheet</a> – Una referencia visual rápida de complejidades temporales y espaciales de algoritmos y estructuras de datos comunes.</li>
+            <li><a href="https://www.khanacademy.org/computing/computer-science/algorithms" target="_blank" rel="noopener">Khan Academy: Algorithms</a> – Introducción amable pero exhaustiva a la notación asintótica y algoritmos clásicos.</li>
+            <li><a href="https://www.coursera.org/learn/algorithms-part1" target="_blank" rel="noopener">Algorithms, Part I by Princeton (Coursera)</a> – Impartido por Kevin Wayne y Robert Sedgewick, incluye un excelente análisis matemático de algoritmos.</li>
+            <li><a href="https://www.geeksforgeeks.org/analysis-of-algorithms-set-3asymptotic-notations/" target="_blank" rel="noopener">GeeksforGeeks: Asymptotic Notations</a> – Ejemplos claros y definiciones formales para Big O, Omega y Theta.</li>
+            <li><a href="https://mitpress.mit.edu/books/introduction-algorithms-third-edition" target="_blank" rel="noopener">CLRS – Introduction to Algorithms (MIT Press)</a> – El libro de texto clásico si realmente quieres adentrarte en los detalles matemáticos de recurrencias y complejidad.</li>
+          </ul>
 
-          <h3>Referencias y Exploración Adicional</h3>
-          <p>Para enriquecer este blog, aquí hay cinco recursos que personalmente he encontrado valiosos. Van desde visualizaciones interactivas hasta desgloses matemáticos profundos:</p>
-
-          <ol class="footnote-refs">
-              <li><a href="https://www.bigocheatsheet.com/" target="_blank" rel="noopener">Big-O Cheat Sheet</a> – Una referencia visual rápida de complejidades temporales y espaciales de algoritmos y estructuras de datos comunes.</li>
-              <li><a href="https://www.khanacademy.org/computing/computer-science/algorithms" target="_blank" rel="noopener">Khan Academy: Algorithms</a> – Introducción amable pero exhaustiva a la notación asintótica y algoritmos clásicos.</li>
-              <li><a href="https://www.coursera.org/learn/algorithms-part1" target="_blank" rel="noopener">Algorithms, Part I by Princeton (Coursera)</a> – Impartido por Kevin Wayne y Robert Sedgewick, incluye un excelente análisis matemático de algoritmos.</li>
-              <li><a href="https://www.geeksforgeeks.org/analysis-of-algorithms-set-3asymptotic-notations/" target="_blank" rel="noopener">GeeksforGeeks: Asymptotic Notations</a> – Ejemplos claros y definiciones formales para Big O, Omega y Theta.</li>
-              <li><a href="https://mitpress.mit.edu/books/introduction-algorithms-third-edition" target="_blank" rel="noopener">CLRS – Introduction to Algorithms (MIT Press)</a> – El libro de texto clásico si realmente quieres adentrarte en los detalles matemáticos de recurrencias y complejidad.</li>
-          </ol>
-
-          <p>Además, si eres del tipo que aprende haciendo, simplemente elige algunos algoritmos y calcula su complejidad en papel. Luego verifica probando con tamaños de entrada crecientes. Es una forma sorprendentemente divertida de pasar una tarde — si te gusta ese tipo de cosas. Sin juicios.</p>
+          <h3>¿No te basta con Lumænaut_? Lee esto…</h3>
+          <ul>
+            <li>
+              <a href="question-of-the-week/qotw-cassidoo-1.html">QOTW (Cassidoo) #1: búsqueda difusa con Bitap</a>
+              — un reto práctico de búsqueda difusa que construye intuición desde fuerza bruta hasta una solución bit-paralela.
+            </li>
+            <li>
+              <a href="grinding-leetcode/day-2-add-two-numbers.html">Grinding LeetCode. Día 2: Add Two Numbers</a>
+              — listas enlazadas, acarreo y razonamiento paso a paso (con soluciones en Python).
+            </li>
+            <li>
+              <a href="the-8-algorithm-paradigms.html">Los 8 paradigmas algorítmicos</a>
+              — ocho modelos mentales que volverás a usar en problemas, entrevistas y código en producción.
+            </li>
+          </ul>
         </div>
       </article>
     </main>

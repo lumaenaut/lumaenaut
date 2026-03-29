@@ -44,7 +44,7 @@
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     "headline": "The Art of Slow Code: A Guide to Algorithm Complexity and Big O",
-    "alternativeHeadline": "A math-infused journey through algorithm complexity and Big O notation",
+    "alternativeHeadline": "A journey through algorithm complexity and Big O notation",
     "description": "The Art of Slow Code: Big O notation, algorithm complexity, and the math behind loops and recursion — a practical guide. By Alberto Del Valle.",
     "url": "https://lumaenaut.com/eng-US/blog/the-art-of-slow-code.html",
     "mainEntityOfPage": { "@id": "https://lumaenaut.com/eng-US/blog/the-art-of-slow-code.html" },
@@ -105,11 +105,11 @@
       <article class="post" aria-labelledby="post-title">
         <header class="post-header">
           <h2 id="post-title" class="post-title">The Art of Slow Code</h2>
-          <p class="post-subtitle">A math-infused journey through algorithm complexity and Big O notation</p>
+          <p class="post-subtitle">A journey through algorithm complexity and Big O notation</p>
           <p class="post-meta">
             By <span class="author">Alberto Del Valle</span><br>
             <time datetime="2026-03-28">March 28, 2026</time><br>
-            <span class="post-read-time">(Read time ~21 min)</span>
+            <span class="post-read-time">(Read time ~18 min)</span>
           </p>
         </header>
         <figure class="post-featured-image" aria-labelledby="slow-code-featured-caption">
@@ -122,241 +122,409 @@
             decoding="async"
             loading="eager"
             class="post-featured-img">
-          <figcaption id="slow-code-featured-caption" class="visually-hidden">Illustration in ASCII art style: a graph comparing how common complexity classes grow with input size, supporting the article on Big O and algorithm analysis.</figcaption>
+          <figcaption id="slow-code-featured-caption" class="visually-hidden">
+            Illustration in ASCII art style: an abstract graph comparing algorithm 
+            complexity in an artistic way.
+          </figcaption>
         </figure>
         <div class="post-body">
-          <p>You’ve probably been there. You write a neat little function that works perfectly on your laptop, with its tiny test array of five items. Then you deploy it, and suddenly the production server starts crying. The logs fill up with timeouts. The database connection pool weeps. A product manager looks at you with gentle disappointment. </p>
-
-          <p>What happened? In most cases, the code wasn’t <em>wrong</em>. It was just <strong>too slow</strong> for the scale. And that’s where algorithm complexity waltzes in, wearing a math tuxedo but speaking the language of loops, recursion trees, and data structures.</p>
-
-          <p>We’re going to break down Big O notation — the bread and butter of performance thinking — and also dive into the mathematical skeleton beneath it. Because once you link code to math, complexity stops feeling like black magic and starts feeling like… well, predictable magic. Let’s go.</p>
-
+          <p>
+            You’ve probably been there. You write a neat little function that 
+            works perfectly on your laptop, with its tiny test array of five 
+            items. Then you deploy it, and suddenly the production server 
+            starts crying. The logs fill up with timeouts. The database 
+            connection pool weeps. A product manager looks at you with gentle 
+            disappointment.
+          </p>
+          <p>
+            What happened? In most cases, the code wasn’t <em>wrong</em>. It 
+            was just <strong>too slow</strong> for the scale. And that’s where 
+            algorithm complexity waltzes in, wearing a math tuxedo but speaking 
+            the language of loops, recursion trees, and data structures.
+          </p>
+          <p>We’re going to break down Big O notation — the bread and butter of 
+            performance thinking — and also dive into the mathematical skeleton 
+            beneath it. Because once you link code to math, complexity stops 
+            feeling like black magic and starts feeling like… well, predictable 
+            magic. Let’s go.
+          </p>
           <h3>What on Earth Is Algorithm Complexity?</h3>
-
-          <p>Algorithm complexity is the study of how an algorithm’s resource usage (time or memory) grows as the input size grows. Usually, we obsess over <strong>time complexity</strong> — how many steps it takes. But <strong>space complexity</strong> (memory) also matters, especially if you’re coding on a smart toaster or handling massive datasets.</p>
-
-          <p>Imagine you’re organizing a party. You need to find a friend named “Alex” in a list of guests. If you scan each name one by one, that’s like a <code>linear search</code>. If you have 10 guests, it’s chill. If you have 10,000 guests, you might miss the party yourself. Complexity gives us the language to describe that “scanning gets proportionally worse with more guests.”</p>
-
-          <div class="warning-note">
-              <strong>Fun fact:</strong> An algorithm with a "bad" Big O can still be faster for small inputs than a "good" one. Constant factors matter in the real world. But when input size skyrockets, Big O is the king.
-          </div>
-
+          <p>
+            Algorithm complexity is the study of how an algorithm’s resource 
+            usage (time or memory) grows as the input size grows. Usually, we 
+            obsess over <strong>time complexity</strong> — how many steps it 
+            takes. But <strong>space complexity</strong> (memory) also matters, 
+            especially if you’re coding on a smart toaster or handling massive 
+            datasets.
+          </p>
+          <p>
+            Imagine you’re organizing a party. You need to find a friend named 
+            “Alex” in a list of guests. If you scan each name one by one, 
+            that’s like a <code>linear search</code>. If you have 10 guests, 
+            it’s chill. If you have 10,000 guests, you might miss the party 
+            yourself. Complexity gives us the language to describe that 
+            “scanning gets proportionally worse with more guests.”
+          </p>
+          <aside class="post-aside" aria-label="Fun fact about Big O">
+            <p>
+              <strong>Fun fact:</strong> An algorithm with a "bad" Big O can 
+              still be faster for small inputs than a "good" one. Constant 
+              factors matter in the real world. But when input size skyrockets, 
+              Big O is the king.
+            </p>
+          </aside>
           <h3>Big O Notation: The Celebrity of Complexity</h3>
-
-          <p>Big O describes the <strong>upper bound</strong> of an algorithm’s growth rate. It's often used to describe worst-case behavior, but technically it can apply to average-case or best-case as well — we just typically use it to answer “how bad can this get?”. We ignore constants and lower-order terms because they don’t affect the growth shape as <code>n</code> becomes large. That’s why we say an O(2n) algorithm is still O(n).</p>
-
+          <p>
+            Big O describes the <strong>upper bound</strong> of an algorithm’s 
+            growth rate. It's often used to describe worst-case behavior, but 
+            technically it can apply to average-case or best-case as well — we 
+            just typically use it to answer “how bad can this get?”. We ignore 
+            constants and lower-order terms because they don’t affect the 
+            growth shape as <code>n</code> becomes large. That’s why we say an 
+            O(2n) algorithm is still O(n).
+          </p>
           <p>Common Big O classes you’ll meet:</p>
           <ul>
-              <li><code>O(1)</code> — Constant time. Doesn’t care how big your input is. Like accessing an array element by index.</li>
-              <li><code>O(log n)</code> — Logarithmic time. Sweet, efficient. Binary search lives here.</li>
-              <li><code>O(n)</code> — Linear time. Single loop over the data.</li>
-              <li><code>O(n log n)</code> — Quasilinear. The optimal bound for comparison-based sorting algorithms like merge sort.</li>
-              <li><code>O(n²)</code> — Quadratic time. Double nested loops. Might make your dataset cry.</li>
-              <li><code>O(2ⁿ)</code> — Exponential time. Often appears in naive recursive solutions for combinatorial problems. Avoid unless <code>n</code> is tiny.</li>
+            <li>
+              <code>O(1)</code> — Constant time. Doesn’t care how big your 
+              input is. Like accessing an array element by index.
+            </li>
+            <li>
+              <code>O(log n)</code> — Logarithmic time. Sweet, efficient. 
+              Binary search lives here.
+            </li>
+            <li>
+              <code>O(n)</code> — Linear time. Single loop over the data.
+            </li>
+            <li>
+              <code>O(n log n)</code> — Quasilinear. The optimal bound for 
+              comparison-based sorting algorithms like merge sort.
+            </li>
+            <li>
+              <code>O(n²)</code> — Quadratic time. Double nested loops. Might 
+              make your dataset cry.
+            </li>
+            <li>
+              <code>O(2ⁿ)</code> — Exponential time. Often appears in naive 
+              recursive solutions for combinatorial problems. Avoid unless 
+              <code>n</code> is tiny.
+            </li>
           </ul>
+          <p>
+            Let’s see them in code form. Keep an eye on how the loops 
+            behave.
+          </p>
+          <div class="solution-card">
+            <div class="lang-tag">Python 3</div>
+            <pre><code>
+# O(1) — constant time
+def get_first_element(arr):
+    return arr[0]                             # no matter the array size, it's one step
 
-          <p>Let’s see them in code form (Python3). Keep an eye on how the loops behave.</p>
+# O(n) — linear
+def find_max(arr):
+    max_val = arr[0]
+    for num in arr:                           # we iterate once over 'n' elements
+        if num > max_val:
+            max_val = num
+    return max_val
 
-          <pre><code># O(1) — constant time
-          def get_first_element(arr):
-              return arr[0]                             # no matter the array size, it's one step
-
-          # O(n) — linear
-          def find_max(arr):
-              max_val = arr[0]
-              for num in arr:                           # we iterate once over 'n' elements
-                  if num > max_val:
-                      max_val = num
-              return max_val
-
-          # O(n²) — quadratic
-          def all_pairs(arr):
-              result = []
-              for i in range(len(arr)):                 # n iterations
-                  for j in range(len(arr)):             # n iterations each outer loop
-                      result.append((arr[i], arr[j]))
-              return result
-          </code></pre>
-
-          <p>The <code>all_pairs</code> function? If you feed it 10 items, it creates 100 pairs. If you feed it 10,000 items… 100 million pairs. Your memory will file for divorce.</p>
-
+# O(n²) — quadratic
+def all_pairs(arr):
+    result = []
+    for i in range(len(arr)):                 # n iterations
+        for j in range(len(arr)):             # n iterations each outer loop
+            result.append((arr[i], arr[j]))
+    return result
+            </code></pre>
+          </div>
+          <p>
+            The <code>all_pairs</code> function? If you feed it 10 items, it 
+            creates 100 pairs. If you feed it 10,000 items… 100 million pairs. 
+            Your memory will file for divorce.
+          </p>
           <h3>The Math Section: Where Code and Calculus Hold Hands</h3>
-
-          <p>Okay, let’s roll up our sleeves. Here's a comprehensive math section that links code complexity to actual mathematics. So here’s the secret: every time you write a loop, you’re basically writing a <strong>summation</strong> — which is just a fancy math term for adding up a bunch of numbers. If a loop runs 10 times and does one operation each time, you’ve just performed 1 + 1 + 1 + … (10 times) = 10 operations. That’s a summation. When loops are nested, the total work becomes adding up sequences that grow in patterns, and those patterns can be described by neat formulas.</p>
-
-          <p>Similarly, when you write a recursive function — one that calls itself — the flow of calls forms a <strong>recursion tree</strong>. Each level of the tree represents a set of recursive calls, and the work done across levels often adds up in a pattern called a <strong>geometric series</strong>, where each term is a constant multiple of the previous one (like 1, 2, 4, 8, …). Recognizing that pattern lets us calculate the total work with a simple formula instead of tracing every single call.</p>
-
-          <p><strong>Big O</strong> is what we use to describe how these sums and series behave as the input size gets very, very large. It strips away the constants and focuses on the shape of growth — whether it stays flat, grows in a straight line, or explodes upward. In short: loops turn into sums, recursion turns into series, and Big O tells you what happens when things get big.</p>
-
+          <p>
+            Okay, let’s roll up our sleeves. Here's a comprehensive math 
+            section that links code complexity to actual mathematics. So here’s 
+            the secret: every time you write a loop, you’re basically writing a 
+            <strong>summation</strong> — which is just a fancy math term for 
+            adding up a bunch of numbers. If a loop runs 10 times and does one 
+            operation each time, you’ve just performed 1 + 1 + 1 + … (10 times) 
+            = 10 operations. That’s a summation. When loops are nested, the 
+            total work becomes adding up sequences that grow in patterns, and 
+            those patterns can be described by neat formulas.
+          </p>
+          <p>
+            Similarly, when you write a recursive function — one that calls 
+            itself — the flow of calls forms a <strong>recursion tree</strong>. 
+            Each level of the tree represents a set of recursive calls, and the 
+            work done across levels often adds up in a pattern called a 
+            <strong>geometric series</strong>, where each term is a constant 
+            multiple of the previous one (like 1, 2, 4, 8, …). Recognizing that 
+            pattern lets us calculate the total work with a simple formula 
+            instead of tracing every single call.
+          </p>
+          <p>
+            <strong>Big O</strong> is what we use to describe how these sums 
+            and series behave as the input size gets very, very large. It 
+            strips away the constants and focuses on the shape of growth — 
+            whether it stays flat, grows in a straight line, or explodes 
+            upward. In short: loops turn into sums, recursion turns into 
+            series, and Big O tells you what happens when things get big.
+          </p>
           <p>Suppose you have a simple double loop:</p>
-
-          <pre><code>for i in range(n):
-              for j in range(i, n):
-                  # do O(1) work
-          </code></pre>
-
-          <p>Let’s break down exactly how we turn that loop into a clean formula. This is where the magic happens.</p>
-
-          <p><strong>Step 1 — Write down the work per iteration of the outer loop.</strong><br>
-          When <code>i = 0</code>, the inner loop runs from <code>j = 0</code> to <code>n-1</code>. That’s <code>n</code> steps.<br>
-          When <code>i = 1</code>, the inner loop runs from <code>j = 1</code> to <code>n-1</code>. That’s <code>n-1</code> steps.<br>
-          When <code>i = 2</code>, we get <code>n-2</code> steps.<br>
-          This continues until <code>i = n-1</code>, where the inner loop runs from <code>j = n-1</code> to <code>n-1</code>. That’s just <code>1</code> step.</p>
-
+          <div class="solution-card">
+            <div class="lang-tag">Python 3</div>
+            <pre><code>
+for i in range(n):
+    for j in range(i, n):
+        # do O(1) work
+            </code></pre>
+          </div>
+          <p>
+            Let’s break down exactly how we turn that loop into a clean 
+            formula. This is where the magic happens.
+          </p>
+          <p>
+            <strong>
+              Step 1 — Write down the work per iteration of the outer loop.
+            </strong><br>
+            When <code>i = 0</code>, the inner loop runs from <code>j = 0</code> 
+            to <code>n-1</code>. That’s <code>n</code> steps.<br>
+            When <code>i = 1</code>, the inner loop runs from <code>j = 1</code> 
+            to <code>n-1</code>. That’s <code>n-1</code> steps.<br>
+            When <code>i = 2</code>, we get <code>n-2</code> steps.<br>
+            This continues until <code>i = n-1</code>, where the inner loop 
+            runs from <code>j = n-1</code> to <code>n-1</code>. That’s just 
+            <code>1</code> step.
+          </p>
           <p>So the total number of operations is:</p>
-
           <div class="math-block">
-              T(n) = n + (n-1) + (n-2) + … + 3 + 2 + 1
+            T(n) = n + (n-1) + (n-2) + … + 3 + 2 + 1
           </div>
-
-          <p><strong>Step 2 — Pair terms from the beginning and end.</strong><br>
-          A classic trick: write the sum forward and backward, then add them.</p>
-
+          <p>
+            <strong>Step 2 — Pair terms from the beginning and end.</strong><br>
+          A classic trick: write the sum forward and backward, then add them.
+          </p>
           <div class="math-block">
-              S = n + (n-1) + (n-2) + … + 2 + 1<br>
-              S = 1 + 2 + 3 + … + (n-1) + n
+            S = n + (n-1) + (n-2) + … + 2 + 1<br>
+            S = 1 + 2 + 3 + … + (n-1) + n
           </div>
-
           <p>Add the two equations vertically, term by term:</p>
-
           <div class="math-block">
-              (n + 1) + (n-1 + 2) + (n-2 + 3) + … + (1 + n)
+            (n + 1) + (n-1 + 2) + (n-2 + 3) + … + (1 + n)
           </div>
-
-          <p>Each pair sums to <code>n + 1</code>. How many pairs? Exactly <code>n</code> of them. So:</p>
-
+          <p>
+            Each pair sums to <code>n + 1</code>. How many pairs? Exactly 
+            <code>n</code> of them. So:
+          </p>
           <div class="math-block">
-              2S = n × (n + 1)
+            2S = n × (n + 1)
           </div>
-
-          <p><strong>Step 3 — Solve for S.</strong><br>
-          Divide both sides by 2:</p>
-
+          <p>
+            <strong>Step 3 — Solve for S.</strong><br>
+            Divide both sides by 2:
+          </p>
           <div class="math-block">
-              S = n(n+1) / 2
+            S = n(n+1) / 2
           </div>
-
           <p><strong>Step 4 — Connect to Big O.</strong><br>
-
-          Expand the formula: 
-
+            Expand the formula: 
+          </p>
           <div class="math-block">
-              S = (1/2)n² + (1/2)n
+            S = (1/2)n² + (1/2)n
           </div>
-
-          <p>In Big O, we strip away the constant factor <code>1/2</code> and the lower-order term <code>(1/2)n</code> because they don’t change the growth shape as <code>n</code> gets large. What remains is <code>n²</code>, so the loop runs in <strong>O(n²)</strong> time.</p>
-
-          <p>See? The math isn’t here to scare you; it’s here to <em>reveal</em> what the code is actually doing in terms of growth. If you ever write a triple nested loop, you’re looking at cubic growth — O(n³) — which is essentially the discrete version of a triple sum.</p>
-
-          <p>Now, what about <strong>logarithmic complexity</strong>? Consider binary search:</p>
-
-          <pre><code>def binary_search(arr, target):
-              left, right = 0, len(arr)-1
-              while left <= right:
-                  mid = (left + right)//2
-                  if arr[mid] == target:
-                      return mid
-                  elif arr[mid] < target:
-                      left = mid + 1
-                  else:
-                      right = mid - 1
-              return -1
-          </code></pre>
-
-          <p>Now let's apply the same step-by-step thinking to binary search. Instead of nested loops, we have a loop that repeatedly cuts the problem in half. Let's trace exactly what happens.</p>
-
-          <p><strong>Step 1 — Write down the size of the search space after each step.</strong><br>
-          We start with <code>n</code> elements.<br>
-          After 1 comparison: the search space becomes <code>n/2</code> (we discard half).<br>
-          After 2 comparisons: it becomes <code>n/4</code>.<br>
-          After 3 comparisons: it becomes <code>n/8</code>.<br>
-          After <code>k</code> comparisons: it becomes <code>n/(2^k)</code>.</p>
-
-          <p>The algorithm stops when there's nothing left to search — when the search space is 1 element or less:</p>
-
+          <p>
+            In Big O, we strip away the constant factor <code>1/2</code> and 
+            the lower-order term <code>(1/2)n</code> because they don’t change 
+            the growth shape as <code>n</code> gets large. What remains is 
+            <code>n²</code>, so the loop runs in <strong>O(n²)</strong> time.
+          </p>
+          <p>
+            See? The math isn’t here to scare you; it’s here to <em>reveal</em> 
+            what the code is actually doing in terms of growth. If you ever 
+            write a triple nested loop, you’re looking at cubic growth — O(n³) 
+            — which is essentially the discrete version of a triple sum.
+          </p>
+          <p>
+            Now, what about <strong>logarithmic complexity</strong>? Consider 
+            binary search:
+          </p>
+          <div class="solution-card">
+            <div class="lang-tag">Python 3</div>
+            <pre><code>
+def binary_search(arr, target):
+    left, right = 0, len(arr)-1
+    while left <= right:
+        mid = (left + right)//2
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+    return -1
+            </code></pre>
+          </div>
+          <p>
+            Now let's apply the same step-by-step thinking to binary search. 
+            Instead of nested loops, we have a loop that repeatedly cuts the 
+            problem in half. Let's trace exactly what happens.
+          </p>
+          <p>
+            <strong>
+              Step 1 — Write down the size of the search space after each step.
+            </strong><br>
+            We start with <code>n</code> elements.<br>
+            After 1 comparison: the search space becomes <code>n/2</code> (we discard half).<br>
+            After 2 comparisons: it becomes <code>n/4</code>.<br>
+            After 3 comparisons: it becomes <code>n/8</code>.<br>
+            After <code>k</code> comparisons: it becomes <code>n/(2^k)</code>.
+          </p>
+          <p>
+            The algorithm stops when there's nothing left to search — when the 
+            search space is 1 element or less:
+          </p>
           <div class="math-block">
-              n/(2^k) ≤ 1
+            n/(2^k) ≤ 1
           </div>
-
-          <p><strong>Step 2 — Solve for k (the number of steps).</strong><br>
-          Multiply both sides by <code>2^k</code>:</p>
-
+          <p>
+            <strong>Step 2 — Solve for k (the number of steps).</strong><br>
+            Multiply both sides by <code>2^k</code>:
+          </p>
           <div class="math-block">
-              n ≤ 2^k
+            n ≤ 2^k
           </div>
-
-          <p>Take the base-2 logarithm of both sides (that's the inverse operation of exponentiation):</p>
-
+          <p>
+            Take the base-2 logarithm of both sides (that's the inverse 
+            operation of exponentiation):
+          </p>
           <div class="math-block">
-              log₂ n ≤ k
+            log₂ n ≤ k
           </div>
-
-          <p>So the number of steps <code>k</code> is at least <code>log₂ n</code>. That means binary search takes about <code>log₂ n</code> steps.</p>
-
-          <p><strong>Step 3 — Connect to Big O.</strong><br>
-          If <code>n = 16</code>, then <code>log₂ 16 = 4</code>. We check at most 4 elements before finding the answer or concluding it's not there. If <code>n = 1,000,000</code>, we check only about 20 elements. That's the power of logarithmic time: when input size doubles, we only add one extra step.</p>
-
-          <p><strong>Step 4 — See the pattern as a recurrence (with a concrete walkthrough).</strong><br>
-          We can also describe binary search with a <strong>recurrence relation</strong>, which is a formula that defines the work in terms of smaller inputs:</p>
-
+          <p>
+            So the number of steps <code>k</code> is at least <code>log₂ n</code>. 
+            That means binary search takes about <code>log₂ n</code> steps.
+          </p>
+          <p>
+            <strong>Step 3 — Connect to Big O.</strong><br>
+            If <code>n = 16</code>, then <code>log₂ 16 = 4</code>. We check at 
+            most 4 elements before finding the answer or concluding it's not 
+            there. If <code>n = 1,000,000</code>, we check only about 20 
+            elements. That's the power of logarithmic time: when input size 
+            doubles, we only add one extra step.
+          </p>
+          <p>
+            <strong>
+              Step 4 — See the pattern as a recurrence (with a concrete walkthrough).
+            </strong><br>
+            We can also describe binary search with a 
+            <strong>recurrence relation</strong>, which is a formula that 
+            defines the work in terms of smaller inputs:
+          </p>
           <div class="math-block">
-              T(n) = T(n/2) + O(1)
+            T(n) = T(n/2) + O(1)
           </div>
-
-          <p>This says: the time to search <code>n</code> elements equals the time to search <code>n/2</code> elements (the recursive call or next loop iteration), plus a constant amount of work for the comparison. If this still feels abstract, let’s replace the symbols with an actual number — say <code>n = 16</code> — and expand it like unwrapping a set of nesting dolls:</p>
-
+          <p>
+            This says: the time to search 
+            <code>n</code> elements equals the time to search <code>n/2</code> 
+            elements (the recursive call or next loop iteration), plus a 
+            constant amount of work for the comparison. If this still feels 
+            abstract, let’s replace the symbols with an actual number — say 
+            <code>n = 16</code> — and expand it like unwrapping a set of 
+            nesting dolls:
+          </p>
           <ul>
-              <li>We want <code>T(16)</code>. The rule says: <code>T(16) = T(8) + 1</code> (one comparison, then search the remaining half).</li>
-              <li>But what’s <code>T(8)</code>? <code>T(8) = T(4) + 1</code>.</li>
-              <li><code>T(4) = T(2) + 1</code>.</li>
-              <li><code>T(2) = T(1) + 1</code>.</li>
-              <li><code>T(1) = 1</code> (base case: just one element left, do one check).</li>
+            <li>
+              We want <code>T(16)</code>. The rule says: 
+              <code>T(16) = T(8) + 1</code> (one comparison, then search the 
+              remaining half).
+            </li>
+            <li>But what’s <code>T(8)</code>? <code>T(8) = T(4) + 1</code>.</li>
+            <li><code>T(4) = T(2) + 1</code>.</li>
+            <li><code>T(2) = T(1) + 1</code>.</li>
+            <li>
+              <code>T(1) = 1</code> (base case: just one element left, do one 
+              check).
+            </li>
           </ul>
-
           <p>Now substitute back from the bottom up:</p>
-
           <div class="math-block">
-              T(2) = 1 + 1 = 2<br>
-              T(4) = 2 + 1 = 3<br>
-              T(8) = 3 + 1 = 4<br>
-              T(16) = 4 + 1 = 5
+            T(2) = 1 + 1 = 2<br>
+            T(4) = 2 + 1 = 3<br>
+            T(8) = 3 + 1 = 4<br>
+            T(16) = 4 + 1 = 5
           </div>
-
-          <p>So <code>T(16) = 5</code>. Notice that <code>5 = log₂(16) + 1</code>. The exact count can vary by ±1 depending on how we define the base case, but the <strong>pattern</strong> is what matters: each time we double the input size (from 8 to 16), we only add one extra step. If we write the recurrence in general terms, we’re effectively adding a “+1” for each level of halving, and we have about <code>log₂ n</code> levels. More formally, expanding the recurrence:</p>
-
+          <p>
+            So <code>T(16) = 5</code>. Notice that <code>5 = log₂(16) + 1</code>. 
+            The exact count can vary by ±1 depending on how we define the base 
+            case, but the <strong>pattern</strong> is what matters: each time 
+            we double the input size (from 8 to 16), we only add one extra step. 
+            If we write the recurrence in general terms, we’re effectively 
+            adding a “+1” for each level of halving, and we have about 
+            <code>log₂ n</code> levels. More formally, expanding the recurrence:
+          </p>
           <div class="math-block">
-              T(n) = T(n/2) + 1<br>
-              T(n/2) = T(n/4) + 1<br>
-              T(n/4) = T(n/8) + 1<br>
-              …<br>
-              T(1) = 1
+            T(n) = T(n/2) + 1<br>
+            T(n/2) = T(n/4) + 1<br>
+            T(n/4) = T(n/8) + 1<br>
+            …<br>
+            T(1) = 1
           </div>
-
-          <p>Substituting back: <code>T(n) = 1 + 1 + 1 + … + 1</code>, and we have about <code>log₂ n</code> of those 1's. So <code>T(n) = log₂ n</code> (plus maybe a small constant), which is <strong>O(log n)</strong>. The recurrence is just a compact way to say: “keep cutting the problem in half until you can’t anymore, and count how many cuts you made.” Just like with the double loop we turned nested iterations into a summation, here we turned repeated halving into a logarithmic count of steps. The math reveals exactly how many operations happen — no magic, just careful counting.</p>
-
-          <p>You can also use the <strong>Master Theorem</strong> for divide-and-conquer recurrences, but that’s a whole other layer. Let’s just say math provides the grammar; loops and recursion are the sentences.</p>
-
+          <p>
+            Substituting back: <code>T(n) = 1 + 1 + 1 + … + 1</code>, and we 
+            have about <code>log₂ n</code> of those 1's. So 
+            <code>T(n) = log₂ n</code> (plus maybe a small constant), which is 
+            <strong>O(log n)</strong>. The recurrence is just a compact way to 
+            say: “keep cutting the problem in half until you can’t anymore, and 
+            count how many cuts you made.” Just like with the double loop we 
+            turned nested iterations into a summation, here we turned repeated 
+            halving into a logarithmic count of steps. The math reveals exactly 
+            how many operations happen — no magic, just careful counting.
+          </p>
+          <p>
+            You can also use the <strong>Master Theorem</strong> for 
+            divide-and-conquer recurrences, but that’s a whole other layer. 
+            Let’s just say math provides the grammar; loops and recursion are 
+            the sentences.
+          </p>
           <h4>Understanding the Formal Definition (Without the Intimidation)</h4>
-
-          <p>You might have seen the formal definition of Big O and felt your eyes glaze over. Let’s break it down in plain language with a concrete example so it stops feeling like abstract math and starts feeling like a useful tool.</p>
-
+          <p>
+            You might have seen the formal definition of Big O and felt your 
+            eyes glaze over. Let’s break it down in plain language with a 
+            concrete example so it stops feeling like abstract math and starts 
+            feeling like a useful tool.
+          </p>
           <p>The formal definition says:</p>
-
           <div class="math-block">
-              f(n) = O(g(n))  if there exist positive constants c and n₀ such that<br>
-              0 ≤ f(n) ≤ c * g(n)   for all   n ≥ n₀
+            f(n) = O(g(n))  if there exist positive constants c and n₀ such that<br>
+            0 ≤ f(n) ≤ c * g(n)   for all   n ≥ n₀
           </div>
-
-          <p>Let’s translate that into everyday thinking. Imagine you’re trying to describe how fast your code runs. Instead of saying “it takes exactly 0.5n² + 0.5n steps,” which is precise but clunky, Big O lets you say “it grows like n².” The definition above is just the mathematical way of saying: “If we look at large enough inputs (n ≥ n₀), the actual running time f(n) will never be more than some constant multiple of g(n).” In other words, g(n) multiplied by some fixed number becomes a safe upper bound.</p>
-
-          <p>Let’s test this with our double loop example. We calculated that the exact number of operations is:</p>
-
+          <p>
+            Let’s translate that into everyday thinking. Imagine you’re trying 
+            to describe how fast your code runs. Instead of saying “it takes 
+            exactly 0.5n² + 0.5n steps,” which is precise but clunky, Big O 
+            lets you say “it grows like n².” The definition above is just the 
+            mathematical way of saying: “If we look at large enough inputs 
+            (n ≥ n₀), the actual running time f(n) will never be more than some 
+            constant multiple of g(n).” In other words, g(n) multiplied by some 
+            fixed number becomes a safe upper bound.
+          </p>
+          <p>
+            Let’s test this with our double loop example. We calculated that 
+            the exact number of operations is:
+          </p>
           <div class="math-block">
-              f(n) = 0.5n² + 0.5n
+            f(n) = 0.5n² + 0.5n
           </div>
-
-          <p>We want to prove that <code>f(n) = O(n²)</code>. According to the definition, we need to find two numbers: a constant <code>c</code> and a starting point <code>n₀</code> such that for every <code>n</code> bigger than <code>n₀</code>, our <code>f(n)</code> is less than or equal to <code>c * n²</code>.</p>
-
+          <p>
+            We want to prove that <code>f(n) = O(n²)</code>. According to the 
+            definition, we need to find two numbers: a constant <code>c</code> 
+            and a starting point <code>n₀</code> such that for every 
+            <code>n</code> bigger than <code>n₀</code>, our <code>f(n)</code> 
+            is less than or equal to <code>c * n²</code>.
+          </p>
           <p>Let’s try <code>c = 1</code> and <code>n₀ = 1</code>. Does the inequality hold?</p>
 
           <div class="math-block">
@@ -395,34 +563,42 @@
 
           <p>Consider calculating the nth Fibonacci number. The Fibonacci sequence starts 0, 1, 1, 2, 3, 5, 8, … where each number is the sum of the two before it. There’s a classic recursive way to write this, and it’s beautifully simple. But let’s see what it does to our memory.</p>
 
-          <pre><code>def fib_recursive(n):
-              if n <= 1:
-                  return n
-              return fib_recursive(n-1) + fib_recursive(n-2)
-          </code></pre>
+          <div class="solution-card">
+              <div class="lang-tag">Python 3</div>
+              <pre><code>
+def fib_recursive(n):
+    if n <= 1:
+        return n
+    return fib_recursive(n-1) + fib_recursive(n-2)
+              </code></pre>
+          </div>
 
           <p>This looks elegant, but watch what happens when we call <code>fib_recursive(5)</code>. The computer doesn’t just make one call — it makes a whole tree of calls. It calls <code>fib_recursive(4)</code> and <code>fib_recursive(3)</code>. Those each make more calls, and so on. The key for space complexity is: how deep does this chain of pending calls get before we start returning answers?</p>
 
           <p>Let’s trace it step by step with <code>n = 5</code>:</p>
 
           <ol>
-              <li>We call <code>fib_recursive(5)</code>. To get its answer, it needs <code>fib_recursive(4)</code> and <code>fib_recursive(3)</code>. So it pauses, puts itself on hold, and calls <code>fib_recursive(4)</code>.</li>
-              <li><code>fib_recursive(4)</code> needs <code>fib_recursive(3)</code> and <code>fib_recursive(2)</code>. It pauses and calls <code>fib_recursive(3)</code>.</li>
-              <li><code>fib_recursive(3)</code> needs <code>fib_recursive(2)</code> and <code>fib_recursive(1)</code>. It pauses and calls <code>fib_recursive(2)</code>.</li>
-              <li><code>fib_recursive(2)</code> needs <code>fib_recursive(1)</code> and <code>fib_recursive(0)</code>. It pauses and calls <code>fib_recursive(1)</code>.</li>
-              <li><code>fib_recursive(1)</code> hits the base case and returns 1 immediately.</li>
+            <li>We call <code>fib_recursive(5)</code>. To get its answer, it needs <code>fib_recursive(4)</code> and <code>fib_recursive(3)</code>. So it pauses, puts itself on hold, and calls <code>fib_recursive(4)</code>.</li>
+            <li><code>fib_recursive(4)</code> needs <code>fib_recursive(3)</code> and <code>fib_recursive(2)</code>. It pauses and calls <code>fib_recursive(3)</code>.</li>
+            <li><code>fib_recursive(3)</code> needs <code>fib_recursive(2)</code> and <code>fib_recursive(1)</code>. It pauses and calls <code>fib_recursive(2)</code>.</li>
+            <li><code>fib_recursive(2)</code> needs <code>fib_recursive(1)</code> and <code>fib_recursive(0)</code>. It pauses and calls <code>fib_recursive(1)</code>.</li>
+            <li><code>fib_recursive(1)</code> hits the base case and returns 1 immediately.</li>
           </ol>
 
           <p>At its deepest point, we had 5 function calls waiting for their sub-calls to finish — one for each level from 5 down to 1. In general, for input <code>n</code>, the call stack will grow to depth <code>n</code> before unwinding. That means this recursive version uses <strong>O(n) extra space</strong> just to keep track of where it is in all those nested calls.</p>
 
           <p>Now look at the iterative version:</p>
 
-          <pre><code>def fib_iterative(n):
-              a, b = 0, 1
-              for _ in range(n):
-                  a, b = b, a+b
-              return a
-          </code></pre>
+          <div class="solution-card">
+              <div class="lang-tag">Python 3</div>
+              <pre><code>
+def fib_iterative(n):
+    a, b = 0, 1
+    for _ in range(n):
+        a, b = b, a+b
+    return a
+              </code></pre>
+          </div>
 
           <p>This version uses only two variables: <code>a</code> and <code>b</code>. No matter whether <code>n</code> is 10 or 10,000, it never needs more than those two numbers in memory. There’s no call stack piling up, no extra arrays. This runs in <strong>O(1) extra space</strong> — constant space.</p>
 
@@ -449,42 +625,50 @@
 
           <p>Imagine you need to group words by their first letter. A naive solution could be:</p>
 
-          <pre><code>def group_words_naive(words):
-              result = []
-              for word in words:                  # O(n)
-                  found = False
-                  for group in result:            # can be up to O(n) in worst case
-                      if group[0][0] == word[0]:
-                          group.append(word)
-                          found = True
-                          break
-                  if not found:
-                      result.append([word])
-              return result
-          </code></pre>
+          <div class="solution-card">
+              <div class="lang-tag">Python 3</div>
+              <pre><code>
+def group_words_naive(words):
+    result = []
+    for word in words:                  # O(n)
+        found = False
+        for group in result:            # can be up to O(n) in worst case
+            if group[0][0] == word[0]:
+                group.append(word)
+                found = True
+                break
+        if not found:
+            result.append([word])
+    return result
+              </code></pre>
+          </div>
 
           <p>Worst-case: each word has a different first letter, so inner loop grows linearly: O(n²). But with a dictionary, we drop to O(n) time and O(k) space where k is the number of distinct first letters:</p>
 
-          <pre><code>def group_words_fast(words):
-              groups = {}
-              for word in words:
-                  first_char = word[0]
-                  if first_char not in groups:
-                      groups[first_char] = []
-                  groups[first_char].append(word)
-              return list(groups.values())
-          </code></pre>
+          <div class="solution-card">
+              <div class="lang-tag">Python 3</div>
+              <pre><code>
+def group_words_fast(words):
+    groups = {}
+    for word in words:
+        first_char = word[0]
+        if first_char not in groups:
+            groups[first_char] = []
+        groups[first_char].append(word)
+    return list(groups.values())
+              </code></pre>
+          </div>
 
           <p>That’s the power of choosing the right data structure — we moved from O(n²) to O(n).</p>
 
           <h3>Common Pitfalls & Misconceptions</h3>
 
           <ul>
-              <li><strong>Big O is not about speed</strong> — It’s about growth. An O(n) algorithm can be slower than an O(n²) for small n if constants differ wildly. Always profile if performance matters.</li>
-              <li><strong>“Amortized complexity”</strong> — Some operations, like appending to a dynamic array, are O(1) on average even if occasionally O(n) due to resizing.</li>
-              <li><strong>Not all constants are equal</strong> — An algorithm with <code>1000n</code> is still O(n), but in practice, it may be less efficient than a <code>n log n</code> one for moderate n. Keep an eye on the hidden constant.</li>
-              <li><strong>Recursion ≠ always exponential</strong> — Memoization turns exponential Fibonacci into O(n). That’s dynamic programming flexing.</li>
-              <li><strong>Hash tables are not always O(1)</strong> — In practice they are, but in theory, worst-case lookup is O(n) due to hash collisions. Good hash functions make this a rare event.</li>
+            <li><strong>Big O is not about speed</strong> — It’s about growth. An O(n) algorithm can be slower than an O(n²) for small n if constants differ wildly. Always profile if performance matters.</li>
+            <li><strong>“Amortized complexity”</strong> — Some operations, like appending to a dynamic array, are O(1) on average even if occasionally O(n) due to resizing.</li>
+            <li><strong>Not all constants are equal</strong> — An algorithm with <code>1000n</code> is still O(n), but in practice, it may be less efficient than a <code>n log n</code> one for moderate n. Keep an eye on the hidden constant.</li>
+            <li><strong>Recursion ≠ always exponential</strong> — Memoization turns exponential Fibonacci into O(n). That’s dynamic programming flexing.</li>
+            <li><strong>Hash tables are not always O(1)</strong> — In practice they are, but in theory, worst-case lookup is O(n) due to hash collisions. Good hash functions make this a rare event.</li>
           </ul>
 
           <h3>Big O in the Wild: A Quick Cheat Sheet</h3>
@@ -492,13 +676,13 @@
           <p>Here’s a practical reference of common operations and their typical complexity:</p>
 
           <ul>
-              <li><strong>Array access by index</strong> – O(1)</li>
-              <li><strong>Search in unsorted array</strong> – O(n)</li>
-              <li><strong>Binary search in sorted array</strong> – O(log n)</li>
-              <li><strong>Hash table lookup/insert</strong> – O(1) average, O(n) worst-case (rare)</li>
-              <li><strong>Insertion in a list (at beginning)</strong> – O(n) (shifting elements)</li>
-              <li><strong>Merge sort / Heap sort</strong> – O(n log n) (optimal for comparison-based sorting)</li>
-              <li><strong>Bubble sort / Insertion sort</strong> – O(n²) average/worst</li>
+            <li><strong>Array access by index</strong> – O(1)</li>
+            <li><strong>Search in unsorted array</strong> – O(n)</li>
+            <li><strong>Binary search in sorted array</strong> – O(log n)</li>
+            <li><strong>Hash table lookup/insert</strong> – O(1) average, O(n) worst-case (rare)</li>
+            <li><strong>Insertion in a list (at beginning)</strong> – O(n) (shifting elements)</li>
+            <li><strong>Merge sort / Heap sort</strong> – O(n log n) (optimal for comparison-based sorting)</li>
+            <li><strong>Bubble sort / Insertion sort</strong> – O(n²) average/worst</li>
           </ul>
 
           <p>If you memorize these, you’ll avoid 80% of performance facepalms. The other 20% are reserved for complex recursive DP and graph algorithms.</p>
@@ -515,24 +699,38 @@
 
           <p>If you want to dive deeper, learn about <strong>amortized analysis</strong>, <strong>NP-completeness</strong>, or explore how modern hardware (caching, branch prediction) can make complexity theory blush. Theory is great, but measuring real runtime is the final boss.</p>
 
-          <div class="insight-box">
+          <aside class="post-aside" aria-label="Mind the gap: real-world performance vs Big O">
+            <p>
               <strong>Mind the gap:</strong> Real-world performance is influenced by CPU caching, memory access patterns, and language overhead. An O(n) algorithm that thrashes the cache can be slower than an O(n log n) algorithm with friendly memory access. Complexity is your map, but benchmarks are the terrain.
-          </div>
-
+            </p>
+          </aside>
+          <blockquote class="closing-quote">
+            Complexity is the compass. Profiling is the path.
+          </blockquote>
           <hr class="home-intro-divider" aria-hidden="true">
-
-          <h3>References & Further Exploration</h3>
-          <p>To make this blog richer, here are five resources that I’ve personally found valuable. They range from interactive visualizations to deep mathematical breakdowns:</p>
-
-          <ol class="footnote-refs">
-              <li><a href="https://www.bigocheatsheet.com/" target="_blank" rel="noopener">Big-O Cheat Sheet</a> – A quick visual reference for time and space complexities of common algorithms and data structures.</li>
-              <li><a href="https://www.khanacademy.org/computing/computer-science/algorithms" target="_blank" rel="noopener">Khan Academy: Algorithms</a> – Gentle but thorough introduction to asymptotic notation and classic algorithms.</li>
-              <li><a href="https://www.coursera.org/learn/algorithms-part1" target="_blank" rel="noopener">Algorithms, Part I by Princeton (Coursera)</a> – Taught by Kevin Wayne and Robert Sedgewick, includes excellent mathematical analysis of algorithms.</li>
-              <li><a href="https://www.geeksforgeeks.org/analysis-of-algorithms-set-3asymptotic-notations/" target="_blank" rel="noopener">GeeksforGeeks: Asymptotic Notations</a> – Clear examples and formal definitions for Big O, Omega, and Theta.</li>
-              <li><a href="https://mitpress.mit.edu/books/introduction-algorithms-third-edition" target="_blank" rel="noopener">CLRS – Introduction to Algorithms (MIT Press)</a> – The classic textbook if you really want to get into the mathematical nitty-gritty of recurrences and complexity.</li>
-          </ol>
-
-          <p>Also, if you’re the type that learns by doing, just pick a few algorithms and calculate their complexity on paper. Then verify by testing with increasing input sizes. It’s a surprisingly fun way to spend an afternoon — if you’re into that sort of thing. No judgment.</p>
+          <h3>References & further reading</h3>
+          <ul>
+            <li><a href="https://www.bigocheatsheet.com/" target="_blank" rel="noopener">Big-O Cheat Sheet</a> – A quick visual reference for time and space complexities of common algorithms and data structures.</li>
+            <li><a href="https://www.khanacademy.org/computing/computer-science/algorithms" target="_blank" rel="noopener">Khan Academy: Algorithms</a> – Gentle but thorough introduction to asymptotic notation and classic algorithms.</li>
+            <li><a href="https://www.coursera.org/learn/algorithms-part1" target="_blank" rel="noopener">Algorithms, Part I by Princeton (Coursera)</a> – Taught by Kevin Wayne and Robert Sedgewick, includes excellent mathematical analysis of algorithms.</li>
+            <li><a href="https://www.geeksforgeeks.org/analysis-of-algorithms-set-3asymptotic-notations/" target="_blank" rel="noopener">GeeksforGeeks: Asymptotic Notations</a> – Clear examples and formal definitions for Big O, Omega, and Theta.</li>
+            <li><a href="https://mitpress.mit.edu/books/introduction-algorithms-third-edition" target="_blank" rel="noopener">CLRS – Introduction to Algorithms (MIT Press)</a> – The classic textbook if you really want to get into the mathematical nitty-gritty of recurrences and complexity.</li>
+          </ul>
+          <h3>Can’t get enough from Lumænaut_? Read this…</h3>
+          <ul>
+            <li>
+              <a href="question-of-the-week/qotw-cassidoo-1.html">QOTW (Cassidoo) #1: Fuzzy string search with Bitap</a>
+              — a practical fuzzy-search challenge that builds intuition from brute force to a bit-parallel solution.
+            </li>
+            <li>
+              <a href="grinding-leetcode/day-2-add-two-numbers.html">Grinding LeetCode. Day 2: Add Two Numbers</a>
+              — linked lists, carry, and clean step-by-step reasoning (with Python solutions).
+            </li>
+            <li>
+              <a href="the-8-algorithm-paradigms.html">The 8 Algorithm Paradigms</a>
+              — eight mental models you’ll keep reusing across problems, interviews, and production code.
+            </li>
+          </ul>
         </div>
       </article>
     </main>
