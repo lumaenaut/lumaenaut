@@ -105,7 +105,7 @@
       <article class="post" aria-labelledby="post-title">
         <header class="post-header">
           <h2 id="post-title" class="post-title">The Art of Slow Code</h2>
-          <p class="post-subtitle">A journey through algorithm complexity and Big O notation</p>
+          <p class="post-subtitle">Big O, complexity, and the math behind your loops</p>
           <p class="post-meta">
             By <span class="author">Alberto Del Valle</span><br>
             <time datetime="2026-03-29">March 29, 2026</time><br>
@@ -548,58 +548,130 @@ def binary_search(arr, target):
               c * n² = 1 * 10000 = 10000<br>
               5050 ≤ 10000  ✓
           </div>
-
-          <p>It works! In fact, for any <code>n ≥ 1</code>, <code>0.5n² + 0.5n</code> is always less than or equal to <code>n²</code>. You can see this because <code>0.5n² + 0.5n ≤ 0.5n² + 0.5n² = n²</code> for <code>n ≥ 1</code> (since <code>0.5n ≤ 0.5n²</code> when <code>n ≥ 1</code>). So we’ve proven that <code>f(n) = O(n²)</code>.</p>
-
-          <p>What does this mean practically? It means that no matter how large <code>n</code> gets, the actual running time of our double loop will never exceed <code>1 * n²</code> (plus maybe a tiny bit, but the definition lets us pick a constant to absorb that). The constant <code>c = 1</code> worked here, but often we might need a larger constant like <code>c = 2</code> or <code>c = 5</code> — and that’s perfectly fine. The definition only requires that <em>some</em> constant exists; we don’t care if it’s huge. That’s why Big O focuses on growth patterns, not exact numbers.</p>
-
-          <p>Now, an important nuance: Big O gives an <strong>upper bound</strong>. If an algorithm runs in <code>O(n²)</code>, it’s also technically correct to say it runs in <code>O(n³)</code> or <code>O(2ⁿ)</code>, because those are also upper bounds (just looser ones). But in practice, we usually want the <em>tightest</em> upper bound — the one that best describes the algorithm’s actual growth. When we say “this algorithm is O(n²)”, we usually mean “it grows roughly like n², and no simpler function gives a tighter bound.” Mathematicians use Theta (Θ) notation for that tight bound, but in everyday coding conversations, Big O is used informally to mean the tightest meaningful bound. Just remember that the formal definition is a bit looser — it’s an “at most” relationship, not an “exactly” relationship.</p>
-
+          <p>
+            It works! In fact, for any <code>n ≥ 1</code>, 
+            <code>0.5n² + 0.5n</code> is always less than or equal to 
+            <code>n²</code>. You can see this because 
+            <code>0.5n² + 0.5n ≤ 0.5n² + 0.5n² = n²</code> for 
+            <code>n ≥ 1</code> (since <code>0.5n ≤ 0.5n²</code> when 
+            <code>n ≥ 1</code>). So we’ve proven that <code>f(n) = O(n²)</code>.
+          </p>
+          <p>
+            What does this mean practically? It means that no matter how large 
+            <code>n</code> gets, the actual running time of our double loop 
+            will never exceed <code>1 * n²</code> (plus maybe a tiny bit, but 
+            the definition lets us pick a constant to absorb that). The 
+            constant <code>c = 1</code> worked here, but often we might need a 
+            larger constant like <code>c = 2</code> or <code>c = 5</code> — and 
+            that’s perfectly fine. The definition only requires that 
+            <em>some</em> constant exists; we don’t care if it’s huge. That’s 
+            why Big O focuses on growth patterns, not exact numbers.
+          </p>
+          <p>
+            Now, an important nuance: Big O gives an 
+            <strong>upper bound</strong>. If an algorithm runs in 
+            <code>O(n²)</code>, it’s also technically correct to say it runs 
+            in <code>O(n³)</code> or <code>O(2ⁿ)</code>, because those are also 
+            upper bounds (just looser ones). But in practice, we usually want 
+            the <em>tightest</em> upper bound — the one that best describes the 
+            algorithm’s actual growth. When we say “this algorithm is O(n²)”, 
+            we usually mean “it grows roughly like n², and no simpler function 
+            gives a tighter bound.” Mathematicians use Theta (Θ) notation for 
+            that tight bound, but in everyday coding conversations, Big O is 
+            used informally to mean the tightest meaningful bound. Just 
+            remember that the formal definition is a bit looser — it’s an “at 
+            most” relationship, not an “exactly” relationship.
+          </p>
           <h3>Space Complexity: The Overlooked Sibling</h3>
-
-          <p>Time complexity gets all the attention, but space complexity is just as important — especially when you’re working with limited memory or processing huge amounts of data. While time complexity asks “how many steps does this take?”, space complexity asks “how much extra memory does this need to run?”</p>
-
-          <p>Every time your code creates a new array, stores values in a dictionary, or makes a recursive call that piles onto the call stack, you’re using memory. If you’re not careful, an algorithm that runs quickly could still crash because it eats up all available RAM. So let’s break down space complexity with a concrete example that shows how drastically different two solutions to the same problem can be.</p>
-
-          <p>Consider calculating the nth Fibonacci number. The Fibonacci sequence starts 0, 1, 1, 2, 3, 5, 8, … where each number is the sum of the two before it. There’s a classic recursive way to write this, and it’s beautifully simple. But let’s see what it does to our memory.</p>
-
+          <p>
+            Time complexity gets all the attention, but space complexity is 
+            just as important — especially when you’re working with limited 
+            memory or processing huge amounts of data. While time complexity 
+            asks “how many steps does this take?”, space complexity asks “how 
+            much extra memory does this need to run?”
+          </p>
+          <p>
+            Every time your code creates a new array, stores values in a 
+            dictionary, or makes a recursive call that piles onto the call 
+            stack, you’re using memory. If you’re not careful, an algorithm 
+            that runs quickly could still crash because it eats up all 
+            available RAM. So let’s break down space complexity with a concrete 
+            example that shows how drastically different two solutions to the 
+            same problem can be.
+          </p>
+          <p>
+            Consider calculating the nth Fibonacci number. The Fibonacci 
+            sequence starts 0, 1, 1, 2, 3, 5, 8, … where each number is the sum 
+            of the two before it. There’s a classic recursive way to write 
+            this, and it’s beautifully simple. But let’s see what it does to 
+            our memory.
+          </p>
           <div class="solution-card">
-              <div class="lang-tag">Python 3</div>
-              <pre><code>
+            <div class="lang-tag">Python 3</div>
+            <pre><code>
 def fib_recursive(n):
     if n <= 1:
         return n
     return fib_recursive(n-1) + fib_recursive(n-2)
-              </code></pre>
+            </code></pre>
           </div>
-
-          <p>This looks elegant, but watch what happens when we call <code>fib_recursive(5)</code>. The computer doesn’t just make one call — it makes a whole tree of calls. It calls <code>fib_recursive(4)</code> and <code>fib_recursive(3)</code>. Those each make more calls, and so on. The key for space complexity is: how deep does this chain of pending calls get before we start returning answers?</p>
-
+          <p>
+            This looks elegant, but watch what happens when we call 
+            <code>fib_recursive(5)</code>. The computer doesn’t just make one 
+            call — it makes a whole tree of calls. It calls 
+            <code>fib_recursive(4)</code> and <code>fib_recursive(3)</code>. 
+            Those each make more calls, and so on. The key for space complexity 
+            is: how deep does this chain of pending calls get before we start 
+            returning answers?
+          </p>
           <p>Let’s trace it step by step with <code>n = 5</code>:</p>
 
           <ol>
-            <li>We call <code>fib_recursive(5)</code>. To get its answer, it needs <code>fib_recursive(4)</code> and <code>fib_recursive(3)</code>. So it pauses, puts itself on hold, and calls <code>fib_recursive(4)</code>.</li>
-            <li><code>fib_recursive(4)</code> needs <code>fib_recursive(3)</code> and <code>fib_recursive(2)</code>. It pauses and calls <code>fib_recursive(3)</code>.</li>
-            <li><code>fib_recursive(3)</code> needs <code>fib_recursive(2)</code> and <code>fib_recursive(1)</code>. It pauses and calls <code>fib_recursive(2)</code>.</li>
-            <li><code>fib_recursive(2)</code> needs <code>fib_recursive(1)</code> and <code>fib_recursive(0)</code>. It pauses and calls <code>fib_recursive(1)</code>.</li>
-            <li><code>fib_recursive(1)</code> hits the base case and returns 1 immediately.</li>
+            <li>
+              We call <code>fib_recursive(5)</code>. To get its answer, it 
+              needs <code>fib_recursive(4)</code> and 
+              <code>fib_recursive(3)</code>. So it pauses, puts itself on hold, 
+              and calls <code>fib_recursive(4)</code>.
+            </li>
+            <li>
+              <code>fib_recursive(4)</code> needs <code>fib_recursive(3)</code> 
+              and <code>fib_recursive(2)</code>. It pauses and calls 
+              <code>fib_recursive(3)</code>.
+            </li>
+            <li>
+              <code>fib_recursive(3)</code> needs <code>fib_recursive(2)</code> 
+              and <code>fib_recursive(1)</code>. It pauses and calls 
+              <code>fib_recursive(2)</code>.
+            </li>
+            <li>
+              <code>fib_recursive(2)</code> needs <code>fib_recursive(1)</code> 
+              and <code>fib_recursive(0)</code>. It pauses and calls 
+              <code>fib_recursive(1)</code>.
+            </li>
+            <li>
+              <code>fib_recursive(1)</code> hits the base case and returns 1 
+              immediately.
+            </li>
           </ol>
-
-          <p>At its deepest point, we had 5 function calls waiting for their sub-calls to finish — one for each level from 5 down to 1. In general, for input <code>n</code>, the call stack will grow to depth <code>n</code> before unwinding. That means this recursive version uses <strong>O(n) extra space</strong> just to keep track of where it is in all those nested calls.</p>
-
+          <p>
+            At its deepest point, we had 5 function calls waiting for their 
+            sub-calls to finish — one for each level from 5 down to 1. In 
+            general, for input <code>n</code>, the call stack will grow to 
+            depth <code>n</code> before unwinding. That means this recursive 
+            version uses <strong>O(n) extra space</strong> just to keep track 
+            of where it is in all those nested calls.
+          </p>
           <p>Now look at the iterative version:</p>
-
           <div class="solution-card">
-              <div class="lang-tag">Python 3</div>
-              <pre><code>
+            <div class="lang-tag">Python 3</div>
+            <pre><code>
 def fib_iterative(n):
     a, b = 0, 1
     for _ in range(n):
         a, b = b, a+b
     return a
-              </code></pre>
+            </code></pre>
           </div>
-
           <p>This version uses only two variables: <code>a</code> and <code>b</code>. No matter whether <code>n</code> is 10 or 10,000, it never needs more than those two numbers in memory. There’s no call stack piling up, no extra arrays. This runs in <strong>O(1) extra space</strong> — constant space.</p>
 
           <p>Let’s put this in perspective with actual numbers:</p>
