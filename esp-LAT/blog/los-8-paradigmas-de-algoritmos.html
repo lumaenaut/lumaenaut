@@ -89,13 +89,17 @@
       </div>
       <div class="header-right">
         <div class="logo-div-mirror" aria-hidden="true"></div>
-        <button type="button" class="share-btn" aria-label="Compartir esta página"><img src="../../assets/share-icon.png" alt="" class="share-btn-icon" data-ios-src="../../assets/ios-share-icon.png" width="20" height="20"></button>
+        <button type="button" class="share-btn" aria-label="Compartir esta página">
+          <img src="../../assets/share-icon.png" alt="" class="share-btn-icon" data-ios-src="../../assets/ios-share-icon.png" width="20" height="20">
+        </button>
       </div>
     </header>
     <main id="main-content" class="content">
       <div class="floating-controls">
         <div class="lang-switcher">
-          <button type="button" class="lang-switcher-btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Seleccionar idioma"><img src="../../assets/translate-icon.png" alt="" class="lang-switcher-icon"><span class="lang-switcher-label">esp (LAT)</span></button>
+          <button type="button" class="lang-switcher-btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Seleccionar idioma"><img src="../../assets/translate-icon.png" alt="" class="lang-switcher-icon">
+            <span class="lang-switcher-label">esp (LAT)</span>
+          </button>
           <ul class="lang-switcher-dropdown" role="listbox" aria-label="Opciones de idioma">
             <li><a href="#" data-lang="eng-US" role="option">eng (US)</a></li>
             <li><a href="#" data-lang="esp-LAT" role="option">esp (LAT)</a></li>
@@ -115,14 +119,20 @@
         <figure class="post-featured-image" aria-labelledby="algorithms-image-caption">
           <img
             src="../../images/people-walking-in-european-city-aascii.png"
-            alt="Color ASCII art: gente caminando por una calle de una ciudad europea; se ve un tranvía y una cafetería; edificios de estilo europeo al fondo."
+            alt="Arte a color ASCII: gente caminando por una calle de una ciudad 
+              europea; se ve un tranvía y una cafetería; edificios de estilo 
+              europeo al fondo."
             title="Arte ASCII — paseo por ciudad europea (tranvía y cafetería)"
             width="1840"
             height="1690"
             decoding="async"
             loading="eager"
             class="post-featured-img">
-          <figcaption id="algorithms-image-caption" class="visually-hidden">Illustration in ASCII art style: gente caminando por una calle de una ciudad europea. Se ve un tranvía y una cafetería, con edificios de estilo europeo al fondo.</figcaption>
+          <figcaption id="algorithms-image-caption" class="visually-hidden">
+            Ilustración estilo ASCII: gente caminando por una calle de 
+            una ciudad europea. Se ve un tranvía y una cafetería, con edificios 
+            de estilo europeo al fondo.
+          </figcaption>
         </figure>
         <div class="post-body">
           <p>
@@ -165,7 +175,9 @@
               Fuerza bruta: candado de 3 dígitos
             </p>
             <div class="demo-canvas-wrap">
-              <canvas class="demo-canvas" id="algo-brute-force-canvas" width="560" height="240" aria-describedby="demo-brute-force-caption">Demo interactiva: prueba cada combinación desde 000 hasta que se abre el candado.</canvas>
+              <canvas class="demo-canvas" id="algo-brute-force-canvas" width="560" height="240" aria-describedby="demo-brute-force-caption">
+                Demo interactiva: prueba cada combinación desde 000 hasta que se abre el candado.
+              </canvas>
             </div>
             <div class="demo-stats" aria-live="polite"></div>
             <div class="demo-controls"></div>
@@ -205,7 +217,9 @@
               Divide y vencerás: merge sort paso a paso
             </p>
             <div class="demo-canvas-wrap">
-              <canvas class="demo-canvas" id="algo-divide-conquer-canvas" width="560" height="240" aria-describedby="demo-divide-conquer-caption">Paso a paso: cada dividir muestra la partición; cada vencer muestra el segmento fusionado.</canvas>
+              <canvas class="demo-canvas" id="algo-divide-conquer-canvas" width="560" height="240" aria-describedby="demo-divide-conquer-caption">
+                Paso a paso: cada dividir muestra la partición; cada vencer muestra el segmento fusionado.
+              </canvas>
             </div>
             <div class="demo-stats" aria-live="polite"></div>
             <div class="demo-controls"></div>
@@ -238,7 +252,9 @@
               Programación dinámica: Fibonacci con memo
             </p>
             <div class="demo-canvas-wrap">
-              <canvas class="demo-canvas" id="algo-dp-canvas" width="560" height="240" aria-describedby="demo-dp-caption">Tabla memo con fib(0), fib(1), … para no recalcular los mismos valores.</canvas>
+              <canvas class="demo-canvas" id="algo-dp-canvas" width="560" height="240" aria-describedby="demo-dp-caption">
+                Tabla memo con fib(0), fib(1), … para no recalcular los mismos valores.
+              </canvas>
             </div>
             <div class="demo-stats" aria-live="polite"></div>
             <div class="demo-controls"></div>
@@ -266,7 +282,9 @@
           <figure class="algorithm-demo" id="demo-greedy" aria-labelledby="demo-greedy-caption">
             <p class="demo-title" id="demo-greedy-caption">Greedy: dar cambio</p>
             <div class="demo-canvas-wrap">
-              <canvas class="demo-canvas" id="algo-greedy-canvas" width="560" height="240" aria-describedby="demo-greedy-caption">Monto en centavos y las monedas elegidas por la regla greedy.</canvas>
+              <canvas class="demo-canvas" id="algo-greedy-canvas" width="560" height="240" aria-describedby="demo-greedy-caption">
+                Monto en centavos y las monedas elegidas por la regla greedy.
+              </canvas>
             </div>
             <div class="demo-stats" aria-live="polite"></div>
             <div class="demo-controls"></div>
@@ -297,7 +315,9 @@
               Backtracking: camino en laberinto
             </p>
             <div class="demo-canvas-wrap">
-              <canvas class="demo-canvas" id="algo-backtrack-canvas" width="560" height="240" aria-describedby="demo-backtrack-caption">Cuadrícula con muros; el backtracking encuentra un camino del inicio a la meta.</canvas>
+              <canvas class="demo-canvas" id="algo-backtrack-canvas" width="560" height="240" aria-describedby="demo-backtrack-caption">
+                Cuadrícula con muros; el backtracking encuentra un camino del inicio a la meta.
+              </canvas>
             </div>
             <div class="demo-stats" aria-live="polite"></div>
             <div class="demo-controls"></div>
@@ -329,7 +349,9 @@
               Búsqueda: búsqueda binaria en una matriz
             </p>
             <div class="demo-canvas-wrap">
-              <canvas class="demo-canvas" id="algo-search-canvas" width="560" height="240" aria-describedby="demo-search-caption">Matriz 10×4 ordenada; animación de búsqueda binaria y secciones descartadas en rojo suave.</canvas>
+              <canvas class="demo-canvas" id="algo-search-canvas" width="560" height="240" aria-describedby="demo-search-caption">
+                Matriz 10×4 ordenada; animación de búsqueda binaria y secciones descartadas en rojo suave.
+              </canvas>
             </div>
             <div class="demo-stats" aria-live="polite"></div>
             <div class="demo-controls"></div>
@@ -359,7 +381,9 @@
           <figure class="algorithm-demo" id="demo-sort" aria-labelledby="demo-sort-caption">
             <p class="demo-title" id="demo-sort-caption">Ordenamiento: bubble sort</p>
             <div class="demo-canvas-wrap">
-              <canvas class="demo-canvas" id="algo-sort-canvas" width="560" height="240" aria-describedby="demo-sort-caption">Las barras se reordenan con bubble sort hasta quedar ascendentes.</canvas>
+              <canvas class="demo-canvas" id="algo-sort-canvas" width="560" height="240" aria-describedby="demo-sort-caption">
+                Las barras se reordenan con bubble sort hasta quedar ascendentes.
+              </canvas>
             </div>
             <div class="demo-stats" aria-live="polite"></div>
             <div class="demo-controls"></div>
@@ -390,7 +414,9 @@
           <figure class="algorithm-demo" id="demo-hash" aria-labelledby="demo-hash-caption">
             <p class="demo-title" id="demo-hash-caption">Hashing: en qué cubeta cae una clave</p>
             <div class="demo-canvas-wrap">
-              <canvas class="demo-canvas" id="algo-hash-canvas" width="560" height="240" aria-describedby="demo-hash-caption">Tabla hash con cinco cubetas y claves de ejemplo; escribe una clave y encuentra su cubeta.</canvas>
+              <canvas class="demo-canvas" id="algo-hash-canvas" width="560" height="240" aria-describedby="demo-hash-caption">
+                Tabla hash con cinco cubetas y claves de ejemplo; escribe una clave y encuentra su cubeta.
+              </canvas>
             </div>
             <div class="demo-stats" aria-live="polite"></div>
             <div class="demo-controls"></div>
@@ -415,14 +441,67 @@
         <blockquote class="closing-quote">
           Ocho formas de pensar. Incontables formas de programar.
         </blockquote>
+
+        <hr class="home-intro-divider" aria-hidden="true">
+        <h3>Referencias y lecturas adicionales</h3>
+        <div class="post-body">
+          <ul>
+            <li>
+              <a href="https://www.khanacademy.org/computing/computer-science/algorithms" target="_blank" rel="noopener noreferrer">
+                Khan Academy: Algorithms
+              </a>
+              — una introducción amable y estructurada a algoritmos e ideas base de CS, con práctica incluida.
+            </li>
+            <li>
+              <a href="https://see.stanford.edu/Course/CS106B" target="_blank" rel="noopener noreferrer">
+                Stanford SEE: CS106B — Programming Abstractions
+              </a>
+              — clases y materiales sobre recursión, estructuras de datos y análisis de complejidad (C++).
+            </li>
+            <li>
+              <a href="https://www.geeksforgeeks.org/dsa/dsa-tutorial-learn-data-structures-and-algorithms/" target="_blank" rel="noopener noreferrer">
+                GeeksforGeeks: DSA Tutorial
+              </a>
+              — un mapa amplio y por temas de estructuras de datos y algoritmos, con enlaces para profundizar.
+            </li>
+          </ul>
+
+          <h3>¿No te basta con Lumænaut_? Lee esto…</h3>
+          <ul>
+            <li>
+              <a href="asi-funciona-el-bucle-del-videojuego.html">Así funciona el bucle del videojuego</a>
+              — input, actualizar, renderizar — el latido del videojuego, explicado paso a paso.
+            </li>
+            <li>
+              <a href="ep-2-todo-lo-que-no-se-sobre-bloggear.html">Episodio 2: Todo lo que no sé sobre bloggear</a>
+              — el cuaderno de bitácora detrás de cámaras: dominios, SEO y aprender en público.
+            </li>
+            <li>
+              <a href="puliendo-leetcode/dia-2-add-two-numbers.html">Puliendo LeetCode. Día 2: Suma Dos Números</a>
+              — de la suma de primaria al dominio de listas enlazadas.
+            </li>
+          </ul>
+        </div>
       </article>
     </main>
     <footer class="footer">
       <nav class="social-links" aria-label="Enlaces sociales">
         <ul>
-          <li><a href="https://www.reddit.com/user/Lumaenaut_/" target="_blank" rel="noopener noreferrer" title="Reddit"><img src="../../assets/reddit-icon.png" alt="Reddit" width="24" height="24"></a></li>
-          <li><a href="https://x.com/lumaenaut_" target="_blank" rel="noopener noreferrer" title="X"><img src="../../assets/twitter-icon.png" alt="X" width="24" height="24"></a></li>
-          <li><a href="https://github.com/Lumaenaut" target="_blank" rel="noopener noreferrer" title="GitHub"><img src="../../assets/github-icon.png" alt="GitHub" width="24" height="24"></a></li>
+          <li>
+            <a href="https://www.reddit.com/user/Lumaenaut_/" target="_blank" rel="noopener noreferrer" title="Reddit">
+              <img src="../../assets/reddit-icon.png" alt="Reddit" width="24" height="24">
+            </a>
+          </li>
+          <li>
+            <a href="https://x.com/lumaenaut_" target="_blank" rel="noopener noreferrer" title="X">
+              <img src="../../assets/twitter-icon.png" alt="X" width="24" height="24">
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/Lumaenaut" target="_blank" rel="noopener noreferrer" title="GitHub">
+              <img src="../../assets/github-icon.png" alt="GitHub" width="24" height="24">
+            </a>
+          </li>
         </ul>
       </nav>
       <div class="footer-meta">
