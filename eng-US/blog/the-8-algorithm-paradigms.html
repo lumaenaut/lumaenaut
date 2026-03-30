@@ -89,13 +89,17 @@
       </div>
       <div class="header-right">
         <div class="logo-div-mirror" aria-hidden="true"></div>
-        <button type="button" class="share-btn" aria-label="Share this page"><img src="../../assets/share-icon.png" alt="" class="share-btn-icon" data-ios-src="../../assets/ios-share-icon.png" width="20" height="20"></button>
+        <button type="button" class="share-btn" aria-label="Share this page">
+          <img src="../../assets/share-icon.png" alt="" class="share-btn-icon" data-ios-src="../../assets/ios-share-icon.png" width="20" height="20">
+        </button>
       </div>
     </header>
     <main id="main-content" class="content">
       <div class="floating-controls">
         <div class="lang-switcher">
-          <button type="button" class="lang-switcher-btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Select language"><img src="../../assets/translate-icon.png" alt="" class="lang-switcher-icon"><span class="lang-switcher-label">eng (US)</span></button>
+          <button type="button" class="lang-switcher-btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Select language"><img src="../../assets/translate-icon.png" alt="" class="lang-switcher-icon">
+            <span class="lang-switcher-label">eng (US)</span>
+          </button>
           <ul class="lang-switcher-dropdown" role="listbox" aria-label="Language options">
             <li><a href="#" data-lang="eng-US" role="option">eng (US)</a></li>
             <li><a href="#" data-lang="esp-LAT" role="option">esp (LAT)</a></li>
@@ -115,14 +119,20 @@
         <figure class="post-featured-image" aria-labelledby="algorithms-image-caption">
           <img
             src="../../images/people-walking-in-european-city-aascii.png"
-            alt="Color ASCII art: people walking through a European city street scene, with a streetcar/tram and a cafeteria visible; European-like buildings in the background."
+            alt="Color ASCII art: people walking through a European city street 
+              scene, with a streetcar/tram and a cafeteria visible; European-like 
+              buildings in the background."
             title="ASCII art — European city stroll (streetcar and cafeteria)"
             width="1840"
             height="1690"
             decoding="async"
             loading="eager"
             class="post-featured-img">
-          <figcaption id="algorithms-image-caption" class="visually-hidden">Illustration in ASCII art style: people walking through a European city street scene. A streetcar/tram and a cafeteria are visible, with European-like buildings in the background.</figcaption>
+          <figcaption id="algorithms-image-caption" class="visually-hidden">
+            Illustration in ASCII art style: people walking through a European 
+            city street scene. A streetcar/tram and a cafeteria are visible, 
+            with European-like buildings in the background.
+          </figcaption>
         </figure>
         <div class="post-body">
           <p>
@@ -164,11 +174,16 @@
           <figure class="algorithm-demo" id="demo-brute-force" aria-labelledby="demo-brute-force-caption">
             <p class="demo-title" id="demo-brute-force-caption">Brute force: 3-digit lock</p>
             <div class="demo-canvas-wrap">
-              <canvas class="demo-canvas" id="algo-brute-force-canvas" width="560" height="240" aria-describedby="demo-brute-force-caption">Interactive demo: try every combination from 000 until the lock opens.</canvas>
+              <canvas class="demo-canvas" id="algo-brute-force-canvas" width="560" height="240" aria-describedby="demo-brute-force-caption">
+                Interactive demo: try every combination from 000 until the lock opens.
+              </canvas>
             </div>
             <div class="demo-stats" aria-live="polite"></div>
             <div class="demo-controls"></div>
-            <p class="demo-caption">Try each combination in order until you find the target. No shortcuts — that’s brute force.</p>
+            <p class="demo-caption">
+              Try each combination in order until you find the target. No 
+              shortcuts — that’s brute force.
+            </p>
           </figure>
 
           <h3>2. Divide and conquer</h3>
@@ -197,13 +212,20 @@
             sequence; <strong>Shuffle</strong> resets with a new array.
           </p>
           <figure class="algorithm-demo" id="demo-divide-conquer" aria-labelledby="demo-divide-conquer-caption">
-            <p class="demo-title" id="demo-divide-conquer-caption">Divide and conquer: merge sort step-by-step</p>
+            <p class="demo-title" id="demo-divide-conquer-caption">
+              Divide and conquer: merge sort step-by-step
+            </p>
             <div class="demo-canvas-wrap">
-              <canvas class="demo-canvas" id="algo-divide-conquer-canvas" width="560" height="240" aria-describedby="demo-divide-conquer-caption">Step-by-step: each divide shows the split; each conquer shows the merged segment.</canvas>
+              <canvas class="demo-canvas" id="algo-divide-conquer-canvas" width="560" height="240" aria-describedby="demo-divide-conquer-caption">
+                Step-by-step: each divide shows the split; each conquer shows the merged segment.
+              </canvas>
             </div>
             <div class="demo-stats" aria-live="polite"></div>
             <div class="demo-controls"></div>
-            <p class="demo-caption">Step through each divide (split in half) and conquer (merge sorted halves). Previous / Next step / Run all / Shuffle.</p>
+            <p class="demo-caption">
+              Step through each divide (split in half) and conquer (merge 
+              sorted halves). Previous / Next step / Run all / Shuffle.
+            </p>
           </figure>
 
           <h3>3. Dynamic programming</h3>
@@ -224,15 +246,22 @@
             stored and reused.
           </p>
           <figure class="algorithm-demo" id="demo-dp" aria-labelledby="demo-dp-caption">
-            <p class="demo-title" id="demo-dp-caption">Dynamic programming: Fibonacci with memo</p>
+            <p class="demo-title" id="demo-dp-caption">
+              Dynamic programming: Fibonacci with memo
+            </p>
             <div class="demo-canvas-wrap">
-              <canvas class="demo-canvas" id="algo-dp-canvas" width="560" height="240" aria-describedby="demo-dp-caption">Memo table showing fib(0), fib(1), … so we don’t recompute the same values.</canvas>
+              <canvas class="demo-canvas" id="algo-dp-canvas" width="560" height="240" aria-describedby="demo-dp-caption">
+                Memo table showing fib(0), fib(1), … so we don’t recompute the 
+                same values.
+              </canvas>
             </div>
             <div class="demo-stats" aria-live="polite"></div>
             <div class="demo-controls"></div>
-            <p class="demo-caption">Compute fib(n). The table caches results so each sub-problem is solved only once.</p>
+            <p class="demo-caption">
+              Compute fib(n). The table caches results so each sub-problem is 
+              solved only once.
+            </p>
           </figure>
-
           <h3>4. Greedy</h3>
           <p>
             The greedy paradigm: at each step, make the best local choice and
@@ -252,11 +281,16 @@
           <figure class="algorithm-demo" id="demo-greedy" aria-labelledby="demo-greedy-caption">
             <p class="demo-title" id="demo-greedy-caption">Greedy: coin change</p>
             <div class="demo-canvas-wrap">
-              <canvas class="demo-canvas" id="algo-greedy-canvas" width="560" height="240" aria-describedby="demo-greedy-caption">Amount in cents and the coins chosen by the greedy rule.</canvas>
+              <canvas class="demo-canvas" id="algo-greedy-canvas" width="560" height="240" aria-describedby="demo-greedy-caption">
+                Amount in cents and the coins chosen by the greedy rule.
+              </canvas>
             </div>
             <div class="demo-stats" aria-live="polite"></div>
             <div class="demo-controls"></div>
-            <p class="demo-caption">At each step we choose the largest coin that fits. No backtracking — that’s greedy.</p>
+            <p class="demo-caption">
+              At each step we choose the largest coin that fits. No backtracking 
+              — that’s greedy.
+            </p>
           </figure>
 
           <h3>5. Backtracking</h3>
@@ -276,11 +310,15 @@
           <figure class="algorithm-demo" id="demo-backtrack" aria-labelledby="demo-backtrack-caption">
             <p class="demo-title" id="demo-backtrack-caption">Backtracking: maze path</p>
             <div class="demo-canvas-wrap">
-              <canvas class="demo-canvas" id="algo-backtrack-canvas" width="560" height="240" aria-describedby="demo-backtrack-caption">Small grid with walls; backtracking finds a path from start to goal.</canvas>
+              <canvas class="demo-canvas" id="algo-backtrack-canvas" width="560" height="240" aria-describedby="demo-backtrack-caption">
+                Small grid with walls; backtracking finds a path from start to goal.
+              </canvas>
             </div>
             <div class="demo-stats" aria-live="polite"></div>
             <div class="demo-controls"></div>
-            <p class="demo-caption">Click Solve to find a path. The algorithm tries a direction, backtracks if blocked, and tries another.</p>
+            <p class="demo-caption">Click Solve to find a path. The algorithm 
+              tries a direction, backtracks if blocked, and tries another.
+            </p>
           </figure>
 
           <h3>6. Searching</h3>
@@ -303,13 +341,18 @@
           <figure class="algorithm-demo" id="demo-search" aria-labelledby="demo-search-caption">
             <p class="demo-title" id="demo-search-caption">Searching: binary search on a matrix</p>
             <div class="demo-canvas-wrap">
-              <canvas class="demo-canvas" id="algo-search-canvas" width="560" height="240" aria-describedby="demo-search-caption">Sorted 10×4 matrix; animate a binary search and highlight pruned sections in soft red.</canvas>
+              <canvas class="demo-canvas" id="algo-search-canvas" width="560" height="240" aria-describedby="demo-search-caption">
+                Sorted 10×4 matrix; animate a binary search and highlight 
+                pruned sections in soft red.
+              </canvas>
             </div>
             <div class="demo-stats" aria-live="polite"></div>
             <div class="demo-controls"></div>
-            <p class="demo-caption">Click "Set random target", then "Run search". Binary search keeps halving the range; soft red cells are no longer considered.</p>
+            <p class="demo-caption">
+              Click "Set random target", then "Run search". Binary search keeps 
+              halving the range; soft red cells are no longer considered.
+            </p>
           </figure>
-
           <h3>7. Sorting</h3>
           <p>
             Sorting means arranging data in a defined order, like smallest to
@@ -329,13 +372,17 @@
           <figure class="algorithm-demo" id="demo-sort" aria-labelledby="demo-sort-caption">
             <p class="demo-title" id="demo-sort-caption">Sorting, bubble sort</p>
             <div class="demo-canvas-wrap">
-              <canvas class="demo-canvas" id="algo-sort-canvas" width="560" height="240" aria-describedby="demo-sort-caption">Bars get reordered by bubble sort until they are ascending.</canvas>
+              <canvas class="demo-canvas" id="algo-sort-canvas" width="560" height="240" aria-describedby="demo-sort-caption">
+                Bars get reordered by bubble sort until they are ascending.
+              </canvas>
             </div>
             <div class="demo-stats" aria-live="polite"></div>
             <div class="demo-controls"></div>
-            <p class="demo-caption">Shuffle the bars, then run bubble sort. Adjacent pairs are compared and swapped until the list is sorted.</p>
+            <p class="demo-caption">
+              Shuffle the bars, then run bubble sort. Adjacent pairs are 
+              compared and swapped until the list is sorted.
+            </p>
           </figure>
-
           <h3>8. Hashing</h3>
           <p>
             Imagine you're organizing a massive library, but instead of 
@@ -357,13 +404,18 @@
           <figure class="algorithm-demo" id="demo-hash" aria-labelledby="demo-hash-caption">
             <p class="demo-title" id="demo-hash-caption">Hashing, find which bucket a key goes in</p>
             <div class="demo-canvas-wrap">
-              <canvas class="demo-canvas" id="algo-hash-canvas" width="560" height="240" aria-describedby="demo-hash-caption">Hash table with five buckets and sample keys; type a key and find which bucket it maps to.</canvas>
+              <canvas class="demo-canvas" id="algo-hash-canvas" width="560" height="240" aria-describedby="demo-hash-caption">
+                Hash table with five buckets and sample keys; type a key and 
+                find which bucket it maps to.
+              </canvas>
             </div>
             <div class="demo-stats" aria-live="polite"></div>
             <div class="demo-controls"></div>
-            <p class="demo-caption">Type a key and click "Find bucket" to see the hash and the bucket. We only look in that bucket, not the whole table.</p>
+            <p class="demo-caption">
+              Type a key and click "Find bucket" to see the hash and the 
+              bucket. We only look in that bucket, not the whole table.
+            </p>
           </figure>
-
           <h3>Eight paradigms, countless algorithms</h3>
           <p>
             No matter how many specific algorithms you run into, they’re
@@ -379,14 +431,72 @@
         <blockquote class="closing-quote">
           Eight ways to think. Countless ways to code.
         </blockquote>
+        <hr class="home-intro-divider" aria-hidden="true">
+        <h3>References & further reading</h3>
+        <div class="post-body">
+          <ul>
+            <li>
+              <a href="https://www.khanacademy.org/computing/computer-science/algorithms" target="_blank" rel="noopener noreferrer">
+                Khan Academy: Algorithms
+              </a>
+              — a gentle, structured intro to algorithms and core CS ideas, 
+              with practice built in.
+            </li>
+            <li>
+              <a href="https://see.stanford.edu/Course/CS106B" target="_blank" rel="noopener noreferrer">
+                Stanford SEE: CS106B — Programming Abstractions
+              </a>
+              — lectures and materials covering recursion, data structures, and 
+              complexity analysis (C++).
+            </li>
+            <li>
+              <a href="https://www.geeksforgeeks.org/dsa/dsa-tutorial-learn-data-structures-and-algorithms/" target="_blank" rel="noopener noreferrer">
+                GeeksforGeeks: DSA Tutorial
+              </a>
+              — a broad, topic-wise map of data structures and algorithms with 
+              links to deeper dives.
+            </li>
+          </ul>
+          <h3>Can't get enough from Lumænaut_? Read this...</h3>
+          <ul>
+            <li>
+              <a href="how-a-game-loop-works.html">How the Game Loop Works</a>
+              — input, update, render — the videogame heartbeat, explained step by step.
+            </li>
+            <li>
+              <a href="ch-2-everything-i-dont-know-about-blogging.html">
+                Chapter 2: Everything I Don't Know About Blogging
+              </a>
+              — the behind-the-scenes logbook: domains, SEO, and learning in public.
+            </li>
+            <li>
+              <a href="grinding-leetcode/day-2-add-two-numbers.html">
+                Grinding LeetCode. Day 2: Add Two Numbers
+              </a>
+              — from grade-school addition to linked list mastery.
+            </li>
+          </ul>
+        </div>
       </article>
     </main>
     <footer class="footer">
       <nav class="social-links" aria-label="Social links">
         <ul>
-          <li><a href="https://www.reddit.com/user/Lumaenaut_/" target="_blank" rel="noopener noreferrer" title="Reddit"><img src="../../assets/reddit-icon.png" alt="Reddit" width="24" height="24"></a></li>
-          <li><a href="https://x.com/lumaenaut_" target="_blank" rel="noopener noreferrer" title="X"><img src="../../assets/twitter-icon.png" alt="X" width="24" height="24"></a></li>
-          <li><a href="https://github.com/Lumaenaut" target="_blank" rel="noopener noreferrer" title="GitHub"><img src="../../assets/github-icon.png" alt="GitHub" width="24" height="24"></a></li>
+          <li>
+            <a href="https://www.reddit.com/user/Lumaenaut_/" target="_blank" rel="noopener noreferrer" title="Reddit">
+              <img src="../../assets/reddit-icon.png" alt="Reddit" width="24" height="24">
+            </a>
+          </li>
+          <li>
+            <a href="https://x.com/lumaenaut_" target="_blank" rel="noopener noreferrer" title="X">
+              <img src="../../assets/twitter-icon.png" alt="X" width="24" height="24">
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/Lumaenaut" target="_blank" rel="noopener noreferrer" title="GitHub">
+              <img src="../../assets/github-icon.png" alt="GitHub" width="24" height="24">
+            </a>
+          </li>
         </ul>
       </nav>
       <div class="footer-meta">
