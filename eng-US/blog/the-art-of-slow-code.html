@@ -148,7 +148,7 @@
             feeling like black magic and starts feeling like… well, predictable 
             magic. Let’s go.
           </p>
-          <h3>What on Earth Is Algorithm Complexity?</h3>
+          <h3>What on earth is algorithm complexity?</h3>
           <p>
             Algorithm complexity is the study of how an algorithm’s resource 
             usage (time or memory) grows as the input size grows. Usually, we 
@@ -173,7 +173,7 @@
               Big O is the king.
             </p>
           </aside>
-          <h3>Big O Notation: The Celebrity of Complexity</h3>
+          <h3>Big O notation: The celebrity of complexity</h3>
           <p>
             Big O describes the <strong>upper bound</strong> of an algorithm’s 
             growth rate. It's often used to describe worst-case behavior, but 
@@ -243,7 +243,7 @@ def all_pairs(arr):
             creates 100 pairs. If you feed it 10,000 items… 100 million pairs. 
             Your memory will file for divorce.
           </p>
-          <h3>The Math Section: Where Code and Calculus Hold Hands</h3>
+          <h3>The math section: Where code and calculus hold hands</h3>
           <p>
             Okay, let’s roll up our sleeves. Here's a comprehensive math 
             section that links code complexity to actual mathematics. So here’s 
@@ -582,7 +582,7 @@ def binary_search(arr, target):
             remember that the formal definition is a bit looser — it’s an “at 
             most” relationship, not an “exactly” relationship.
           </p>
-          <h3>Space Complexity: The Overlooked Sibling</h3>
+          <h3>Space complexity: The overlooked sibling</h3>
           <p>
             Time complexity gets all the attention, but space complexity is 
             just as important — especially when you’re working with limited 
@@ -687,7 +687,7 @@ def fib_iterative(n):
 
           <p>In short: time complexity tells you if your code will finish before the heat death of the universe. Space complexity tells you if your code will run at all without crashing from memory exhaustion. Pay attention to both.</p>
 
-          <h3>From Theory to Practice: Why This Matters</h3>
+          <h3>From theory to practice: Why this matters</h3>
 
           <p>Big O is not just for whiteboard interviews. It’s for the moment you’re processing a million log entries and your simple O(n²) approach brings the server to its knees. It’s for deciding between a hash map (O(1) average lookup) and a list of tuples (O(n) search). It’s for those 3 AM realizations that your elegant one-liner actually hides a quadratic monster.</p>
 
@@ -733,7 +733,7 @@ def group_words_fast(words):
 
           <p>That’s the power of choosing the right data structure — we moved from O(n²) to O(n).</p>
 
-          <h3>Common Pitfalls & Misconceptions</h3>
+          <h3>Common pitfalls & misconceptions</h3>
 
           <ul>
             <li><strong>Big O is not about speed</strong> — It’s about growth. An O(n) algorithm can be slower than an O(n²) for small n if constants differ wildly. Always profile if performance matters.</li>
@@ -743,7 +743,7 @@ def group_words_fast(words):
             <li><strong>Hash tables are not always O(1)</strong> — In practice they are, but in theory, worst-case lookup is O(n) due to hash collisions. Good hash functions make this a rare event.</li>
           </ul>
 
-          <h3>Big O in the Wild: A Quick Cheat Sheet</h3>
+          <h3>Big O in the wild: A quick cheat sheet</h3>
 
           <p>Here’s a practical reference of common operations and their typical complexity:</p>
 
@@ -759,13 +759,13 @@ def group_words_fast(words):
 
           <p>If you memorize these, you’ll avoid 80% of performance facepalms. The other 20% are reserved for complex recursive DP and graph algorithms.</p>
 
-          <h3>Final Thoughts</h3>
+          <h3>Final thoughts</h3>
 
           <p>Algorithm complexity and Big O are not about making you feel bad because your code isn’t “perfect.” They’re about giving you the tools to make conscious trade-offs. Sometimes O(n²) is totally fine because n is always small. Sometimes you need that O(log n) binary search because n can be in the billions. And sometimes, the most optimized solution isn’t worth the effort if you’re building a prototype that might get scrapped next week.</p>
 
           <p>But knowing complexity means you get to make that call deliberately, rather than accidentally. And when your code finally runs fast even with huge datasets, you get that small dopamine hit. That’s the stuff. Go forth and write loops with intention — and may your recursion depth be shallow.</p>
 
-          <h3>Where to Go Next: Beyond Big O</h3>
+          <h3>Where to go next: Beyond Big O</h3>
 
           <p>Big O is just the first step. There’s also <strong>Big Omega (Ω)</strong> for lower bounds and <strong>Big Theta (Θ)</strong> for tight bounds. Most engineers live comfortably with Big O and the occasional profiling session, but knowing the distinction makes you look like a wizard in code reviews.</p>
 
@@ -782,9 +782,27 @@ def group_words_fast(words):
           <hr class="home-intro-divider" aria-hidden="true">
           <h3>References & further reading</h3>
           <ul>
-            <li><a href="https://www.bigocheatsheet.com/" target="_blank" rel="noopener">Big-O Cheat Sheet</a> – A quick visual reference for time and space complexities of common algorithms and data structures.</li>
-            <li><a href="https://www.khanacademy.org/computing/computer-science/algorithms" target="_blank" rel="noopener">Khan Academy: Algorithms</a> – Gentle but thorough introduction to asymptotic notation and classic algorithms.</li>
-            <li><a href="https://www.coursera.org/learn/algorithms-part1" target="_blank" rel="noopener">Algorithms, Part I by Princeton (Coursera)</a> – Taught by Kevin Wayne and Robert Sedgewick, includes excellent mathematical analysis of algorithms.</li>
+            <li>
+              <a href="https://www.bigocheatsheet.com/" target="_blank" rel="noopener">
+                Big-O Cheat Sheet
+              </a>
+              – A quick visual reference for time and space complexities of 
+              common algorithms and data structures.
+            </li>
+            <li>
+              <a href="https://www.khanacademy.org/computing/computer-science/algorithms" target="_blank" rel="noopener">
+                Khan Academy: Algorithms
+              </a>
+              – Gentle but thorough introduction to asymptotic notation and 
+              classic algorithms.
+            </li>
+            <li>
+              <a href="https://www.coursera.org/learn/algorithms-part1" target="_blank" rel="noopener">
+                Algorithms, Part I by Princeton (Coursera)
+              </a> 
+              – Taught by Kevin Wayne and Robert Sedgewick, includes excellent 
+              mathematical analysis of algorithms.
+            </li>
             <li><a href="https://www.geeksforgeeks.org/analysis-of-algorithms-set-3asymptotic-notations/" target="_blank" rel="noopener">GeeksforGeeks: Asymptotic Notations</a> – Clear examples and formal definitions for Big O, Omega, and Theta.</li>
             <li><a href="https://mitpress.mit.edu/books/introduction-algorithms-third-edition" target="_blank" rel="noopener">CLRS – Introduction to Algorithms (MIT Press)</a> – The classic textbook if you really want to get into the mathematical nitty-gritty of recurrences and complexity.</li>
           </ul>

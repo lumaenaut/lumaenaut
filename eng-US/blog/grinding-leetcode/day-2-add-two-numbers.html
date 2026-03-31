@@ -89,13 +89,18 @@
       </div>
       <div class="header-right">
         <div class="logo-div-mirror" aria-hidden="true"></div>
-        <button type="button" class="share-btn" aria-label="Share this page"><img src="../../../assets/share-icon.png" alt="" class="share-btn-icon" data-ios-src="../../../assets/ios-share-icon.png" width="20" height="20"></button>
+        <button type="button" class="share-btn" aria-label="Share this page">
+          <img src="../../../assets/share-icon.png" alt="" class="share-btn-icon" data-ios-src="../../../assets/ios-share-icon.png" width="20" height="20">
+        </button>
       </div>
     </header>
     <main id="main-content" class="content">
       <div class="floating-controls">
         <div class="lang-switcher">
-          <button type="button" class="lang-switcher-btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Select language"><img src="../../../assets/translate-icon.png" alt="" class="lang-switcher-icon"><span class="lang-switcher-label">eng (US)</span></button>
+          <button type="button" class="lang-switcher-btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Select language">
+            <img src="../../../assets/translate-icon.png" alt="" class="lang-switcher-icon">
+            <span class="lang-switcher-label">eng (US)</span>
+          </button>
           <ul class="lang-switcher-dropdown" role="listbox" aria-label="Language options">
             <li><a href="#" data-lang="eng-US" role="option">eng (US)</a></li>
             <li><a href="#" data-lang="esp-LAT" role="option">esp (LAT)</a></li>
@@ -122,10 +127,13 @@
             decoding="async"
             loading="eager"
             class="post-featured-img">
-          <figcaption id="add-two-numbers-feature-caption" class="visually-hidden">Illustration in ASCII art style: an outdated computer on a desk with a bookshelf behind it.</figcaption>
+          <figcaption id="add-two-numbers-feature-caption" class="visually-hidden">
+            Illustration in ASCII art style: an outdated computer on a desk 
+            with a bookshelf behind it.
+          </figcaption>
         </figure>
         <div class="post-body">
-          <h3>Problem Statement</h3>
+          <h3>Problem statement</h3>
           <p>
             You are given two <strong>non-empty linked lists</strong> 
             representing two non-negative integers. The digits are stored in 
@@ -135,7 +143,6 @@
             You may assume the two numbers do not contain any leading zero, 
             except the number 0 itself.
           </p>
-
           <pre>
 Input: l1 = [2,4,3], l2 = [5,6,4]
 Output: [7,0,8]
@@ -149,18 +156,33 @@ Output: [8,9,9,9,0,0,0,1]
           </pre>
           <p><strong>Constraints:</strong></p>
           <ul>
-            <li>The number of nodes in each linked list is in the range [1, 100].</li>
+            <li>
+              The number of nodes in each linked list is in the range [1, 100].
+            </li>
             <li>0 <= Node.val <= 9</li>
-            <li>It is guaranteed that the list represents a number that does not have leading zeros.</li>
+            <li>
+              It is guaranteed that the list represents a number that does not 
+              have leading zeros.
+            </li>
           </ul>
-
-          <h3>Rewriting in Simple Terms</h3>
-          <p>Imagine you have two numbers written <em>backwards</em>. For instance, 342 is stored as 2 → 4 → 3. You’re asked to add them digit by digit from left to right, just like we did in elementary school, but with the lists reversed. The twist? The result also has to be a reversed linked list. So instead of dealing with big integers, we simulate manual addition with a carry. That’s all there is to it — except we need to do it efficiently while traversing two linked lists that might have different lengths.</p>
-
-          <h3>Road to Optimal: From Naive to Masterful</h3>
-
-          <h4>Step 1 – The Naive Approach: Convert to Numbers</h4>
-          <p>The most straightforward idea: traverse each linked list, build the actual integer (by reversing digit order), add them, then convert the sum back to a reversed linked list. In Python that might look like:</p>
+          <h3>Rewriting in simple terms</h3>
+          <p>Imagine you have two numbers written <em>backwards</em>. For 
+            instance, 342 is stored as 2 → 4 → 3. You’re asked to add them 
+            digit by digit from left to right, just like we did in elementary 
+            school, but with the lists reversed. The twist? The result also has 
+            to be a reversed linked list. So instead of dealing with big 
+            integers, we simulate manual addition with a carry. That’s all 
+            there is to it — except we need to do it efficiently while 
+            traversing two linked lists that might have different lengths.
+          </p>
+          <h3>Road to optimal: From Naive to masterful</h3>
+          <h4>Step 1 – The naive approach: convert to numbers</h4>
+          <p>
+            The most straightforward idea: traverse each linked list, build the 
+            actual integer (by reversing digit order), add them, then convert 
+            the sum back to a reversed linked list. In Python that might look 
+            like:
+          </p>
           <pre><code>
 def get_number(head):
     num = 0
@@ -173,8 +195,7 @@ def get_number(head):
 # Then do addition and reconstruct
           </code></pre>
           <p>This works, but it's fatally flawed when numbers exceed 64-bit integers. Since each linked list can have up to 100 digits, the integer can be as large as 10<sup>100</sup> — Python’s big ints can handle it, but in languages like C++ or Java, we would overflow. Also, the problem explicitly intends to train us on linked list traversal and carry management, not big number libraries. So this naive method is inefficient both conceptually and in spirit.</p>
-
-          <h4>Step 2 – Simulation with Carry (The Standard Approach)</h4>
+          <h4>Step 2 – Simulation with carry (the standard approach)</h4>
           <p>The insight: addition is performed digit by digit from the least significant digit (which is the head of the list, thanks to reverse order). So we walk through both lists simultaneously, sum the current digits plus a carry, store the digit (sum % 10) in a new node, and propagate the carry (sum // 10). We continue until both lists are exhausted and the carry becomes 0.</p>
 
           <div class="simulation-table">
@@ -269,10 +290,10 @@ def get_number(head):
 
           <p>This algorithm runs in <strong>O(max(m, n))</strong> time, where m and n are lengths of the lists, and O(max(m, n)) space for the result list (if we ignore output, it's optimal). The key is the dummy head trick that simplifies edge cases — you never have to treat the first node specially.</p>
 
-          <h4>Step 3 – Optimizing for Memory and Edge Cases</h4>
+          <h4>Step 3 – Optimizing for memory and edge cases</h4>
           <p>Could we avoid creating a new list? In theory, we could reuse one of the input lists to store the result, modifying nodes in place. This would bring space complexity down to O(1) besides the answer. However, it's messy because we might need to extend a list if the final carry adds a new node. Usually interviewers and LeetCode accept the simpler new-list construction because it's cleaner. The real optimization is recognizing we must handle the final carry separately.</p>
 
-          <h3>Mathematical Formulation</h3>
+          <h3>Mathematical cormulation</h3>
           <div class="math">
             Let the numbers be represented as:<br>
             A = Σ (a_i * 10<sup>i</sup>) , where a_0 is the head of l1 (least significant digit).<br>
@@ -289,7 +310,7 @@ def get_number(head):
             This is exactly the elementary school addition algorithm, formalized for base 10.
           </div>
 
-          <h3>Code Solutions in Multiple Languages</h3>
+          <h3>Code solutions in multiple languages</h3>
           <p>Below you’ll find clean implementations of the optimal algorithm in six languages. Each uses the dummy head pattern and runs in O(n) time.</p>
 
           <div class="solution-card">
@@ -511,7 +532,7 @@ class Solution {
               <p>Swift uses optional chaining and nil-coalescing (<code>??</code>) to keep the code concise. The logic is identical across all languages, demonstrating the universality of the addition algorithm.</p>
           </div>
 
-          <h3>Edge Cases & Pitfalls</h3>
+          <h3>Edge cases & pitfalls</h3>
           <ul>
               <li><strong>Different list lengths:</strong> The algorithm gracefully handles this by defaulting missing nodes to 0.</li>
               <li><strong>Final carry:</strong> e.g., 999 + 1 = 1000 → output list [0,0,0,1]. Our loop condition includes <code>carry != 0</code> to add that extra node.</li>
@@ -519,15 +540,15 @@ class Solution {
               <li><strong>Large numbers:</strong> The solution works for 100-digit numbers because it never converts to integer — it only deals with digits and carry.</li>
           </ul>
 
-          <h3>Complexity Analysis</h3>
+          <h3>Complexity analysis</h3>
           <p><strong>Time Complexity:</strong> O(max(m, n)) where m, n are lengths of l1 and l2. We traverse each node at most once.</p>
           <p><strong>Space Complexity:</strong> O(max(m, n)) for the new list. If we disregard the output, it’s O(1) auxiliary space (only a few variables). Some solutions reuse one of the input lists to achieve O(1) extra space but at the cost of mutating inputs — it’s a tradeoff.</p>
 
-          <h3>Lessons Learned & Practical Applications</h3>
+          <h3>Lessons learned & practical applications</h3>
           <p>The “Add Two Numbers” problem is a microcosm of how low-level arithmetic works in every digital system. The carry propagation algorithm you implement here is the same fundamental building block used in arbitrary-precision arithmetic libraries, cryptographic modules, and even hardware ALUs. By mastering this pattern, you gain insight into how software handles numbers beyond native machine word sizes.</p>
           <p>Beyond interviews, this technique appears in real-world scenarios: implementing big integer arithmetic in blockchain smart contracts where gas costs demand efficient digit-by-digit operations, building high-performance financial software that requires exact decimal arithmetic, or optimizing embedded systems where memory is constrained. The dummy head pattern also teaches a reusable strategy for linked list construction — a pattern that applies to merging sorted lists, partitioning lists, and more.</p>
 
-          <h3>Further References & Resources</h3>
+          <h3>Further references & resources</h3>
           <ul>
               <li><a href="https://leetcode.com/problems/add-two-numbers/" target="_blank">Original LeetCode Problem</a></li>
               <li><a href="https://en.wikipedia.org/wiki/Elementary_arithmetic#Addition" target="_blank">Wikipedia – Elementary arithmetic addition</a></li>

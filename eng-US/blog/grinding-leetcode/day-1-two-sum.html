@@ -89,13 +89,18 @@
       </div>
       <div class="header-right">
         <div class="logo-div-mirror" aria-hidden="true"></div>
-        <button type="button" class="share-btn" aria-label="Share this page"><img src="../../../assets/share-icon.png" alt="" class="share-btn-icon" data-ios-src="../../../assets/ios-share-icon.png" width="20" height="20"></button>
+        <button type="button" class="share-btn" aria-label="Share this page">
+          <img src="../../../assets/share-icon.png" alt="" class="share-btn-icon" data-ios-src="../../../assets/ios-share-icon.png" width="20" height="20">
+        </button>
       </div>
     </header>
     <main id="main-content" class="content">
       <div class="floating-controls">
         <div class="lang-switcher">
-          <button type="button" class="lang-switcher-btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Select language"><img src="../../../assets/translate-icon.png" alt="" class="lang-switcher-icon"><span class="lang-switcher-label">eng (US)</span></button>
+          <button type="button" class="lang-switcher-btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Select language">
+            <img src="../../../assets/translate-icon.png" alt="" class="lang-switcher-icon">
+            <span class="lang-switcher-label">eng (US)</span>
+          </button>
           <ul class="lang-switcher-dropdown" role="listbox" aria-label="Language options">
             <li><a href="#" data-lang="eng-US" role="option">eng (US)</a></li>
             <li><a href="#" data-lang="esp-LAT" role="option">esp (LAT)</a></li>
@@ -124,7 +129,9 @@
             decoding="async"
             loading="eager"
             class="post-featured-img">
-          <figcaption id="two-sum-feature-caption" class="visually-hidden">Illustration in ASCII art style: an outdated computer on a desk with a bookshelf behind it.</figcaption>
+          <figcaption id="two-sum-feature-caption" class="visually-hidden">
+            Illustration in ASCII art style: an outdated computer on a desk with a bookshelf behind it.
+          </figcaption>
         </figure>
         <div class="post-body">
           <p>
@@ -138,8 +145,7 @@
             into something beautiful and fast. Grab a cup of coffee (or tea, we 
             do not judge), and let’s go.
           </p>
-
-          <h3>Problem Statement</h3>
+          <h3>Problem statement</h3>
           <blockquote cite="https://leetcode.com/problems/two-sum/">
             <p>
               Given an array of integers <code>nums</code> and an integer 
@@ -155,7 +161,6 @@
               You can return the answer in any order.
             </p>
           </blockquote>
-
           <h3>Rewriting in plain English</h3>
           <p>
             Imagine you have a list of numbers (like <code>[2, 7, 11, 15]</code>) 
@@ -169,7 +174,9 @@
           </p>
           <aside class="post-aside" aria-label="Indexing note">
             <p>
-              <strong>Indexing note.</strong> In programming, list indices usually start from 0. So the first number sits at index 0, the second at index 1, and so on.
+              <strong>Indexing note.</strong> In programming, list indices 
+              usually start from 0. So the first number sits at index 0, the 
+              second at index 1, and so on.
             </p>
           </aside>
           <h3>Examples from the problem</h3>
@@ -203,19 +210,23 @@
             That is the brute force approach. It is simple, it is honest, and 
             it works. But it is also the slowest.
           </p>
-          <pre class="post-pseudocode"><code>Brute force flow:
+          <pre class="post-pseudocode"><code>
+Brute force flow:
+
 For i = 0 to n-1:
   For j = i+1 to n-1:
-    If nums[i] + nums[j] == target → return [i, j]</code></pre>
+    If nums[i] + nums[j] == target → return [i, j]
+          </code></pre>
           <p><strong>Code (Python).</strong></p>
-          <pre><code class="language-python">def twoSum_bruteforce(nums, target):
+          <pre><code class="language-python">
+def twoSum_bruteforce(nums, target):
     n = len(nums)
     for i in range(n):
         for j in range(i + 1, n):
             if nums[i] + nums[j] == target:
                 return [i, j]
-    return []  # never reached because one solution exists</code></pre>
-
+    return []  # never reached because one solution exists
+          </code></pre>
           <h3>Complexity — the bad news</h3>
           <p>
             If the array has <code>n</code> elements, the outer loop runs 
@@ -271,22 +282,27 @@ For i = 0 to n-1:
               <code>map[nums[i]] = i</code>.
             </li>
           </ol>
-          <pre class="post-pseudocode"><code>One-pass hash map flow:
+          <pre class="post-pseudocode"><code>
+One-pass hash map flow:
+
 map = {}
 for i in 0..n-1:
   complement = target - nums[i]
   if complement in map: return [map[complement], i]
   else: map[nums[i]] = i
-# done</code></pre>
+# done
+          </code></pre>
           <p><strong>Code implementation.</strong></p>
-          <pre><code class="language-python">def twoSum_hashmap(nums, target):
+          <pre><code class="language-python">
+def twoSum_hashmap(nums, target):
     seen = {}  # key = number, value = index
     for i, num in enumerate(nums):
         complement = target - num
         if complement in seen:
             return [seen[complement], i]
         seen[num] = i
-    return []</code></pre>
+    return []
+          </code></pre>
           <p>Let’s trace example <code>nums = [3,2,4], target = 6</code>:</p>
           <ul>
             <li>
@@ -305,7 +321,6 @@ for i in 0..n-1:
             </li>
           </ul>
           <p>Beautiful, is it not? We only pass through the array once.</p>
-
           <h3>Complexity analysis: why it is a game-changer</h3>
           <p>
             <strong>Time complexity:</strong> O(n) — we traverse the array 
@@ -355,7 +370,10 @@ for i in 0..n-1:
           <h3>Follow-up: can we do better than O(n²)?</h3>
           <p>
             The problem’s follow-up asks: 
-            <em>“Can you come up with an algorithm that is less than O(n²) time complexity?”</em> 
+            <em>
+              “Can you come up with an algorithm that is less than O(n²) time 
+              complexity?”
+            </em> 
             And yes — we just did! O(n) with a hash map is dramatically faster. 
             Could we do O(n log n)? Possibly with sorting and two-pointer 
             technique, but that would lose original indices unless we store 
@@ -387,7 +405,6 @@ for i in 0..n-1:
             pattern in algorithm interviews (you will see it again in problems 
             like “Subarray Sum Equals K” or “Contains Duplicate”).
           </p>
-
           <h3>Testing our solution with edge cases</h3>
           <p>
             Let’s check some tricky scenarios that might break a naive approach:
@@ -407,8 +424,8 @@ for i in 0..n-1:
               holds.
             </li>
             <li>
-              <strong>Large numbers:</strong> Up to 10<sup>9</sup>, but our integer 
-              arithmetic works fine.
+              <strong>Large numbers:</strong> Up to 10<sup>9</sup>, but our 
+              integer arithmetic works fine.
             </li>
           </ul>
           <p>
@@ -483,7 +500,6 @@ public int[] twoSum(int[] nums, int target) {
               two-pointer without storing indices would be messy.
             </li>
           </ul>
-
           <h3>Why this problem matters beyond the interview</h3>
           <p>
             Two Sum teaches you the art of <strong>trade-offs</strong>. The 
@@ -552,9 +568,21 @@ public int[] twoSum(int[] nums, int target) {
     <footer class="footer">
       <nav class="social-links" aria-label="Social links">
         <ul>
-          <li><a href="https://www.reddit.com/user/Lumaenaut_/" target="_blank" rel="noopener noreferrer" title="Reddit"><img src="../../../assets/reddit-icon.png" alt="Reddit" width="24" height="24"></a></li>
-          <li><a href="https://x.com/lumaenaut_" target="_blank" rel="noopener noreferrer" title="X"><img src="../../../assets/twitter-icon.png" alt="X" width="24" height="24"></a></li>
-          <li><a href="https://github.com/Lumaenaut" target="_blank" rel="noopener noreferrer" title="GitHub"><img src="../../../assets/github-icon.png" alt="GitHub" width="24" height="24"></a></li>
+          <li>
+            <a href="https://www.reddit.com/user/Lumaenaut_/" target="_blank" rel="noopener noreferrer" title="Reddit">
+              <img src="../../../assets/reddit-icon.png" alt="Reddit" width="24" height="24">
+            </a>
+          </li>
+          <li>
+            <a href="https://x.com/lumaenaut_" target="_blank" rel="noopener noreferrer" title="X">
+              <img src="../../../assets/twitter-icon.png" alt="X" width="24" height="24">
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/Lumaenaut" target="_blank" rel="noopener noreferrer" title="GitHub">
+              <img src="../../../assets/github-icon.png" alt="GitHub" width="24" height="24">
+            </a>
+          </li>
         </ul>
       </nav>
       <div class="footer-meta">

@@ -237,7 +237,7 @@
             <strong>end</strong> of a hit instead; they differ by 
             <code>m - 1</code> once you know the pattern length.
           </p>
-          <h3>From naive to bit magic: a journey</h3>
+          <h3>From naive to bit magic: A journey</h3>
           <h4>1. The brute-force baseline (Levenshtein distance at every window)</h4>
           <p>
             The most straightforward approach: slide a window of size 
@@ -555,15 +555,21 @@ if __name__ == "__main__":
           <h3>References & further reading</h3>
           <ul>
             <li>
-              <a href="https://dl.acm.org/doi/10.1145/135239.135244" target="_blank" rel="noopener noreferrer">Ricardo Baeza-Yates and Gaston H. Gonnet — "A New Approach to Text Searching"</a>
+              <a href="https://dl.acm.org/doi/10.1145/135239.135244" target="_blank" rel="noopener noreferrer">
+                Ricardo Baeza-Yates and Gaston H. Gonnet — "A New Approach to Text Searching"
+              </a>
               — original Communications of the ACM paper that introduced the Bitap / shift-or line of work.
             </li>
             <li>
-              <a href="https://en.wikipedia.org/wiki/Bitap_algorithm" target="_blank" rel="noopener noreferrer">Bitap algorithm (Wikipedia)</a>
+              <a href="https://en.wikipedia.org/wiki/Bitap_algorithm" target="_blank" rel="noopener noreferrer">
+                Bitap algorithm (Wikipedia)
+              </a>
               — compact overview of exact and fuzzy variants, with the usual bit-mask intuition.
             </li>
             <li>
-              <a href="https://doi.org/10.1145/263867.263869" target="_blank" rel="noopener noreferrer">Gene Myers — “A fast bit-vector algorithm for approximate string matching based on dynamic programming”</a>
+              <a href="https://doi.org/10.1145/263867.263869" target="_blank" rel="noopener noreferrer">
+                Gene Myers — “A fast bit-vector algorithm for approximate string matching based on dynamic programming”
+              </a>
               — classic bit-vector treatment; useful context next to shift-or Bitap.
             </li>
           </ul>
