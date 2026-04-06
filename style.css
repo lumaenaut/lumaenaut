@@ -888,88 +888,33 @@ article.post .where-to-start p + p {
   padding: 0.85rem 1rem;
 }
 
-/* Position palette (eight cards; QOTW / LeetCode overrides below) */
-.blog-card-list li:nth-child(1) .blog-card {
-  box-shadow: 4px 4px 0px #c4a574;
-}
-
-.blog-card-list li:nth-child(2) .blog-card {
-  box-shadow: 4px 4px 0px #9a8bb5;
-}
-
-.blog-card-list li:nth-child(3) .blog-card {
-  box-shadow: 4px 4px 0px #7aa5b8;
-}
-
-.blog-card-list li:nth-child(4) .blog-card {
-  box-shadow: 4px 4px 0px #7aa5b8;
-}
-
-.blog-card-list li:nth-child(5) .blog-card {
-  box-shadow: 4px 4px 0px #8DCEA7;
-}
-
-.blog-card-list li:nth-child(6) .blog-card {
-  box-shadow: 4px 4px 0px #b8a082;
-}
-
-.blog-card-list li:nth-child(7) .blog-card {
-  box-shadow: 4px 4px 0px #c4a574;
-}
-
-.blog-card-list li:nth-child(8) .blog-card {
-  box-shadow: 4px 4px 0px #9a8bb5;
-}
-
-/* Question of the week (Cassidoo) — warm yellow–gold, theme-consistent */
+/* Blog index: one shadow color per series (order on the page does not matter) */
 .blog-card-list li.blog-card-item--qotw .blog-card {
   box-shadow: 4px 4px 0px #c9a227;
 }
 
-/* Slow Code feature — muted deep teal, distinct but on-palette */
 .blog-card-list li.blog-card-item--slowcode .blog-card {
   box-shadow: 4px 4px 0px #4f7f8a;
 }
 
-/* LeetCode series — distinct from position-based palette */
 .blog-card-list li.blog-card-item--leetcode .blog-card {
   box-shadow: 4px 4px 0px #b5654b;
 }
 
+.blog-card-list li.blog-card-item--paradigms .blog-card {
+  box-shadow: 4px 4px 0px #6e7a9e;
+}
+
+.blog-card-list li.blog-card-item--gameloop .blog-card {
+  box-shadow: 4px 4px 0px #5a9b7a;
+}
+
+.blog-card-list li.blog-card-item--logbook .blog-card {
+  box-shadow: 4px 4px 0px #8b6b9e;
+}
+
 .blog-card:hover {
   transform: translate(2px, 2px);
-}
-
-.blog-card-list li:nth-child(1) .blog-card:hover {
-  box-shadow: 2px 2px 0px #c4a574;
-}
-
-.blog-card-list li:nth-child(2) .blog-card:hover {
-  box-shadow: 2px 2px 0px #9a8bb5;
-}
-
-.blog-card-list li:nth-child(3) .blog-card:hover {
-  box-shadow: 2px 2px 0px #7aa5b8;
-}
-
-.blog-card-list li:nth-child(4) .blog-card:hover {
-  box-shadow: 2px 2px 0px #7aa5b8;
-}
-
-.blog-card-list li:nth-child(5) .blog-card:hover {
-  box-shadow: 2px 2px 0px #8DCEA7;
-}
-
-.blog-card-list li:nth-child(6) .blog-card:hover {
-  box-shadow: 2px 2px 0px #b8a082;
-}
-
-.blog-card-list li:nth-child(7) .blog-card:hover {
-  box-shadow: 2px 2px 0px #c4a574;
-}
-
-.blog-card-list li:nth-child(8) .blog-card:hover {
-  box-shadow: 2px 2px 0px #9a8bb5;
 }
 
 .blog-card-list li.blog-card-item--qotw .blog-card:hover {
@@ -982,6 +927,18 @@ article.post .where-to-start p + p {
 
 .blog-card-list li.blog-card-item--leetcode .blog-card:hover {
   box-shadow: 2px 2px 0px #b5654b;
+}
+
+.blog-card-list li.blog-card-item--paradigms .blog-card:hover {
+  box-shadow: 2px 2px 0px #6e7a9e;
+}
+
+.blog-card-list li.blog-card-item--gameloop .blog-card:hover {
+  box-shadow: 2px 2px 0px #5a9b7a;
+}
+
+.blog-card-list li.blog-card-item--logbook .blog-card:hover {
+  box-shadow: 2px 2px 0px #8b6b9e;
 }
 
 .blog-card-title {
