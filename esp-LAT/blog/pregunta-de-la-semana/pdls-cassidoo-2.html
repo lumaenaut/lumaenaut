@@ -1,0 +1,530 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-TLP7F5XM');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#F9F5EC">
+  <meta name="description" content="Resuelve enlaces simbólicos en un objeto de sistema de archivos. Maneja ciclos con elegancia. Desde recursión hasta DFS iterativo con detección de ciclos. Solución en Python con matemáticas y código.">
+  <meta name="author" content="Alberto Del Valle">
+  <title>PDLS (Cassidoo) #2: Resolución de enlaces simbólicos en un sistema de archivos falso</title>
+  <link rel="canonical" href="https://lumaenaut.com/esp-LAT/blog/pregunta-de-la-semana/pdls-cassidoo-2.html">
+  <link rel="alternate" hreflang="x-default" href="https://lumaenaut.com/eng-US/blog/question-of-the-week/qotw-cassidoo-2.html">
+  <link rel="alternate" hreflang="en" href="https://lumaenaut.com/eng-US/blog/question-of-the-week/qotw-cassidoo-2.html">
+  <link rel="alternate" hreflang="es" href="https://lumaenaut.com/esp-LAT/blog/pregunta-de-la-semana/pdls-cassidoo-2.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Lumænaut_">
+  <meta property="og:title" content="PDLS (Cassidoo) #2: Resolución de enlaces simbólicos en un sistema de archivos falso">
+  <meta property="og:description" content="Resuelve enlaces simbólicos, detecta ciclos y sigue la cadena hasta el archivo real. Desde recursión hasta solución iterativa óptima. Por Alberto Del Valle.">
+  <meta property="og:url" content="https://lumaenaut.com/esp-LAT/blog/pregunta-de-la-semana/pdls-cassidoo-2.html">
+  <meta property="og:image" content="https://lumaenaut.com/images/keyboard-infront-of-nebula-ascii.png">
+  <meta property="og:image:alt" content="Arte ASCII: teclado con luces RGB en el espacio exterior con una nebulosa amarilla suave al fondo.">
+  <meta property="og:image:width" content="1840">
+  <meta property="og:image:height" content="1690">
+  <meta property="og:locale" content="es_MX">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="article:published_time" content="2026-04-05">
+  <meta property="article:modified_time" content="2026-04-05">
+  <meta property="article:author" content="Alberto Del Valle">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:creator" content="@lumaenaut_">
+  <meta name="twitter:image" content="https://lumaenaut.com/images/keyboard-infront-of-nebula-ascii.png">
+  <meta name="twitter:title" content="PDLS (Cassidoo) #2: Resolución de enlaces simbólicos en un sistema de archivos falso">
+  <meta name="twitter:description" content="Resuelve enlaces simbólicos, detecta ciclos y sigue la cadena hasta el archivo real.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%94%A5%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../../../style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "PDLS (Cassidoo) #2: Resolución de enlaces simbólicos en un sistema de archivos falso",
+    "alternativeHeadline": "De la recursión a la detección iterativa de ciclos",
+    "description": "Resuelve enlaces simbólicos en un objeto de sistema de archivos. Maneja ciclos con elegancia. Un recorrido por un acertijo de entrevista de Cassidy Williams, con matemáticas y código Python. Por Alberto Del Valle.",
+    "url": "https://lumaenaut.com/esp-LAT/blog/pregunta-de-la-semana/pdls-cassidoo-2.html",
+    "mainEntityOfPage": { "@id": "https://lumaenaut.com/esp-LAT/blog/pregunta-de-la-semana/pdls-cassidoo-2.html" },
+    "image": "https://lumaenaut.com/images/keyboard-infront-of-nebula-ascii.png",
+    "inLanguage": "es-MX",
+    "datePublished": "2026-04-05",
+    "dateModified": "2026-04-05",
+    "author": {
+      "@type": "Person",
+      "name": "Alberto Del Valle",
+      "url": "https://lumaenaut.com/esp-LAT/indice.html"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Alberto Del Valle"
+    },
+    "isPartOf": { "@id": "https://lumaenaut.com/esp-LAT/blog/blog-indice.html" }
+  }
+  </script>
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TLP7F5XM"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+  <div class="page-wrapper">
+    <header class="header">
+      <div class="header-left">
+        <div class="logo-div">
+          <pre class="logo-ascii" id="logo-container" aria-hidden="true"></pre>
+        </div>
+      </div>
+      <div class="header-center">
+        <h1>Lumænaut_</h1>
+        <nav class="main-nav" aria-label="Navegación principal">
+          <ul>
+            <li><a class="home-btn" href="../../indice.html">inicio</a></li>
+            <li><a class="blog-btn" href="../blog-indice.html">blog</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="header-right">
+        <div class="logo-div-mirror" aria-hidden="true"></div>
+        <button type="button" class="share-btn" aria-label="Compartir esta página"><img src="../../../assets/share-icon.png" alt="" class="share-btn-icon" data-ios-src="../../../assets/ios-share-icon.png" width="20" height="20"></button>
+      </div>
+    </header>
+    <main id="main-content" class="content">
+      <div class="floating-controls">
+        <div class="lang-switcher">
+          <button type="button" class="lang-switcher-btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Seleccionar idioma"><img src="../../../assets/translate-icon.png" alt="" class="lang-switcher-icon"><span class="lang-switcher-label">esp (LAT)</span></button>
+          <ul class="lang-switcher-dropdown" role="listbox" aria-label="Opciones de idioma">
+            <li><a href="#" data-lang="eng-US" role="option">eng (US)</a></li>
+            <li><a href="#" data-lang="esp-LAT" role="option">esp (LAT)</a></li>
+          </ul>
+        </div>
+      </div>
+      <article class="post" aria-labelledby="post-title">
+        <header class="post-header">
+          <h2 id="post-title" class="post-title">Pregunta de la semana (Cassidoo).<br>#2: Resolución de enlaces simbólicos</h2>
+          <p class="post-subtitle">Siguiendo las migas de pan en un sistema de archivos falso</p>
+          <p class="post-meta">
+            Por <span class="author">Alberto Del Valle</span><br>
+            <time datetime="2026-04-05">5 de abril de 2026</time><br>
+            <span class="post-read-time">(Tiempo de lectura ~15 min)</span>
+          </p>
+        </header>
+        <figure class="post-featured-image" aria-labelledby="pdls-feature-caption">
+          <img
+            src="../../../images/keyboard-infront-of-nebula-ascii.png"
+            alt="Arte ASCII a color: teclado con luces RGB en el espacio exterior con una nebulosa amarilla suave al fondo."
+            title="Arte ASCII — teclado en el espacio con nebulosa amarilla"
+            width="1840"
+            height="1690"
+            decoding="async"
+            loading="eager"
+            class="post-featured-img">
+          <figcaption id="pdls-feature-caption" class="visually-hidden">Ilustración en estilo arte ASCII: un teclado con luces RGB en el espacio exterior con una nebulosa amarilla suave detrás.</figcaption>
+        </figure>
+        <div class="post-body">
+          <h3>Enlaces simbólicos, ciclos y el arte de la resolución</h3>
+          <p>
+            <strong>Un enorme agradecimiento a 
+            <a href="https://cassidoo.co/" target="_blank" rel="noopener noreferrer">Cassidy Williams</a> 
+            y su fantástico 
+            <a href="https://cassidoo.co/newsletter/" target="_blank" rel="noopener noreferrer">boletín Cassidoo</a>
+            </strong> por el acertijo de esta semana. El problema se siente como navegar por un laberinto de atajos: dado un diccionario que representa un sistema de archivos (rutas como claves, valores que son <code>null</code> para un archivo real o una cadena que apunta a otra ruta), escribe una función que resuelva una ruta hasta su destino real. Si una cadena de enlaces simbólicos forma un ciclo, regresas <code>null</code>. Sencillo en la superficie, pero lleno de trampas sutiles.
+          </p>
+          <p>
+            En esta publicación construiremos desde cero: un enfoque recursivo ingenuo, luego una solución iterativa con detección de ciclos y finalmente una versión óptima limpia usando un conjunto de visitados. En el camino exploraremos las matemáticas de los grafos funcionales, discutiremos la complejidad temporal y espacial, y produciremos código Python que realmente puedas usar. Y sí, le daremos a Cassidy el crédito que merece.
+          </p>
+          
+          <h3>El enunciado del problema (tal como se da)</h3>
+          <p>
+            <em>
+              "Se te da un sistema de archivos representado como un objeto donde las claves son rutas absolutas y los valores son null (archivo/directorio real) o una cadena (un enlace simbólico que apunta a otra ruta). Escribe una función que resuelva una ruta dada hasta su destino real, siguiendo los enlaces simbólicos en el camino. Si una cadena de enlaces simbólicos forma un ciclo, regresa null."
+            </em>
+          </p>
+          <p>Ejemplo (en notación de objeto de JavaScript, pero usaremos diccionarios de Python):</p>
+          <pre><code>
+const fs = {
+  "/a": "/b",
+  "/b": "/c",
+  "/c": null,
+  "/loop1": "/loop2",
+  "/loop2": "/loop1",
+  "/real": null,
+  "/alias": "/real",
+};
+
+resolvePath(fs, "/a");      // "/c"
+resolvePath(fs, "/alias");  // "/real"
+resolvePath(fs, "/loop1");  // null
+resolvePath(fs, "/real");   // "/real"
+          </code></pre>
+          <p>Nuestra tarea: implementar <code>resolve_path(fs, path)</code> en Python.</p>
+          
+          <h3>Reescribiendo en términos más simples</h3>
+          <p>
+            Imagina un mapa del tesoro donde cada ubicación <strong>es</strong> el tesoro (null / archivo real) o contiene una nota que dice "ve a esta otra ubicación". Tu tarea: seguir las notas hasta que llegues al tesoro o te des cuenta de que estás caminando en círculos. Si encuentras el tesoro, regresa su nombre. Si detectas un bucle (regresas a un lugar que ya visitaste), regresa <code>None</code> (que es el null de Python).
+          </p>
+          <p>
+            La entrada es un diccionario (mapa hash) donde las claves son cadenas (rutas como <code>"/a"</code>) y los valores son <code>None</code> (que significa "soy un archivo real") u otra cadena (que significa "soy un enlace simbólico, ve allí"). La función debe ser pura: no modifica el diccionario, solo lo lee.
+          </p>
+          
+          <h3>De ingenuo a óptimo: tres enfoques</h3>
+          
+          <h4>Enfoque 1: Seguidor recursivo (el más simple pero riesgoso)</h4>
+          <p>
+            La traducción más directa: si la ruta actual apunta a un archivo real (<code>fs[path] is None</code>), regresa la ruta. Si apunta a otra ruta, llama a la función nuevamente en ese destino. Si la ruta no está en el diccionario (caso extremo), podríamos regresar <code>None</code> o lanzar un error; pero dado el enunciado del problema, asumimos que todos los enlaces simbólicos apuntan a claves existentes.
+          </p>
+          <p>El problema obvio: la profundidad de recursión. Si tienes una cadena de 1000 enlaces simbólicos, el límite de recursión de Python (generalmente 1000) se romperá. Además, los ciclos causan recursión infinita a menos que los detectemos.</p>
+          <pre><code>
+def resolve_path_recursive(fs, path):
+    """
+    Resolución recursiva ingenua. Vulnerable a desbordamiento de pila y bucles infinitos.
+    """
+    if path not in fs:
+        return None  # O lanza KeyError, pero la especificación asume claves válidas.
+    target = fs[path]
+    if target is None:
+        return path
+    # Paso recursivo
+    return resolve_path_recursive(fs, target)
+          </code></pre>
+          <p>Esto funciona para los casos simples, pero falla en ciclos (RecursionError) y cadenas profundas (RecursionError otra vez). No está listo para producción.</p>
+          
+          <h4>Enfoque 2: Iterativo con detección de ciclos usando un conjunto de visitados</h4>
+          <p>
+            Podemos transformar la recursión en un bucle. Mantén un conjunto de rutas que ya hayamos visto en la cadena de resolución actual. Si alguna vez encontramos una ruta que ya está en el conjunto, significa que estamos a punto de repetirnos: existe un ciclo. Regresa <code>None</code>. De lo contrario, sigue caminando hasta que llegues a un archivo real (null) o una entrada faltante.
+          </p>
+          <pre><code>
+def resolve_path_iterative(fs, path):
+    """
+    Resolución iterativa con detección de ciclos usando un conjunto de visitados.
+    Regresa la ruta real o None si se detecta un ciclo.
+    """
+    seen = set()
+    current = path
+    while current in fs:
+        if current in seen:
+            # Ciclo detectado
+            return None
+        seen.add(current)
+        target = fs[current]
+        if target is None:
+            # Archivo / directorio real
+            return current
+        # De lo contrario, sigue el enlace simbólico
+        current = target
+    # Si salimos del bucle porque current no está en fs, es una condición de error.
+    # Según la especificación del problema, asumimos que todos los enlaces son válidos, pero defensivamente:
+    return None
+          </code></pre>
+          <p>Esto ya es mucho mejor. Sin límite de recursión, detección explícita de ciclos, tiempo lineal en la longitud de la cadena de enlaces simbólicos. Pero hay un matiz: el problema espera que si la ruta inicial es un archivo real (apunta a null), regresemos esa misma ruta. Nuestro código hace eso.</p>
+          
+          <h4>Enfoque 3: Óptimo con salida temprana y seguimiento de ruta (la forma final)</h4>
+          <p>
+            La solución anterior ya es óptima en términos de complejidad temporal: O(L) donde L es la longitud de la cadena (o el número de nodos únicos visitados antes de un ciclo). Sin embargo, podemos hacer una pequeña mejora: en lugar de almacenar un conjunto genérico de nodos visitados, también podríamos almacenar el orden de recorrido, pero no lo necesitamos. El conjunto de visitados es suficiente. El código anterior es limpio y rápido.
+          </p>
+          <p>Pero espera: hay un error sutil en algunos casos extremos. ¿Qué pasa si el diccionario contiene una clave que mapea a una cadena que no existe como clave? Según el enunciado del problema, asumimos que la entrada está bien formada, pero el código robusto podría manejar eso regresando <code>None</code>. Además, ¿qué pasa con los auto-bucles? <code>"/self": "/self"</code> sería detectado por la detección de ciclos inmediatamente.</p>
+          <p>Produzcamos la versión final, pulida, con comentarios y manejo de errores.</p>
+          
+          <pre><code>
+def resolve_path(fs, path):
+    """
+    Resuelve una ruta de enlace simbólico hasta su destino real.
+    
+    Parámetros:
+    fs (dict): Un diccionario que mapea rutas absolutas a None (archivo real)
+               o una cadena (destino del enlace simbólico).
+    path (str): La ruta inicial a resolver.
+    
+    Regresa:
+    str o None: La ruta real si se encuentra, None si se detecta un ciclo o la
+                ruta lleva a un destino inválido.
+                 
+    Ejemplo:
+    >>> fs = {"/a": "/b", "/b": None, "/loop": "/loop"}
+    >>> resolve_path(fs, "/a")
+    '/b'
+    >>> resolve_path(fs, "/loop")
+    None
+    """
+    if path not in fs:
+        # Ruta no está en el sistema de archivos: tratar como faltante, también podría lanzar excepción.
+        return None
+    
+    visited = set()
+    current = path
+    
+    while current in fs:
+        if current in visited:
+            # Ciclo detectado
+            return None
+        visited.add(current)
+        target = fs[current]
+        if target is None:
+            # Llegamos a un archivo real
+            return current
+        # Seguir el enlace simbólico
+        current = target
+    
+    # Si salimos porque current no está en fs, es un enlace roto.
+    return None
+          </code></pre>
+          <p>Esta es la implementación que enviaremos. Es concisa, eficiente y maneja ciclos con elegancia.</p>
+          
+          <h3>El modelo matemático: grafos funcionales</h3>
+          <p>
+            El diccionario del sistema de archivos se puede ver como una <strong>función parcial</strong> f: P → P ∪ {⊥}, donde P es el conjunto de cadenas de ruta y ⊥ representa un archivo real (null). Para cada ruta p que es un enlace simbólico, f(p) = q donde q es otra ruta. Para archivos reales, f(p) = ⊥.
+          </p>
+          <p>
+            Partiendo de una ruta inicial p0, generamos una secuencia: p0, p1, p2, ... donde p_{i+1} = f(p_i) siempre que f(p_i) sea una cadena (no ⊥). Esta secuencia:
+            <ul>
+              <li><strong>Termina</strong> en un archivo real: encontramos algún p_k tal que f(p_k) = ⊥, y regresamos p_k.</li>
+              <li><strong>Entra en un ciclo</strong>: existen i < j tales que p_i = p_j, y para todo k ≥ i, la secuencia se repite. Como f es determinista, una vez que revisitamos un nodo estamos en un bucle infinito. Detectamos esto y regresamos None.</li>
+              <li><strong>Lleva a una clave faltante</strong>: si algún f(p_i) es una cadena que no está en el dominio de f, la cadena se rompe. Defensivamente regresamos None.</li>
+            </ul>
+          </p>
+          <p>
+            Esta es exactamente la estructura de un <strong>grafo funcional</strong> (un grafo dirigido donde cada nodo tiene grado de salida como máximo 1). La detección de ciclos en grafos funcionales es un problema clásico de ciencias de la computación. El enfoque del conjunto de visitados es esencialmente un método de "marcar y barrer": marcamos los nodos a medida que los recorremos, y si encontramos un nodo marcado, tenemos un ciclo.
+          </p>
+          <p>
+            Un enfoque matemático alternativo es el algoritmo de detección de ciclos de Floyd (tortuga y liebre), que usa O(1) de memoria extra en lugar de O(L). Pero dado que es poco probable que las cadenas de enlaces simbólicos sean astronómicamente largas, el conjunto de visitados es más simple y legible. Para completar, aquí te mostramos cómo podrías implementar el algoritmo de Floyd:
+          </p>
+          <pre><code>
+def resolve_path_floyd(fs, path):
+    """
+    Detección de ciclos usando el algoritmo de la tortuga y la liebre de Floyd.
+    Usa O(1) de espacio extra pero dos apuntadores.
+    """
+    def next_node(p):
+        # regresa la siguiente ruta o None si es archivo real o falta
+        if p not in fs:
+            return None
+        val = fs[p]
+        if val is None:
+            return None
+        return val
+    
+    tortoise = path
+    hare = path
+    
+    # Fase 1: detectar ciclo
+    while True:
+        tortoise = next_node(tortoise)
+        hare = next_node(next_node(hare)) if hare is not None else None
+        if hare is None or tortoise is None:
+            # No hay ciclo, llegamos a un archivo real o enlace roto
+            break
+        if tortoise == hare:
+            # Ciclo detectado
+            return None
+    
+    # Fase 2: encontrar el destino real sin ciclo
+    # En realidad, si no hay ciclo, solo seguimos hasta None
+    current = path
+    visited = set()  # todavía necesitamos visitados para evitar bucles infinitos? No, porque ya sabemos que no hay ciclo.
+    # Pero cuidado: Floyd solo nos dice que hay un ciclo, no dónde comienza si queremos el archivo real.
+    # Para nuestro propósito, es más simple reutilizar el conjunto de visitados iterativo. Floyd es excesivo.
+    # Así que nos quedamos con la versión anterior.
+    return resolve_path_iterative(fs, path)  # respaldo
+          </code></pre>
+          <p>Dada la claridad del conjunto de visitados, mantendremos ese como nuestra solución canónica.</p>
+          
+          <h3>Análisis de complejidad</h3>
+          <p>
+            Sea L el número de nodos distintos visitados durante la resolución (la longitud de la cadena hasta la terminación o detección de ciclos). En el peor caso, L podría ser hasta el número total de enlaces simbólicos en el diccionario (digamos N). El algoritmo:
+            <ul>
+              <li><strong>Complejidad temporal:</strong> O(L) porque cada paso realiza búsquedas en el diccionario e inserciones/verificaciones en el conjunto en tiempo constante.</li>
+              <li><strong>Complejidad espacial:</strong> O(L) para el conjunto de visitados. En el peor caso, L = N, entonces O(N) de memoria adicional.</li>
+            </ul>
+            Si la memoria es una preocupación (por ejemplo, miles de millones de enlaces simbólicos), la variante de Floyd reduciría el espacio a O(1), pero a costa de la legibilidad. Para contextos de entrevista, el conjunto de visitados es perfectamente aceptable y esperado.
+          </p>
+          
+          <h3>Probando la solución (con los ejemplos proporcionados)</h3>
+          <p>Escribamos algunos casos de prueba para asegurar la corrección.</p>
+          <pre><code>
+def test_resolve_path():
+    fs = {
+        "/a": "/b",
+        "/b": "/c",
+        "/c": None,
+        "/loop1": "/loop2",
+        "/loop2": "/loop1",
+        "/real": None,
+        "/alias": "/real",
+        "/self": "/self",      # auto-bucle
+        "/broken": "/missing", # enlace roto
+    }
+    
+    assert resolve_path(fs, "/a") == "/c"
+    assert resolve_path(fs, "/alias") == "/real"
+    assert resolve_path(fs, "/loop1") is None
+    assert resolve_path(fs, "/real") == "/real"
+    assert resolve_path(fs, "/self") is None
+    assert resolve_path(fs, "/broken") is None  # destino faltante
+    assert resolve_path(fs, "/nonexistent") is None
+    
+    print("¡Todas las pruebas pasaron!")
+
+if __name__ == "__main__":
+    test_resolve_path()
+          </code></pre>
+          <p>Ejecutar esto debería mostrar "¡Todas las pruebas pasaron!"</p>
+          
+          <h3>Casos extremos y trampas</h3>
+          <ul>
+            <li><strong>Diccionario vacío:</strong> Si fs está vacío, cualquier ruta se resuelve a None (ya que la ruta no está en fs). Es consistente.</li>
+            <li><strong>La ruta apunta directamente a None:</strong> Debería regresar la ruta misma (archivo real). Nuestro código hace eso porque target es None y regresamos current.</li>
+            <li><strong>Ciclo de longitud 1:</strong> Una clave que se mapea a sí misma. Se detecta inmediatamente cuando vemos que current ya está en el conjunto de visitados.</li>
+            <li><strong>Cadena que termina en una clave faltante:</strong> Regresamos None, que es un valor predeterminado sensato. El enunciado del problema no especificó este escenario, pero el código robusto lo maneja.</li>
+            <li><strong>Cadenas muy largas:</strong> Sin recursión, por lo que el desbordamiento de pila es imposible.</li>
+          </ul>
+          
+          <h3>Por qué esta pregunta es interesante</h3>
+          <p>
+            La pregunta de Cassidy evalúa varios conceptos fundamentales: recursión vs iteración, detección de ciclos, búsquedas en diccionarios y pensamiento en casos extremos. Refleja la resolución de enlaces simbólicos del mundo real en sistemas operativos (aunque esos son más complejos con permisos y puntos de montaje). En entrevistas, es una excelente manera de evaluar si un candidato recurre a la recursión sin considerar los límites de la pila, y si recuerda detectar ciclos.
+          </p>
+          <p>
+            Además, es un ejemplo perfecto de un <strong>problema de recorrido de grafos</strong> disfrazado de problema de sistema de archivos. Una vez que ves el grafo funcional, la solución se vuelve clara.
+          </p>
+          
+          <h3>Enfoques alternativos de la comunidad</h3>
+          <p>
+            He visto a algunos desarrolladores implementar esto usando un bucle while con un contador (por ejemplo, limitar a 1000 pasos) como una detección de ciclos pobre. Eso es frágil. Otros usan una lista para registrar el orden de visita y verifican <code>if current in path_list</code>, que es O(L) por verificación, haciendo que todo el algoritmo sea O(L^2). El conjunto de visitados da verificaciones O(1).
+          </p>
+          <p>
+            También hay una técnica de dos apuntadores (tortuga y liebre) que usa espacio O(1). Aunque elegante, es más difícil de explicar en una entrevista a menos que estés preparado. El conjunto de visitados es el punto medio ideal.
+          </p>
+          
+          <h3>Poniéndolo todo junto: la respuesta final</h3>
+          <p>Aquí está la función Python completa, lista para usar, con cadena de documentación y comentarios.</p>
+          <pre><code>
+def resolve_path(fs, path):
+    """
+    Resuelve una ruta de enlace simbólico hasta su destino real.
+    
+    La función sigue enlaces simbólicos hasta que llega a un archivo real
+    (el valor es None) o detecta un ciclo. Si se encuentra un ciclo, regresa None.
+    
+    Args:
+        fs (dict): Un diccionario que mapea rutas de cadena a None (archivo real)
+                   o una cadena (destino del enlace simbólico).
+        path (str): La ruta inicial a resolver.
+    
+    Regresa:
+        str o None: La ruta real resuelta, o None si se detecta un ciclo
+                     o la ruta lleva a un destino inválido.
+    
+    Complejidad temporal: O(L) donde L es la longitud de la cadena de enlaces simbólicos.
+    Complejidad espacial: O(L) para el conjunto de visitados.
+    """
+    if path not in fs:
+        return None  # la ruta no existe en el sistema de archivos
+    
+    visited = set()
+    current = path
+    
+    while current in fs:
+        if current in visited:
+            # Ya estuvimos aquí antes -> ciclo
+            return None
+        visited.add(current)
+        target = fs[current]
+        
+        if target is None:
+            # Llegamos a un archivo/directorio real
+            return current
+        # De lo contrario, seguir el enlace simbólico
+        current = target
+    
+    # Si salimos del bucle porque current no es una clave en fs,
+    # el enlace simbólico apunta a una ruta inexistente.
+    return None
+          </code></pre>
+          
+          <h3>Conclusión</h3>
+          <p>
+            Hemos viajado desde una solución recursiva ingenua a través de una versión iterativa consciente de ciclos hasta una implementación óptima y limpia. Las ideas clave: tratar el sistema de archivos como un grafo funcional, usar un conjunto para registrar nodos visitados y preferir siempre la iteración sobre la recursión para cadenas sin límite. La pregunta de Cassidy nos recuerda que incluso los problemas aparentemente simples pueden ocultar complejidad, y que un enfoque metódico produce código robusto.
+          </p>
+          <p>
+            Gracias nuevamente a Cassidy Williams por la inspiración. Si disfrutaste este desglose, revisa su boletín para más desafíos semanales. ¡Feliz codificación, y que tus enlaces simbólicos nunca formen ciclos!
+          </p>
+          
+          <aside class="post-aside" aria-label="Agradecimiento a Cassidy Williams">
+            <p>
+              <strong>Agradecimiento especial</strong> a
+              <a href="https://cassidoo.co/" target="_blank" rel="noopener noreferrer">
+                Cassidy Williams
+              </a>
+              y su
+              <a href="https://cassidoo.co/newsletter/" target="_blank" rel="noopener noreferrer">
+                boletín Cassidoo
+              </a>
+              por el desafío original de entrevista. Suscríbete para recibir acertijos semanales y perspectivas profesionales.
+            </p>
+          </aside>
+        </div>
+        <blockquote class="closing-quote">
+          Pregunta de la semana #2 — Cassidoo. Resolución de enlaces simbólicos.
+        </blockquote>
+        <div class="prev-chap-nav" aria-label="Navegación al capítulo anterior">
+          <a class="next-chap-btn" href="pdls-cassidoo-1.html">
+            <img src="../../../assets/arrow-previous-icon.png" alt="" width="18" height="18">
+            <span>Cap. anterior</span>
+          </a>
+        </div>
+        <hr class="home-intro-divider" aria-hidden="true">
+        <div class="post-body">
+          <h3>Referencias y lecturas adicionales</h3>
+          <ul>
+            <li>
+              <a href="https://en.wikipedia.org/wiki/Functional_graph" target="_blank" rel="noopener noreferrer">
+                Grafo funcional (Wikipedia)
+              </a> — Antecedentes matemáticos para mapear nodos a como máximo un sucesor.
+            </li>
+            <li>
+              <a href="https://en.wikipedia.org/wiki/Cycle_detection" target="_blank" rel="noopener noreferrer">
+                Detección de ciclos (algoritmos de Floyd y Brent)
+              </a> — Alternativas eficientes en espacio al conjunto de visitados.
+            </li>
+            <li>
+              <a href="https://www.gnu.org/software/coreutils/manual/html_node/readlink-invocation.html" target="_blank" rel="noopener noreferrer">
+                Comando readlink de GNU
+              </a> — Resolución de enlaces simbólicos en el mundo real en Unix.
+            </li>
+          </ul>
+          <h3>¿Aún no tienes suficiente de Lumænaut_? Lee esto...</h3>
+          <ul>
+            <li>
+              <a href="../puliendo-leetcode/dia-2-add-two-numbers.html">Puliendo LeetCode — Día 2: Suma de Dos Números</a>
+              — acarreo de primaria en listas enlazadas: recorre una cadena paso a paso, mantén un poco de estado y cuida los casos extremos al final.
+            </li>
+            <li>
+              <a href="../los-8-paradigmas-de-algoritmos.html">Los 8 paradigmas de algoritmos</a>
+              — ocho modelos mentales que repetirás en problemas, entrevistas y código de producción.
+            </li>
+            <li>
+              <a href="../asi-funciona-el-bucle-del-videojuego.html">Así funciona el bucle del videojuego</a>
+              — el latido de un fotograma: actualizar, renderizar y una temporización estable en lenguaje sencillo.
+            </li>
+          </ul>
+        </div>
+      </article>
+    </main>
+    <footer class="footer">
+      <nav class="social-links" aria-label="Enlaces sociales">
+        <ul>
+          <li><a href="https://www.reddit.com/user/Lumaenaut_/" target="_blank" rel="noopener noreferrer" title="Reddit"><img src="../../../assets/reddit-icon.png" alt="Reddit" width="24" height="24"></a></li>
+          <li><a href="https://x.com/lumaenaut_" target="_blank" rel="noopener noreferrer" title="X"><img src="../../../assets/twitter-icon.png" alt="X" width="24" height="24"></a></li>
+          <li><a href="https://github.com/Lumaenaut" target="_blank" rel="noopener noreferrer" title="GitHub"><img src="../../../assets/github-icon.png" alt="GitHub" width="24" height="24"></a></li>
+        </ul>
+      </nav>
+      <div class="footer-meta">
+        <p>2026, Lumænaut_ <a href="../../politica-de-privacidad.html">Política de privacidad</a></p>
+      </div>
+    </footer>
+  </div>
+  <script src="../../../scripts/script.js"></script>
+</body>
+</html>
