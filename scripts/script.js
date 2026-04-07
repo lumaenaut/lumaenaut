@@ -1,5 +1,5 @@
 /**
- * Logo animation: builds the Lumænaut_ ASCII logo in the DOM and animates
+ * Logo animation: builds the lumænaut ASCII logo in the DOM and animates
  * random characters with alternating colors on an interval.
  */
 (function () {
