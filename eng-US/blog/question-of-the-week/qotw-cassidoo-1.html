@@ -79,7 +79,7 @@
         </div>
       </div>
       <div class="header-center">
-        <h1>Lumænaut_</h1>
+        <p class="header-site-title">lumænaut</p>
         <nav class="main-nav" aria-label="Main navigation">
           <ul>
             <li><a class="home-btn" href="../../index.html">home</a></li>
@@ -104,7 +104,7 @@
       </div>
       <article class="post" aria-labelledby="post-title">
         <header class="post-header">
-          <h2 id="post-title" class="post-title">Question of the Week (Cassidoo).<br>#1: Bitap Algorithm</h2>
+          <h1 id="post-title">Question of the Week (Cassidoo).<br>#1: Bitap Algorithm</h1>
           <p class="post-subtitle">Fuzzy string search</p>
           <p class="post-meta">
             By <span class="author">Alberto Del Valle</span><br>
@@ -125,7 +125,7 @@
           <figcaption id="qotw-feature-caption" class="visually-hidden">Illustration in ASCII art style: an RGB-lit keyboard in outer space with a soft yellow nebula behind it.</figcaption>
         </figure>
         <div class="post-body">
-          <h3>Fuzzy string search with Bitap: from naive to efficient</h3>
+          <h2>Fuzzy string search with Bitap: from naive to efficient</h2>
           <p>
             <strong>
               A big shoutout to 
@@ -149,7 +149,7 @@
             along the way, we’ll make sure you actually understand 
             <em>why</em> Bitap works.
           </p>
-          <h3>The problem statement</h3>
+          <h2>The problem statement</h2>
           <p>
             <em>
               “Given a text string and a pattern, implement a fuzzy string 
@@ -204,7 +204,7 @@
               and elegant, not the only asymptotic game in town.
             </p>
           </aside>
-          <h3>Restating in plain English</h3>
+          <h2>Restating in plain English</h2>
           <p>
             Imagine you're building a “did you mean?” feature. The user types 
             <code>"cassidoo"</code> and looks for <code>"cool"</code>. With 
@@ -237,8 +237,8 @@
             <strong>end</strong> of a hit instead; they differ by 
             <code>m - 1</code> once you know the pattern length.
           </p>
-          <h3>From naive to bit magic: A journey</h3>
-          <h4>1. The brute-force baseline (Levenshtein distance at every window)</h4>
+          <h2>From naive to bit magic: A journey</h2>
+          <h3>1. The brute-force baseline (Levenshtein distance at every window)</h3>
           <p>
             The most straightforward approach: slide a window of size 
             <code>len(pattern)</code> over the text, compute Levenshtein 
@@ -285,7 +285,7 @@ def levenshtein(a, b):
             This gets the job done, but each comparison costs O(m<sup>2</sup>) and we 
             repeat it up to n times — far from ideal for large documents.
           </p>
-          <h4>2. Enter Bitap — the shift-or algorithm (exact match)</h4>
+          <h3>2. Enter Bitap — the shift-or algorithm (exact match)</h3>
           <p>
             Before tackling fuzzy search, let's understand exact matching 
             with Bitap. The idea: track which prefixes of the pattern can still 
@@ -325,7 +325,7 @@ def levenshtein(a, b):
             For fuzzy search we need to count errors — that’s where state 
             grows beyond a single <strong>R</strong>.
           </p>
-          <h4>3. Bitap for fuzzy search (with ≤ k errors)</h4>
+          <h3>3. Bitap for fuzzy search (with ≤ k errors)</h3>
           <p>
             The fuzzy idea is still the same family as shift-or: maintain a 
             small stack of bitmasks — one per error budget — so a stream of text 
@@ -352,7 +352,7 @@ def levenshtein(a, b):
             can unit-test against; a production <code>agrep</code>-style engine 
             would replace the inner loop with the bit-parallel recurrence.
           </p>
-          <h3>A correct Python implementation (same model as the baseline)</h3>
+          <h2>A correct Python implementation (same model as the baseline)</h2>
           <p>
             This returns <code>{position, errors}</code> objects in the shape 
             of the prompt. It is intentionally plain: correctness and clarity 
@@ -400,7 +400,7 @@ if __name__ == "__main__":
     print(fuzzy_search("cassidoo", "cool", 3))
     # [{'position': 0, 'errors': 3}, {'position': 4, 'errors': 3}]
           </code></pre>
-          <h3>Precise Bitap (<code>k = 0</code>) — minimal shift-or in Python</h3>
+          <h2>Precise Bitap (<code>k = 0</code>) — minimal shift-or in Python</h2>
           <p>
             This is a compact, standard <strong>shift-or</strong> implementation: 
             character masks use <strong>cleared</strong> bits (0) where the pattern 
@@ -441,7 +441,7 @@ if __name__ == "__main__":
         hit["position"] for hit in fuzzy_search(sample, "cat", 0)
     ]
           </code></pre>
-          <h3>When <code>k = 1</code> on length-<code>m</code> windows</h3>
+          <h2>When <code>k = 1</code> on length-<code>m</code> windows</h2>
           <p>
             Full Levenshtein fuzzy Bitap (<code>k &gt; 0</code>) needs the 
             Wu–Manber / Baeza-Yates–Navarro recurrence on several masks. For 
@@ -498,7 +498,7 @@ if __name__ == "__main__":
             and fuzz on random strings — if the scores diverge, the bug is always 
             in the parallel layer you added last.
           </p>
-          <h3>Complexity & real-world usage</h3>
+          <h2>Complexity & real-world usage</h2>
           <p>
             The reference implementation above costs Θ((<code>n</code> − 
             <code>m</code> + 1) &middot; <code>m</code><sup>2</sup>) time in 
@@ -518,7 +518,7 @@ if __name__ == "__main__":
             fuzzy sibling, uses it under the hood. Also, some code editors and 
             search tools rely on similar algorithms for typo-tolerant search.
           </p>
-          <h3>Wrapping up</h3>
+          <h2>Wrapping up</h2>
           <p>
             We started with brute force, zoomed in on how shift-or packs NFA 
             states into integers, added a <strong>working exact Bitap</strong> 
@@ -558,7 +558,7 @@ if __name__ == "__main__":
         </div>
         <hr class="home-intro-divider" aria-hidden="true">
         <div class="post-body">          
-          <h3>References & further reading</h3>
+          <h2>References & further reading</h2>
           <ul>
             <li>
               <a href="https://dl.acm.org/doi/10.1145/135239.135244" target="_blank" rel="noopener noreferrer">
@@ -579,7 +579,7 @@ if __name__ == "__main__":
               — classic bit-vector treatment; useful context next to shift-or Bitap.
             </li>
           </ul>
-          <h3>Can't get enough from Lumænaut_? Read this...</h3>
+          <h2>Can't get enough from Lumænaut_? Read this...</h2>
           <ul>
             <li>
               <a href="../grinding-leetcode/day-1-two-sum.html">Grinding LeetCode — Day 1: Two Sum</a>

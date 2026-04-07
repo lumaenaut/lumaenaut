@@ -79,7 +79,7 @@
         </div>
       </div>
       <div class="header-center">
-        <h1>Lumænaut_</h1>
+        <p class="header-site-title">lumænaut</p>
         <nav class="main-nav" aria-label="Main navigation">
           <ul>
             <li><a class="home-btn" href="../../index.html">home</a></li>
@@ -104,7 +104,7 @@
       </div>
       <article class="post" aria-labelledby="post-title">
         <header class="post-header">
-          <h2 id="post-title" class="post-title">Question of the Week (Cassidoo).<br>#2: Symlink Resolution</h2>
+          <h1 id="post-title">Question of the Week (Cassidoo).<br>#2: Symlink Resolution</h1>
           <p class="post-subtitle">Following the breadcrumbs in a fake filesystem</p>
           <p class="post-meta">
             By <span class="author">Alberto Del Valle</span><br>
@@ -125,7 +125,7 @@
           <figcaption id="qotw-feature-caption" class="visually-hidden">Illustration in ASCII art style: an RGB-lit keyboard in outer space with a soft yellow nebula behind it.</figcaption>
         </figure>
         <div class="post-body">
-          <h3>Symlinks, cycles, and the art of resolution</h3>
+          <h2>Symlinks, cycles, and the art of resolution</h2>
           <p>
             <strong>A huge thank you to 
             <a href="https://cassidoo.co/" target="_blank" rel="noopener noreferrer">Cassidy Williams</a> 
@@ -137,7 +137,7 @@
             In this post we will build from the ground up: a naive recursive approach, then an iterative solution with cycle detection, and finally a clean optimal version using a visited set. Along the way we will explore the mathematics of functional graphs, discuss time and space complexity, and produce Python code that you can actually use. And yes, we will give Cassidy the credit she deserves.
           </p>
           
-          <h3>The problem statement (as given)</h3>
+          <h2>The problem statement (as given)</h2>
           <p>
             <em>
               "You are given a file system represented as an object where keys are absolute paths and values are either null (real file/directory) or a string (a symlink pointing to another path). Write a function that resolves a given path to its real destination, following symlinks along the way. If a symlink chain forms a cycle, return null."
@@ -162,7 +162,7 @@ resolvePath(fs, "/real");   // "/real"
           </code></pre>
           <p>Our job: implement <code>resolve_path(fs, path)</code> in Python.</p>
           
-          <h3>Rewriting in simpler terms</h3>
+          <h2>Rewriting in simpler terms</h2>
           <p>
             Imagine a treasure map where each location either <strong>is</strong> the treasure (null / real file) or contains a note saying "go to this other location". Your task: follow the notes until you either reach the treasure or realize you are walking in circles. If you find the treasure, return its name. If you detect a loop (you come back to a place you have already visited), return <code>None</code> (which is Python's null).
           </p>
@@ -170,9 +170,9 @@ resolvePath(fs, "/real");   // "/real"
             The input is a dictionary (hash map) where keys are strings (paths like <code>"/a"</code>) and values are either <code>None</code> (meaning "I am a real file") or another string (meaning "I am a symlink, go there"). The function should be pure: it does not modify the dictionary, it only reads it.
           </p>
           
-          <h3>From naive to optimal: three approaches</h3>
+          <h2>From naive to optimal: three approaches</h2>
           
-          <h4>Approach 1: Recursive follower (the simplest but risky)</h4>
+          <h3>Approach 1: Recursive follower (the simplest but risky)</h3>
           <p>
             The most direct translation: if the current path points to a real file (<code>fs[path] is None</code>), return the path. If it points to another path, call the function again on that target. If the path is not in the dictionary at all (edge case), we could return <code>None</code> or raise an error; but given the problem statement we assume all symlinks point to existing keys.
           </p>
@@ -192,7 +192,7 @@ def resolve_path_recursive(fs, path):
           </code></pre>
           <p>This works for the simple cases but fails on cycles (RecursionError) and deep chains (RecursionError again). Not production ready.</p>
           
-          <h4>Approach 2: Iterative with cycle detection using a visited set</h4>
+          <h3>Approach 2: Iterative with cycle detection using a visited set</h3>
           <p>
             We can transform recursion into a loop. Keep a set of paths we have already seen in the current resolution chain. If we ever encounter a path that is already in the set, that means we are about to repeat ourselves: a cycle exists. Return <code>None</code>. Otherwise, keep walking until we hit a real file (null) or a missing entry.
           </p>
@@ -221,7 +221,7 @@ def resolve_path_iterative(fs, path):
           </code></pre>
           <p>This is already much better. No recursion limit, explicit cycle detection, linear time in the length of the symlink chain. But there is a nuance: the problem expects that if the starting path is a real file (points to null), we return that same path. Our code does that.</p>
           
-          <h4>Approach 3: Optimal with early exit and path tracking (the final form)</h4>
+          <h3>Approach 3: Optimal with early exit and path tracking (the final form)</h3>
           <p>
             The previous solution is already optimal in terms of time complexity: O(L) where L is the length of the chain (or number of unique nodes visited before a cycle). However we can make a small improvement: instead of storing a generic set of visited nodes, we can also store the order of traversal, but we don't need that. The visited set is enough. The code above is clean and fast.
           </p>
@@ -273,7 +273,7 @@ def resolve_path(fs, path):
           </code></pre>
           <p>This is the implementation we will ship. It is concise, efficient, and handles cycles gracefully.</p>
           
-          <h3>The mathematical model: functional graphs</h3>
+          <h2>The mathematical model: functional graphs</h2>
           <p>
             The filesystem dictionary can be viewed as a <strong>partial function</strong> f: P → P ∪ {⊥}, where P is the set of path strings and ⊥ represents a real file (null). For each path p that is a symlink, f(p) = q where q is another path. For real files, f(p) = ⊥.
           </p>
@@ -331,7 +331,7 @@ def resolve_path_floyd(fs, path):
           </code></pre>
           <p>Given the clarity of the visited set, we will keep that as our canonical solution.</p>
           
-          <h3>Complexity analysis</h3>
+          <h2>Complexity analysis</h2>
           <p>
             Let L be the number of distinct nodes visited during resolution (the length of the chain until termination or cycle detection). In the worst case, L could be up to the total number of symlinks in the dictionary (say N). The algorithm:
             <ul>
@@ -341,7 +341,7 @@ def resolve_path_floyd(fs, path):
             If memory is a concern (e.g., billions of symlinks), the Floyd variant would reduce space to O(1), but at the cost of readability. For interview contexts, the visited set is perfectly acceptable and expected.
           </p>
           
-          <h3>Testing the solution (with provided examples)</h3>
+          <h2>Testing the solution (with provided examples)</h2>
           <p>Let's write some test cases to ensure correctness.</p>
           <pre><code>
 def test_resolve_path():
@@ -372,7 +372,7 @@ if __name__ == "__main__":
           </code></pre>
           <p>Running this should output "All tests passed!"</p>
           
-          <h3>Edge cases and pitfalls</h3>
+          <h2>Edge cases and pitfalls</h2>
           <ul>
             <li><strong>Empty dictionary:</strong> If fs is empty, any path resolves to None (since path not in fs). That's consistent.</li>
             <li><strong>Path points to None directly:</strong> Should return the path itself (real file). Our code does that because target is None and we return current.</li>
@@ -381,7 +381,7 @@ if __name__ == "__main__":
             <li><strong>Very long chains:</strong> No recursion, so stack overflow is impossible.</li>
           </ul>
           
-          <h3>Why this question is interesting</h3>
+          <h2>Why this question is interesting</h2>
           <p>
             Cassidy's question tests several fundamental concepts: recursion vs iteration, cycle detection, dictionary lookups, and edge case thinking. It mirrors real-world symlink resolution in operating systems (though those are more complex with permissions and mount points). In interviews, it's a great way to assess whether a candidate reaches for recursion without considering stack limits, and whether they remember to detect cycles.
           </p>
@@ -389,7 +389,7 @@ if __name__ == "__main__":
             Moreover, it's a perfect example of a <strong>graph traversal problem</strong> disguised as a filesystem problem. Once you see the functional graph, the solution becomes clear.
           </p>
           
-          <h3>Alternative approaches from the community</h3>
+          <h2>Alternative approaches from the community</h2>
           <p>
             I've seen some developers implement this using a while loop with a counter (e.g., limit to 1000 steps) as a poor man's cycle detection. That's fragile. Others use a list to record the order of visitation and check <code>if current in path_list</code> which is O(L) per check, making the whole algorithm O(L^2). The visited set gives O(1) checks.
           </p>
@@ -397,7 +397,7 @@ if __name__ == "__main__":
             There is also a two-pointer technique (tortoise and hare) that uses O(1) space. While elegant, it's harder to explain in an interview unless you are prepared. The visited set is the sweet spot.
           </p>
           
-          <h3>Putting it all together: the final answer</h3>
+          <h2>Putting it all together: the final answer</h2>
           <p>Here is the complete, ready-to-use Python function with docstring and comments.</p>
           <pre><code>
 def resolve_path(fs, path):
@@ -443,7 +443,7 @@ def resolve_path(fs, path):
     return None
           </code></pre>
           
-          <h3>Conclusion</h3>
+          <h2>Conclusion</h2>
           <p>
             We have journeyed from a naive recursive solution through an iterative cycle-aware version to a clean, optimal implementation. The key insights: treat the filesystem as a functional graph, use a set to record visited nodes, and always prefer iteration over recursion for unbounded chains. Cassidy's question reminds us that even seemingly simple problems can hide complexity, and that a methodical approach yields robust code.
           </p>
@@ -476,7 +476,7 @@ def resolve_path(fs, path):
         </div>
         <hr class="home-intro-divider" aria-hidden="true">
         <div class="post-body">
-          <h3>References & further reading</h3>
+          <h2>References & further reading</h2>
           <ul>
             <li>
               <a href="https://en.wikipedia.org/wiki/Functional_graph" target="_blank" rel="noopener noreferrer">
@@ -494,7 +494,7 @@ def resolve_path(fs, path):
               </a> — Real-world symlink resolution in Unix.
             </li>
           </ul>
-          <h3>Can't get enough from Lumænaut_? Read this...</h3>
+          <h2>Can't get enough from Lumænaut_? Read this...</h2>
           <ul>
             <li>
               <a href="../grinding-leetcode/day-2-add-two-numbers.html">Grinding LeetCode — Day 2: Add Two Numbers</a>

@@ -79,7 +79,7 @@
         </div>
       </div>
       <div class="header-center">
-        <h1>Lumænaut_</h1>
+        <p class="header-site-title">lumænaut</p>
         <nav class="main-nav" aria-label="Navegación principal">
           <ul>
             <li><a class="home-btn" href="../../indice.html">inicio</a></li>
@@ -104,7 +104,7 @@
       </div>
       <article class="post" aria-labelledby="post-title">
         <header class="post-header">
-          <h2 id="post-title" class="post-title">Pregunta de la semana (Cassidoo).<br>#1: Algoritmo Bitap</h2>
+          <h1 id="post-title">Pregunta de la semana (Cassidoo).<br>#1: Algoritmo Bitap</h1>
           <p class="post-subtitle">Búsqueda difusa</p>
           <p class="post-meta">
             Por <span class="author">Alberto Del Valle</span><br>
@@ -125,7 +125,7 @@
           <figcaption id="pdls-feature-caption" class="visually-hidden">Ilustración estilo ASCII: teclado con iluminación RGB en el espacio, con nebulosa amarilla suave al fondo.</figcaption>
         </figure>
         <div class="post-body">
-          <h3>Búsqueda difusa de cadenas con Bitap: de lo ingenuo a lo eficiente</h3>
+          <h2>Búsqueda difusa de cadenas con Bitap: de lo ingenuo a lo eficiente</h2>
           <p>
             <strong>
               Un gran agradecimiento a 
@@ -149,7 +149,7 @@
             de paso nos aseguraremos de que entiendas de verdad 
             <em>por qué</em> Bitap funciona.
           </p>
-          <h3>El planteamiento del problema</h3>
+          <h2>El planteamiento del problema</h2>
           <p>
             <em>
               “Dada una cadena de texto y un patrón, implementa una búsqueda difusa de cadenas 
@@ -201,7 +201,7 @@
               única opción asintóticamente interesante.
             </p>
           </aside>
-          <h3>Reformulando en palabras sencillas</h3>
+          <h2>Reformulando en palabras sencillas</h2>
           <p>
             Imagina que construyes un “¿quisiste decir?”. El usuario escribe 
             <code>"cassidoo"</code> y busca <code>"cool"</code>. Con 
@@ -234,8 +234,8 @@
             dan el <strong>final</strong> de una coincidencia; se relacionan con 
             <code>m - 1</code> cuando ya conoces la longitud del patrón.
           </p>
-          <h3>De lo ingenuo a la magia de los bits: un viaje</h3>
-          <h4>1. La línea base de fuerza bruta (distancia de Levenshtein en cada ventana)</h4>
+          <h2>De lo ingenuo a la magia de los bits: un viaje</h2>
+          <h3>1. La línea base de fuerza bruta (distancia de Levenshtein en cada ventana)</h3>
           <p>
             El enfoque más directo: deslizar una ventana de tamaño 
             <code>len(pattern)</code> sobre el texto, calcular la distancia de Levenshtein entre el 
@@ -282,7 +282,7 @@ def levenshtein(a, b):
             Esto cumple el objetivo, pero cada comparación cuesta O(m<sup>2</sup>) y la 
             repetimos hasta n veces — lejos de lo ideal para documentos grandes.
           </p>
-          <h4>2. Entra Bitap — el algoritmo shift-or (coincidencia exacta)</h4>
+          <h3>2. Entra Bitap — el algoritmo shift-or (coincidencia exacta)</h3>
           <p>
             Antes de la búsqueda difusa, entendamos la coincidencia exacta 
             con Bitap. La idea: llevar la cuenta de qué prefijos del patrón 
@@ -323,7 +323,7 @@ def levenshtein(a, b):
             En la búsqueda difusa hace falta contar errores — ahí el 
             estado ya no cabe en un solo <strong>R</strong>.
           </p>
-          <h4>3. Bitap para búsqueda difusa (con ≤ k errores)</h4>
+          <h3>3. Bitap para búsqueda difusa (con ≤ k errores)</h3>
           <p>
             La idea difusa sigue en la misma familia que shift-or: mantener una 
             pila pequeña de máscaras — una por presupuesto de errores — de modo que un flujo de texto 
@@ -350,7 +350,7 @@ def levenshtein(a, b):
             contrastar con pruebas; un motor tipo <code>agrep</code> en producción 
             sustituiría el bucle interno por la recurrencia bit-paralela.
           </p>
-          <h3>Una implementación correcta en Python (mismo modelo que la línea base)</h3>
+          <h2>Una implementación correcta en Python (mismo modelo que la línea base)</h2>
           <p>
             Devuelve objetos <code>{position, errors}</code> con la forma 
             del enunciado. Es deliberadamente sobria: primero corrección y claridad; 
@@ -398,7 +398,7 @@ if __name__ == "__main__":
     print(fuzzy_search("cassidoo", "cool", 3))
     # [{'position': 0, 'errors': 3}, {'position': 4, 'errors': 3}]
           </code></pre>
-          <h3>Bitap exacto (<code>k = 0</code>) — shift-or mínimo en Python</h3>
+          <h2>Bitap exacto (<code>k = 0</code>) — shift-or mínimo en Python</h2>
           <p>
             Implementación compacta de <strong>shift-or</strong>: las máscaras de 
             carácter usan bits en <strong>0</strong> donde el patrón coincide, y 
@@ -439,7 +439,7 @@ if __name__ == "__main__":
         hit["position"] for hit in fuzzy_search(sample, "cat", 0)
     ]
           </code></pre>
-          <h3>Cuando <code>k = 1</code> en ventanas de longitud <code>m</code></h3>
+          <h2>Cuando <code>k = 1</code> en ventanas de longitud <code>m</code></h2>
           <p>
             La Bitap difusa Levenshtein completa (<code>k &gt; 0</code>) exige la 
             recurrencia Wu–Manber / Baeza-Yates–Navarro sobre varias máscaras. Para 
@@ -496,7 +496,7 @@ if __name__ == "__main__":
             y haz <em>fuzz</em> sobre cadenas aleatorias: si las puntuaciones 
             divergen, el fallo está en la capa bit-paralela que añadiste al final.
           </p>
-          <h3>Complejidad y uso en el mundo real</h3>
+          <h2>Complejidad y uso en el mundo real</h2>
           <p>
             La implementación de referencia anterior cuesta tiempo Θ((<code>n</code> − 
             <code>m</code> + 1) &middot; <code>m</code><sup>2</sup>) en 
@@ -516,7 +516,7 @@ if __name__ == "__main__":
             <code>grep</code>, lo lleva bajo el capó. También algunos editores de código y 
             herramientas de búsqueda apoyan en algoritmos parecidos para la búsqueda tolerante a typos.
           </p>
-          <h3>Para terminar</h3>
+          <h2>Para terminar</h2>
           <p>
             Partimos de la fuerza bruta, acercamos la lente a cómo shift-or empaqueta 
             estados de un NFA en enteros, añadimos un <strong>Bitap exacto que 
@@ -557,7 +557,7 @@ if __name__ == "__main__":
         </div>
         <hr class="home-intro-divider" aria-hidden="true">
         <div class="post-body">
-          <h3>Referencias y lecturas adicionales</h3>
+          <h2>Referencias y lecturas adicionales</h2>
           <ul>
             <li>
               <a href="https://dl.acm.org/doi/10.1145/135239.135244" target="_blank" rel="noopener noreferrer">Ricardo Baeza-Yates and Gaston H. Gonnet — "A New Approach to Text Searching"</a>
@@ -572,7 +572,7 @@ if __name__ == "__main__":
               — tratamiento clásico con vectores de bits; buen contexto junto al shift-or Bitap.
             </li>
           </ul>
-          <h3>¿Aún no tienes suficiente de Lumænaut_? Lee esto...</h3>
+          <h2>¿Aún no tienes suficiente de Lumænaut_? Lee esto...</h2>
           <ul>
             <li>
               <a href="../puliendo-leetcode/dia-1-two-sum.html">Puliendo LeetCode — Día 1: Two Sum</a>

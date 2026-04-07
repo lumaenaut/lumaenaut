@@ -79,7 +79,7 @@
         </div>
       </div>
       <div class="header-center">
-        <h1>Lumænaut_</h1>
+        <p class="header-site-title">lumænaut</p>
         <nav class="main-nav" aria-label="Navegación principal">
           <ul>
             <li><a class="home-btn" href="../../indice.html">inicio</a></li>
@@ -104,7 +104,7 @@
       </div>
       <article class="post" aria-labelledby="post-title">
         <header class="post-header">
-          <h2 id="post-title" class="post-title">Puliendo LeetCode.<br>Día 2: Suma de Dos Números</h2>
+          <h1 id="post-title">Puliendo LeetCode.<br>Día 2: Suma de Dos Números</h1>
           <p class="post-subtitle">De la suma de primaria a la maestría en listas enlazadas</p>
           <p class="post-meta">
             Por <span class="author">Alberto Del Valle</span><br>
@@ -125,7 +125,7 @@
           <figcaption id="add-two-numbers-feature-caption" class="visually-hidden">Ilustración estilo ASCII: una computadora antigua en un escritorio con un librero detrás.</figcaption>
         </figure>
         <div class="post-body">
-          <h3>Declaración del Problema</h3>
+          <h2>Declaración del Problema</h2>
           <p>
             Se te proporcionan dos <strong>listas enlazadas no vacías</strong> 
             que representan dos enteros no negativos. Los dígitos están almacenados en 
@@ -154,12 +154,12 @@ Salida: [8,9,9,9,0,0,0,1]
             <li>Se garantiza que la lista representa un número que no tiene ceros a la izquierda.</li>
           </ul>
 
-          <h3>Reescribiendo en Términos Simples</h3>
+          <h2>Reescribiendo en Términos Simples</h2>
           <p>Imagina que tienes dos números escritos <em>al revés</em>. Por ejemplo, 342 se almacena como 2 → 4 → 3. Se te pide sumarlos dígito por dígito de izquierda a derecha, tal como lo hacíamos en la primaria, pero con las listas invertidas. ¿El truco? El resultado también debe ser una lista enlazada invertida. Así que, en lugar de lidiar con enteros grandes, simulamos la suma manual con un acarreo. Eso es todo — excepto que debemos hacerlo eficientemente mientras recorremos dos listas enlazadas que pueden tener longitudes diferentes.</p>
 
-          <h3>Camino hacia lo Óptimo: De lo Ingenuo a lo Magistral</h3>
+          <h2>Camino hacia lo Óptimo: De lo Ingenuo a lo Magistral</h2>
 
-          <h4>Paso 1 – El Enfoque Ingenuo: Convertir a Números</h4>
+          <h3>Paso 1 – El Enfoque Ingenuo: Convertir a Números</h3>
           <p>La idea más directa: recorrer cada lista enlazada, construir el entero real (invirtiendo el orden de los dígitos), sumarlos y luego convertir la suma de nuevo a una lista enlazada invertida. En Python podría verse así:</p>
           <pre><code>
 def obtener_numero(cabeza):
@@ -174,7 +174,7 @@ def obtener_numero(cabeza):
           </code></pre>
           <p>Esto funciona, pero tiene un problema fatal cuando los números exceden los enteros de 64 bits. Dado que cada lista enlazada puede tener hasta 100 dígitos, el entero puede ser tan grande como 10<sup>100</sup> — los enteros grandes de Python pueden manejarlo, pero en lenguajes como C++ o Java, habría desbordamiento. Además, el problema pretende explícitamente entrenarnos en el recorrido de listas enlazadas y la gestión del acarreo, no en bibliotecas de números grandes. Así que este método ingenuo es ineficiente conceptualmente.</p>
 
-          <h4>Paso 2 – Simulación con Acarreo (El Enfoque Estándar)</h4>
+          <h3>Paso 2 – Simulación con Acarreo (El Enfoque Estándar)</h3>
           <p>La idea clave: la suma se realiza dígito por dígito desde el dígito menos significativo (que es la cabeza de la lista, gracias al orden inverso). Así que recorremos ambas listas simultáneamente, sumamos los dígitos actuales más un acarreo, almacenamos el dígito (suma % 10) en un nuevo nodo y propagamos el acarreo (suma // 10). Continuamos hasta que ambas listas se agoten y el acarreo sea 0.</p>
 
           <div class="simulation-table">
@@ -269,10 +269,10 @@ def obtener_numero(cabeza):
 
           <p>Este algoritmo se ejecuta en <strong>O(max(m, n))</strong> tiempo, donde m y n son las longitudes de las listas, y O(max(m, n)) espacio para la lista resultado (si ignoramos la salida, es óptimo). La clave es el truco del nodo ficticio que simplifica los casos extremos — nunca tienes que tratar el primer nodo de manera especial.</p>
 
-          <h4>Paso 3 – Optimizando Memoria y Casos Extremos</h4>
+          <h3>Paso 3 – Optimizando Memoria y Casos Extremos</h3>
           <p>¿Podríamos evitar crear una nueva lista? En teoría, podríamos reutilizar una de las listas de entrada para almacenar el resultado, modificando los nodos en su lugar. Esto reduciría la complejidad espacial a O(1) además de la respuesta. Sin embargo, es complicado porque podríamos necesitar extender una lista si el acarreo final agrega un nuevo nodo. Por lo general, los entrevistadores y LeetCode aceptan la construcción de una nueva lista porque es más limpia. La verdadera optimización es reconocer que debemos manejar el acarreo final por separado.</p>
 
-          <h3>Formulación Matemática</h3>
+          <h2>Formulación Matemática</h2>
           <div class="math">
           Sean los números representados como:<br>
           A = Σ (a_i * 10<sup>i</sup>) , donde a_0 es la cabeza de l1 (dígito menos significativo).<br>
@@ -289,7 +289,7 @@ def obtener_numero(cabeza):
           Este es exactamente el algoritmo de suma de la escuela primaria, formalizado para base 10.
           </div>
 
-          <h3>Soluciones en Múltiples Lenguajes</h3>
+          <h2>Soluciones en Múltiples Lenguajes</h2>
           <p>A continuación encontrarás implementaciones limpias del algoritmo óptimo en seis lenguajes. Cada una usa el patrón del nodo ficticio y se ejecuta en O(n) tiempo.</p>
 
           <div class="solution-card">
@@ -511,7 +511,7 @@ class Solution {
               <p>Swift usa encadenamiento opcional y coalescencia nula (<code>??</code>) para mantener el código conciso. La lógica es idéntica en todos los lenguajes, demostrando la universalidad del algoritmo de suma.</p>
           </div>
 
-          <h3>Casos Extremos y Trampas</h3>
+          <h2>Casos Extremos y Trampas</h2>
           <ul>
               <li><strong>Longitudes de lista diferentes:</strong> El algoritmo maneja esto elegantemente asignando 0 a los nodos faltantes.</li>
               <li><strong>Acarreo final:</strong> ej., 999 + 1 = 1000 → lista de salida [0,0,0,1]. Nuestra condición de bucle incluye <code>carry != 0</code> para agregar ese nodo extra.</li>
@@ -519,15 +519,15 @@ class Solution {
               <li><strong>Números grandes:</strong> La solución funciona para números de 100 dígitos porque nunca los convierte a enteros — solo trabaja con dígitos y acarreo.</li>
           </ul>
 
-          <h3>Análisis de Complejidad</h3>
+          <h2>Análisis de Complejidad</h2>
           <p><strong>Complejidad de Tiempo:</strong> O(max(m, n)) donde m, n son las longitudes de l1 y l2. Recorremos cada nodo como máximo una vez.</p>
           <p><strong>Complejidad de Espacio:</strong> O(max(m, n)) para la nueva lista. Si ignoramos la salida, es O(1) de espacio auxiliar (solo unas pocas variables). Algunas soluciones reutilizan una de las listas de entrada para lograr O(1) de espacio extra, pero a costa de mutar las entradas — es un compromiso.</p>
 
-          <h3>Lecciones Aprendidas y Aplicaciones Prácticas</h3>
+          <h2>Lecciones Aprendidas y Aplicaciones Prácticas</h2>
           <p>El problema “Suma de Dos Números” es un microcosmos de cómo funciona la aritmética de bajo nivel en todo sistema digital. El algoritmo de propagación de acarreo que implementas aquí es el mismo bloque fundamental utilizado en bibliotecas aritméticas de precisión arbitraria, módulos criptográficos e incluso ALUs de hardware. Al dominar este patrón, obtienes una visión de cómo el software maneja números más allá de los tamaños de palabra nativos de la máquina.</p>
           <p>Más allá de las entrevistas, esta técnica aparece en escenarios del mundo real: implementar aritmética de enteros grandes en contratos inteligentes de blockchain donde los costos de gas exigen operaciones dígito por dígito eficientes, construir software financiero de alto rendimiento que requiere aritmética decimal exacta, u optimizar sistemas embebidos donde la memoria es limitada. El patrón del nodo ficticio también enseña una estrategia reutilizable para la construcción de listas enlazadas — un patrón que se aplica para fusionar listas ordenadas, particionar listas y más.</p>
 
-          <h3>Referencias y Recursos Adicionales</h3>
+          <h2>Referencias y Recursos Adicionales</h2>
           <ul>
               <li><a href="https://leetcode.com/problems/add-two-numbers/" target="_blank">Problema Original en LeetCode</a></li>
               <li><a href="https://en.wikipedia.org/wiki/Elementary_arithmetic#Addition" target="_blank">Wikipedia – Aritmética elemental (suma)</a></li>

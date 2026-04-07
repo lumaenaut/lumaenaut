@@ -79,7 +79,7 @@
         </div>
       </div>
       <div class="header-center">
-        <h1>Lumænaut_</h1>
+        <p class="header-site-title">lumænaut</p>
         <nav class="main-nav" aria-label="Navegación principal">
           <ul>
             <li><a class="home-btn" href="../../indice.html">inicio</a></li>
@@ -104,7 +104,7 @@
       </div>
       <article class="post" aria-labelledby="post-title">
         <header class="post-header">
-          <h2 id="post-title" class="post-title">Pregunta de la semana (Cassidoo).<br>#2: Resolución de enlaces simbólicos</h2>
+          <h1 id="post-title">Pregunta de la semana (Cassidoo).<br>#2: Resolución de enlaces simbólicos</h1>
           <p class="post-subtitle">Siguiendo las migas de pan en un sistema de archivos falso</p>
           <p class="post-meta">
             Por <span class="author">Alberto Del Valle</span><br>
@@ -125,7 +125,7 @@
           <figcaption id="pdls-feature-caption" class="visually-hidden">Ilustración en estilo arte ASCII: un teclado con luces RGB en el espacio exterior con una nebulosa amarilla suave detrás.</figcaption>
         </figure>
         <div class="post-body">
-          <h3>Enlaces simbólicos, ciclos y el arte de la resolución</h3>
+          <h2>Enlaces simbólicos, ciclos y el arte de la resolución</h2>
           <p>
             <strong>Un enorme agradecimiento a 
             <a href="https://cassidoo.co/" target="_blank" rel="noopener noreferrer">Cassidy Williams</a> 
@@ -137,7 +137,7 @@
             En esta publicación construiremos desde cero: un enfoque recursivo ingenuo, luego una solución iterativa con detección de ciclos y finalmente una versión óptima limpia usando un conjunto de visitados. En el camino exploraremos las matemáticas de los grafos funcionales, discutiremos la complejidad temporal y espacial, y produciremos código Python que realmente puedas usar. Y sí, le daremos a Cassidy el crédito que merece.
           </p>
           
-          <h3>El enunciado del problema (tal como se da)</h3>
+          <h2>El enunciado del problema (tal como se da)</h2>
           <p>
             <em>
               "Se te da un sistema de archivos representado como un objeto donde las claves son rutas absolutas y los valores son null (archivo/directorio real) o una cadena (un enlace simbólico que apunta a otra ruta). Escribe una función que resuelva una ruta dada hasta su destino real, siguiendo los enlaces simbólicos en el camino. Si una cadena de enlaces simbólicos forma un ciclo, regresa null."
@@ -162,7 +162,7 @@ resolvePath(fs, "/real");   // "/real"
           </code></pre>
           <p>Nuestra tarea: implementar <code>resolve_path(fs, path)</code> en Python.</p>
           
-          <h3>Reescribiendo en términos más simples</h3>
+          <h2>Reescribiendo en términos más simples</h2>
           <p>
             Imagina un mapa del tesoro donde cada ubicación <strong>es</strong> el tesoro (null / archivo real) o contiene una nota que dice "ve a esta otra ubicación". Tu tarea: seguir las notas hasta que llegues al tesoro o te des cuenta de que estás caminando en círculos. Si encuentras el tesoro, regresa su nombre. Si detectas un bucle (regresas a un lugar que ya visitaste), regresa <code>None</code> (que es el null de Python).
           </p>
@@ -170,9 +170,9 @@ resolvePath(fs, "/real");   // "/real"
             La entrada es un diccionario (mapa hash) donde las claves son cadenas (rutas como <code>"/a"</code>) y los valores son <code>None</code> (que significa "soy un archivo real") u otra cadena (que significa "soy un enlace simbólico, ve allí"). La función debe ser pura: no modifica el diccionario, solo lo lee.
           </p>
           
-          <h3>De ingenuo a óptimo: tres enfoques</h3>
+          <h2>De ingenuo a óptimo: tres enfoques</h2>
           
-          <h4>Enfoque 1: Seguidor recursivo (el más simple pero riesgoso)</h4>
+          <h3>Enfoque 1: Seguidor recursivo (el más simple pero riesgoso)</h3>
           <p>
             La traducción más directa: si la ruta actual apunta a un archivo real (<code>fs[path] is None</code>), regresa la ruta. Si apunta a otra ruta, llama a la función nuevamente en ese destino. Si la ruta no está en el diccionario (caso extremo), podríamos regresar <code>None</code> o lanzar un error; pero dado el enunciado del problema, asumimos que todos los enlaces simbólicos apuntan a claves existentes.
           </p>
@@ -192,7 +192,7 @@ def resolve_path_recursive(fs, path):
           </code></pre>
           <p>Esto funciona para los casos simples, pero falla en ciclos (RecursionError) y cadenas profundas (RecursionError otra vez). No está listo para producción.</p>
           
-          <h4>Enfoque 2: Iterativo con detección de ciclos usando un conjunto de visitados</h4>
+          <h3>Enfoque 2: Iterativo con detección de ciclos usando un conjunto de visitados</h3>
           <p>
             Podemos transformar la recursión en un bucle. Mantén un conjunto de rutas que ya hayamos visto en la cadena de resolución actual. Si alguna vez encontramos una ruta que ya está en el conjunto, significa que estamos a punto de repetirnos: existe un ciclo. Regresa <code>None</code>. De lo contrario, sigue caminando hasta que llegues a un archivo real (null) o una entrada faltante.
           </p>
@@ -221,7 +221,7 @@ def resolve_path_iterative(fs, path):
           </code></pre>
           <p>Esto ya es mucho mejor. Sin límite de recursión, detección explícita de ciclos, tiempo lineal en la longitud de la cadena de enlaces simbólicos. Pero hay un matiz: el problema espera que si la ruta inicial es un archivo real (apunta a null), regresemos esa misma ruta. Nuestro código hace eso.</p>
           
-          <h4>Enfoque 3: Óptimo con salida temprana y seguimiento de ruta (la forma final)</h4>
+          <h3>Enfoque 3: Óptimo con salida temprana y seguimiento de ruta (la forma final)</h3>
           <p>
             La solución anterior ya es óptima en términos de complejidad temporal: O(L) donde L es la longitud de la cadena (o el número de nodos únicos visitados antes de un ciclo). Sin embargo, podemos hacer una pequeña mejora: en lugar de almacenar un conjunto genérico de nodos visitados, también podríamos almacenar el orden de recorrido, pero no lo necesitamos. El conjunto de visitados es suficiente. El código anterior es limpio y rápido.
           </p>
@@ -273,7 +273,7 @@ def resolve_path(fs, path):
           </code></pre>
           <p>Esta es la implementación que enviaremos. Es concisa, eficiente y maneja ciclos con elegancia.</p>
           
-          <h3>El modelo matemático: grafos funcionales</h3>
+          <h2>El modelo matemático: grafos funcionales</h2>
           <p>
             El diccionario del sistema de archivos se puede ver como una <strong>función parcial</strong> f: P → P ∪ {⊥}, donde P es el conjunto de cadenas de ruta y ⊥ representa un archivo real (null). Para cada ruta p que es un enlace simbólico, f(p) = q donde q es otra ruta. Para archivos reales, f(p) = ⊥.
           </p>
@@ -331,7 +331,7 @@ def resolve_path_floyd(fs, path):
           </code></pre>
           <p>Dada la claridad del conjunto de visitados, mantendremos ese como nuestra solución canónica.</p>
           
-          <h3>Análisis de complejidad</h3>
+          <h2>Análisis de complejidad</h2>
           <p>
             Sea L el número de nodos distintos visitados durante la resolución (la longitud de la cadena hasta la terminación o detección de ciclos). En el peor caso, L podría ser hasta el número total de enlaces simbólicos en el diccionario (digamos N). El algoritmo:
             <ul>
@@ -341,7 +341,7 @@ def resolve_path_floyd(fs, path):
             Si la memoria es una preocupación (por ejemplo, miles de millones de enlaces simbólicos), la variante de Floyd reduciría el espacio a O(1), pero a costa de la legibilidad. Para contextos de entrevista, el conjunto de visitados es perfectamente aceptable y esperado.
           </p>
           
-          <h3>Probando la solución (con los ejemplos proporcionados)</h3>
+          <h2>Probando la solución (con los ejemplos proporcionados)</h2>
           <p>Escribamos algunos casos de prueba para asegurar la corrección.</p>
           <pre><code>
 def test_resolve_path():
@@ -372,7 +372,7 @@ if __name__ == "__main__":
           </code></pre>
           <p>Ejecutar esto debería mostrar "¡Todas las pruebas pasaron!"</p>
           
-          <h3>Casos extremos y trampas</h3>
+          <h2>Casos extremos y trampas</h2>
           <ul>
             <li><strong>Diccionario vacío:</strong> Si fs está vacío, cualquier ruta se resuelve a None (ya que la ruta no está en fs). Es consistente.</li>
             <li><strong>La ruta apunta directamente a None:</strong> Debería regresar la ruta misma (archivo real). Nuestro código hace eso porque target es None y regresamos current.</li>
@@ -381,7 +381,7 @@ if __name__ == "__main__":
             <li><strong>Cadenas muy largas:</strong> Sin recursión, por lo que el desbordamiento de pila es imposible.</li>
           </ul>
           
-          <h3>Por qué esta pregunta es interesante</h3>
+          <h2>Por qué esta pregunta es interesante</h2>
           <p>
             La pregunta de Cassidy evalúa varios conceptos fundamentales: recursión vs iteración, detección de ciclos, búsquedas en diccionarios y pensamiento en casos extremos. Refleja la resolución de enlaces simbólicos del mundo real en sistemas operativos (aunque esos son más complejos con permisos y puntos de montaje). En entrevistas, es una excelente manera de evaluar si un candidato recurre a la recursión sin considerar los límites de la pila, y si recuerda detectar ciclos.
           </p>
@@ -389,7 +389,7 @@ if __name__ == "__main__":
             Además, es un ejemplo perfecto de un <strong>problema de recorrido de grafos</strong> disfrazado de problema de sistema de archivos. Una vez que ves el grafo funcional, la solución se vuelve clara.
           </p>
           
-          <h3>Enfoques alternativos de la comunidad</h3>
+          <h2>Enfoques alternativos de la comunidad</h2>
           <p>
             He visto a algunos desarrolladores implementar esto usando un bucle while con un contador (por ejemplo, limitar a 1000 pasos) como una detección de ciclos pobre. Eso es frágil. Otros usan una lista para registrar el orden de visita y verifican <code>if current in path_list</code>, que es O(L) por verificación, haciendo que todo el algoritmo sea O(L^2). El conjunto de visitados da verificaciones O(1).
           </p>
@@ -397,7 +397,7 @@ if __name__ == "__main__":
             También hay una técnica de dos apuntadores (tortuga y liebre) que usa espacio O(1). Aunque elegante, es más difícil de explicar en una entrevista a menos que estés preparado. El conjunto de visitados es el punto medio ideal.
           </p>
           
-          <h3>Poniéndolo todo junto: la respuesta final</h3>
+          <h2>Poniéndolo todo junto: la respuesta final</h2>
           <p>Aquí está la función Python completa, lista para usar, con cadena de documentación y comentarios.</p>
           <pre><code>
 def resolve_path(fs, path):
@@ -443,7 +443,7 @@ def resolve_path(fs, path):
     return None
           </code></pre>
           
-          <h3>Conclusión</h3>
+          <h2>Conclusión</h2>
           <p>
             Hemos viajado desde una solución recursiva ingenua a través de una versión iterativa consciente de ciclos hasta una implementación óptima y limpia. Las ideas clave: tratar el sistema de archivos como un grafo funcional, usar un conjunto para registrar nodos visitados y preferir siempre la iteración sobre la recursión para cadenas sin límite. La pregunta de Cassidy nos recuerda que incluso los problemas aparentemente simples pueden ocultar complejidad, y que un enfoque metódico produce código robusto.
           </p>
@@ -476,7 +476,7 @@ def resolve_path(fs, path):
         </div>
         <hr class="home-intro-divider" aria-hidden="true">
         <div class="post-body">
-          <h3>Referencias y lecturas adicionales</h3>
+          <h2>Referencias y lecturas adicionales</h2>
           <ul>
             <li>
               <a href="https://en.wikipedia.org/wiki/Functional_graph" target="_blank" rel="noopener noreferrer">
@@ -494,7 +494,7 @@ def resolve_path(fs, path):
               </a> — Resolución de enlaces simbólicos en el mundo real en Unix.
             </li>
           </ul>
-          <h3>¿Aún no tienes suficiente de Lumænaut_? Lee esto...</h3>
+          <h2>¿Aún no tienes suficiente de Lumænaut_? Lee esto...</h2>
           <ul>
             <li>
               <a href="../puliendo-leetcode/dia-2-add-two-numbers.html">Puliendo LeetCode — Día 2: Suma de Dos Números</a>

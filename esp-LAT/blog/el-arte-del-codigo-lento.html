@@ -79,7 +79,7 @@
         </div>
       </div>
       <div class="header-center">
-        <h1>Lumænaut_</h1>
+        <p class="header-site-title">lumænaut</p>
         <nav class="main-nav" aria-label="Navegación principal">
           <ul>
             <li><a class="home-btn" href="../indice.html">inicio</a></li>
@@ -104,7 +104,7 @@
       </div>
       <article class="post" aria-labelledby="post-title">
         <header class="post-header">
-          <h2 id="post-title" class="post-title">El arte del código lento</h2>
+          <h1 id="post-title">El arte del código lento</h1>
           <p class="post-subtitle">Un viaje a través de la complejidad algorítmica y la notación Big O</p>
           <p class="post-meta">
             Por <span class="author">Alberto Del Valle</span><br>
@@ -131,7 +131,7 @@
 
           <p>Vamos a desglosar la notación Big O — el pan y mantequilla del pensamiento sobre rendimiento — y también sumergirnos en el esqueleto matemático que la sustenta. Porque una vez que conectas el código con las matemáticas, la complejidad deja de sentirse como magia negra y empieza a sentirse como… bueno, magia predecible. Vamos allá.</p>
 
-          <h3>¿Qué Diablos es la Complejidad Algorítmica?</h3>
+          <h2>¿Qué Diablos es la Complejidad Algorítmica?</h2>
 
           <p>La complejidad algorítmica es el estudio de cómo el uso de recursos de un algoritmo (tiempo o memoria) crece a medida que crece el tamaño de la entrada. Por lo general, nos obsesionamos con la <strong>complejidad temporal</strong> — cuántos pasos toma. Pero la <strong>complejidad espacial</strong> (memoria) también importa, especialmente si estás programando en una tostadora inteligente o manejando conjuntos masivos de datos.</p>
 
@@ -143,7 +143,7 @@
             </p>
           </aside>
 
-          <h3>Notación Big O: La Celebridad de la Complejidad</h3>
+          <h2>Notación Big O: La Celebridad de la Complejidad</h2>
 
           <p>Big O describe el <strong>límite superior</strong> de la tasa de crecimiento de un algoritmo. A menudo se usa para describir el comportamiento en el peor de los casos, pero técnicamente puede aplicarse también al caso promedio o al mejor caso — simplemente solemos usarlo para responder "¿qué tan malo puede llegar a ser?". Ignoramos las constantes y los términos de orden inferior porque no afectan la forma del crecimiento a medida que <code>n</code> se hace grande. Por eso decimos que un algoritmo O(2n) sigue siendo O(n).</p>
 
@@ -186,7 +186,7 @@ def todos_los_pares(arr):
 
           <p>¿La función <code>todos_los_pares</code>? Si le das 10 elementos, crea 100 pares. Si le das 10,000 elementos… 100 millones de pares. Tu memoria pedirá el divorcio.</p>
 
-          <h3>La Sección de Matemáticas: Donde el Código y el Cálculo se Toman de la Mano</h3>
+          <h2>La Sección de Matemáticas: Donde el Código y el Cálculo se Toman de la Mano</h2>
 
           <p>Bien, arremanguémonos. Aquí hay una sección matemática completa que vincula la complejidad del código con las matemáticas reales. Así que aquí está el secreto: cada vez que escribes un bucle, básicamente estás escribiendo una <strong>sumatoria</strong> — que es solo un término matemático elegante para sumar un montón de números. Si un bucle se ejecuta 10 veces y hace una operación cada vez, acabas de realizar 1 + 1 + 1 + … (10 veces) = 10 operaciones. Eso es una sumatoria. Cuando los bucles están anidados, el trabajo total se convierte en sumar secuencias que crecen en patrones, y esos patrones pueden describirse con fórmulas ordenadas.</p>
 
@@ -350,7 +350,7 @@ def busqueda_binaria(arr, objetivo):
 
           <p>También puedes usar el <strong>Teorema Maestro</strong> para recurrencias de divide y vencerás, pero esa es otra capa más. Digamos simplemente que las matemáticas proporcionan la gramática; los bucles y la recursión son las oraciones.</p>
 
-          <h4>Entendiendo la Definición Formal (Sin la Intimidación)</h4>
+          <h3>Entendiendo la Definición Formal (Sin la Intimidación)</h3>
 
           <p>Quizás has visto la definición formal de Big O y sentiste que tus ojos se vidriaban. Vamos a desglosarla en lenguaje sencillo con un ejemplo concreto para que deje de sentirse como matemáticas abstractas y empiece a sentirse como una herramienta útil.</p>
 
@@ -401,7 +401,7 @@ def busqueda_binaria(arr, objetivo):
 
           <p>Ahora, un matiz importante: Big O da un <strong>límite superior</strong>. Si un algoritmo se ejecuta en <code>O(n²)</code>, también es técnicamente correcto decir que se ejecuta en <code>O(n³)</code> o <code>O(2ⁿ)</code>, porque esos también son límites superiores (simplemente más laxos). Pero en la práctica, normalmente queremos el límite superior <em>más ajustado</em> — el que mejor describe el crecimiento real del algoritmo. Cuando decimos "este algoritmo es O(n²)", normalmente queremos decir "crece aproximadamente como n², y ninguna función más simple da un límite más ajustado". Los matemáticos usan la notación Theta (Θ) para ese límite ajustado, pero en las conversaciones cotidianas de programación, Big O se usa informalmente para significar el límite ajustado más significativo. Solo recuerda que la definición formal es un poco más laxa — es una relación de "como máximo", no de "exactamente".</p>
 
-          <h3>Complejidad Espacial: La Hermana Pasada por Alto</h3>
+          <h2>Complejidad Espacial: La Hermana Pasada por Alto</h2>
 
           <p>La complejidad temporal acapara toda la atención, pero la complejidad espacial es igualmente importante — especialmente cuando trabajas con memoria limitada o procesas grandes cantidades de datos. Mientras que la complejidad temporal pregunta "¿cuántos pasos toma esto?", la complejidad espacial pregunta "¿cuánta memoria extra necesita para ejecutarse?"</p>
 
@@ -461,13 +461,13 @@ def fibonacci_iterativo(n):
 
           <p>En resumen: la complejidad temporal te dice si tu código terminará antes de la muerte térmica del universo. La complejidad espacial te dice si tu código se ejecutará sin fallar por agotamiento de memoria. Presta atención a ambas.</p>
 
-          <h3>De la Teoría a la Práctica: Por Qué Esto Importa</h3>
+          <h2>De la Teoría a la Práctica: Por Qué Esto Importa</h2>
 
           <p>Big O no es solo para entrevistas de pizarra. Es para el momento en que estás procesando un millón de entradas de registro y tu simple enfoque O(n²) lleva al servidor a sus rodillas. Es para decidir entre un mapa hash (búsqueda promedio O(1)) y una lista de tuplas (búsqueda O(n)). Es para esas realizaciones a las 3 AM de que tu elegante código de una línea en realidad esconde un monstruo cuadrático.</p>
 
           <p>Una vez que interiorices el análisis de complejidad, empezarás a ver el código de manera diferente. Verás bucles anidados y pensarás: "uh-oh, si estos datos crecen, estoy en problemas". Instintivamente recurrirás a diccionarios, conjuntos y patrones de divide y vencerás. Eso es lo bueno.</p>
 
-          <h4>Ejemplo del Mundo Real: El Problema de Agrupación</h4>
+          <h3>Ejemplo del Mundo Real: El Problema de Agrupación</h3>
 
           <p>Imagina que necesitas agrupar palabras por su primera letra. Una solución ingenua podría ser:</p>
 
@@ -507,7 +507,7 @@ def agrupar_palabras_rapida(palabras):
 
           <p>Ese es el poder de elegir la estructura de datos correcta — pasamos de O(n²) a O(n).</p>
 
-          <h3>Errores Comunes y Conceptos Equivocados</h3>
+          <h2>Errores Comunes y Conceptos Equivocados</h2>
 
           <ul>
               <li><strong>Big O no es sobre velocidad</strong> — Es sobre crecimiento. Un algoritmo O(n) puede ser más lento que uno O(n²) para n pequeños si las constantes difieren enormemente. Siempre haz perfiles si el rendimiento importa.</li>
@@ -517,7 +517,7 @@ def agrupar_palabras_rapida(palabras):
               <li><strong>Las tablas hash no son siempre O(1)</strong> — En la práctica lo son, pero en teoría, la búsqueda en el peor caso es O(n) debido a colisiones de hash. Buenas funciones hash hacen de esto un evento raro.</li>
           </ul>
 
-          <h3>Big O en el Mundo Real: Una Hoja de Referencia Rápida</h3>
+          <h2>Big O en el Mundo Real: Una Hoja de Referencia Rápida</h2>
 
           <p>Aquí hay una referencia práctica de operaciones comunes y su complejidad típica:</p>
 
@@ -533,13 +533,13 @@ def agrupar_palabras_rapida(palabras):
 
           <p>Si memorizas estos, evitarás el 80% de las palmadas en la frente por rendimiento. El otro 20% está reservado para DP recursivo complejo y algoritmos de grafos.</p>
 
-          <h3>Reflexiones Finales</h3>
+          <h2>Reflexiones Finales</h2>
 
           <p>La complejidad algorítmica y Big O no se tratan de hacerte sentir mal porque tu código no es "perfecto". Se tratan de darte las herramientas para hacer concesiones conscientes. A veces O(n²) está perfectamente bien porque n siempre es pequeño. A veces necesitas esa búsqueda binaria O(log n) porque n puede estar en los miles de millones. Y a veces, la solución más optimizada no vale la pena el esfuerzo si estás construyendo un prototipo que podría ser descartado la próxima semana.</p>
 
           <p>Pero conocer la complejidad significa que puedes tomar esa decisión deliberadamente, en lugar de accidentalmente. Y cuando tu código finalmente corre rápido incluso con conjuntos de datos enormes, obtienes ese pequeño golpe de dopamina. Eso es lo que importa. Adelante, escribe bucles con intención — y que tu profundidad de recursión sea superficial.</p>
 
-          <h3>Hacia Dónde Ir Después: Más Allá de Big O</h3>
+          <h2>Hacia Dónde Ir Después: Más Allá de Big O</h2>
 
           <p>Big O es solo el primer paso. También existe <strong>Big Omega (Ω)</strong> para límites inferiores y <strong>Big Theta (Θ)</strong> para límites ajustados. La mayoría de los ingenieros viven cómodamente con Big O y alguna sesión ocasional de perfiles, pero conocer la distinción te hace parecer un mago en las revisiones de código.</p>
 
@@ -556,7 +556,7 @@ def agrupar_palabras_rapida(palabras):
           </blockquote>
 
           <hr class="home-intro-divider" aria-hidden="true">
-          <h3>Referencias y lecturas adicionales</h3>
+          <h2>Referencias y lecturas adicionales</h2>
           <ul>
             <li><a href="https://www.bigocheatsheet.com/" target="_blank" rel="noopener">Big-O Cheat Sheet</a> – Una referencia visual rápida de complejidades temporales y espaciales de algoritmos y estructuras de datos comunes.</li>
             <li><a href="https://www.khanacademy.org/computing/computer-science/algorithms" target="_blank" rel="noopener">Khan Academy: Algorithms</a> – Introducción amable pero exhaustiva a la notación asintótica y algoritmos clásicos.</li>
@@ -565,7 +565,7 @@ def agrupar_palabras_rapida(palabras):
             <li><a href="https://mitpress.mit.edu/books/introduction-algorithms-third-edition" target="_blank" rel="noopener">CLRS – Introduction to Algorithms (MIT Press)</a> – El libro de texto clásico si realmente quieres adentrarte en los detalles matemáticos de recurrencias y complejidad.</li>
           </ul>
 
-          <h3>¿No te basta con Lumænaut_? Lee esto…</h3>
+          <h2>¿No te basta con Lumænaut_? Lee esto…</h2>
           <ul>
             <li>
               <a href="question-of-the-week/qotw-cassidoo-1.html">QOTW (Cassidoo) #1: búsqueda difusa con Bitap</a>

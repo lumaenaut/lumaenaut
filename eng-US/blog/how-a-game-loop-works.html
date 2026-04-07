@@ -79,7 +79,7 @@
         </div>
       </div>
       <div class="header-center">
-        <h1>Lumænaut_</h1>
+        <p class="header-site-title">lumænaut</p>
         <nav class="main-nav" aria-label="Main navigation">
           <ul>
             <li><a class="home-btn" href="../index.html">home</a></li>
@@ -104,7 +104,7 @@
       </div>
       <article class="post" aria-labelledby="post-title">
         <header class="post-header">
-          <h2 id="post-title" class="post-title">How the Game Loop works</h2>
+          <h1 id="post-title">How the Game Loop works</h1>
           <p class="post-subtitle">Input, update, render — the videogame heartbeat</p>
           <p class="post-meta">
             By <span class="author">Alberto Del Valle</span><br>
@@ -133,7 +133,7 @@
             game is over. Understanding how it works is the first step to 
             making games yourself.
           </p>
-          <h3>The simplest loop</h3>
+          <h2>The simplest loop</h2>
           <p>
             At its core, a game loop does three things, over and over: it 
             checks for <strong>input</strong>, it <strong>updates</strong> the 
@@ -154,7 +154,7 @@ while (gameIsRunning) {
             game’s clock. Move the player, update the enemies, resolve 
             collisions, then paint the result. Repeat until the player quits.
           </p>
-          <h3>Why frame rate isn’t fixed</h3>
+          <h2>Why frame rate isn’t fixed</h2>
           <p>
             Old arcade machines and consoles used fixed hardware where game 
             logic ran at a consistent rate, such as 60 times per second. In 
@@ -174,7 +174,7 @@ while (gameIsRunning) {
             distance per second regardless of how many frames the machine can 
             draw. The game is <strong>frame-rate independent</strong>.
           </p>
-          <h3>Update vs render</h3>
+          <h2>Update vs render</h2>
           <p>
             It’s useful to keep “update” and “render” separate in your head. 
             <strong>Update</strong> is where you change the game world: 
@@ -185,7 +185,7 @@ while (gameIsRunning) {
             do “update at 60 Hz, render when possible” so physics stays stable 
             while the picture can vary.
           </p>
-          <h3>The loop in the browser</h3>
+          <h2>The loop in the browser</h2>
           <p>
             In a browser, you don’t write <code>while (true)</code>. The 
             browser gives you <strong><code>requestAnimationFrame</code></strong> 
@@ -223,7 +223,7 @@ while (gameIsRunning) {
             “Step 1 frame” runs one update and one render so you can see the 
             loop tick once.
           </p>
-          <h3>Fixed vs variable timestep</h3>
+          <h2>Fixed vs variable timestep</h2>
           <p>
             Some games use a <strong>fixed timestep</strong> for physics (e.g. 
             always 1/60 s per step). They might run several physics steps in 
@@ -235,7 +235,7 @@ while (gameIsRunning) {
             Professional engines often use a mix (fixed physics, variable 
             rendering).
           </p>
-          <h3>One loop to rule them all</h3>
+          <h2>One loop to rule them all</h2>
           <p>
             No matter how big the game is, the idea is the same: one loop, 
             input → update → render, with time (delta time) driving change. 
@@ -260,7 +260,7 @@ while (gameIsRunning) {
             rhythm this post describes. You can install it from the
             <a href="https://chromewebstore.google.com/detail/ljjaokgbhlgifgoigeaijhpgonlapinm" target="_blank" rel="noopener noreferrer">Chrome Web Store — Second Runner</a>.
           </p>
-          <h3>References & further reading</h3>
+          <h2>References & further reading</h2>
           <ul>
             <li>
               <a href="https://www.meshy.ai/blog/game-loop" target="_blank" rel="noopener noreferrer">Game Loop Fundamentals (Meshy)</a>
@@ -283,7 +283,7 @@ while (gameIsRunning) {
               — the loop as a design pattern: why continuous simulation beats a purely event-driven model for real-time play.
             </li>
           </ul>
-          <h3>Can't get enough from Lumænaut_? Read this...</h3>
+          <h2>Can't get enough from Lumænaut_? Read this...</h2>
           <ul>
             <li>
               <a href="grinding-leetcode/day-1-two-sum.html">Grinding LeetCode — Day 1: Two Sum</a>

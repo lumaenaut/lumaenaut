@@ -79,7 +79,7 @@
         </div>
       </div>
       <div class="header-center">
-        <h1>Lumænaut_</h1>
+        <p class="header-site-title">lumænaut</p>
         <nav class="main-nav" aria-label="Main navigation">
           <ul>
             <li><a class="home-btn" href="../../index.html">home</a></li>
@@ -109,7 +109,7 @@
       </div>
       <article class="post" aria-labelledby="post-title">
         <header class="post-header">
-          <h2 id="post-title" class="post-title">Grinding LeetCode.<br>Day 2: Add Two Numbers</h2>
+          <h1 id="post-title">Grinding LeetCode.<br>Day 2: Add Two Numbers</h1>
           <p class="post-subtitle">From grade-school addition to linked list mastery</p>
           <p class="post-meta">
             By <span class="author">Alberto Del Valle</span><br>
@@ -133,7 +133,7 @@
           </figcaption>
         </figure>
         <div class="post-body">
-          <h3>Problem statement</h3>
+          <h2>Problem statement</h2>
           <p>
             You are given two <strong>non-empty linked lists</strong> 
             representing two non-negative integers. The digits are stored in 
@@ -165,7 +165,7 @@ Output: [8,9,9,9,0,0,0,1]
               have leading zeros.
             </li>
           </ul>
-          <h3>Rewriting in simple terms</h3>
+          <h2>Rewriting in simple terms</h2>
           <p>Imagine you have two numbers written <em>backwards</em>. For 
             instance, 342 is stored as 2 → 4 → 3. You’re asked to add them 
             digit by digit from left to right, just like we did in elementary 
@@ -175,8 +175,8 @@ Output: [8,9,9,9,0,0,0,1]
             there is to it — except we need to do it efficiently while 
             traversing two linked lists that might have different lengths.
           </p>
-          <h3>Road to optimal: From Naive to masterful</h3>
-          <h4>Step 1 – The naive approach: convert to numbers</h4>
+          <h2>Road to optimal: From Naive to masterful</h2>
+          <h3>Step 1 – The naive approach: convert to numbers</h3>
           <p>
             The most straightforward idea: traverse each linked list, build the 
             actual integer (by reversing digit order), add them, then convert 
@@ -195,7 +195,7 @@ def get_number(head):
 # Then do addition and reconstruct
           </code></pre>
           <p>This works, but it's fatally flawed when numbers exceed 64-bit integers. Since each linked list can have up to 100 digits, the integer can be as large as 10<sup>100</sup> — Python’s big ints can handle it, but in languages like C++ or Java, we would overflow. Also, the problem explicitly intends to train us on linked list traversal and carry management, not big number libraries. So this naive method is inefficient both conceptually and in spirit.</p>
-          <h4>Step 2 – Simulation with carry (the standard approach)</h4>
+          <h3>Step 2 – Simulation with carry (the standard approach)</h3>
           <p>The insight: addition is performed digit by digit from the least significant digit (which is the head of the list, thanks to reverse order). So we walk through both lists simultaneously, sum the current digits plus a carry, store the digit (sum % 10) in a new node, and propagate the carry (sum // 10). We continue until both lists are exhausted and the carry becomes 0.</p>
 
           <div class="simulation-table">
@@ -290,10 +290,10 @@ def get_number(head):
 
           <p>This algorithm runs in <strong>O(max(m, n))</strong> time, where m and n are lengths of the lists, and O(max(m, n)) space for the result list (if we ignore output, it's optimal). The key is the dummy head trick that simplifies edge cases — you never have to treat the first node specially.</p>
 
-          <h4>Step 3 – Optimizing for memory and edge cases</h4>
+          <h3>Step 3 – Optimizing for memory and edge cases</h3>
           <p>Could we avoid creating a new list? In theory, we could reuse one of the input lists to store the result, modifying nodes in place. This would bring space complexity down to O(1) besides the answer. However, it's messy because we might need to extend a list if the final carry adds a new node. Usually interviewers and LeetCode accept the simpler new-list construction because it's cleaner. The real optimization is recognizing we must handle the final carry separately.</p>
 
-          <h3>Mathematical cormulation</h3>
+          <h2>Mathematical cormulation</h2>
           <div class="math">
             Let the numbers be represented as:<br>
             A = Σ (a_i * 10<sup>i</sup>) , where a_0 is the head of l1 (least significant digit).<br>
@@ -310,7 +310,7 @@ def get_number(head):
             This is exactly the elementary school addition algorithm, formalized for base 10.
           </div>
 
-          <h3>Code solutions in multiple languages</h3>
+          <h2>Code solutions in multiple languages</h2>
           <p>Below you’ll find clean implementations of the optimal algorithm in six languages. Each uses the dummy head pattern and runs in O(n) time.</p>
 
           <div class="solution-card">
@@ -532,7 +532,7 @@ class Solution {
               <p>Swift uses optional chaining and nil-coalescing (<code>??</code>) to keep the code concise. The logic is identical across all languages, demonstrating the universality of the addition algorithm.</p>
           </div>
 
-          <h3>Edge cases & pitfalls</h3>
+          <h2>Edge cases & pitfalls</h2>
           <ul>
               <li><strong>Different list lengths:</strong> The algorithm gracefully handles this by defaulting missing nodes to 0.</li>
               <li><strong>Final carry:</strong> e.g., 999 + 1 = 1000 → output list [0,0,0,1]. Our loop condition includes <code>carry != 0</code> to add that extra node.</li>
@@ -540,15 +540,15 @@ class Solution {
               <li><strong>Large numbers:</strong> The solution works for 100-digit numbers because it never converts to integer — it only deals with digits and carry.</li>
           </ul>
 
-          <h3>Complexity analysis</h3>
+          <h2>Complexity analysis</h2>
           <p><strong>Time Complexity:</strong> O(max(m, n)) where m, n are lengths of l1 and l2. We traverse each node at most once.</p>
           <p><strong>Space Complexity:</strong> O(max(m, n)) for the new list. If we disregard the output, it’s O(1) auxiliary space (only a few variables). Some solutions reuse one of the input lists to achieve O(1) extra space but at the cost of mutating inputs — it’s a tradeoff.</p>
 
-          <h3>Lessons learned & practical applications</h3>
+          <h2>Lessons learned & practical applications</h2>
           <p>The “Add Two Numbers” problem is a microcosm of how low-level arithmetic works in every digital system. The carry propagation algorithm you implement here is the same fundamental building block used in arbitrary-precision arithmetic libraries, cryptographic modules, and even hardware ALUs. By mastering this pattern, you gain insight into how software handles numbers beyond native machine word sizes.</p>
           <p>Beyond interviews, this technique appears in real-world scenarios: implementing big integer arithmetic in blockchain smart contracts where gas costs demand efficient digit-by-digit operations, building high-performance financial software that requires exact decimal arithmetic, or optimizing embedded systems where memory is constrained. The dummy head pattern also teaches a reusable strategy for linked list construction — a pattern that applies to merging sorted lists, partitioning lists, and more.</p>
 
-          <h3>Further references & resources</h3>
+          <h2>Further references & resources</h2>
           <ul>
               <li><a href="https://leetcode.com/problems/add-two-numbers/" target="_blank">Original LeetCode Problem</a></li>
               <li><a href="https://en.wikipedia.org/wiki/Elementary_arithmetic#Addition" target="_blank">Wikipedia – Elementary arithmetic addition</a></li>

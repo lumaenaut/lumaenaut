@@ -20,6 +20,12 @@ body {
   overflow: hidden; /* Keep scrolling inside the `.content` panel only. */
 }
 
+h2 {
+  margin: 1rem 0;
+  padding: 0;
+  font-weight: 500;
+}
+
 .skip-link {
   position: absolute;
   top: -100%;
@@ -107,9 +113,15 @@ body {
   padding: 0.5rem 0;
 }
 
-.header h1 {
+.header h1,
+.header .header-site-title {
   font-size: 2rem;
   margin: 0;
+}
+
+.header .header-site-title {
+  font-weight: 800;
+  letter-spacing: 0.04em;
 }
 
 .header .main-nav {
@@ -304,11 +316,11 @@ body {
   color: var(--text-main);
 }
 
-.legal-page-title {
+.legal-page > h1:first-of-type {
   font-size: 1.75rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
+  font-weight: 550;
   color: var(--text-main);
+  margin-bottom: 0.5rem;
 }
 
 .legal-page-updated {
@@ -317,7 +329,7 @@ body {
   margin-bottom: 1.5rem;
 }
 
-.legal-page h3 {
+.legal-page h2 {
   font-size: 1.15rem;
   font-weight: 600;
   margin-top: 1.75rem;
@@ -368,11 +380,11 @@ body {
   margin-bottom: 3rem;
 }
 
-.post-title {
+.post-header h1 {
   font-size: 2.25rem;
-  font-weight: 600;
+  font-weight: 550;
   line-height: 1.2;
-  margin-bottom: 0.5rem;
+  margin: 1rem 0;
 }
 
 .post-subtitle {
@@ -434,14 +446,6 @@ article.post .where-to-start {
   padding-top: 0;
 }
 
-article.post .where-to-start-title {
-  font-size: 1.35rem;
-  font-weight: 600;
-  margin-top: 0;
-  margin-bottom: 1rem;
-  color: var(--text-main);
-}
-
 article.post .where-to-start p {
   line-height: 1.7;
   font-size: 1rem;
@@ -452,7 +456,7 @@ article.post .where-to-start p + p {
   margin-top: 1rem;
 }
 
-.post-body h3 {
+.post-body h2 {
   font-size: 1.2rem;
   font-weight: 600;
   margin-top: 2rem;
@@ -522,7 +526,7 @@ article.post .where-to-start p + p {
 }
 
 /* LeetCode series: simulation tables, math blocks, multi-language solution cards */
-.post-body h4 {
+.post-body h3 {
   font-size: 1.05rem;
   font-weight: 600;
   margin-top: 1.5rem;
@@ -822,11 +826,11 @@ article.post .where-to-start p + p {
   padding: 2rem 0;
 }
 
-.blog-menu-title {
+.blog-menu h1 {
   font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
+  font-weight: 550;
   color: var(--text-main);
+  margin: 1rem 0;
 }
 
 .blog-menu-intro {
@@ -972,15 +976,15 @@ article.post .where-to-start p + p {
   font-style: normal;
 }
 
-/* Home page intro */
-.home-intro {
+/* Home page welcome block (eng-US/index, esp-LAT/indice only) */
+#welcome {
   max-width: 38rem;
   margin: 0 auto;
   padding: 1rem 0 2rem;
 }
 
-.home-intro h2 {
-  font-size: 1.5rem;
+#welcome h1 {
+  font-size: 1.7rem;
   font-weight: 600;
   margin-top: 1.5rem;
   margin-bottom: 1rem;
@@ -988,26 +992,24 @@ article.post .where-to-start p + p {
 }
 
 .home-greeting {
-  /* The welcome greeting is the first element in the section. */
+  /* First line of the welcome block */
   margin-top: 0;
 }
 
-.hero-name {
-  font-size: 1.75rem;
-  font-weight: 600;
-  margin-top: 2.5rem;
-  margin-bottom: 0.25rem;
+#welcome .hero-name {
+  font-size: 1.58rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.25;
+  margin: 2.5rem 0 0;
   color: var(--text-main);
 }
 
 .hero-tagline {
   font-size: 1rem;
   color: var(--text-muted);
-  margin-bottom: 1.5rem;
-}
-
-.home-intro .where-to-start-title {
   margin-top: 0;
+  margin-bottom: 1.5rem;
 }
 
 .home-intro-divider {
@@ -1041,13 +1043,13 @@ article.post .where-to-start p + p {
   border: 0;
 }
 
-.home-intro p {
+#welcome p {
   line-height: 1.7;
   font-size: 1rem;
   color: var(--text-muted);
 }
 
-.home-intro p + p {
+#welcome p + p {
   margin-top: 1rem;
 }
 

@@ -79,7 +79,7 @@
         </div>
       </div>
       <div class="header-center">
-        <h1>Lumænaut_</h1>
+        <p class="header-site-title">lumænaut</p>
         <nav class="main-nav" aria-label="Navegación principal">
           <ul>
             <li><a class="home-btn" href="../../indice.html">inicio</a></li>
@@ -104,7 +104,7 @@
       </div>
       <article class="post" aria-labelledby="post-title">
         <header class="post-header">
-          <h2 id="post-title" class="post-title">Puliendo LeetCode.<br>Día 1: Two Sum</h2>
+          <h1 id="post-title">Puliendo LeetCode.<br>Día 1: Two Sum</h1>
           <p class="post-subtitle">Desde fuerza bruta hasta O(n) — un viaje amigable para principiantes</p>
           <p class="post-meta">
             Por <span class="author">Alberto Del Valle</span><br>
@@ -129,7 +129,7 @@
             Bienvenido, valiente programador. Si estás comenzando tu viaje en LeetCode, <strong>Two Sum</strong> es casi con certeza el primer problema que encontrarás. Es como el “hola mundo” de las entrevistas algorítmicas — sencillo en la superficie, pero lleno de lecciones que resonarán a lo largo de toda tu carrera como programador. En este post, lo desglosaremos juntos. Sin jerga intimidante, sin saltarnos pasos. Comenzaremos con la solución más ingenua, nos reiremos de sus defectos, y luego la transformaremos en algo hermoso y rápido. Toma una taza de café (o té, no juzgamos), y comencemos.
           </p>
 
-          <h3>El problema — Two Sum (LeetCode 1)</h3>
+          <h2>El problema — Two Sum (LeetCode 1)</h2>
           <p>Antes de sumergirnos en las soluciones, leamos el enunciado original del problema:</p>
           <blockquote cite="https://leetcode.com/problems/two-sum/">
             <p>
@@ -143,7 +143,7 @@
             </p>
           </blockquote>
 
-          <h3>Reescribiendo en español sencillo</h3>
+          <h2>Reescribiendo en español sencillo</h2>
           <p>
             Imagina que tienes una lista de números (como <code>[2, 7, 11, 15]</code>) y un número objetivo (como <code>9</code>). Necesitas encontrar <strong>dos números dentro de la lista que sumen el objetivo</strong>. Luego devuelves sus posiciones (índices) — no los números en sí. Además, cada elemento solo puede usarse una vez. Y el rompecabezas garantiza que <strong>hay exactamente un par válido</strong> escondido ahí. Eso significa que nunca te quedarás atascado preguntándote “¿qué combinación es la correcta?” — solo hay una respuesta correcta.
           </p>
@@ -153,7 +153,7 @@
             </p>
           </aside>
 
-          <h3>Ejemplos del problema</h3>
+          <h2>Ejemplos del problema</h2>
           <ul>
             <li><strong>Ejemplo 1:</strong> <code>nums = [2,7,11,15], target = 9</code> → Salida: <code>[0,1]</code> porque 2 + 7 = 9.</li>
             <li><strong>Ejemplo 2:</strong> <code>nums = [3,2,4], target = 6</code> → Salida: <code>[1,2]</code> porque 2 + 4 = 6 (índices 1 y 2).</li>
@@ -161,7 +161,7 @@
           </ul>
           <p>¿Sencillo, verdad? Sin embargo, el verdadero desafío es <strong>qué tan rápido</strong> podemos encontrarlos cuando el arreglo se vuelve enorme — hasta 10,000 números. Ahí es donde comienza la diversión.</p>
 
-          <h3>El enfoque ingenuo: fuerza bruta (“revisar cada pareja”)</h3>
+          <h2>El enfoque ingenuo: fuerza bruta (“revisar cada pareja”)</h2>
           <p>
             Seamos honestos: cuando vemos un problema como este por primera vez, nuestro cerebro instintivamente piensa: “Tomaré el primer número, y luego intentaré sumarlo con cada otro número después de él. Si coincide con el objetivo, ¡listo!” Ese es el enfoque de fuerza bruta. Es simple, es honesto, y funciona. Pero también es el más lento.
           </p>
@@ -178,7 +178,7 @@ Para i desde 0 hasta n-1:
                 return [i, j]
     return []  # nunca se alcanza porque existe una solución</code></pre>
 
-          <h3>Complejidad — las malas noticias</h3>
+          <h2>Complejidad — las malas noticias</h2>
           <p>
             Si el arreglo tiene <code>n</code> elementos, el bucle externo se ejecuta <code>n</code> veces, y el bucle interno se ejecuta alrededor de <code>n/2</code> veces en promedio. Eso nos da aproximadamente <code>n * (n-1)/2</code> operaciones, que en notación Big O es <code>O(n²)</code>. Para n = 10,000, ¡eso es alrededor de 50 millones de comparaciones! Tu computadora puede manejarlo, pero en una entrevista te preguntarán: <em>¿Puedes hacerlo mejor?</em>
           </p>
@@ -186,7 +186,7 @@ Para i desde 0 hasta n-1:
             Pero el enfoque de fuerza bruta sigue siendo importante — es la base. Siempre comenzamos con la solución funcional más simple, y luego optimizamos.
           </p>
 
-          <h3>El momento “¡Ajá!”: usar una memoria (hash map)</h3>
+          <h2>El momento “¡Ajá!”: usar una memoria (hash map)</h2>
           <p>
             Aquí está la idea clave: en lugar de revisar cada pareja, podemos <strong>recordar qué números hemos visto</strong> y hacer una pregunta simple: <em>“¿Necesito un número específico para completar el objetivo?”</em>
           </p>
@@ -199,7 +199,7 @@ Para i desde 0 hasta n-1:
             </p>
           </aside>
 
-          <h3>El algoritmo inteligente (una sola pasada)</h3>
+          <h2>El algoritmo inteligente (una sola pasada)</h2>
           <p>Recorremos el arreglo una sola vez. Para cada elemento <code>nums[i]</code>:</p>
           <ol>
             <li>Calculamos <code>complemento = objetivo - nums[i]</code>.</li>
@@ -230,7 +230,7 @@ para i en 0..n-1:
           </ul>
           <p>Hermoso, ¿verdad? Solo recorremos el arreglo una vez.</p>
 
-          <h3>Análisis de complejidad: por qué es un cambio radical</h3>
+          <h2>Análisis de complejidad: por qué es un cambio radical</h2>
           <p>
             <strong>Complejidad temporal:</strong> O(n) — recorremos el arreglo una vez, y cada operación de hash map (inserción y búsqueda) es O(1) en promedio.<br>
             <strong>Complejidad espacial:</strong> O(n) — en el peor caso almacenamos casi todos los elementos en el hash map antes de encontrar el par.
@@ -239,7 +239,7 @@ para i en 0..n-1:
             Para n = 10,000, la fuerza bruta realiza hasta 50 millones de operaciones; la solución con hash map hace alrededor de 10,000. Esa es la diferencia entre esperar 2 segundos y 0.001 segundos.
           </p>
 
-          <h3>La sección de matemáticas — entendiendo la ecuación central</h3>
+          <h2>La sección de matemáticas — entendiendo la ecuación central</h2>
           <p>Formalicemos el problema con matemáticas. Se nos da:</p>
           <blockquote>
             <p>
@@ -258,7 +258,7 @@ para i en 0..n-1:
             También podemos visualizarlo como: dibuja una recta numérica. Para cada <code>x</code>, el compañero deseado es <code>objetivo - x</code>. A medida que escaneamos, dejamos “migas de pan” en un hash map. En el momento en que pisamos una migaja dejada por un número anterior, tenemos nuestra solución. Es como una búsqueda del tesoro con memoria perfecta.
           </p>
 
-          <h3>Seguimiento: ¿podemos hacer mejor que O(n²)?</h3>
+          <h2>Seguimiento: ¿podemos hacer mejor que O(n²)?</h2>
           <p>
             El seguimiento del problema pregunta: <em>“¿Puedes encontrar un algoritmo con complejidad temporal menor que O(n²)?”</em> Y sí — ¡acabamos de hacerlo! O(n) con un hash map es dramáticamente más rápido. ¿Podríamos hacer O(n log n)? Posiblemente con ordenamiento y técnica de dos punteros, pero eso perdería los índices originales a menos que los almacenemos. El enfoque con hash map sigue siendo el más elegante para este problema específico.
           </p>
@@ -266,7 +266,7 @@ para i en 0..n-1:
             Si sientes curiosidad por el método de ordenamiento: podrías ordenar el arreglo (con los índices adjuntos) y luego usar dos punteros (izquierdo y derecho) para encontrar el par. Eso es O(n log n), pero se usa a menudo cuando necesitas evitar espacio extra. Sin embargo, para Two Sum, el método con hash map es el favorito en entrevistas.
           </p>
 
-          <h3>Un poco de historia: ¿de dónde viene este problema?</h3>
+          <h2>Un poco de historia: ¿de dónde viene este problema?</h2>
           <p>
             El problema Two Sum se hizo famoso principalmente porque fue uno de los primeros problemas en LeetCode (lanzado en 2015). Pero la idea de encontrar dos números que sumen un objetivo se remonta a décadas atrás. Es esencialmente un caso especial del <strong>problema de suma de subconjuntos</strong> de la teoría de la computación. Empresas como Google, Facebook y Amazon lo adoran porque pone a prueba tanto la habilidad básica de codificación como la transición del pensamiento ingenuo al óptimo — una habilidad fundamental en ingeniería de software.
           </p>
@@ -274,7 +274,7 @@ para i en 0..n-1:
             También hay una línea directa con el <strong>uso de tablas hash</strong>, que revolucionó la forma en que manejamos las búsquedas en programación. La idea de usar un hash map para recordar valores pasados es un patrón de diseño común en entrevistas de algoritmos (lo verás nuevamente en problemas como “Subarray Sum Equals K” o “Contains Duplicate”).
           </p>
 
-          <h3>Probando nuestra solución con casos límite</h3>
+          <h2>Probando nuestra solución con casos límite</h2>
           <p>Revisemos algunos escenarios complicados que podrían romper un enfoque ingenuo:</p>
           <ul>
             <li><strong>Duplicados:</strong> <code>nums = [1, 1, 2], target = 2</code> → Salida: <code>[0,1]</code> porque 1+1=2. Nuestro hash map funciona: cuando i=1, complemento=1, visto ya tiene 1 desde el índice 0 → devuelve <code>[0,1]</code>.</li>
@@ -285,7 +285,7 @@ para i en 0..n-1:
             Un error común para principiantes: usar el mismo elemento dos veces. Por ejemplo, si <code>nums = [3, 2, 4], target = 6</code>, el complemento para 3 es 3, pero no podemos usar el mismo 3 otra vez. Es por eso que almacenamos los números <strong>después</strong> de verificar el complemento, no antes. El algoritmo asegura que solo emparejamos el elemento actual con los vistos previamente.
           </p>
 
-          <h3>Diagrama — viendo la magia de una sola pasada</h3>
+          <h2>Diagrama — viendo la magia de una sola pasada</h2>
           <pre class="post-pseudocode"><code>Recorrido visual para nums = [2,7,11,15], objetivo = 9
 
 Paso 0: visto = {}
@@ -294,7 +294,7 @@ Paso 2 (i=1, num=7): complemento = 2. ¿2 en visto? ¡Sí! visto[2] = 0 → devo
 Nunca siquiera miramos 11 y 15.</code></pre>
           <p>Es como si el algoritmo tuviera supervisión — detecta la respuesta en el momento más temprano posible.</p>
 
-          <h3>Otros lenguajes y pequeñas variaciones</h3>
+          <h2>Otros lenguajes y pequeñas variaciones</h2>
           <p>Aunque escribimos pseudocódigo estilo Python, la misma lógica aplica para JavaScript, Java, C++, etc.</p>
           <p><strong>Ejemplo en JavaScript (usando Map).</strong></p>
           <pre><code class="language-javascript">var twoSum = function(nums, target) {
@@ -318,7 +318,7 @@ Nunca siquiera miramos 11 y 15.</code></pre>
     return new int[] {};
 }</code></pre>
 
-          <h3>Trampas comunes y cómo evitarlas</h3>
+          <h2>Trampas comunes y cómo evitarlas</h2>
           <ul>
             <li><strong>Olvidar el orden:</strong> Siempre verifica el complemento <em>antes</em> de almacenar el número actual. De lo contrario, podrías emparejar un elemento consigo mismo (cuando el complemento es igual al número actual).</li>
             <li><strong>Usar búsqueda en arreglo en lugar de hash map:</strong> Algunos principiantes intentan usar <code>index()</code> o búsqueda lineal para el complemento dentro del bucle, volviendo a O(n²).</li>
@@ -326,11 +326,11 @@ Nunca siquiera miramos 11 y 15.</code></pre>
             <li><strong>Asumir que el arreglo está ordenado:</strong> No es un dato dado. Así que el método de dos punteros sin almacenar índices sería complicado.</li>
           </ul>
 
-          <h3>Por qué este problema importa más allá de la entrevista</h3>
+          <h2>Por qué este problema importa más allá de la entrevista</h2>
           <p>
             Two Sum te enseña el arte de las <strong>compensaciones</strong>. La fuerza bruta es fácil de escribir pero lenta. La versión con hash map usa un poco más de memoria pero te da velocidad. En la ingeniería del mundo real, constantemente equilibras tiempo vs. espacio. Este simple problema encapsula esa decisión fundamental. Además, el patrón de “búsqueda de complemento” aparecerá nuevamente en problemas como 3Sum, 4Sum, y muchos otros.
           </p>
-          <h3>Referencias y lecturas adicionales</h3>
+          <h2>Referencias y lecturas adicionales</h2>
           <p>Si quieres profundizar, aquí hay algunos recursos excelentes:</p>
           <ul>
             <li>Publiqué soluciones comentadas en <strong>Python</strong>, <strong>JavaScript</strong>, <strong>C++</strong>, <strong>Go</strong>, <strong>Kotlin</strong> y <strong>Swift</strong> <a href="https://github.com/Lumaenaut/lumaenaut/tree/main/leetcode-solutions/1-two-sum" target="_blank" rel="noopener noreferrer">en GitHub</a> (<code>leetcode-solutions/1-two-sum</code> en el repo lumaenaut) — la misma idea O(n) con hash map que en este post.</li>
@@ -341,7 +341,7 @@ Nunca siquiera miramos 11 y 15.</code></pre>
             <li><a href="https://bigocheatsheet.com/" target="_blank" rel="noopener noreferrer">Hoja de referencia Big-O</a> — para entender mejor el análisis de complejidad.</li>
           </ul>
 
-          <h3>Reflexiones finales</h3>
+          <h2>Reflexiones finales</h2>
           <p>
             Comenzamos desde el bucle doble más ingenuo, soportamos el dolor de O(n²), y luego subimos de nivel a una solución con hash map de una pasada que es elegante, rápida y fácil de recordar. Ese es el espíritu del pensamiento algorítmico: siempre iterar, siempre optimizar, y nunca tener miedo de usar memoria extra si te da grandes ganancias de velocidad.
           </p>

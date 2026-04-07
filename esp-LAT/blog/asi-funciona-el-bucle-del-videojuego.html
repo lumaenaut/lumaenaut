@@ -79,7 +79,7 @@
         </div>
       </div>
       <div class="header-center">
-        <h1>Lumænaut_</h1>
+        <p class="header-site-title">lumænaut</p>
         <nav class="main-nav" aria-label="Navegación principal">
           <ul>
             <li><a class="home-btn" href="../indice.html">inicio</a></li>
@@ -104,7 +104,7 @@
       </div>
       <article class="post" aria-labelledby="post-title">
         <header class="post-header">
-          <h2 id="post-title" class="post-title">Así funciona el bucle del videojuego</h2>
+          <h1 id="post-title">Así funciona el bucle del videojuego</h1>
           <p class="post-subtitle">Input, actualizar, renderizar — el latido del videojuego</p>
           <p class="post-meta">
             Por <span class="author">Alberto Del Valle</span><br>
@@ -133,7 +133,7 @@
             detiene, el juego termina. Entender cómo funciona es el primer paso 
             para hacer tus propios videojuegos.
           </p>
-          <h3>El bucle más simple</h3>
+          <h2>El bucle más simple</h2>
           <p>
             En el núcleo, un bucle de juego hace tres cosas, una y otra vez: 
             revisa el <strong>input</strong>, <strong>actualiza</strong> el 
@@ -155,7 +155,7 @@ while (gameIsRunning) {  // Mientras el juego esté corriendo
             resuelves colisiones y pintas el resultado. Repites hasta que el 
             jugador cierra.
           </p>
-          <h3>Por qué los cuadros por segundo no son fijos</h3>
+          <h2>Por qué los cuadros por segundo no son fijos</h2>
           <p>
             En las máquinas arcade y consolas viejas la lógica corría a un 
             ritmo fijo, por ejemplo 60 veces por segundo. En computadoras y 
@@ -175,7 +175,7 @@ while (gameIsRunning) {  // Mientras el juego esté corriendo
             distancia por segundo sin importar cuántos cuadros renderice la 
             máquina. El juego queda <strong>independiente del framerate</strong>.
           </p>
-          <h3>Actualizar vs renderizar</h3>
+          <h2>Actualizar vs renderizar</h2>
           <p>
             Conviene tener claro la diferencia entre “actualizar” y “renderizar”. 
             <strong>Actualizar</strong> es donde cambias el mundo del juego: 
@@ -186,7 +186,7 @@ while (gameIsRunning) {  // Mientras el juego esté corriendo
             “actualizar a 60 Hz, renderizar cuando se pueda” para que la física 
             sea estable y la imagen varíe.
           </p>
-          <h3>El bucle en el navegador</h3>
+          <h2>El bucle en el navegador</h2>
           <p>
             En el navegador no escribes <code>while (true)</code>. El navegador 
             te da <strong><code>requestAnimationFrame</code></strong> (a veces 
@@ -225,7 +225,7 @@ while (gameIsRunning) {  // Mientras el juego esté corriendo
             detiene el bucle; “Avanzar 1 cuadro” hace una actualización y un 
             render para que veas el bucle dar un solo tic.
           </p>
-          <h3>Paso fijo vs paso variable</h3>
+          <h2>Paso fijo vs paso variable</h2>
           <p>
             Algunos juegos usan un <strong>paso fijo</strong> para la física 
             (por ejemplo siempre 1/60 s por paso). Pueden ejecutar varios pasos 
@@ -237,7 +237,7 @@ while (gameIsRunning) {  // Mientras el juego esté corriendo
             variable es más simple y es suficiente para muchos juegos. Los motores 
             profesionales suelen mezclar (física fija, render variable).
           </p>
-          <h3>Un solo bucle para todos</h3>
+          <h2>Un solo bucle para todos</h2>
           <p>
             No importa qué tan grande sea el juego, la idea es la misma: un 
             bucle, input → actualizar → renderizar, con el tiempo (tiempo delta) 
@@ -263,7 +263,7 @@ while (gameIsRunning) {  // Mientras el juego esté corriendo
             instalarla desde 
             <a href="https://chromewebstore.google.com/detail/ljjaokgbhlgifgoigeaijhpgonlapinm" target="_blank" rel="noopener noreferrer">Chrome Web Store — Second Runner</a>.
           </p>
-          <h3>Referencias & lecturas adicionales</h3>
+          <h2>Referencias & lecturas adicionales</h2>
           <ul>
             <li>
               <a href="https://qastack.mx/gamedev/tagged/game-loop/" target="_blank" rel="noopener noreferrer">
@@ -295,7 +295,7 @@ while (gameIsRunning) {  // Mientras el juego esté corriendo
               fotogramas, paso variable, paso fijo).
             </li>
           </ul>
-          <h3>¿Aún no tienes suficiente de Lumænaut_? Lee esto...</h3>
+          <h2>¿Aún no tienes suficiente de Lumænaut_? Lee esto...</h2>
           <ul>
             <li>
               <a href="puliendo-leetcode/dia-1-two-sum.html">Puliendo LeetCode — Día 1: Two Sum</a>
