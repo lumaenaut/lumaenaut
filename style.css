@@ -446,6 +446,13 @@ article.post .where-to-start {
   padding-top: 0;
 }
 
+article.post .where-to-start h2.where-to-start-title {
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin: 0 0 0.75rem;
+  color: var(--text-main);
+}
+
 article.post .where-to-start p {
   line-height: 1.7;
   font-size: 1rem;
