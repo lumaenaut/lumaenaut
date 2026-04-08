@@ -286,22 +286,34 @@
     "blog/el-arte-del-codigo-lento.html": "blog/the-art-of-slow-code.html",
     "blog/los-8-paradigmas-de-algoritmos.html": "blog/the-8-algorithm-paradigms.html",
     "blog/asi-funciona-el-bucle-del-videojuego.html": "blog/how-a-game-loop-works.html",
-    "blog/ep-2-todo-lo-que-no-se-sobre-bloggear.html": "blog/ch-2-everything-i-dont-know-about-blogging.html",
-    "blog/ep-1-aspirante-nomada-digital.html": "blog/ch-1-aspiring-digital-nomad.html",
+    // Logbook / Bitácora (moved into subfolders)
+    "blog/bitacora/ep-2-todo-lo-que-no-se-sobre-bloguear.html": "blog/logbook/ch-2-everything-i-dont-know-about-blogging.html",
+    "blog/bitacora/ep-1-aspirante-nomada-digital.html": "blog/logbook/ch-1-aspiring-digital-nomad.html",
+    // Legacy paths (pre-move) — keep mapping so older links still translate correctly.
+    "blog/ep-2-todo-lo-que-no-se-sobre-bloggear.html": "blog/logbook/ch-2-everything-i-dont-know-about-blogging.html",
+    "blog/ep-1-aspirante-nomada-digital.html": "blog/logbook/ch-1-aspiring-digital-nomad.html",
     "blog/puliendo-leetcode/dia-1-two-sum.html": "blog/grinding-leetcode/day-1-two-sum.html",
     "blog/puliendo-leetcode/dia-2-add-two-numbers.html": "blog/grinding-leetcode/day-2-add-two-numbers.html",
     "blog/pregunta-de-la-semana/pdls-cassidoo-1.html": "blog/question-of-the-week/qotw-cassidoo-1.html",
+    "blog/pregunta-de-la-semana/pdls-cassidoo-2.html": "blog/question-of-the-week/qotw-cassidoo-2.html",
+    "blog/pregunta-de-la-semana/pdls-cassidoo-3.html": "blog/question-of-the-week/qotw-cassidoo-3.html",
   };
 
   var blogEngToEsp = {
     "blog/the-art-of-slow-code.html": "blog/el-arte-del-codigo-lento.html",
     "blog/the-8-algorithm-paradigms.html": "blog/los-8-paradigmas-de-algoritmos.html",
     "blog/how-a-game-loop-works.html": "blog/asi-funciona-el-bucle-del-videojuego.html",
-    "blog/ch-2-everything-i-dont-know-about-blogging.html": "blog/ep-2-todo-lo-que-no-se-sobre-bloggear.html",
-    "blog/ch-1-aspiring-digital-nomad.html": "blog/ep-1-aspirante-nomada-digital.html",
+    // Logbook / Bitácora (moved into subfolders)
+    "blog/logbook/ch-2-everything-i-dont-know-about-blogging.html": "blog/bitacora/ep-2-todo-lo-que-no-se-sobre-bloguear.html",
+    "blog/logbook/ch-1-aspiring-digital-nomad.html": "blog/bitacora/ep-1-aspirante-nomada-digital.html",
+    // Legacy paths (pre-move)
+    "blog/ch-2-everything-i-dont-know-about-blogging.html": "blog/bitacora/ep-2-todo-lo-que-no-se-sobre-bloguear.html",
+    "blog/ch-1-aspiring-digital-nomad.html": "blog/bitacora/ep-1-aspirante-nomada-digital.html",
     "blog/grinding-leetcode/day-1-two-sum.html": "blog/puliendo-leetcode/dia-1-two-sum.html",
     "blog/grinding-leetcode/day-2-add-two-numbers.html": "blog/puliendo-leetcode/dia-2-add-two-numbers.html",
     "blog/question-of-the-week/qotw-cassidoo-1.html": "blog/pregunta-de-la-semana/pdls-cassidoo-1.html",
+    "blog/question-of-the-week/qotw-cassidoo-2.html": "blog/pregunta-de-la-semana/pdls-cassidoo-2.html",
+    "blog/question-of-the-week/qotw-cassidoo-3.html": "blog/pregunta-de-la-semana/pdls-cassidoo-3.html",
   };
 
   function espToEngPath(espPathname) {
