@@ -121,7 +121,7 @@
         <header class="post-header">
           <h1 id="post-title">Resolviendo LeetCode<br>Día 1 — Two Sum</h1>
           <p class="post-subtitle">
-            De fuerza bruta a O(n) — un recorrido amigable para principiantes
+            De fuerza bruta a O(n)—un recorrido amigable para principiantes
           </p>
           <p class="post-meta">
             Por <span class="author">Alberto Del Valle</span><br>
@@ -191,8 +191,8 @@
                 <li><strong>Solo existe una respuesta válida.</strong></li>
               </ul>
             <p>
-              <strong>Para pensar:</strong> ¿Puedes idear un algoritmo 
-              con complejidad temporal menor a O(n²)?
+              <strong>Seguimiento:</strong> ¿Puedes idear un algoritmo 
+              con complejidad temporal a O(n²)?
             </p>
           </blockquote> 
 
@@ -200,8 +200,8 @@
           
           <p>
             Podrías tomar el primer número y luego intentar sumarlo con cada 
-            número que le sigue. Si coincide con el objetivo, ¡listo! Es simple, 
-            honesto y funciona. Pero también es el más lento.
+            número que le sigue. Si coincide con el target, ¡listo! Es simple, 
+            honesto y funciona. Pero también es una solución lenta.
           </p>
           
           <div class="solution-card">
@@ -220,7 +220,7 @@ def twoSum_fuerzabruta(nums, target):
           <h2>Complejidad inicial</h2>
           <p>
             Si el arreglo tiene <code>n</code> elementos, el bucle exterior se ejecuta 
-            <code>n</code> veces, y el bucle interior se ejecutaría aproximadamente <code>n/2</code> 
+            <code>n</code> veces, y el bucle interior se ejecutaría <code>n/2</code> 
             veces en promedio. Eso nos da aproximadamente <code>n * (n-1)/2</code> 
             operaciones, lo que se traduce en <code>O(n²)</code>. Si 
             <code>n = 10,000</code>... ¡eso son cerca de 50 millones de comparaciones!
@@ -230,14 +230,14 @@ def twoSum_fuerzabruta(nums, target):
           <p>
             En lugar de comprobar cada par, podemos 
             <strong>recordar qué números hemos visto</strong> y preguntarnos: 
-            <em>¿Necesito un número específico para completar la suma objetivo?</em>
+            <em>¿Necesito un número específico para completar el target?</em>
           </p>
           <p>
             Para cada número <code>x</code>, su complemento es 
             <code>target - x</code>. Si ya hemos visto ese complemento 
             en algún lugar del arreglo, ¡hemos encontrado nuestro par! Solo necesitamos una forma de 
             almacenar los números por los que ya pasamos y buscarlos rápidamente. Ahí es donde entra un 
-            <strong>mapa hash</strong> (también llamado tabla hash o diccionario) — una estructura de datos 
+            <strong>mapa hash</strong> (también llamado tabla hash o diccionario)—una estructura de datos 
             que permite almacenar pares clave-valor y comprobar si una clave existe en tiempo promedio <code>O(1)</code>.             
           </p>                    
           
@@ -345,7 +345,7 @@ def twoSum_mapahash(nums, target):
             <li>
               <a href="https://www.youtube.com/watch?v=KLlXCFG5TnA" target="_blank" rel="noopener noreferrer">
                 YouTube: Two Sum por NeetCode
-              </a> — explicación visual (muy recomendada para quienes aprenden visualmente).
+              </a> — explicación visual.
             </li>
             <li>
               <a href="https://bigocheatsheet.com/" target="_blank" rel="noopener noreferrer">
