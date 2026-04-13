@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es-MX">
 <head>
   <!-- Google Tag Manager -->
@@ -11,57 +11,57 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#F9F5EC">
-  <meta name="description" content="Puliendo LeetCode, Día 1: Two Sum. Desde fuerza bruta hasta un hash map de una pasada, con matemáticas, casos borde, JS/Java y referencias. Por Alberto Del Valle.">
+  <meta name="description" content="Resolviendo LeetCode | Día 1 — Two Sum. De fuerza bruta a una solución con mapa hash de una sola pasada, con ejemplos en Python, seguimiento paso a paso, notas de complejidad y referencias. Por Alberto Del Valle.">
   <meta name="author" content="Alberto Del Valle">
-  <title>Puliendo LeetCode. Día 1: Two Sum</title>
-  <link rel="canonical" href="https://lumaenaut.com/esp-LAT/blog/resolviendo-leetcode/dia-1-two-sum.html">
+  <title>Resolviendo LeetCode | Día 1 — Two Sum</title>
+  <link rel="canonical" href="https://lumaenaut.com/eng-US/blog/solving-leetcode/day-1-two-sum.html">
   <link rel="alternate" hreflang="x-default" href="https://lumaenaut.com/eng-US/blog/solving-leetcode/day-1-two-sum.html">
   <link rel="alternate" hreflang="en" href="https://lumaenaut.com/eng-US/blog/solving-leetcode/day-1-two-sum.html">
   <link rel="alternate" hreflang="es" href="https://lumaenaut.com/esp-LAT/blog/resolviendo-leetcode/dia-1-two-sum.html">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="lumænaut">
-  <meta property="og:title" content="Puliendo LeetCode. Día 1: Two Sum">
-  <meta property="og:description" content="Desde fuerza bruta hasta O(n) con un hash map: Two Sum para principiantes, con código, matemáticas y trampas comunes. Por Alberto Del Valle.">
-  <meta property="og:url" content="https://lumaenaut.com/esp-LAT/blog/resolviendo-leetcode/dia-1-two-sum.html">
+  <meta property="og:title" content="Resolviendo LeetCode | Día 1 — Two Sum">
+  <meta property="og:description" content="Resolviendo LeetCode | Día 1 — Two Sum. De fuerza bruta a una solución con mapa hash de una sola pasada, con ejemplos en Python, seguimiento paso a paso, notas de complejidad y referencias. Por Alberto Del Valle.">
+  <meta property="og:url" content="https://lumaenaut.com/eng-US/blog/solving-leetcode/day-1-two-sum.html">
   <meta property="og:image" content="https://lumaenaut.com/images/outdated-computer-ascii.png">
-  <meta property="og:image:alt" content="Arte ASCII: computadora antigua sobre un escritorio con librero al fondo, evocando un espacio clásico de programación.">
+  <meta property="og:image:alt" content="Arte ASCII: una computadora anticuada sobre un escritorio con una estantería al fondo, evocando la práctica clásica de programación.">
   <meta property="og:image:width" content="1840">
   <meta property="og:image:height" content="1690">
   <meta property="og:locale" content="es_MX">
   <meta property="og:locale:alternate" content="en_US">
   <meta property="article:published_time" content="2026-03-21">
-  <meta property="article:modified_time" content="2026-04-08">
+  <meta property="article:modified_time" content="2026-04-13">
   <meta property="article:author" content="Alberto Del Valle">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:creator" content="@lumaenaut">
   <meta name="twitter:image" content="https://lumaenaut.com/images/outdated-computer-ascii.png">
-  <meta name="twitter:title" content="Puliendo LeetCode. Día 1: Two Sum">
-  <meta name="twitter:description" content="Two Sum: fuerza bruta, hash map, complejidad, casos borde y código en Python, JavaScript y Java.">
+  <meta name="twitter:title" content="Resolviendo LeetCode | Día 1 — Two Sum">
+  <meta name="twitter:description" content="Resolviendo LeetCode | Día 1 — Two Sum. De fuerza bruta a una solución con mapa hash de una sola pasada, con ejemplos en Python, seguimiento paso a paso, notas de complejidad y referencias. Por Alberto Del Valle.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%94%A5%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="../../../style.css">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    "headline": "Puliendo LeetCode. Día 1: Two Sum",
-    "alternativeHeadline": "Desde fuerza bruta hasta O(n) con un hash map",
-    "description": "Puliendo LeetCode, Día 1: Two Sum. Fuerza bruta, hash map, matemáticas, casos borde, JS/Java. Por Alberto Del Valle.",
-    "url": "https://lumaenaut.com/esp-LAT/blog/resolviendo-leetcode/dia-1-two-sum.html",
-    "mainEntityOfPage": { "@id": "https://lumaenaut.com/esp-LAT/blog/resolviendo-leetcode/dia-1-two-sum.html" },
+    "headline": "Resolviendo LeetCode | Día 1 — Two Sum",
+    "alternativeHeadline": "De fuerza bruta a O(n) — un recorrido amigable para principiantes",
+    "description": "Resolviendo LeetCode | Día 1 — Two Sum. De fuerza bruta a una solución con mapa hash de una sola pasada, con ejemplos en Python, seguimiento paso a paso, notas de complejidad y referencias. Por Alberto Del Valle.",
+    "url": "https://lumaenaut.com/eng-US/blog/solving-leetcode/day-1-two-sum.html",
+    "mainEntityOfPage": { "@id": "https://lumaenaut.com/eng-US/blog/solving-leetcode/day-1-two-sum.html" },
     "image": "https://lumaenaut.com/images/outdated-computer-ascii.png",
     "inLanguage": "es-MX",
     "datePublished": "2026-03-21",
-    "dateModified": "2026-04-08",
+    "dateModified": "2026-04-13",
     "author": {
       "@type": "Person",
       "name": "Alberto Del Valle",
-      "url": "https://lumaenaut.com/esp-LAT/indice.html"
+      "url": "https://lumaenaut.com/eng-US/"
     },
     "publisher": {
       "@type": "Person",
       "name": "Alberto Del Valle"
     },
-    "isPartOf": { "@id": "https://lumaenaut.com/esp-LAT/blog/blog-indice.html" }
+    "isPartOf": { "@id": "https://lumaenaut.com/eng-US/blog/blog-index.html" }
   }
   </script>
 </head>
@@ -71,308 +71,340 @@
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
   <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+  
   <div class="page-wrapper">
+    
     <header class="header">
+
       <div class="header-left">
         <div class="logo-div">
           <pre class="logo-ascii" id="logo-container" aria-hidden="true"></pre>
         </div>
       </div>
+
       <div class="header-center">
         <p class="header-site-title">lumænaut</p>
         <nav class="main-nav" aria-label="Navegación principal">
           <ul>
-            <li><a class="home-btn" href="../../indice.html">inicio</a></li>
-            <li><a class="blog-btn" href="../blog-indice.html">blog</a></li>
+            <li><a class="home-btn" href="../../index.html">inicio</a></li>
+            <li><a class="blog-btn" href="../blog-index.html">blog</a></li>
           </ul>
         </nav>
       </div>
+
       <div class="header-right">
         <div class="logo-div-mirror" aria-hidden="true"></div>
-        <button type="button" class="share-btn" aria-label="Compartir esta página"><img src="../../../assets/share-icon.png" alt="" class="share-btn-icon" data-ios-src="../../../assets/ios-share-icon.png" width="20" height="20"></button>
+        <button type="button" class="share-btn" aria-label="Compartir esta página">
+          <img src="../../../assets/share-icon.png" alt="" class="share-btn-icon" data-ios-src="../../../assets/ios-share-icon.png" width="20" height="20">
+        </button>
       </div>
+
     </header>
+
     <main id="main-content" class="content">
+
       <div class="floating-controls">
         <div class="lang-switcher">
-          <button type="button" class="lang-switcher-btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Seleccionar idioma"><img src="../../../assets/translate-icon.png" alt="" class="lang-switcher-icon"><span class="lang-switcher-label">esp (LAT)</span></button>
+          <button type="button" class="lang-switcher-btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Seleccionar idioma">
+            <img src="../../../assets/translate-icon.png" alt="" class="lang-switcher-icon">
+            <span class="lang-switcher-label">esp (MX)</span>
+          </button>
           <ul class="lang-switcher-dropdown" role="listbox" aria-label="Opciones de idioma">
             <li><a href="#" data-lang="eng-US" role="option">eng (US)</a></li>
             <li><a href="#" data-lang="esp-LAT" role="option">esp (LAT)</a></li>
           </ul>
         </div>
       </div>
+      
       <article class="post" aria-labelledby="post-title">
+      
         <header class="post-header">
-          <h1 id="post-title">Puliendo LeetCode.<br>Día 1: Two Sum</h1>
-          <p class="post-subtitle">Desde fuerza bruta hasta O(n) — un viaje amigable para principiantes</p>
+          <h1 id="post-title">Resolviendo LeetCode<br>Día 1 — Two Sum</h1>
+          <p class="post-subtitle">
+            De fuerza bruta a O(n) — un recorrido amigable para principiantes
+          </p>
           <p class="post-meta">
             Por <span class="author">Alberto Del Valle</span><br>
             <time datetime="2026-03-21">21 de marzo de 2026</time><br>
-            <span class="post-read-time">(Tiempo de lectura ~18 min.)</span>
+            <span class="post-read-time">(Tiempo de lectura ~18 min)</span>
           </p>
         </header>
+
         <figure class="post-featured-image" aria-labelledby="two-sum-feature-caption">
           <img
             src="../../../images/outdated-computer-ascii.png"
-            alt="Arte a color ASCII: computadora antigua sobre un escritorio con librero al fondo, sugiriendo un espacio clásico de programación."
-            title="Arte ASCII — computadora antigua en escritorio con librero"
+            alt="Arte ASCII a color: una computadora anticuada sobre un escritorio con una estantería al fondo, que sugiere un espacio de trabajo clásico para programar."
+            title="Arte ASCII — computadora anticuada sobre un escritorio con estantería"
             width="1840"
             height="1690"
             decoding="async"
             loading="eager"
             class="post-featured-img">
-          <figcaption id="two-sum-feature-caption" class="visually-hidden">Ilustración estilo ASCII: computadora antigua sobre un escritorio con librero al fondo.</figcaption>
+          <figcaption id="two-sum-feature-caption" class="visually-hidden">
+            Ilustración en estilo ASCII: una computadora anticuada sobre un escritorio 
+            con una estantería detrás.
+          </figcaption>
         </figure>
-        <div class="post-body">
-          <p>
-            Bienvenido, valiente programador. Si estás comenzando tu viaje en LeetCode, <strong>Two Sum</strong> es casi con certeza el primer problema que encontrarás. Es como el “hola mundo” de las entrevistas algorítmicas — sencillo en la superficie, pero lleno de lecciones que resonarán a lo largo de toda tu carrera como programador. En este post, lo desglosaremos juntos. Sin jerga intimidante, sin saltarnos pasos. Comenzaremos con la solución más ingenua, nos reiremos de sus defectos, y luego la transformaremos en algo hermoso y rápido. Toma una taza de café (o té, no juzgamos), y comencemos.
-          </p>
 
-          <h2>El problema — Two Sum (LeetCode 1)</h2>
-          <p>Antes de sumergirnos en las soluciones, leamos el enunciado original del problema:</p>
+        <div class="post-body">          
+          <h2>Enunciado del problema</h2>
+          
           <blockquote cite="https://leetcode.com/problems/two-sum/">
+
             <p>
-              Dado un arreglo de enteros <code>nums</code> y un entero <code>target</code>, devuelve los <strong>índices</strong> de los dos números que suman <code>target</code>.
+              Dado un arreglo de números enteros <code>nums</code> y un entero 
+              <code>target</code>, devuelve los <strong>índices</strong> de los dos 
+              números tales que su suma sea igual a <code>target</code>.
             </p>
             <p>
-              Puedes asumir que cada entrada tendrá <strong>exactamente una solución</strong>, y no puedes usar el mismo elemento dos veces.
+              Puedes asumir que cada entrada tendrá 
+              <strong>exactamente una solución</strong>, y no puedes usar el 
+              mismo elemento dos veces.
             </p>
             <p>
               Puedes devolver la respuesta en cualquier orden.
             </p>
-          </blockquote>
+            
+            <p><strong>Ejemplo 1:</strong></p>
+            <aside class="post-aside" aria-label="Ejemplo 1">
+              <p><strong>Entrada:</strong> <code>nums = [2,7,11,15], target = 9</code></p>
+              <p><strong>Salida:</strong> <code>[0,1]</code></p>
+              <p><strong>Explicación:</strong> <code>Como nums[0] + nums[1] == 9, devolvemos [0, 1].</code></p>
+            </aside>
 
-          <h2>Reescribiendo en español sencillo</h2>
-          <p>
-            Imagina que tienes una lista de números (como <code>[2, 7, 11, 15]</code>) y un número objetivo (como <code>9</code>). Necesitas encontrar <strong>dos números dentro de la lista que sumen el objetivo</strong>. Luego devuelves sus posiciones (índices) — no los números en sí. Además, cada elemento solo puede usarse una vez. Y el rompecabezas garantiza que <strong>hay exactamente un par válido</strong> escondido ahí. Eso significa que nunca te quedarás atascado preguntándote “¿qué combinación es la correcta?” — solo hay una respuesta correcta.
-          </p>
-          <aside class="post-aside" aria-label="Nota sobre índices">
+            <p><strong>Ejemplo 2:</strong></p>
+            <aside class="post-aside" aria-label="Ejemplo 2">
+              <p><strong>Entrada:</strong> <code>nums = [3,2,4], target = 6</code></p>
+              <p><strong>Salida:</strong> <code>[1,2]</code></p>
+            </aside>
+
+            <p><strong>Ejemplo 3:</strong></p>
+            <aside class="post-aside" aria-label="Ejemplo 3">
+              <p><strong>Entrada:</strong> <code>nums = [3,3], target = 6</code></p>
+              <p><strong>Salida:</strong> <code>[0,1]</code></p>
+            </aside>
+            <p><strong>Restricciones:</strong></p>
+              <ul>
+                <li><code>2 <= nums.length <= 10⁴</code></li>
+                <li><code>-10⁹ <= nums[i] <= 10⁹</code></li>
+                <li><code>-10⁹ <= target <= 10⁹</code></li>
+                <li><strong>Solo existe una respuesta válida.</strong></li>
+              </ul>
             <p>
-              <strong>Nota sobre índices.</strong> En programación, los índices de las listas generalmente empiezan desde 0. Así que el primer número está en el índice 0, el segundo en el índice 1, y así sucesivamente.
+              <strong>Para pensar:</strong> ¿Puedes idear un algoritmo 
+              con complejidad temporal menor a O(n²)?
             </p>
-          </aside>
+          </blockquote> 
 
-          <h2>Ejemplos del problema</h2>
-          <ul>
-            <li><strong>Ejemplo 1:</strong> <code>nums = [2,7,11,15], target = 9</code> → Salida: <code>[0,1]</code> porque 2 + 7 = 9.</li>
-            <li><strong>Ejemplo 2:</strong> <code>nums = [3,2,4], target = 6</code> → Salida: <code>[1,2]</code> porque 2 + 4 = 6 (índices 1 y 2).</li>
-            <li><strong>Ejemplo 3:</strong> <code>nums = [3,3], target = 6</code> → Salida: <code>[0,1]</code>. Los dos 3 están en posiciones diferentes.</li>
-          </ul>
-          <p>¿Sencillo, verdad? Sin embargo, el verdadero desafío es <strong>qué tan rápido</strong> podemos encontrarlos cuando el arreglo se vuelve enorme — hasta 10,000 números. Ahí es donde comienza la diversión.</p>
-
-          <h2>El enfoque ingenuo: fuerza bruta (“revisar cada pareja”)</h2>
+          <h2>El enfoque ingenuo</h2>
+          
           <p>
-            Seamos honestos: cuando vemos un problema como este por primera vez, nuestro cerebro instintivamente piensa: “Tomaré el primer número, y luego intentaré sumarlo con cada otro número después de él. Si coincide con el objetivo, ¡listo!” Ese es el enfoque de fuerza bruta. Es simple, es honesto, y funciona. Pero también es el más lento.
+            Podrías tomar el primer número y luego intentar sumarlo con cada 
+            número que le sigue. Si coincide con el objetivo, ¡listo! Es simple, 
+            honesto y funciona. Pero también es el más lento.
           </p>
-          <pre class="post-pseudocode"><code>Flujo de fuerza bruta:
-Para i desde 0 hasta n-1:
-  Para j desde i+1 hasta n-1:
-    Si nums[i] + nums[j] == target → devolver [i, j]</code></pre>
-          <p><strong>Código (Python).</strong></p>
-          <pre><code class="language-python">def twoSum_fuerza_bruta(nums, target):
-    n = len(nums)
-    for i in range(n):
-        for j in range(i + 1, n):
-            if nums[i] + nums[j] == target:
-                return [i, j]
-    return []  # nunca se alcanza porque existe una solución</code></pre>
-
-          <h2>Complejidad — las malas noticias</h2>
+          
+          <div class="solution-card">
+            <div class="lang-tag">Python 3</div>
+            <pre><code>
+def twoSum_fuerzabruta(nums, target):
+  n = len(nums)
+  for i in range(n):
+      for j in range(i + 1, n):
+          if nums[i] + nums[j] == target:
+              return [i, j]
+  return []  # nunca se alcanza porque existe una solución
+            </code></pre>
+          </div>
+          
+          <h2>Complejidad inicial</h2>
           <p>
-            Si el arreglo tiene <code>n</code> elementos, el bucle externo se ejecuta <code>n</code> veces, y el bucle interno se ejecuta alrededor de <code>n/2</code> veces en promedio. Eso nos da aproximadamente <code>n * (n-1)/2</code> operaciones, que en notación Big O es <code>O(n²)</code>. Para n = 10,000, ¡eso es alrededor de 50 millones de comparaciones! Tu computadora puede manejarlo, pero en una entrevista te preguntarán: <em>¿Puedes hacerlo mejor?</em>
+            Si el arreglo tiene <code>n</code> elementos, el bucle exterior se ejecuta 
+            <code>n</code> veces, y el bucle interior se ejecutaría aproximadamente <code>n/2</code> 
+            veces en promedio. Eso nos da aproximadamente <code>n * (n-1)/2</code> 
+            operaciones, lo que se traduce en <code>O(n²)</code>. Si 
+            <code>n = 10,000</code>... ¡eso son cerca de 50 millones de comparaciones!
+          </p>
+          
+          <h2>Usando memoria</h2>
+          <p>
+            En lugar de comprobar cada par, podemos 
+            <strong>recordar qué números hemos visto</strong> y preguntarnos: 
+            <em>¿Necesito un número específico para completar la suma objetivo?</em>
           </p>
           <p>
-            Pero el enfoque de fuerza bruta sigue siendo importante — es la base. Siempre comenzamos con la solución funcional más simple, y luego optimizamos.
-          </p>
-
-          <h2>El momento “¡Ajá!”: usar una memoria (hash map)</h2>
-          <p>
-            Aquí está la idea clave: en lugar de revisar cada pareja, podemos <strong>recordar qué números hemos visto</strong> y hacer una pregunta simple: <em>“¿Necesito un número específico para completar el objetivo?”</em>
-          </p>
-          <p>
-            Desglosémoslo: Para cada número <code>x</code>, el complemento es <code>objetivo - x</code>. Si ya hemos visto ese complemento en algún lugar del arreglo, ¡encontramos nuestro par! Solo necesitamos una forma de almacenar los números que hemos pasado y consultarlos rápidamente. Ahí es donde entra un <strong>hash map</strong> (también llamado tabla hash o diccionario) — una estructura de datos que permite almacenar pares clave-valor y verificar si una clave existe en <code>O(1)</code> en promedio. Súper rápido.
-          </p>
-          <aside class="post-aside" aria-label="Hash map en términos simples">
-            <p>
-              <strong>Hash map en términos simples.</strong> Piensa en un cuaderno mágico. Cuando lees un número, lo anotas junto con su índice. Más tarde, si necesitas verificar si ya has visto un número, solo echas un vistazo al cuaderno. Sin necesidad de revisar toda la lista otra vez.
-            </p>
-          </aside>
-
-          <h2>El algoritmo inteligente (una sola pasada)</h2>
-          <p>Recorremos el arreglo una sola vez. Para cada elemento <code>nums[i]</code>:</p>
-          <ol>
-            <li>Calculamos <code>complemento = objetivo - nums[i]</code>.</li>
-            <li>Verificamos si el complemento ya existe en nuestro hash map. Si es así → devolvemos <code>[map[complemento], i]</code>.</li>
-            <li>De lo contrario, almacenamos el número actual y su índice en el mapa: <code>map[nums[i]] = i</code>.</li>
-          </ol>
-          <pre class="post-pseudocode"><code>Flujo del hash map de una pasada:
-mapa = {}
-para i en 0..n-1:
-  complemento = objetivo - nums[i]
-  si complemento está en mapa: devolver [mapa[complemento], i]
-  si no: mapa[nums[i]] = i
-# listo</code></pre>
-          <p><strong>Implementación en código.</strong></p>
-          <pre><code class="language-python">def twoSum_hashmap(nums, objetivo):
-    visto = {}  # clave = número, valor = índice
+            Para cada número <code>x</code>, su complemento es 
+            <code>target - x</code>. Si ya hemos visto ese complemento 
+            en algún lugar del arreglo, ¡hemos encontrado nuestro par! Solo necesitamos una forma de 
+            almacenar los números por los que ya pasamos y buscarlos rápidamente. Ahí es donde entra un 
+            <strong>mapa hash</strong> (también llamado tabla hash o diccionario) — una estructura de datos 
+            que permite almacenar pares clave-valor y comprobar si una clave existe en tiempo promedio <code>O(1)</code>.             
+          </p>                    
+          
+          <div class="solution-card">
+            <div class="lang-tag">Python 3</div>
+            <pre><code>
+def twoSum_mapahash(nums, target):
+    vistos = {}  # clave = número, valor = índice
     for i, num in enumerate(nums):
-        complemento = objetivo - num
-        if complemento in visto:
-            return [visto[complemento], i]
-        visto[num] = i
-    return []</code></pre>
-          <p>Recorramos el ejemplo <code>nums = [3,2,4], objetivo = 6</code>:</p>
-          <ul>
-            <li><code>i=0</code>, <code>num=3</code>, <code>complemento=3</code>. <code>visto</code> está vacío → almacenamos <code>{3:0}</code></li>
-            <li><code>i=1</code>, <code>num=2</code>, <code>complemento=4</code>. <code>visto</code> tiene <code>{3:0}</code>, 4 no está → almacenamos <code>{3:0, 2:1}</code></li>
-            <li><code>i=2</code>, <code>num=4</code>, <code>complemento=2</code>. ¿<code>visto</code> tiene 2? ¡Sí! → devolvemos <code>[visto[2]=1, 2]</code> → <code>[1,2]</code></li>
-          </ul>
-          <p>Hermoso, ¿verdad? Solo recorremos el arreglo una vez.</p>
-
-          <h2>Análisis de complejidad: por qué es un cambio radical</h2>
+        complemento = target - num
+        if complemento in vistos:
+            return [vistos[complemento], i]
+        vistos[num] = i
+    return []
+            </code></pre>
+          </div>
+          
+          <p>Sigamos el ejemplo <code>nums = [3,2,4], target = 6</code>:</p>
+          
+          <div class="simulation-table">
+            <strong>Simulación paso a paso: nums = [3,2,4] , target = 6</strong>
+            <table>
+              <thead>
+                <tr>
+                  <th>Paso</th>
+                  <th>i</th>
+                  <th>num</th>
+                  <th>complemento</th>
+                  <th>vistos antes</th>
+                  <th>Acción</th>
+                  <th>vistos después</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>0</td>
+                  <td>3</td>
+                  <td>3</td>
+                  <td>{}</td>
+                  <td>Guardar <code>{3:0}</code></td>
+                  <td><code>{3:0}</code></td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>1</td>
+                  <td>2</td>
+                  <td>4</td>
+                  <td><code>{3:0}</code></td>
+                  <td>Guardar <code>{2:1}</code></td>
+                  <td><code>{3:0, 2:1}</code></td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>2</td>
+                  <td>4</td>
+                  <td class="highlight">2</td>
+                  <td><code>{3:0, 2:1}</code></td>
+                  <td>Encontrado <code>2</code> → devolver <code>[1, 2]</code></td>
+                  <td>Terminado → <code>[1, 2]</code></td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="step-caption">Cada fila corresponde a una iteración del bucle. Cuando el complemento ya existe en <code>vistos</code> (paso 3), devolvemos inmediatamente el par de índices.</div>
+          </div>
+          
+          <p>Hermoso, ¿no es así? Solo recorremos el arreglo una vez.</p>
+          
+          <h2>Complejidad final</h2>
           <p>
-            <strong>Complejidad temporal:</strong> O(n) — recorremos el arreglo una vez, y cada operación de hash map (inserción y búsqueda) es O(1) en promedio.<br>
-            <strong>Complejidad espacial:</strong> O(n) — en el peor caso almacenamos casi todos los elementos en el hash map antes de encontrar el par.
-          </p>
-          <p>
-            Para n = 10,000, la fuerza bruta realiza hasta 50 millones de operaciones; la solución con hash map hace alrededor de 10,000. Esa es la diferencia entre esperar 2 segundos y 0.001 segundos.
-          </p>
-
-          <h2>La sección de matemáticas — entendiendo la ecuación central</h2>
-          <p>Formalicemos el problema con matemáticas. Se nos da:</p>
-          <blockquote>
-            <p>
-              <strong>Reformulación del problema.</strong> Encontrar índices <code>i</code> y <code>j</code>, <code>i ≠ j</code>, tales que<br>
-              <code>nums[i] + nums[j] = objetivo</code><br>
-              Equivalente a: <code>nums[i] = objetivo - nums[j]</code>
-            </p>
-          </blockquote>
-          <p>
-            Si lo pensamos como una ecuación: para cada índice <code>j</code>, queremos encontrar un índice anterior <code>i</code> que cumpla <code>nums[i] = objetivo - nums[j]</code>. Esto es como resolver un sumando faltante. El método ingenuo revisa todos los pares; el método del hash map precalcula el conjunto de números anteriores, convirtiendo el problema en una búsqueda de tiempo constante.
-          </p>
-          <p>
-            Otro punto de vista matemático: considera la función <code>f(x) = objetivo - x</code>. Para cada número en el arreglo, su complemento está definido. Dos números forman un par válido si uno es la imagen del otro bajo <code>f</code>. Eso es todo lo que estamos haciendo — buscar pares de complementos en una sola pasada.
-          </p>
-          <p>
-            También podemos visualizarlo como: dibuja una recta numérica. Para cada <code>x</code>, el compañero deseado es <code>objetivo - x</code>. A medida que escaneamos, dejamos “migas de pan” en un hash map. En el momento en que pisamos una migaja dejada por un número anterior, tenemos nuestra solución. Es como una búsqueda del tesoro con memoria perfecta.
-          </p>
-
-          <h2>Seguimiento: ¿podemos hacer mejor que O(n²)?</h2>
-          <p>
-            El seguimiento del problema pregunta: <em>“¿Puedes encontrar un algoritmo con complejidad temporal menor que O(n²)?”</em> Y sí — ¡acabamos de hacerlo! O(n) con un hash map es dramáticamente más rápido. ¿Podríamos hacer O(n log n)? Posiblemente con ordenamiento y técnica de dos punteros, pero eso perdería los índices originales a menos que los almacenemos. El enfoque con hash map sigue siendo el más elegante para este problema específico.
-          </p>
-          <p>
-            Si sientes curiosidad por el método de ordenamiento: podrías ordenar el arreglo (con los índices adjuntos) y luego usar dos punteros (izquierdo y derecho) para encontrar el par. Eso es O(n log n), pero se usa a menudo cuando necesitas evitar espacio extra. Sin embargo, para Two Sum, el método con hash map es el favorito en entrevistas.
-          </p>
-
-          <h2>Un poco de historia: ¿de dónde viene este problema?</h2>
-          <p>
-            El problema Two Sum se hizo famoso principalmente porque fue uno de los primeros problemas en LeetCode (lanzado en 2015). Pero la idea de encontrar dos números que sumen un objetivo se remonta a décadas atrás. Es esencialmente un caso especial del <strong>problema de suma de subconjuntos</strong> de la teoría de la computación. Empresas como Google, Facebook y Amazon lo adoran porque pone a prueba tanto la habilidad básica de codificación como la transición del pensamiento ingenuo al óptimo — una habilidad fundamental en ingeniería de software.
-          </p>
-          <p>
-            También hay una línea directa con el <strong>uso de tablas hash</strong>, que revolucionó la forma en que manejamos las búsquedas en programación. La idea de usar un hash map para recordar valores pasados es un patrón de diseño común en entrevistas de algoritmos (lo verás nuevamente en problemas como “Subarray Sum Equals K” o “Contains Duplicate”).
-          </p>
-
-          <h2>Probando nuestra solución con casos límite</h2>
-          <p>Revisemos algunos escenarios complicados que podrían romper un enfoque ingenuo:</p>
-          <ul>
-            <li><strong>Duplicados:</strong> <code>nums = [1, 1, 2], target = 2</code> → Salida: <code>[0,1]</code> porque 1+1=2. Nuestro hash map funciona: cuando i=1, complemento=1, visto ya tiene 1 desde el índice 0 → devuelve <code>[0,1]</code>.</li>
-            <li><strong>Números negativos:</strong> <code>nums = [-1, -2, -3, -4], target = -6</code> → Salida: <code>[1,3]</code> porque -2 + (-4) = -6. La lógica del complemento sigue funcionando.</li>
-            <li><strong>Números grandes:</strong> Hasta 10<sup>9</sup>, pero nuestra aritmética de enteros funciona bien.</li>
-          </ul>
-          <p>
-            Un error común para principiantes: usar el mismo elemento dos veces. Por ejemplo, si <code>nums = [3, 2, 4], target = 6</code>, el complemento para 3 es 3, pero no podemos usar el mismo 3 otra vez. Es por eso que almacenamos los números <strong>después</strong> de verificar el complemento, no antes. El algoritmo asegura que solo emparejamos el elemento actual con los vistos previamente.
-          </p>
-
-          <h2>Diagrama — viendo la magia de una sola pasada</h2>
-          <pre class="post-pseudocode"><code>Recorrido visual para nums = [2,7,11,15], objetivo = 9
-
-Paso 0: visto = {}
-Paso 1 (i=0, num=2): complemento = 7. ¿7 en visto? No. Agregamos {2:0}
-Paso 2 (i=1, num=7): complemento = 2. ¿2 en visto? ¡Sí! visto[2] = 0 → devolvemos [0,1]. Listo.
-Nunca siquiera miramos 11 y 15.</code></pre>
-          <p>Es como si el algoritmo tuviera supervisión — detecta la respuesta en el momento más temprano posible.</p>
-
-          <h2>Otros lenguajes y pequeñas variaciones</h2>
-          <p>Aunque escribimos pseudocódigo estilo Python, la misma lógica aplica para JavaScript, Java, C++, etc.</p>
-          <p><strong>Ejemplo en JavaScript (usando Map).</strong></p>
-          <pre><code class="language-javascript">var twoSum = function(nums, target) {
-    const map = new Map();
-    for (let i = 0; i &lt; nums.length; i++) {
-        const complement = target - nums[i];
-        if (map.has(complement)) return [map.get(complement), i];
-        map.set(nums[i], i);
-    }
-};</code></pre>
-          <p><strong>Ejemplo en Java (usando HashMap).</strong></p>
-          <pre><code class="language-java">public int[] twoSum(int[] nums, int target) {
-    Map&lt;Integer, Integer&gt; map = new HashMap&lt;&gt;();
-    for (int i = 0; i &lt; nums.length; i++) {
-        int complement = target - nums[i];
-        if (map.containsKey(complement)) {
-            return new int[] {map.get(complement), i};
-        }
-        map.put(nums[i], i);
-    }
-    return new int[] {};
-}</code></pre>
-
-          <h2>Trampas comunes y cómo evitarlas</h2>
-          <ul>
-            <li><strong>Olvidar el orden:</strong> Siempre verifica el complemento <em>antes</em> de almacenar el número actual. De lo contrario, podrías emparejar un elemento consigo mismo (cuando el complemento es igual al número actual).</li>
-            <li><strong>Usar búsqueda en arreglo en lugar de hash map:</strong> Algunos principiantes intentan usar <code>index()</code> o búsqueda lineal para el complemento dentro del bucle, volviendo a O(n²).</li>
-            <li><strong>Devolver números en lugar de índices:</strong> El problema espera índices. Verifica dos veces el formato de salida.</li>
-            <li><strong>Asumir que el arreglo está ordenado:</strong> No es un dato dado. Así que el método de dos punteros sin almacenar índices sería complicado.</li>
-          </ul>
-
-          <h2>Por qué este problema importa más allá de la entrevista</h2>
-          <p>
-            Two Sum te enseña el arte de las <strong>compensaciones</strong>. La fuerza bruta es fácil de escribir pero lenta. La versión con hash map usa un poco más de memoria pero te da velocidad. En la ingeniería del mundo real, constantemente equilibras tiempo vs. espacio. Este simple problema encapsula esa decisión fundamental. Además, el patrón de “búsqueda de complemento” aparecerá nuevamente en problemas como 3Sum, 4Sum, y muchos otros.
-          </p>
-          <h2>Referencias y lecturas adicionales</h2>
-          <p>Si quieres profundizar, aquí hay algunos recursos excelentes:</p>
-          <ul>
-            <li>Publiqué soluciones comentadas en <strong>Python</strong>, <strong>JavaScript</strong>, <strong>C++</strong>, <strong>Go</strong>, <strong>Kotlin</strong> y <strong>Swift</strong> <a href="https://github.com/lumaenaut/lumaenaut/tree/main/leetcode-solutions/1-two-sum" target="_blank" rel="noopener noreferrer">en GitHub</a> (<code>leetcode-solutions/1-two-sum</code> en el repo lumaenaut) — la misma idea O(n) con hash map que en este post.</li>
-            <li><a href="https://leetcode.com/problems/two-sum/" target="_blank" rel="noopener noreferrer">Página del problema Two Sum en LeetCode</a> — problema oficial y foros de discusión.</li>
-            <li><a href="https://es.wikipedia.org/wiki/Tabla_hash" target="_blank" rel="noopener noreferrer">Wikipedia: Tabla hash</a> — aprende sobre la estructura de datos que usamos.</li>
-            <li><a href="https://www.geeksforgeeks.org/two-sum/" target="_blank" rel="noopener noreferrer">GeeksforGeeks — Two Sum</a> — explicaciones adicionales y código en múltiples lenguajes.</li>
-            <li><a href="https://www.youtube.com/watch?v=KLlXCFG5TnA" target="_blank" rel="noopener noreferrer">YouTube: Two Sum por NeetCode</a> — explicación visual (muy recomendado para aprendices visuales).</li>
-            <li><a href="https://bigocheatsheet.com/" target="_blank" rel="noopener noreferrer">Hoja de referencia Big-O</a> — para entender mejor el análisis de complejidad.</li>
-          </ul>
-
-          <h2>Reflexiones finales</h2>
-          <p>
-            Comenzamos desde el bucle doble más ingenuo, soportamos el dolor de O(n²), y luego subimos de nivel a una solución con hash map de una pasada que es elegante, rápida y fácil de recordar. Ese es el espíritu del pensamiento algorítmico: siempre iterar, siempre optimizar, y nunca tener miedo de usar memoria extra si te da grandes ganancias de velocidad.
-          </p>
-          <p>
-            Two Sum puede ser tu primer problema de LeetCode, pero no será el último. Los patrones que aprendas aquí se quedarán contigo. Así que la próxima vez que veas un desafío de codificación, pregúntate: <em>“¿Puedo usar un hash map para recordar cosas?”</em> A menudo es la clave.
-          </p>
-          <p>Feliz codificación, y que tu complejidad siempre sea baja.</p>
+            <strong>Complejidad temporal:</strong> O(n) — recorremos el arreglo 
+            una sola vez, y cada operación de mapa hash (inserción y búsqueda) es O(1) en 
+            promedio. Lo cual también responde a la pregunta de si podemos 
+            hacer algo mejor que O(n²).<br> 
+            <strong>Complejidad espacial:</strong> O(n) — en el peor de los casos almacenamos 
+            casi todos los elementos en el mapa hash antes de encontrar el par.
+          </p>         
         </div>
+
         <blockquote class="closing-quote">
-          Puliendo LeetCode — Día 1: Two Sum. Escrito con curiosidad.
+          Feliz programación, y que tu complejidad siempre sea baja.
         </blockquote>
-        <div class="next-chap-nav" aria-label="Navegación al siguiente día">
-          <a class="next-chap-btn" href="dia-2-add-two-numbers.html">
-            <span>Siguiente ep.</span>
+
+        <div class="next-chap-nav" aria-label="Navegación Día 2">
+          <a class="next-chap-btn" href="day-2-add-two-numbers.html">
+            <span>Día 2</span>
             <img src="../../../assets/arrow-next-icon.png" alt="" width="18" height="18">
           </a>
         </div>
+        <hr class="home-intro-divider" aria-hidden="true">
+        
+        <div class="post-body">
+          <h2>Referencias y lecturas adicionales</h2>
+          <ul>
+            <li>
+              <a href="https://leetcode.com/problems/two-sum/" target="_blank" rel="noopener noreferrer">
+                Página del problema Two Sum en LeetCode
+              </a> — página oficial y foros de discusión.
+            </li>
+            <li>
+              <a href="https://en.wikipedia.org/wiki/Hash_table" target="_blank" rel="noopener noreferrer">
+                Wikipedia: Tabla hash
+              </a> — aprende sobre la estructura de datos que usamos.
+            </li>
+            <li>
+              <a href="https://www.youtube.com/watch?v=KLlXCFG5TnA" target="_blank" rel="noopener noreferrer">
+                YouTube: Two Sum por NeetCode
+              </a> — explicación visual (muy recomendada para quienes aprenden visualmente).
+            </li>
+            <li>
+              <a href="https://bigocheatsheet.com/" target="_blank" rel="noopener noreferrer">
+                Hoja de referencia Big-O
+              </a> — para entender mejor el análisis de complejidad.
+            </li>
+          </ul>
+          
+          <h2>¿No tienes suficiente de lumænaut? Lee esto...</h2>
+          <ul>
+            <li>
+              <a href="../logbook/ch-2-everything-i-dont-know-about-blogging.html">
+                Capítulo 2 | Todo lo que no sé sobre bloguear
+              </a>
+              — la bitácora detrás del sitio: dominios, SEO, plugins y aprender en público.
+            </li>
+            <li>
+              <a href="../computer-science/the-8-algorithm-paradigms.html">
+                Los 8 paradigmas de algoritmos
+              </a>
+              — ocho modelos mentales que reutilizarás en problemas, entrevistas y código en producción.
+            </li>
+            <li>
+              <a href="../computer-science/how-the-game-loop-works.html">
+                Cómo funciona el bucle de juego
+              </a>
+              — el latido de un fotograma de juego: actualizar, renderizar y temporización estable en lenguaje claro.
+            </li>
+          </ul>
+        </div>
+
       </article>
     </main>
+    
     <footer class="footer">
       <nav class="social-links" aria-label="Enlaces sociales">
         <ul>
-          <li><a href="https://www.reddit.com/user/Lumaenaut_/" target="_blank" rel="noopener noreferrer" title="Reddit"><img src="../../../assets/reddit-icon.png" alt="Reddit" width="24" height="24"></a></li>
-          <li><a href="https://x.com/lumaenaut" target="_blank" rel="noopener noreferrer" title="X"><img src="../../../assets/twitter-icon.png" alt="X" width="24" height="24"></a></li>
-          <li><a href="https://github.com/lumaenaut" target="_blank" rel="noopener noreferrer" title="GitHub"><img src="../../../assets/github-icon.png" alt="GitHub" width="24" height="24"></a></li>
+          <li>
+            <a href="https://www.reddit.com/user/Lumaenaut_/" target="_blank" rel="noopener noreferrer" title="Reddit">
+              <img src="../../../assets/reddit-icon.png" alt="Reddit" width="24" height="24">
+            </a>
+          </li>
+          <li>
+            <a href="https://x.com/lumaenaut" target="_blank" rel="noopener noreferrer" title="X">
+              <img src="../../../assets/twitter-icon.png" alt="X" width="24" height="24">
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/lumaenaut" target="_blank" rel="noopener noreferrer" title="GitHub">
+              <img src="../../../assets/github-icon.png" alt="GitHub" width="24" height="24">
+            </a>
+          </li>
         </ul>
       </nav>
       <div class="footer-meta">
-        <p>2026, lumænaut <a href="../../politica-de-privacidad.html">Política de privacidad</a></p>
+        <p>2026, lumænaut <a href="../../privacy-policy.html">Política de Privacidad</a></p>
       </div>
     </footer>
+
   </div>
   <script src="../../../scripts/script.js"></script>
 </body>
