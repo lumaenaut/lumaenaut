@@ -299,9 +299,6 @@
     // Logbook / Bitácora (moved into subfolders)
     "blog/bitacora/ep-2-todo-lo-que-no-se-sobre-bloguear.html": "blog/logbook/ch-2-everything-i-dont-know-about-blogging.html",
     "blog/bitacora/ep-1-aspirante-nomada-digital.html": "blog/logbook/ch-1-aspiring-digital-nomad.html",
-    "blog/pregunta-de-la-semana/pdls-cassidoo-1.html": "blog/question-of-the-week/qotw-cassidoo-1.html",
-    "blog/pregunta-de-la-semana/pdls-cassidoo-2.html": "blog/question-of-the-week/qotw-cassidoo-2.html",
-    "blog/pregunta-de-la-semana/pdls-cassidoo-3.html": "blog/question-of-the-week/qotw-cassidoo-3.html",
   };
 
   var blogEngToEsp = {
@@ -321,9 +318,6 @@
     "blog/logbook/ch-1-aspiring-digital-nomad.html": "blog/bitacora/ep-1-aspirante-nomada-digital.html",
     "blog/ch-2-everything-i-dont-know-about-blogging.html": "blog/bitacora/ep-2-todo-lo-que-no-se-sobre-bloguear.html",
     "blog/ch-1-aspiring-digital-nomad.html": "blog/bitacora/ep-1-aspirante-nomada-digital.html",
-    "blog/question-of-the-week/qotw-cassidoo-1.html": "blog/pregunta-de-la-semana/pdls-cassidoo-1.html",
-    "blog/question-of-the-week/qotw-cassidoo-2.html": "blog/pregunta-de-la-semana/pdls-cassidoo-2.html",
-    "blog/question-of-the-week/qotw-cassidoo-3.html": "blog/pregunta-de-la-semana/pdls-cassidoo-3.html",
   };
 
   function espToEngPath(espPathname) {
