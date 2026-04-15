@@ -1070,6 +1070,31 @@ article.post .where-to-start p + p {
 }
 
 @media (max-width: 600px) {
+  .header {
+    /* Prevent header overflow on small screens */
+    padding: 0.4rem;
+  }
+
+  .main-nav ul {
+    /* Allow the 3rd button to wrap to its own row */
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .main-nav a {
+    /* Slightly tighter buttons for mobile */
+    margin: 2px 4px;
+    padding: 4px 10px;
+    font-size: 0.95rem;
+  }
+
+  /* Place "leetcode editorial" on a centered second row */
+  .main-nav li:nth-child(3) {
+    flex-basis: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
   .content {
     padding-left: 1rem;
     padding-right: 1rem;
@@ -1089,19 +1114,20 @@ article.post .where-to-start p + p {
   }
 
   .header-right {
-    position: relative;
-    justify-content: center;
+    /* Keep share button visible and stable */
+    position: static;
+    justify-content: flex-end;
   }
 
   .header-right .share-btn {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    position: static;
+    left: auto;
+    transform: none;
     margin: 0;
   }
 
   .header-right .share-btn:hover {
-    transform: translateX(-50%) translate(2px, 2px);
+    transform: translate(2px, 2px);
   }
 }
 
