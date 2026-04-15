@@ -221,30 +221,6 @@
 })();
 
 /**
- * Fix legacy relative paths after content moves/renames.
- * Some older pages reference images with too many "../" segments.
- */
-(function () {
-  var pathname = window.location.pathname || "";
-  var imgs = document.querySelectorAll('img[src^="../../../images/"]');
-  if (!imgs || imgs.length === 0) return;
-
-  // These sections live at /<locale>/<series>/..., so images should be ../../images/...
-  var shouldFix =
-    pathname.indexOf("/eng-US/leetcode-solutions/") !== -1 ||
-    pathname.indexOf("/esp-LAT/soluciones-leetcode/") !== -1;
-  if (!shouldFix) return;
-
-  for (var i = 0; i < imgs.length; i++) {
-    var img = imgs[i];
-    var src = img.getAttribute("src") || "";
-    if (src.indexOf("../../../images/") === 0) {
-      img.setAttribute("src", src.replace("../../../images/", "../../images/"));
-    }
-  }
-})();
-
-/**
  * Floating controls (e.g. language switcher): hide on scroll down, show on scroll up
  * or when at top of .content. Uses requestAnimationFrame to throttle scroll handling.
  */
