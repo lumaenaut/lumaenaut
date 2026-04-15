@@ -1133,6 +1133,12 @@ article.post .where-to-start p + p {
   }
 }
 
+@media (min-width: 601px) {
+  .header-right .share-btn {
+    margin-right: 10px;
+  }
+}
+
 .footer {
   border-radius: 0px 0px 20px 20px;
   border: 5px solid var(--contrast);
