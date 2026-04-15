@@ -1117,7 +1117,7 @@ article.post .where-to-start p + p {
   .header-right {
     /* Keep share button visible and stable */
     position: static;
-    justify-content: flex-end;
+    justify-content: center;
   }
 
   .header-right .share-btn {
@@ -1129,12 +1129,6 @@ article.post .where-to-start p + p {
 
   .header-right .share-btn:hover {
     transform: translate(2px, 2px);
-  }
-}
-
-@media (min-width: 601px) {
-  .header-right .share-btn {
-    margin-right: 10px;
   }
 }
 
