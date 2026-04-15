@@ -61,8 +61,7 @@ h2 {
   z-index: 10;
 
   padding: 0.5rem;
-  /* Let the header grow with its content (mobile nav wraps). */
-  max-height: none;
+  max-height: 7rem;
   border-radius: 20px 20px 0px 0px;
   border: 5px solid var(--contrast);
   background-color: var(--background-color);
