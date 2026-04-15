@@ -61,7 +61,8 @@ h2 {
   z-index: 10;
 
   padding: 0.5rem;
-  max-height: 7rem;
+  /* Let the header grow with its content (mobile nav wraps). */
+  max-height: none;
   border-radius: 20px 20px 0px 0px;
   border: 5px solid var(--contrast);
   background-color: var(--background-color);
@@ -1073,6 +1074,7 @@ article.post .where-to-start p + p {
   .header {
     /* Prevent header overflow on small screens */
     padding: 0.4rem;
+    max-height: none;
   }
 
   .main-nav ul {
