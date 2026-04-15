@@ -1089,7 +1089,7 @@ article.post .where-to-start p + p {
     font-size: 0.95rem;
   }
 
-  /* Place "leetcode editorial" on a centered second row */
+  /* Place "leetcode solutions" on a centered second row */
   .main-nav li:nth-child(3) {
     flex-basis: 100%;
     display: flex;
