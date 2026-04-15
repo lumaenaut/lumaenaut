@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-TLP7F5XM');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#F9F5EC">
+  <meta name="description" content="LeetCode Editorial posts by Alberto Del Valle: clear, step-by-step solutions with complexity notes and references.">
+  <meta name="author" content="Alberto Del Valle">
+  <title>LeetCode Editorial | lumænaut</title>
+  <link rel="canonical" href="https://lumaenaut.com/eng-US/leetcode-editorial/leetcode-editorial-index.html">
+  <link rel="alternate" hreflang="x-default" href="https://lumaenaut.com/eng-US/leetcode-editorial/leetcode-editorial-index.html">
+  <link rel="alternate" hreflang="en" href="https://lumaenaut.com/eng-US/leetcode-editorial/leetcode-editorial-index.html">
+  <link rel="alternate" hreflang="es" href="https://lumaenaut.com/esp-LAT/editorial-leetcode/editorial-leetcode-indice.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="lumænaut">
+  <meta property="og:title" content="LeetCode Editorial | lumænaut">
+  <meta property="og:description" content="LeetCode Editorial posts by Alberto Del Valle: clear, step-by-step solutions with complexity notes and references.">
+  <meta property="og:url" content="https://lumaenaut.com/eng-US/leetcode-editorial/leetcode-editorial-index.html">
+  <meta property="og:image" content="https://lumaenaut.com/images/alberto-portrait-ascii.png">
+  <meta property="og:image:alt" content="Portrait of Alberto Del Valle made from ASCII characters, in color ASCII art style.">
+  <meta property="og:image:width" content="1840">
+  <meta property="og:image:height" content="1690">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="es">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:creator" content="@lumaenaut">
+  <meta name="twitter:image" content="https://lumaenaut.com/images/alberto-portrait-ascii.png">
+  <meta name="twitter:title" content="LeetCode Editorial | lumænaut">
+  <meta name="twitter:description" content="LeetCode Editorial posts by Alberto Del Valle: clear, step-by-step solutions with complexity notes and references.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%94%A5%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../../style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": "https://lumaenaut.com/eng-US/leetcode-editorial/leetcode-editorial-index.html",
+    "name": "LeetCode Editorial | lumænaut",
+    "url": "https://lumaenaut.com/eng-US/leetcode-editorial/leetcode-editorial-index.html",
+    "inLanguage": "en-US",
+    "isPartOf": { "@id": "https://lumaenaut.com/eng-US/blog/blog-index.html" },
+    "hasPart": [
+      {
+        "@type": "BlogPosting",
+        "headline": "LeetCode Editorial | #2 — Add Two Numbers",
+        "url": "https://lumaenaut.com/eng-US/leetcode-editorial/2-add-two-numbers.html",
+        "datePublished": "2026-03-23",
+        "image": "https://lumaenaut.com/images/outdated-computer-ascii.png"
+      },
+      {
+        "@type": "BlogPosting",
+        "headline": "LeetCode Editorial | #1 — Two Sum",
+        "url": "https://lumaenaut.com/eng-US/leetcode-editorial/1-two-sum.html",
+        "datePublished": "2026-03-21",
+        "image": "https://lumaenaut.com/images/outdated-computer-ascii.png"
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TLP7F5XM"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <div class="page-wrapper">
+    <header class="header">
+      <div class="header-left">
+        <div class="logo-div">
+          <pre class="logo-ascii" id="logo-container" aria-hidden="true"></pre>
+        </div>
+      </div>
+      <div class="header-center">
+        <p class="header-site-title">lumænaut</p>
+        <nav class="main-nav" aria-label="Main navigation">
+          <ul>
+            <li><a class="home-btn" href="../index.html">home</a></li>
+            <li><a class="blog-btn" href="../blog/blog-index.html">blog</a></li>
+            <li><a class="leetcode-btn" href="leetcode-editorial-index.html">leetcode editorial</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="header-right">
+        <div class="logo-div-mirror" aria-hidden="true"></div>
+        <button type="button" class="share-btn" aria-label="Share this page"><img src="../../assets/share-icon.png" alt="" class="share-btn-icon" data-ios-src="../../assets/ios-share-icon.png" width="20" height="20"></button>
+      </div>
+    </header>
+    <main id="main-content" class="content">
+      <div class="floating-controls">
+        <div class="lang-switcher">
+          <button type="button" class="lang-switcher-btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Select language"><img src="../../assets/translate-icon.png" alt="" class="lang-switcher-icon"><span class="lang-switcher-label">eng (US)</span></button>
+          <ul class="lang-switcher-dropdown" role="listbox" aria-label="Language options">
+            <li><a href="#" data-lang="eng-US" role="option">eng (US)</a></li>
+            <li><a href="#" data-lang="esp-LAT" role="option">esp (LAT)</a></li>
+          </ul>
+        </div>
+      </div>
+      <section class="blog-menu" aria-labelledby="leetcode-menu-title">
+        <h1 id="leetcode-menu-title">LeetCode Editorial</h1>
+        <p class="blog-menu-intro">Pick a post.</p>
+        <ul class="blog-card-list" aria-label="LeetCode Editorial posts">
+          <li class="blog-card-item--leetcode">
+            <a class="blog-card blog-card--with-thumb" href="2-add-two-numbers.html">
+              <div class="blog-card-thumb">
+                <img src="../../images/outdated-computer-ascii.png" width="1840" height="1690" loading="lazy" decoding="async" alt="Color ASCII art: an outdated computer on a desk with a bookshelf in the background, suggesting a classic coding workspace.">
+              </div>
+              <div class="blog-card-body">
+                <h2 class="blog-card-title">LeetCode Editorial | #2 — Add Two Numbers</h2>
+                <p class="blog-card-subtitle">From grade-school addition to linked list mastery</p>
+                <p class="blog-card-meta">
+                  <span class="blog-card-author">Alberto Del Valle</span>
+                  <time class="blog-card-date" datetime="2026-03-23">March 23, 2026</time>
+                </p>
+              </div>
+            </a>
+          </li>
+          <li class="blog-card-item--leetcode">
+            <a class="blog-card blog-card--with-thumb" href="1-two-sum.html">
+              <div class="blog-card-thumb">
+                <img src="../../images/outdated-computer-ascii.png" width="1840" height="1690" loading="lazy" decoding="async" alt="Color ASCII art: an outdated computer on a desk with a bookshelf in the background, suggesting a classic coding workspace.">
+              </div>
+              <div class="blog-card-body">
+                <h2 class="blog-card-title">LeetCode Editorial | #1 — Two Sum</h2>
+                <p class="blog-card-subtitle">From brute force to O(n) — a friendly journey for beginners</p>
+                <p class="blog-card-meta">
+                  <span class="blog-card-author">Alberto Del Valle</span>
+                  <time class="blog-card-date" datetime="2026-03-21">March 21, 2026</time>
+                </p>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </section>
+    </main>
+    <footer class="footer">
+      <nav class="social-links" aria-label="Social links">
+        <ul>
+          <li><a href="https://www.reddit.com/user/Lumaenaut_/" target="_blank" rel="noopener noreferrer" title="Reddit"><img src="../../assets/reddit-icon.png" alt="Reddit" width="24" height="24"></a></li>
+          <li><a href="https://x.com/lumaenaut" target="_blank" rel="noopener noreferrer" title="X"><img src="../../assets/twitter-icon.png" alt="X" width="24" height="24"></a></li>
+          <li><a href="https://github.com/lumaenaut" target="_blank" rel="noopener noreferrer" title="GitHub"><img src="../../assets/github-icon.png" alt="GitHub" width="24" height="24"></a></li>
+        </ul>
+      </nav>
+      <div class="footer-meta">
+        <p>2026, lumænaut <a href="../privacy-policy.html">Privacy Policy</a></p>
+      </div>
+    </footer>
+  </div>
+  <script src="../../scripts/script.js"></script>
+</body>
+</html>

@@ -287,15 +287,16 @@
     "blog/computacion/el-arte-del-codigo-lento.html": "blog/computer-science/the-art-of-slow-code.html",
     "blog/computacion/los-8-paradigmas-de-algoritmos.html": "blog/computer-science/the-8-algorithm-paradigms.html",
     "blog/computacion/asi-funciona-el-bucle-del-videojuego.html": "blog/computer-science/how-the-game-loop-works.html",
-    // LeetCode series
-    "blog/editorialleet/1-suma-de-dos.html": "blog/leeteditorial/1-two-sum.html",
-    "blog/editorialleet/2-suma-dos-numeros.html": "blog/leeteditorial/2-add-two-numbers.html",
+    // LeetCode editorial
+    "editorial-leetcode/editorial-leetcode-indice.html": "leetcode-editorial/leetcode-editorial-index.html",
+    "editorial-leetcode/1-suma-de-dos.html": "leetcode-editorial/1-two-sum.html",
+    "editorial-leetcode/2-suma-dos-numeros.html": "leetcode-editorial/2-add-two-numbers.html",
     // Legacy blog root / old folder names (pre-reorg)
     "blog/el-arte-del-codigo-lento.html": "blog/computer-science/the-art-of-slow-code.html",
     "blog/los-8-paradigmas-de-algoritmos.html": "blog/computer-science/the-8-algorithm-paradigms.html",
     "blog/asi-funciona-el-bucle-del-videojuego.html": "blog/computer-science/how-the-game-loop-works.html",
-    "blog/puliendo-leetcode/dia-1-two-sum.html": "blog/leeteditorial/1-two-sum.html",
-    "blog/puliendo-leetcode/dia-2-add-two-numbers.html": "blog/leeteditorial/2-add-two-numbers.html",
+    "blog/puliendo-leetcode/dia-1-two-sum.html": "leetcode-editorial/1-two-sum.html",
+    "blog/puliendo-leetcode/dia-2-add-two-numbers.html": "leetcode-editorial/2-add-two-numbers.html",
     // Logbook / Bitácora (moved into subfolders)
     "blog/bitacora/ep-2-todo-lo-que-no-se-sobre-bloguear.html": "blog/logbook/ch-2-everything-i-dont-know-about-blogging.html",
     "blog/bitacora/ep-1-aspirante-nomada-digital.html": "blog/logbook/ch-1-aspiring-digital-nomad.html",
@@ -305,14 +306,15 @@
     "blog/computer-science/the-art-of-slow-code.html": "blog/computacion/el-arte-del-codigo-lento.html",
     "blog/computer-science/the-8-algorithm-paradigms.html": "blog/computacion/los-8-paradigmas-de-algoritmos.html",
     "blog/computer-science/how-the-game-loop-works.html": "blog/computacion/asi-funciona-el-bucle-del-videojuego.html",
-    "blog/leeteditorial/1-two-sum.html": "blog/editorialleet/1-suma-de-dos.html",
-    "blog/leeteditorial/2-add-two-numbers.html": "blog/editorialleet/2-suma-dos-numeros.html",
+    "leetcode-editorial/leetcode-editorial-index.html": "editorial-leetcode/editorial-leetcode-indice.html",
+    "leetcode-editorial/1-two-sum.html": "editorial-leetcode/1-suma-de-dos.html",
+    "leetcode-editorial/2-add-two-numbers.html": "editorial-leetcode/2-suma-dos-numeros.html",
     // Legacy English paths
     "blog/the-art-of-slow-code.html": "blog/computacion/el-arte-del-codigo-lento.html",
     "blog/the-8-algorithm-paradigms.html": "blog/computacion/los-8-paradigmas-de-algoritmos.html",
     "blog/how-a-game-loop-works.html": "blog/computacion/asi-funciona-el-bucle-del-videojuego.html",
-    "blog/grinding-leetcode/day-1-two-sum.html": "blog/editorialleet/1-suma-de-dos.html",
-    "blog/grinding-leetcode/day-2-add-two-numbers.html": "blog/editorialleet/2-suma-dos-numeros.html",
+    "blog/grinding-leetcode/day-1-two-sum.html": "editorial-leetcode/1-suma-de-dos.html",
+    "blog/grinding-leetcode/day-2-add-two-numbers.html": "editorial-leetcode/2-suma-dos-numeros.html",
     // Logbook / Bitácora
     "blog/logbook/ch-2-everything-i-dont-know-about-blogging.html": "blog/bitacora/ep-2-todo-lo-que-no-se-sobre-bloguear.html",
     "blog/logbook/ch-1-aspiring-digital-nomad.html": "blog/bitacora/ep-1-aspirante-nomada-digital.html",
