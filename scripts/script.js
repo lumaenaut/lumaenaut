@@ -291,12 +291,11 @@
     "soluciones-leetcode/soluciones-leetcode-indice.html": "leetcode-solutions/leetcode-solutions-index.html",
     "soluciones-leetcode/1-suma-de-dos.html": "leetcode-solutions/1-two-sum.html",
     "soluciones-leetcode/2-suma-dos-numeros.html": "leetcode-solutions/2-add-two-numbers.html",
+    "soluciones-leetcode/9-numero-palindromo.html": "leetcode-solutions/9-palindrome-number.html",
     // Legacy blog root / old folder names (pre-reorg)
     "blog/el-arte-del-codigo-lento.html": "blog/computer-science/the-art-of-slow-code.html",
     "blog/los-8-paradigmas-de-algoritmos.html": "blog/computer-science/the-8-algorithm-paradigms.html",
     "blog/asi-funciona-el-bucle-del-videojuego.html": "blog/computer-science/how-the-game-loop-works.html",
-    "blog/puliendo-leetcode/dia-1-two-sum.html": "leetcode-solutions/1-two-sum.html",
-    "blog/puliendo-leetcode/dia-2-add-two-numbers.html": "leetcode-solutions/2-add-two-numbers.html",
     // Logbook / Bitácora (moved into subfolders)
     "blog/bitacora/ep-2-todo-lo-que-no-se-sobre-bloguear.html": "blog/logbook/ch-2-everything-i-dont-know-about-blogging.html",
     "blog/bitacora/ep-1-aspirante-nomada-digital.html": "blog/logbook/ch-1-aspiring-digital-nomad.html",
@@ -309,12 +308,11 @@
     "leetcode-solutions/leetcode-solutions-index.html": "soluciones-leetcode/soluciones-leetcode-indice.html",
     "leetcode-solutions/1-two-sum.html": "soluciones-leetcode/1-suma-de-dos.html",
     "leetcode-solutions/2-add-two-numbers.html": "soluciones-leetcode/2-suma-dos-numeros.html",
+    "leetcode-solutions/9-palindrome-number.html": "soluciones-leetcode/9-numero-palindromo.html",
     // Legacy English paths
     "blog/the-art-of-slow-code.html": "blog/computacion/el-arte-del-codigo-lento.html",
     "blog/the-8-algorithm-paradigms.html": "blog/computacion/los-8-paradigmas-de-algoritmos.html",
     "blog/how-a-game-loop-works.html": "blog/computacion/asi-funciona-el-bucle-del-videojuego.html",
-    "blog/grinding-leetcode/day-1-two-sum.html": "soluciones-leetcode/1-suma-de-dos.html",
-    "blog/grinding-leetcode/day-2-add-two-numbers.html": "soluciones-leetcode/2-suma-dos-numeros.html",
     // Logbook / Bitácora
     "blog/logbook/ch-2-everything-i-dont-know-about-blogging.html": "blog/bitacora/ep-2-todo-lo-que-no-se-sobre-bloguear.html",
     "blog/logbook/ch-1-aspiring-digital-nomad.html": "blog/bitacora/ep-1-aspirante-nomada-digital.html",
