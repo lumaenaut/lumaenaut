@@ -711,6 +711,22 @@ article.post .where-to-start p + p {
   margin-bottom: 0.5rem;
 }
 
+.chap-nav-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+  gap: 1rem;
+}
+
+.chap-nav-row .prev-chap-nav,
+.chap-nav-row .next-chap-nav {
+  margin-top: 0;
+  margin-bottom: 0;
+  flex: 0 0 auto;
+}
+
 .next-chap-btn {
   display: inline-flex;
   align-items: center;

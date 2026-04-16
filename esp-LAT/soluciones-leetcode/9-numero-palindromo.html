@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-TLP7F5XM');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#F9F5EC">
+  <meta name="description" content="Soluciones LeetCode | #9 — Número palíndromo. De la conversión a cadena a la inversión parcial sin strings, con ejemplos en Python, seguimiento paso a paso, notas de complejidad y referencias. Por Alberto Del Valle.">
+  <meta name="author" content="Alberto Del Valle">
+  <title>Soluciones LeetCode | #9 — Número palíndromo</title>
+  <link rel="canonical" href="https://lumaenaut.com/esp-LAT/soluciones-leetcode/9-numero-palindromo.html">
+  <link rel="alternate" hreflang="x-default" href="https://lumaenaut.com/eng-US/leetcode-solutions/9-palindrome-number.html">
+  <link rel="alternate" hreflang="en" href="https://lumaenaut.com/eng-US/leetcode-solutions/9-palindrome-number.html">
+  <link rel="alternate" hreflang="es" href="https://lumaenaut.com/esp-LAT/soluciones-leetcode/9-numero-palindromo.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="lumænaut">
+  <meta property="og:title" content="Soluciones LeetCode | #9 — Número palíndromo">
+  <meta property="og:description" content="Soluciones LeetCode | #9 — Número palíndromo. De la conversión a cadena a la inversión parcial sin strings, con ejemplos en Python, seguimiento paso a paso, notas de complejidad y referencias. Por Alberto Del Valle.">
+  <meta property="og:url" content="https://lumaenaut.com/esp-LAT/soluciones-leetcode/9-numero-palindromo.html">
+  <meta property="og:image" content="https://lumaenaut.com/images/outdated-computer-ascii.png">
+  <meta property="og:image:alt" content="Arte ASCII: una computadora anticuada sobre un escritorio con una estantería al fondo, evocando la práctica clásica de programación.">
+  <meta property="og:image:width" content="1840">
+  <meta property="og:image:height" content="1690">
+  <meta property="og:locale" content="es_MX">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="article:published_time" content="2026-04-16">
+  <meta property="article:modified_time" content="2026-04-16">
+  <meta property="article:author" content="Alberto Del Valle">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:creator" content="@lumaenaut">
+  <meta name="twitter:image" content="https://lumaenaut.com/images/outdated-computer-ascii.png">
+  <meta name="twitter:title" content="Soluciones LeetCode | #9 — Número palíndromo">
+  <meta name="twitter:description" content="Soluciones LeetCode | #9 — Número palíndromo. De la conversión a cadena a la inversión parcial sin strings, con ejemplos en Python, seguimiento paso a paso, notas de complejidad y referencias. Por Alberto Del Valle.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%94%A5%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../../style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Soluciones LeetCode | #9 — Número palíndromo",
+    "alternativeHeadline": "Del truco con cadena a la inversión parcial — lógica entera limpia",
+    "description": "Soluciones LeetCode | #9 — Número palíndromo. De la conversión a cadena a la inversión parcial sin strings, con ejemplos en Python, seguimiento paso a paso, notas de complejidad y referencias. Por Alberto Del Valle.",
+    "url": "https://lumaenaut.com/esp-LAT/soluciones-leetcode/9-numero-palindromo.html",
+    "mainEntityOfPage": { "@id": "https://lumaenaut.com/esp-LAT/soluciones-leetcode/9-numero-palindromo.html" },
+    "image": "https://lumaenaut.com/images/outdated-computer-ascii.png",
+    "inLanguage": "es-MX",
+    "datePublished": "2026-04-16",
+    "dateModified": "2026-04-16",
+    "author": {
+      "@type": "Person",
+      "name": "Alberto Del Valle",
+      "url": "https://lumaenaut.com/esp-LAT/indice.html"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Alberto Del Valle"
+    },
+    "isPartOf": { "@id": "https://lumaenaut.com/esp-LAT/blog/blog-indice.html" }
+  }
+  </script>
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TLP7F5XM"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+  
+  <div class="page-wrapper">
+    
+    <header class="header">
+
+      <div class="header-left">
+        <div class="logo-div">
+          <pre class="logo-ascii" id="logo-container" aria-hidden="true"></pre>
+        </div>
+      </div>
+
+      <div class="header-center">
+        <p class="header-site-title">lumænaut</p>
+        <nav class="main-nav" aria-label="Navegación principal">
+          <ul>
+            <li><a class="home-btn" href="../indice.html">inicio</a></li>
+            <li><a class="blog-btn" href="../blog/blog-indice.html">blog</a></li>
+            <li><a class="leetcode-btn" href="soluciones-leetcode-indice.html">soluciones leetcode</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="header-right">
+        <div class="logo-div-mirror" aria-hidden="true"></div>
+        <button type="button" class="share-btn" aria-label="Compartir esta página">
+          <img src="../../assets/share-icon.png" alt="" class="share-btn-icon" data-ios-src="../../assets/ios-share-icon.png" width="20" height="20">
+        </button>
+      </div>
+
+    </header>
+
+    <main id="main-content" class="content">
+
+      <div class="floating-controls">
+        <div class="lang-switcher">
+          <button type="button" class="lang-switcher-btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Seleccionar idioma">
+            <img src="../../assets/translate-icon.png" alt="" class="lang-switcher-icon">
+            <span class="lang-switcher-label">esp (LAT)</span>
+          </button>
+          <ul class="lang-switcher-dropdown" role="listbox" aria-label="Opciones de idioma">
+            <li><a href="#" data-lang="eng-US" role="option">eng (US)</a></li>
+            <li><a href="#" data-lang="esp-LAT" role="option">esp (LAT)</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <article class="post" aria-labelledby="post-title">
+      
+        <header class="post-header">
+          <h1 id="post-title">Soluciones LeetCode<br>#9 — Número palíndromo</h1>
+          <p class="post-subtitle">
+            Del truco con cadena a la inversión parcial — lógica entera limpia
+          </p>
+          <p class="post-meta">
+            Por <span class="author">Alberto Del Valle</span><br>
+            <time datetime="2026-04-16">16 de abril de 2026</time><br>
+            <span class="post-read-time">(Tiempo de lectura ~4 min)</span>
+          </p>
+        </header>
+
+        <figure class="post-featured-image" aria-labelledby="palindrome-number-feature-caption">
+          <img
+            src="../../images/outdated-computer-ascii.png"
+            alt="Arte ASCII a color: una computadora anticuada sobre un escritorio con una estantería al fondo, que sugiere un espacio de trabajo clásico para programar."
+            title="Arte ASCII — computadora anticuada sobre un escritorio con estantería"
+            width="1840"
+            height="1690"
+            decoding="async"
+            loading="eager"
+            class="post-featured-img">
+          <figcaption id="palindrome-number-feature-caption" class="visually-hidden">
+            Ilustración en estilo ASCII: una computadora anticuada sobre un escritorio 
+            con una estantería detrás.
+          </figcaption>
+        </figure>
+
+        <div class="post-body">          
+          <h2>Enunciado del problema</h2>
+          
+          <blockquote cite="https://leetcode.com/problems/palindrome-number/">
+            <p>
+              Dado un entero <code>x</code>, devuelve <code>true</code> si <code>x</code> es un 
+              <strong>palíndromo</strong>, y <code>false</code> en caso contrario.
+            </p>
+            <p><strong>Ejemplo 1:</strong></p>
+            <aside class="post-aside" aria-label="Ejemplo 1">
+              <p><strong>Entrada:</strong> <code>x = 121</code></p>
+              <p><strong>Salida:</strong> <code>true</code></p>
+              <p><strong>Explicación:</strong> 121 se lee igual de izquierda a derecha que de derecha a izquierda.</p>
+            </aside>
+
+            <p><strong>Ejemplo 2:</strong></p>
+            <aside class="post-aside" aria-label="Ejemplo 2">
+              <p><strong>Entrada:</strong> <code>x = -121</code></p>
+              <p><strong>Salida:</strong> <code>false</code></p>
+              <p><strong>Explicación:</strong> De izquierda a derecha, leemos -121. De derecha a izquierda se convierte en 121-. Por lo tanto, no es un palíndromo.</p>
+            </aside>
+
+            <p><strong>Ejemplo 3:</strong></p>
+            <aside class="post-aside" aria-label="Ejemplo 3">
+              <p><strong>Entrada:</strong> <code>x = 10</code></p>
+              <p><strong>Salida:</strong> <code>false</code></p>
+              <p><strong>Explicación:</strong> Se lee 01 de derecha a izquierda. Por lo tanto, no es un palíndromo.</p>
+            </aside>
+            <p><strong>Restricciones:</strong></p>
+            <ul>
+              <li><p><code>-2³¹ <= x <= 2³¹ - 1</code></p></li>
+            </ul>
+            <p>
+              <strong>Seguimiento:</strong> ¿Podrías resolverlo sin convertir el entero a cadena?
+            </p>
+          </blockquote> 
+
+          <h2>El enfoque ingenuo</h2>
+          
+          <p>
+            La solución más directa es convertir el entero a cadena y verificar si se lee igual al revés. Es breve, legible y pasa todos los casos de prueba fácilmente, pero usa memoria extra y evita el verdadero desafío.
+          </p>
+          
+          <div class="solution-card">
+            <div class="lang-tag">Python</div>
+            <pre><code>
+def esPalindromo_cadena(x: int) -> bool:
+    s = str(x)
+    return s == s[::-1]
+            </code></pre>
+          </div>
+          
+          <h2>Complejidad inicial</h2>
+          <p>
+            <strong>Tiempo:</strong> O(n), donde n es el número de dígitos (≈ log₁₀(x)).<br>
+            <strong>Espacio:</strong> O(n) para la representación como cadena.
+          </p>
+          <p>
+            Esto es aceptable dadas las restricciones (máximo 10 dígitos), pero el seguimiento pide una solución sin conversión a cadena — y es más interesante trabajar directamente con el número.
+          </p>
+          
+          <h2>Invirtiendo sin cadenas</h2>
+          <p>
+            Un enfoque numérico: invertir el entero y compararlo con el original. Los números negativos nunca son palíndromos (el signo menos rompe la simetría), y los números que terminan en 0 (excepto el 0 mismo) no pueden ser palíndromos porque el reverso tendría un cero a la izquierda.
+          </p>
+          <p>
+            El método obvio es construir el número invertido extrayendo dígitos con <code>% 10</code> y <code>// 10</code>. Pero invertir el número <strong>completo</strong> puede causar desbordamiento en lenguajes con enteros de ancho fijo. Un enfoque más inteligente: invertir solo <strong>la mitad</strong> del número y compararla con la otra mitad.
+          </p>
+          <p>
+            ¿Cómo sabemos que hemos llegado a la mitad? Mientras el número original <code>x</code> sea mayor que la mitad invertida <code>mitad_invertida</code>, seguimos moviendo dígitos de <code>x</code> a <code>mitad_invertida</code>.
+          </p>
+          
+          <div class="solution-card">
+            <div class="lang-tag">Python</div>
+            <pre><code>
+def esPalindromo(x: int) -> bool:
+    # los números negativos no son palíndromos
+    # además, si el último dígito es 0, solo el 0 mismo puede ser palíndromo
+    if x < 0 or (x % 10 == 0 and x != 0):
+        return False
+
+    mitad_invertida = 0
+    while x > mitad_invertida:
+        mitad_invertida = mitad_invertida * 10 + x % 10
+        x //= 10
+
+    # Para longitud par: x == mitad_invertida
+    # Para longitud impar: x == mitad_invertida // 10 (el dígito del medio no importa)
+    return x == mitad_invertida or x == mitad_invertida // 10
+            </code></pre>
+          </div>
+          
+          <p>Veamos la traza para <code>x = 1221</code> (longitud par) y <code>x = 121</code> (longitud impar):</p>
+          
+          <div class="simulation-table">
+            <strong>Simulación paso a paso: inversión parcial para x = 1221</strong>
+            <table>
+              <thead>
+                <tr>
+                  <th>Paso</th>
+                  <th>x (restante)</th>
+                  <th>mitad_invertida</th>
+                  <th>Condición (x > mitad_invertida)</th>
+                  <th>Acción</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>inicial</td>
+                  <td>1221</td>
+                  <td>0</td>
+                  <td>Verdadero</td>
+                  <td>Entrar al bucle</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>122</td>
+                  <td>1</td>
+                  <td>Verdadero</td>
+                  <td>Continuar</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>12</td>
+                  <td>12</td>
+                  <td>Falso (12 > 12 es falso)</td>
+                  <td>Salir del bucle</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="step-caption">
+              Después del bucle: <code>x = 12</code>, <code>mitad_invertida = 12</code>. Son iguales → palíndromo.
+            </div>
+          </div>
+          
+          <div class="simulation-table">
+            <strong>Simulación paso a paso: inversión parcial para x = 121</strong>
+            <table>
+              <thead>
+                <tr>
+                  <th>Paso</th>
+                  <th>x (restante)</th>
+                  <th>mitad_invertida</th>
+                  <th>Condición</th>
+                  <th>Acción</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>inicial</td>
+                  <td>121</td>
+                  <td>0</td>
+                  <td>Verdadero</td>
+                  <td>Entrar al bucle</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>12</td>
+                  <td>1</td>
+                  <td>Verdadero</td>
+                  <td>Continuar</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>1</td>
+                  <td>12</td>
+                  <td>Falso (1 > 12 falso)</td>
+                  <td>Salir del bucle</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="step-caption">
+              Después del bucle: <code>x = 1</code>, <code>mitad_invertida = 12</code>. Verificamos <code>x == mitad_invertida // 10</code> → 1 == 1 → palíndromo.
+            </div>
+          </div>
+          
+          <p>
+            El truco con números de longitud impar: el dígito del medio termina en la última posición de <code>mitad_invertida</code>, así que lo descartamos con división entera.
+          </p>
+          
+          <h2>Complejidad final</h2>
+          <p>
+            <strong>Complejidad temporal:</strong> O(log₁₀(x)) — procesamos aproximadamente la mitad de los dígitos.<br>
+            <strong>Complejidad espacial:</strong> O(1) — solo unas pocas variables enteras, sin estructuras adicionales.
+          </p>
+          <p>
+            Esta solución respeta las restricciones, evita el desbordamiento y cumple con el requisito de seguimiento. Es una forma limpia y matemática de verificar palíndromos.
+          </p>
+        </div>
+
+        <blockquote class="closing-quote">
+          A veces la respuesta más elegante no necesita ni un solo carácter — solo unos dígitos invertidos.
+        </blockquote>
+
+        <!-- Navegación: saltar a la solución LeetCode #2 -->
+        <div class="prev-chap-nav" aria-label="Navegación a Solución LeetCode #2">
+          <a class="next-chap-btn" href="2-suma-dos-numeros.html">
+            <img src="../../assets/arrow-previous-icon.png" alt="" width="18" height="18">
+            <span>#2</span>
+          </a>
+        </div>                
+        <hr class="home-intro-divider" aria-hidden="true">
+        
+        <div class="post-body">
+          <h2>Referencias y lecturas adicionales</h2>
+          <ul>
+            <li>
+              <a href="https://leetcode.com/problems/palindrome-number/" target="_blank" rel="noopener noreferrer">
+                Página del problema Palindrome Number en LeetCode
+              </a> — problema oficial y foros de discusión.
+            </li>
+            <li>
+              <a href="https://es.wikipedia.org/wiki/Capic%C3%BAa" target="_blank" rel="noopener noreferrer">
+                Wikipedia: Capicúa (número palindrómico)
+              </a> — antecedentes y propiedades.
+            </li>
+            <li>
+              <a href="https://es.wikipedia.org/wiki/Desbordamiento_de_entero" target="_blank" rel="noopener noreferrer">
+                Wikipedia: Desbordamiento de entero
+              </a> — por qué la inversión parcial es más segura.
+            </li>
+            <li>
+              <a href="https://realpython.com/reverse-string-python/" target="_blank" rel="noopener noreferrer">
+                Real Python: Reverse Strings in Python
+              </a> — explicación del enfoque con cadenas.
+            </li>
+          </ul>
+          
+          <h2>¿No te cansas de lumænaut? Lee esto...</h2>
+          <ul>
+            <li>
+              <a href="../blog/bitacora/ep-2-todo-lo-que-no-se-sobre-bloguear.html">
+                Capítulo 2 | Todo lo que no sé sobre bloguear
+              </a>
+              — la bitácora detrás del sitio: dominios, SEO, plugins y aprender en público.
+            </li>
+            <li>
+              <a href="../blog/computacion/los-8-paradigmas-de-algoritmos.html">
+                Los 8 paradigmas de algoritmos
+              </a>
+              — ocho modelos mentales que reutilizarás en problemas, entrevistas y código en producción.
+            </li>
+            <li>
+              <a href="../blog/computacion/asi-funciona-el-bucle-del-videojuego.html">
+                Cómo funciona el bucle de juego
+              </a>
+              — el latido de un fotograma de juego: actualizar, renderizar y temporización estable en lenguaje claro.
+            </li>
+          </ul>
+        </div>
+
+      </article>
+    </main>
+    
+    <footer class="footer">
+      <nav class="social-links" aria-label="Enlaces sociales">
+        <ul>
+          <li>
+            <a href="https://www.reddit.com/user/Lumaenaut_/" target="_blank" rel="noopener noreferrer" title="Reddit">
+              <img src="../../assets/reddit-icon.png" alt="Reddit" width="24" height="24">
+            </a>
+          </li>
+          <li>
+            <a href="https://x.com/lumaenaut" target="_blank" rel="noopener noreferrer" title="X">
+              <img src="../../assets/twitter-icon.png" alt="X" width="24" height="24">
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/lumaenaut" target="_blank" rel="noopener noreferrer" title="GitHub">
+              <img src="../../assets/github-icon.png" alt="GitHub" width="24" height="24">
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <div class="footer-meta">
+        <p>2026, lumænaut <a href="../politica-de-privacidad.html">Política de Privacidad</a></p>
+      </div>
+    </footer>
+
+  </div>
+  <script src="../../scripts/script.js"></script>
+</body>
+</html>
