@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-TLP7F5XM');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#F9F5EC">
+  <meta name="description" content="LeetCode Solutions | #9 — Palindrome Number. From string conversion to half‑reversal without strings, with Python examples, a step‑by‑step trace, complexity notes and references. By Alberto Del Valle.">
+  <meta name="author" content="Alberto Del Valle">
+  <title>LeetCode Solutions | #9 — Palindrome Number</title>
+  <link rel="canonical" href="https://lumaenaut.com/eng-US/leetcode-solutions/9-palindrome-number.html">
+  <link rel="alternate" hreflang="x-default" href="https://lumaenaut.com/eng-US/leetcode-solutions/9-palindrome-number.html">
+  <link rel="alternate" hreflang="en" href="https://lumaenaut.com/eng-US/leetcode-solutions/9-palindrome-number.html">
+  <link rel="alternate" hreflang="es" href="https://lumaenaut.com/esp-LAT/soluciones-leetcode/9-numero-palindromo.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="lumænaut">
+  <meta property="og:title" content="LeetCode Solutions | #9 — Palindrome Number">
+  <meta property="og:description" content="LeetCode Solutions | #9 — Palindrome Number. From string conversion to half‑reversal without strings, with Python examples, a step‑by‑step trace, complexity notes and references. By Alberto Del Valle.">
+  <meta property="og:url" content="https://lumaenaut.com/eng-US/leetcode-solutions/9-palindrome-number.html">
+  <meta property="og:image" content="https://lumaenaut.com/images/outdated-computer-ascii.png">
+  <meta property="og:image:alt" content="ASCII art: an outdated computer on a desk with a bookshelf in the background, evoking classic coding practice.">
+  <meta property="og:image:width" content="1840">
+  <meta property="og:image:height" content="1690">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="es_MX">
+  <meta property="article:published_time" content="2026-04-16">
+  <meta property="article:modified_time" content="2026-04-16">
+  <meta property="article:author" content="Alberto Del Valle">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:creator" content="@lumaenaut">
+  <meta name="twitter:image" content="https://lumaenaut.com/images/outdated-computer-ascii.png">
+  <meta name="twitter:title" content="LeetCode Solutions | #9 — Palindrome Number">
+  <meta name="twitter:description" content="LeetCode Solutions | #9 — Palindrome Number. From string conversion to half‑reversal without strings, with Python examples, a step‑by‑step trace, complexity notes and references. By Alberto Del Valle.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%94%A5%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../../style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "LeetCode Solutions | #9 — Palindrome Number",
+    "alternativeHeadline": "From string trick to half‑reversal — clean integer logic",
+    "description": "LeetCode Solutions | #9 — Palindrome Number. From string conversion to half‑reversal without strings, with Python examples, a step‑by‑step trace, complexity notes and references. By Alberto Del Valle.",
+    "url": "https://lumaenaut.com/eng-US/leetcode-solutions/9-palindrome-number.html",
+    "mainEntityOfPage": { "@id": "https://lumaenaut.com/eng-US/leetcode-solutions/9-palindrome-number.html" },
+    "image": "https://lumaenaut.com/images/outdated-computer-ascii.png",
+    "inLanguage": "en-US",
+    "datePublished": "2026-04-16",
+    "dateModified": "2026-04-16",
+    "author": {
+      "@type": "Person",
+      "name": "Alberto Del Valle",
+      "url": "https://lumaenaut.com/eng-US/"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Alberto Del Valle"
+    },
+    "isPartOf": { "@id": "https://lumaenaut.com/eng-US/blog/blog-index.html" }
+  }
+  </script>
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TLP7F5XM"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  
+  <div class="page-wrapper">
+    
+    <header class="header">
+
+      <div class="header-left">
+        <div class="logo-div">
+          <pre class="logo-ascii" id="logo-container" aria-hidden="true"></pre>
+        </div>
+      </div>
+
+      <div class="header-center">
+        <p class="header-site-title">lumænaut</p>
+        <nav class="main-nav" aria-label="Main navigation">
+          <ul>
+            <li><a class="home-btn" href="../../index.html">home</a></li>
+            <li><a class="blog-btn" href="../blog/blog-index.html">blog</a></li>
+            <li><a class="leetcode-btn" href="leetcode-solutions-index.html">leetcode solutions</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="header-right">
+        <div class="logo-div-mirror" aria-hidden="true"></div>
+        <button type="button" class="share-btn" aria-label="Share this page">
+          <img src="../../assets/share-icon.png" alt="" class="share-btn-icon" data-ios-src="../../assets/ios-share-icon.png" width="20" height="20">
+        </button>
+      </div>
+
+    </header>
+
+    <main id="main-content" class="content">
+
+      <div class="floating-controls">
+        <div class="lang-switcher">
+          <button type="button" class="lang-switcher-btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Select language">
+            <img src="../../assets/translate-icon.png" alt="" class="lang-switcher-icon">
+            <span class="lang-switcher-label">eng (US)</span>
+          </button>
+          <ul class="lang-switcher-dropdown" role="listbox" aria-label="Language options">
+            <li><a href="#" data-lang="eng-US" role="option">eng (US)</a></li>
+            <li><a href="#" data-lang="esp-LAT" role="option">esp (LAT)</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <article class="post" aria-labelledby="post-title">
+      
+        <header class="post-header">
+          <h1 id="post-title">LeetCode Solutions<br>#9 — Palindrome Number</h1>
+          <p class="post-subtitle">
+            From string trick to half‑reversal — clean integer logic
+          </p>
+          <p class="post-meta">
+            By <span class="author">Alberto Del Valle</span><br>
+            <time datetime="2026-04-16">April 16, 2026</time><br>
+            <span class="post-read-time">(Read time ~4 min)</span>
+          </p>
+        </header>
+
+        <figure class="post-featured-image" aria-labelledby="palindrome-number-feature-caption">
+          <img
+            src="../../images/outdated-computer-ascii.png"
+            alt="Color ASCII art: an outdated computer on a desk with a bookshelf in the background, suggesting a classic coding workspace."
+            title="ASCII art — outdated computer on a desk with bookshelf"
+            width="1840"
+            height="1690"
+            decoding="async"
+            loading="eager"
+            class="post-featured-img">
+          <figcaption id="palindrome-number-feature-caption" class="visually-hidden">
+            Illustration in ASCII art style: an outdated computer on a desk 
+            with a bookshelf behind it.
+          </figcaption>
+        </figure>
+
+        <div class="post-body">          
+          <h2>Problem statement</h2>
+          
+          <blockquote cite="https://leetcode.com/problems/palindrome-number/">
+            <p>
+              Given an integer <code>x</code>, return <code>true</code> if <code>x</code> is a 
+              <strong>palindrome</strong>, and <code>false</code> otherwise.
+            </p>
+            <p><strong>Example 1:</strong></p>
+            <aside class="post-aside" aria-label="Example 1">
+              <p><strong>Input:</strong> <code>x = 121</code></p>
+              <p><strong>Output:</strong> <code>true</code></p>
+              <p><strong>Explanation:</strong> 121 reads as 121 from left to right and from right to left.</p>
+            </aside>
+
+            <p><strong>Example 2:</strong></p>
+            <aside class="post-aside" aria-label="Example 2">
+              <p><strong>Input:</strong> <code>x = -121</code></p>
+              <p><strong>Output:</strong> <code>false</code></p>
+              <p><strong>Explanation:</strong> From left to right, it reads -121. From right to left, it becomes 121-. Therefore it is not a palindrome.</p>
+            </aside>
+
+            <p><strong>Example 3:</strong></p>
+            <aside class="post-aside" aria-label="Example 3">
+              <p><strong>Input:</strong> <code>x = 10</code></p>
+              <p><strong>Output:</strong> <code>false</code></p>
+              <p><strong>Explanation:</strong> Reads 01 from right to left. Therefore it is not a palindrome.</p>
+            </aside>
+            <p><strong>Constraints:</strong></p>
+            <ul>
+              <li><p><code>-2³¹ <= x <= 2³¹ - 1</code></p></li>
+            </ul>
+            <p>
+              <strong>Follow up:</strong> Could you solve it without converting the integer to a string?
+            </p>
+          </blockquote> 
+
+          <h2>The naive way</h2>
+          
+          <p>
+            The most straightforward solution is to convert the integer to a string 
+            and check if it reads the same backward. It’s short, readable, and 
+            passes all test cases easily — but it uses extra memory and avoids 
+            the real challenge.
+          </p>
+          
+          <div class="solution-card">
+            <div class="lang-tag">Python</div>
+            <pre><code>
+def isPalindrome_string(x: int) -> bool:
+    s = str(x)
+    return s == s[::-1]
+            </code></pre>
+          </div>
+          
+          <h2>Initial complexity</h2>
+          <p>
+            <strong>Time:</strong> O(n), where n is the number of digits (≈ log₁₀(x)).<br>
+            <strong>Space:</strong> O(n) for the string representation.
+          </p>
+          <p>
+            This is acceptable given the constraints (max 10 digits), but the follow‑up 
+            asks for a solution without string conversion — and it’s more interesting 
+            to work directly with the number.
+          </p>
+          
+          <h2>Reversing without strings</h2>
+          <p>
+            A numeric approach: reverse the integer and compare with the original. 
+            Negative numbers are never palindromes (the minus sign breaks symmetry), 
+            and numbers ending with 0 (except 0 itself) can't be palindromes because 
+            the reverse would have a leading zero.
+          </p>
+          <p>
+            The obvious method is to build the reversed number by extracting digits 
+            with <code>% 10</code> and <code>// 10</code>. But reversing the 
+            <strong>entire</strong> number can cause overflow in languages with 
+            fixed‑width integers. A smarter approach: reverse only <strong>half</strong> 
+            of the number and compare it with the other half.
+          </p>
+          <p>
+            How do we know we've reached half? While the original number <code>x</code> 
+            is greater than the reversed half <code>reversed_half</code>, we keep 
+            moving digits from <code>x</code> to <code>reversed_half</code>.
+          </p>
+          
+          <div class="solution-card">
+            <div class="lang-tag">Python</div>
+            <pre><code>
+def isPalindrome(x: int) -> bool:
+    # negative numbers are not palindromes
+    # also, if last digit is 0, only 0 itself can be a palindrome
+    if x < 0 or (x % 10 == 0 and x != 0):
+        return False
+
+    reversed_half = 0
+    while x > reversed_half:
+        reversed_half = reversed_half * 10 + x % 10
+        x //= 10
+
+    # For even length: x == reversed_half
+    # For odd length:  x == reversed_half // 10  (middle digit doesn't matter)
+    return x == reversed_half or x == reversed_half // 10
+            </code></pre>
+          </div>
+          
+          <p>Let’s trace <code>x = 1221</code> (even length) and <code>x = 121</code> (odd length):</p>
+          
+          <div class="simulation-table">
+            <strong>Step‑by‑Step Simulation: half‑reversal for x = 1221</strong>
+            <table>
+              <thead>
+                <tr>
+                  <th>Step</th>
+                  <th>x (remaining)</th>
+                  <th>reversed_half</th>
+                  <th>Condition (x > reversed_half)</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>initial</td>
+                  <td>1221</td>
+                  <td>0</td>
+                  <td>True</td>
+                  <td>Enter loop</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>122</td>
+                  <td>1</td>
+                  <td>True</td>
+                  <td>Continue</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>12</td>
+                  <td>12</td>
+                  <td>False (12 > 12 is false)</td>
+                  <td>Exit loop</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="step-caption">
+              After loop: <code>x = 12</code>, <code>reversed_half = 12</code>. They are equal → palindrome.
+            </div>
+          </div>
+          
+          <div class="simulation-table">
+            <strong>Step‑by‑Step Simulation: half‑reversal for x = 121</strong>
+            <table>
+              <thead>
+                <tr>
+                  <th>Step</th>
+                  <th>x (remaining)</th>
+                  <th>reversed_half</th>
+                  <th>Condition</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>initial</td>
+                  <td>121</td>
+                  <td>0</td>
+                  <td>True</td>
+                  <td>Enter loop</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>12</td>
+                  <td>1</td>
+                  <td>True</td>
+                  <td>Continue</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>1</td>
+                  <td>12</td>
+                  <td>False (1 > 12 false)</td>
+                  <td>Exit loop</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="step-caption">
+              After loop: <code>x = 1</code>, <code>reversed_half = 12</code>. We check <code>x == reversed_half // 10</code> → 1 == 1 → palindrome.
+            </div>
+          </div>
+          
+          <p>
+            The trick with odd‑length numbers: the middle digit ends up in the last 
+            position of <code>reversed_half</code>, so we discard it with integer division.
+          </p>
+          
+          <h2>Final complexity</h2>
+          <p>
+            <strong>Time complexity:</strong> O(log₁₀(x)) — we process roughly half the digits.<br>
+            <strong>Space complexity:</strong> O(1) — only a few integer variables, no extra structures.
+          </p>
+          <p>
+            This solution respects the constraints, avoids overflow, and meets the 
+            follow‑up requirement. It’s a clean, mathematical way to check for palindromes.
+          </p>
+        </div>
+
+        <blockquote class="closing-quote">
+          Sometimes the most elegant answer doesn’t need a single character — just a few digits reversed.
+        </blockquote>
+
+        <!-- Navigation: both previous (#8) and next (#10) -->
+        <div class="prev-chap-nav" aria-label="Previous LeetCode solution navigation">
+          <a class="next-chap-btn" href="8-string-to-integer-atoi.html">
+            <img src="../../assets/arrow-previous-icon.png" alt="" width="18" height="18">
+            <span>#8</span>
+          </a>
+        </div>
+        <div class="next-chap-nav" aria-label="Next LeetCode solution navigation">
+          <a class="next-chap-btn" href="10-regular-expression-matching.html">
+            <span>#10</span>
+            <img src="../../assets/arrow-next-icon.png" alt="" width="18" height="18">
+          </a>
+        </div>
+        <hr class="home-intro-divider" aria-hidden="true">
+        
+        <div class="post-body">
+          <h2>References & further reading</h2>
+          <ul>
+            <li>
+              <a href="https://leetcode.com/problems/palindrome-number/" target="_blank" rel="noopener noreferrer">
+                LeetCode Palindrome Number Problem Page
+              </a> — official problem and discussion.
+            </li>
+            <li>
+              <a href="https://en.wikipedia.org/wiki/Palindromic_number" target="_blank" rel="noopener noreferrer">
+                Wikipedia: Palindromic number
+              </a> — background and properties.
+            </li>
+            <li>
+              <a href="https://en.wikipedia.org/wiki/Integer_overflow" target="_blank" rel="noopener noreferrer">
+                Wikipedia: Integer overflow
+              </a> — why half‑reversal is safer.
+            </li>
+            <li>
+              <a href="https://realpython.com/reverse-string-python/" target="_blank" rel="noopener noreferrer">
+                Real Python: Reverse Strings in Python
+              </a> — the string approach explained.
+            </li>
+          </ul>
+          
+          <h2>Can't get enough from lumænaut? Read this...</h2>
+          <ul>
+            <li>
+              <a href="../logbook/ch-2-everything-i-dont-know-about-blogging.html">
+                Chapter 2 | Everything I Don't Know About Blogging
+              </a>
+              — the logbook behind the site: domains, SEO, plugins, and learning in public.
+            </li>
+            <li>
+              <a href="../computer-science/the-8-algorithm-paradigms.html">
+                The 8 Algorithm Paradigms
+              </a>
+              — eight mental models you’ll keep reusing across problems, interviews, and production code.
+            </li>
+            <li>
+              <a href="../computer-science/how-the-game-loop-works.html">
+                How the Game Loop Works
+              </a>
+              — the heartbeat of a game frame: update, render, and steady timing in plain language.
+            </li>
+          </ul>
+        </div>
+
+      </article>
+    </main>
+    
+    <footer class="footer">
+      <nav class="social-links" aria-label="Social links">
+        <ul>
+          <li>
+            <a href="https://www.reddit.com/user/Lumaenaut_/" target="_blank" rel="noopener noreferrer" title="Reddit">
+              <img src="../../assets/reddit-icon.png" alt="Reddit" width="24" height="24">
+            </a>
+          </li>
+          <li>
+            <a href="https://x.com/lumaenaut" target="_blank" rel="noopener noreferrer" title="X">
+              <img src="../../assets/twitter-icon.png" alt="X" width="24" height="24">
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/lumaenaut" target="_blank" rel="noopener noreferrer" title="GitHub">
+              <img src="../../assets/github-icon.png" alt="GitHub" width="24" height="24">
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <div class="footer-meta">
+        <p>2026, lumænaut <a href="../../privacy-policy.html">Privacy Policy</a></p>
+      </div>
+    </footer>
+
+  </div>
+  <script src="../../scripts/script.js"></script>
+</body>
+</html>
