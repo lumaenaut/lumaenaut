@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-TLP7F5XM');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#F9F5EC">
+  <meta name="description" content="LeetCode Solutions | #13 — Roman to Integer. From left‑to‑right parsing to a single‑pass lookahead trick, with Python examples, a step‑by‑step trace, complexity notes and references. By Alberto Del Valle.">
+  <meta name="author" content="Alberto Del Valle">
+  <title>LeetCode Solutions | #13 — Roman to Integer</title>
+  <link rel="canonical" href="https://lumaenaut.com/eng-US/leetcode-solutions/13-roman-to-integer.html">
+  <link rel="alternate" hreflang="x-default" href="https://lumaenaut.com/eng-US/leetcode-solutions/13-roman-to-integer.html">
+  <link rel="alternate" hreflang="en" href="https://lumaenaut.com/eng-US/leetcode-solutions/13-roman-to-integer.html">
+  <link rel="alternate" hreflang="es" href="https://lumaenaut.com/esp-LAT/soluciones-leetcode/13-romano-a-entero.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="lumænaut">
+  <meta property="og:title" content="LeetCode Solutions | #13 — Roman to Integer">
+  <meta property="og:description" content="LeetCode Solutions | #13 — Roman to Integer. From left‑to‑right parsing to a single‑pass lookahead trick, with Python examples, a step‑by‑step trace, complexity notes and references. By Alberto Del Valle.">
+  <meta property="og:url" content="https://lumaenaut.com/eng-US/leetcode-solutions/13-roman-to-integer.html">
+  <meta property="og:image" content="https://lumaenaut.com/images/outdated-computer-ascii.png">
+  <meta property="og:image:alt" content="ASCII art: an outdated computer on a desk with a bookshelf in the background, evoking classic coding practice.">
+  <meta property="og:image:width" content="1840">
+  <meta property="og:image:height" content="1690">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="es_MX">
+  <meta property="article:published_time" content="2026-04-16">
+  <meta property="article:modified_time" content="2026-04-16">
+  <meta property="article:author" content="Alberto Del Valle">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:creator" content="@lumaenaut">
+  <meta name="twitter:image" content="https://lumaenaut.com/images/outdated-computer-ascii.png">
+  <meta name="twitter:title" content="LeetCode Solutions | #13 — Roman to Integer">
+  <meta name="twitter:description" content="LeetCode Solutions | #13 — Roman to Integer. From left‑to‑right parsing to a single‑pass lookahead trick, with Python examples, a step‑by‑step trace, complexity notes and references. By Alberto Del Valle.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%94%A5%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../../style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "LeetCode Solutions | #13 — Roman to Integer",
+    "alternativeHeadline": "Look ahead, subtract, and conquer — the Roman numeral decoder",
+    "description": "LeetCode Solutions | #13 — Roman to Integer. From left‑to‑right parsing to a single‑pass lookahead trick, with Python examples, a step‑by‑step trace, complexity notes and references. By Alberto Del Valle.",
+    "url": "https://lumaenaut.com/eng-US/leetcode-solutions/13-roman-to-integer.html",
+    "mainEntityOfPage": { "@id": "https://lumaenaut.com/eng-US/leetcode-solutions/13-roman-to-integer.html" },
+    "image": "https://lumaenaut.com/images/outdated-computer-ascii.png",
+    "inLanguage": "en-US",
+    "datePublished": "2026-04-16",
+    "dateModified": "2026-04-16",
+    "author": {
+      "@type": "Person",
+      "name": "Alberto Del Valle",
+      "url": "https://lumaenaut.com/eng-US/"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Alberto Del Valle"
+    },
+    "isPartOf": { "@id": "https://lumaenaut.com/eng-US/blog/blog-index.html" }
+  }
+  </script>
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TLP7F5XM"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  
+  <div class="page-wrapper">
+    
+    <header class="header">
+
+      <div class="header-left">
+        <div class="logo-div">
+          <pre class="logo-ascii" id="logo-container" aria-hidden="true"></pre>
+        </div>
+      </div>
+
+      <div class="header-center">
+        <p class="header-site-title">lumænaut</p>
+        <nav class="main-nav" aria-label="Main navigation">
+          <ul>
+            <li><a class="home-btn" href="../../index.html">home</a></li>
+            <li><a class="blog-btn" href="../blog/blog-index.html">blog</a></li>
+            <li><a class="leetcode-btn" href="leetcode-solutions-index.html">leetcode solutions</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="header-right">
+        <div class="logo-div-mirror" aria-hidden="true"></div>
+        <button type="button" class="share-btn" aria-label="Share this page">
+          <img src="../../assets/share-icon.png" alt="" class="share-btn-icon" data-ios-src="../../assets/ios-share-icon.png" width="20" height="20">
+        </button>
+      </div>
+
+    </header>
+
+    <main id="main-content" class="content">
+
+      <div class="floating-controls">
+        <div class="lang-switcher">
+          <button type="button" class="lang-switcher-btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Select language">
+            <img src="../../assets/translate-icon.png" alt="" class="lang-switcher-icon">
+            <span class="lang-switcher-label">eng (US)</span>
+          </button>
+          <ul class="lang-switcher-dropdown" role="listbox" aria-label="Language options">
+            <li><a href="#" data-lang="eng-US" role="option">eng (US)</a></li>
+            <li><a href="#" data-lang="esp-LAT" role="option">esp (LAT)</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <article class="post" aria-labelledby="post-title">
+      
+        <header class="post-header">
+          <h1 id="post-title">LeetCode Solutions<br>#13 — Roman to Integer</h1>
+          <p class="post-subtitle">
+            Look ahead, subtract, and conquer — the Roman numeral decoder
+          </p>
+          <p class="post-meta">
+            By <span class="author">Alberto Del Valle</span><br>
+            <time datetime="2026-04-16">April 16, 2026</time><br>
+            <span class="post-read-time">(Read time ~4 min)</span>
+          </p>
+        </header>
+
+        <figure class="post-featured-image" aria-labelledby="roman-to-integer-feature-caption">
+          <img
+            src="../../images/outdated-computer-ascii.png"
+            alt="Color ASCII art: an outdated computer on a desk with a bookshelf in the background, suggesting a classic coding workspace."
+            title="ASCII art — outdated computer on a desk with bookshelf"
+            width="1840"
+            height="1690"
+            decoding="async"
+            loading="eager"
+            class="post-featured-img">
+          <figcaption id="roman-to-integer-feature-caption" class="visually-hidden">
+            Illustration in ASCII art style: an outdated computer on a desk 
+            with a bookshelf behind it.
+          </figcaption>
+        </figure>
+
+        <div class="post-body">          
+          <h2>Problem statement</h2>
+          
+          <blockquote cite="https://leetcode.com/problems/roman-to-integer/">
+            <p>
+              Roman numerals are represented by seven different symbols: <code>I</code>, <code>V</code>, <code>X</code>, <code>L</code>, <code>C</code>, <code>D</code> and <code>M</code>.
+            </p>
+            <table style="margin:1em 0; border-collapse:collapse;">
+              <tr><th>Symbol</th><th>Value</th></tr>
+              <tr><td>I</td><td>1</td></tr>
+              <tr><td>V</td><td>5</td></tr>
+              <tr><td>X</td><td>10</td></tr>
+              <tr><td>L</td><td>50</td></tr>
+              <tr><td>C</td><td>100</td></tr>
+              <tr><td>D</td><td>500</td></tr>
+              <tr><td>M</td><td>1000</td></tr>
+            </table>
+            <p>
+              For example, <code>2</code> is written as <code>II</code> in Roman numeral, just two ones added together. <code>12</code> is written as <code>XII</code>, which is simply <code>X + II</code>. The number <code>27</code> is written as <code>XXVII</code>, which is <code>XX + V + II</code>.
+            </p>
+            <p>
+              Roman numerals are usually written largest to smallest from left to right. However, the numeral for four is not <code>IIII</code>. Instead, the number four is written as <code>IV</code>. Because the one is before the five we subtract it making four. The same principle applies to the number nine, which is written as <code>IX</code>. There are six instances where subtraction is used:
+            </p>
+            <ul>
+              <li><code>I</code> can be placed before <code>V</code> (5) and <code>X</code> (10) to make 4 and 9.</li>
+              <li><code>X</code> can be placed before <code>L</code> (50) and <code>C</code> (100) to make 40 and 90.</li>
+              <li><code>C</code> can be placed before <code>D</code> (500) and <code>M</code> (1000) to make 400 and 900.</li>
+            </ul>
+            <p>Given a roman numeral, convert it to an integer.</p>
+            
+            <p><strong>Example 1:</strong></p>
+            <aside class="post-aside" aria-label="Example 1">
+              <p><strong>Input:</strong> <code>s = "III"</code></p>
+              <p><strong>Output:</strong> <code>3</code></p>
+              <p><strong>Explanation:</strong> III = 3.</p>
+            </aside>
+
+            <p><strong>Example 2:</strong></p>
+            <aside class="post-aside" aria-label="Example 2">
+              <p><strong>Input:</strong> <code>s = "LVIII"</code></p>
+              <p><strong>Output:</strong> <code>58</code></p>
+              <p><strong>Explanation:</strong> L = 50, V= 5, III = 3.</p>
+            </aside>
+
+            <p><strong>Example 3:</strong></p>
+            <aside class="post-aside" aria-label="Example 3">
+              <p><strong>Input:</strong> <code>s = "MCMXCIV"</code></p>
+              <p><strong>Output:</strong> <code>1994</code></p>
+              <p><strong>Explanation:</strong> M = 1000, CM = 900, XC = 90 and IV = 4.</p>
+            </aside>
+            
+            <p><strong>Constraints:</strong></p>
+            <ul>
+              <li><p><code>1 <= s.length <= 15</code></p></li>
+              <li><p><code>s</code> contains only the characters <code>('I', 'V', 'X', 'L', 'C', 'D', 'M')</code>.</p></li>
+              <li>It is <strong>guaranteed</strong> that <code>s</code> is a valid roman numeral in the range <code>[1, 3999]</code>.</li>
+            </ul>
+          </blockquote> 
+
+          <h2>The naive way</h2>
+          
+          <p>
+            The most direct translation of the rules: walk left to right, map each symbol to its value, and if you see a smaller value before a larger one (like <code>I</code> before <code>V</code>), subtract it instead of adding. That’s a perfectly valid approach, and it works right away.
+          </p>
+          
+          <div class="solution-card">
+            <div class="lang-tag">Python</div>
+            <pre><code>
+def romanToInt_naive(s: str) -> int:
+    values = {'I':1, 'V':5, 'X':10, 'L':50, 'C':100, 'D':500, 'M':1000}
+    total = 0
+    i = 0
+    while i < len(s):
+        # if current < next, it's a subtractive pair
+        if i + 1 < len(s) and values[s[i]] < values[s[i+1]]:
+            total += values[s[i+1]] - values[s[i]]
+            i += 2
+        else:
+            total += values[s[i]]
+            i += 1
+    return total
+            </code></pre>
+          </div>
+          
+          <h2>Initial complexity</h2>
+          <p>
+            This is already <strong>O(n)</strong> time and <strong>O(1)</strong> space — we only touch each character a couple of times. The code is clear and easy to follow. But the problem becomes even cleaner when we invert the perspective: instead of looking for pairs, we simply look ahead and decide whether the current symbol should be added or subtracted. That small shift removes the need for a jumpy index.
+          </p>
+          
+          <h2>A smoother single pass</h2>
+          <p>
+            The key observation: in Roman numerals, if a symbol is followed by one of greater value, it acts as a subtractor. Otherwise, it adds. So we can walk the string once, compare the current value with the next one, and add or subtract accordingly. The last symbol is always added because there’s nothing after it.
+          </p>
+          <p>
+            This version reads almost like the mental process: “M is 1000, next is C (100) which is smaller, so add 1000. C is 100, next is M (1000) — larger, so subtract 100…” It’s elegant and uses only one pass with no special-case jumps.
+          </p>
+                    
+          <div class="solution-card">
+            <div class="lang-tag">Python</div>
+            <pre><code>
+def romanToInt(s: str) -> int:
+    values = {
+        'I': 1,
+        'V': 5,
+        'X': 10,
+        'L': 50,
+        'C': 100,
+        'D': 500,
+        'M': 1000
+    }
+    
+    total = 0
+    n = len(s)
+    
+    for i in range(n):
+        # if current value is less than next value, subtract it
+        if i < n - 1 and values[s[i]] < values[s[i+1]]:
+            total -= values[s[i]]
+        else:
+            total += values[s[i]]
+            
+    return total
+            </code></pre>
+          </div>
+          
+          <p>Let’s trace the trickiest example: <code>s = "MCMXCIV"</code> (1994).</p>
+          
+          <div class="simulation-table">
+            <strong>Step‑by‑Step Simulation: s = "MCMXCIV"</strong>
+            <table>
+              <thead>
+                <tr>
+                  <th>i</th>
+                  <th>symbol</th>
+                  <th>value</th>
+                  <th>next symbol</th>
+                  <th>next value</th>
+                  <th>action</th>
+                  <th>total after step</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>0</td>
+                  <td>M</td>
+                  <td>1000</td>
+                  <td>C</td>
+                  <td>100</td>
+                  <td>1000 ≥ 100 → add</td>
+                  <td>1000</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>C</td>
+                  <td>100</td>
+                  <td>M</td>
+                  <td>1000</td>
+                  <td>100 < 1000 → subtract</td>
+                  <td>900</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>M</td>
+                  <td>1000</td>
+                  <td>X</td>
+                  <td>10</td>
+                  <td>1000 ≥ 10 → add</td>
+                  <td>1900</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>X</td>
+                  <td>10</td>
+                  <td>C</td>
+                  <td>100</td>
+                  <td>10 < 100 → subtract</td>
+                  <td>1890</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>C</td>
+                  <td>100</td>
+                  <td>I</td>
+                  <td>1</td>
+                  <td>100 ≥ 1 → add</td>
+                  <td>1990</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>I</td>
+                  <td>1</td>
+                  <td>V</td>
+                  <td>5</td>
+                  <td>1 < 5 → subtract</td>
+                  <td>1989</td>
+                </tr>
+                <tr>
+                  <td>6</td>
+                  <td>V</td>
+                  <td>5</td>
+                  <td>—</td>
+                  <td>—</td>
+                  <td>last symbol → add</td>
+                  <td>1994</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="step-caption">The decision is made by peeking at the next character. Subtractive pairs (CM, XC, IV) are handled naturally by subtracting the smaller value before adding the larger one in the next iteration.</div>
+          </div>
+          
+          <p>Notice how the subtraction for <code>C</code> (100) and the later addition of <code>M</code> (1000) combine to give the net <code>+900</code> of <code>CM</code>. The same happens for <code>XC</code> (90) and <code>IV</code> (4).</p>
+          
+          <h2>Final complexity</h2>
+          <p>
+            <strong>Time complexity:</strong> O(n) — we traverse the string exactly once, performing a constant‑time dictionary lookup and comparison per character.<br>
+            <strong>Space complexity:</strong> O(1) — the dictionary size is fixed at 7 entries, and we use only a few integer variables. No extra structures scale with the input.
+          </p>
+          <p>
+            This solution is fast, memory‑efficient, and mirrors exactly how an experienced human would parse a Roman numeral: glance ahead and decide.
+          </p>
+        </div>
+
+        <blockquote class="closing-quote">
+          Happy coding, and may your complexity always be low.
+        </blockquote>
+
+        <div class="prev-chap-nav" aria-label="LeetCode Solutions #9 navigation">
+          <a class="next-chap-btn" href="9-palindrome-number.html">
+            <img src="../../assets/arrow-previous-icon.png" alt="" width="18" height="18">
+            <span>#9</span>
+          </a>
+        </div>                
+        <hr class="home-intro-divider" aria-hidden="true">
+        
+        <div class="post-body">
+          <h2>References & further reading</h2>
+          <ul>
+            <li>
+              <a href="https://leetcode.com/problems/roman-to-integer/" target="_blank" rel="noopener noreferrer">
+                LeetCode Roman to Integer Problem Page
+              </a> — official problem and discussion forums.
+            </li>
+            <li>
+              <a href="https://en.wikipedia.org/wiki/Roman_numerals" target="_blank" rel="noopener noreferrer">
+                Wikipedia: Roman numerals
+              </a> — history, rules, and more complex examples.
+            </li>
+            <li>
+              <a href="https://realpython.com/python-roman-numerals/" target="_blank" rel="noopener noreferrer">
+                Real Python: Convert Roman Numerals With Python
+              </a> — a deeper dive with both directions (to and from Roman).
+            </li>
+            <li>
+              <a href="https://www.geeksforgeeks.org/converting-roman-numerals-decimal-lying-1-3999/" target="_blank" rel="noopener noreferrer">
+                GeeksforGeeks: Converting Roman Numerals to Decimal
+              </a> — alternative implementations in multiple languages.
+            </li>
+          </ul>
+          
+          <h2>Can't get enough from lumænaut? Read this...</h2>
+          <ul>
+            <li>
+              <a href="../logbook/ch-2-everything-i-dont-know-about-blogging.html">
+                Chapter 2 | Everything I Don't Know About Blogging
+              </a>
+              — the logbook behind the site: domains, SEO, plugins, and learning in public.
+            </li>
+            <li>
+              <a href="../computer-science/the-8-algorithm-paradigms.html">
+                The 8 Algorithm Paradigms
+              </a>
+              — eight mental models you’ll keep reusing across problems, interviews, and production code.
+            </li>
+            <li>
+              <a href="../computer-science/how-the-game-loop-works.html">
+                How the Game Loop Works
+              </a>
+              — the heartbeat of a game frame: update, render, and steady timing in plain language.
+            </li>
+          </ul>
+        </div>
+
+      </article>
+    </main>
+    
+    <footer class="footer">
+      <nav class="social-links" aria-label="Social links">
+        <ul>
+          <li>
+            <a href="https://www.reddit.com/user/Lumaenaut_/" target="_blank" rel="noopener noreferrer" title="Reddit">
+              <img src="../../assets/reddit-icon.png" alt="Reddit" width="24" height="24">
+            </a>
+          </li>
+          <li>
+            <a href="https://x.com/lumaenaut" target="_blank" rel="noopener noreferrer" title="X">
+              <img src="../../assets/twitter-icon.png" alt="X" width="24" height="24">
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/lumaenaut" target="_blank" rel="noopener noreferrer" title="GitHub">
+              <img src="../../assets/github-icon.png" alt="GitHub" width="24" height="24">
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <div class="footer-meta">
+        <p>2026, lumænaut <a href="../../privacy-policy.html">Privacy Policy</a></p>
+      </div>
+    </footer>
+
+  </div>
+  <script src="../../scripts/script.js"></script>
+</body>
+</html>
