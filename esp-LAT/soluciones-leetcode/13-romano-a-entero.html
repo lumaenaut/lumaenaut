@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-TLP7F5XM');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#F9F5EC">
+  <meta name="description" content="Soluciones LeetCode | #13 — Romano a entero. Del recorrido izquierda‑derecha al truco de una sola pasada mirando adelante, con ejemplos en Python, seguimiento paso a paso, notas de complejidad y referencias. Por Alberto Del Valle.">
+  <meta name="author" content="Alberto Del Valle">
+  <title>Soluciones LeetCode | #13 — Romano a entero</title>
+  <link rel="canonical" href="https://lumaenaut.com/esp-LAT/soluciones-leetcode/13-romano-a-entero.html">
+  <link rel="alternate" hreflang="x-default" href="https://lumaenaut.com/eng-US/leetcode-solutions/13-roman-to-integer.html">
+  <link rel="alternate" hreflang="en" href="https://lumaenaut.com/eng-US/leetcode-solutions/13-roman-to-integer.html">
+  <link rel="alternate" hreflang="es" href="https://lumaenaut.com/esp-LAT/soluciones-leetcode/13-romano-a-entero.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="lumænaut">
+  <meta property="og:title" content="Soluciones LeetCode | #13 — Romano a entero">
+  <meta property="og:description" content="Soluciones LeetCode | #13 — Romano a entero. Del recorrido izquierda‑derecha al truco de una sola pasada mirando adelante, con ejemplos en Python, seguimiento paso a paso, notas de complejidad y referencias. Por Alberto Del Valle.">
+  <meta property="og:url" content="https://lumaenaut.com/esp-LAT/soluciones-leetcode/13-romano-a-entero.html">
+  <meta property="og:image" content="https://lumaenaut.com/images/outdated-computer-ascii.png">
+  <meta property="og:image:alt" content="Arte ASCII: una computadora anticuada sobre un escritorio con una estantería al fondo, evocando la práctica clásica de programación.">
+  <meta property="og:image:width" content="1840">
+  <meta property="og:image:height" content="1690">
+  <meta property="og:locale" content="es_MX">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="article:published_time" content="2026-04-17">
+  <meta property="article:modified_time" content="2026-04-17">
+  <meta property="article:author" content="Alberto Del Valle">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:creator" content="@lumaenaut">
+  <meta name="twitter:image" content="https://lumaenaut.com/images/outdated-computer-ascii.png">
+  <meta name="twitter:title" content="Soluciones LeetCode | #13 — Romano a entero">
+  <meta name="twitter:description" content="Soluciones LeetCode | #13 — Romano a entero. Del recorrido izquierda‑derecha al truco de una sola pasada mirando adelante, con ejemplos en Python, seguimiento paso a paso, notas de complejidad y referencias. Por Alberto Del Valle.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%94%A5%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../../style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Soluciones LeetCode | #13 — Romano a entero",
+    "alternativeHeadline": "Mira adelante, resta y conquista — el decodificador de números romanos",
+    "description": "Soluciones LeetCode | #13 — Romano a entero. Del recorrido izquierda‑derecha al truco de una sola pasada mirando adelante, con ejemplos en Python, seguimiento paso a paso, notas de complejidad y referencias. Por Alberto Del Valle.",
+    "url": "https://lumaenaut.com/esp-LAT/soluciones-leetcode/13-romano-a-entero.html",
+    "mainEntityOfPage": { "@id": "https://lumaenaut.com/esp-LAT/soluciones-leetcode/13-romano-a-entero.html" },
+    "image": "https://lumaenaut.com/images/outdated-computer-ascii.png",
+    "inLanguage": "es-MX",
+    "datePublished": "2026-04-17",
+    "dateModified": "2026-04-17",
+    "author": {
+      "@type": "Person",
+      "name": "Alberto Del Valle",
+      "url": "https://lumaenaut.com/esp-LAT/indice.html"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Alberto Del Valle"
+    },
+    "isPartOf": { "@id": "https://lumaenaut.com/esp-LAT/blog/blog-indice.html" }
+  }
+  </script>
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TLP7F5XM"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+  
+  <div class="page-wrapper">
+    
+    <header class="header">
+
+      <div class="header-left">
+        <div class="logo-div">
+          <pre class="logo-ascii" id="logo-container" aria-hidden="true"></pre>
+        </div>
+      </div>
+
+      <div class="header-center">
+        <p class="header-site-title">lumænaut</p>
+        <nav class="main-nav" aria-label="Navegación principal">
+          <ul>
+            <li><a class="home-btn" href="../indice.html">inicio</a></li>
+            <li><a class="blog-btn" href="../blog/blog-indice.html">blog</a></li>
+            <li><a class="leetcode-btn" href="soluciones-leetcode-indice.html">soluciones leetcode</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="header-right">
+        <div class="logo-div-mirror" aria-hidden="true"></div>
+        <button type="button" class="share-btn" aria-label="Compartir esta página">
+          <img src="../../assets/share-icon.png" alt="" class="share-btn-icon" data-ios-src="../../assets/ios-share-icon.png" width="20" height="20">
+        </button>
+      </div>
+
+    </header>
+
+    <main id="main-content" class="content">
+
+      <div class="floating-controls">
+        <div class="lang-switcher">
+          <button type="button" class="lang-switcher-btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Seleccionar idioma">
+            <img src="../../assets/translate-icon.png" alt="" class="lang-switcher-icon">
+            <span class="lang-switcher-label">esp (LAT)</span>
+          </button>
+          <ul class="lang-switcher-dropdown" role="listbox" aria-label="Opciones de idioma">
+            <li><a href="#" data-lang="eng-US" role="option">eng (US)</a></li>
+            <li><a href="#" data-lang="esp-LAT" role="option">esp (LAT)</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <article class="post" aria-labelledby="post-title">
+      
+        <header class="post-header">
+          <h1 id="post-title">Soluciones LeetCode<br>#13 — Romano a entero</h1>
+          <p class="post-subtitle">
+            Mira adelante, resta y conquista — el decodificador de números romanos
+          </p>
+          <p class="post-meta">
+            Por <span class="author">Alberto Del Valle</span><br>
+            <time datetime="2026-04-17">17 de abril de 2026</time><br>
+            <span class="post-read-time">(Tiempo de lectura ~5 min)</span>
+          </p>
+        </header>
+
+        <figure class="post-featured-image" aria-labelledby="roman-to-integer-feature-caption">
+          <img
+            src="../../images/outdated-computer-ascii.png"
+            alt="Arte ASCII a color: una computadora anticuada sobre un escritorio con una estantería al fondo, que sugiere un espacio de trabajo clásico para programar."
+            title="Arte ASCII — computadora anticuada sobre un escritorio con estantería"
+            width="1840"
+            height="1690"
+            decoding="async"
+            loading="eager"
+            class="post-featured-img">
+          <figcaption id="roman-to-integer-feature-caption" class="visually-hidden">
+            Ilustración en estilo ASCII: una computadora anticuada sobre un escritorio 
+            con una estantería detrás.
+          </figcaption>
+        </figure>
+
+        <div class="post-body">          
+          <h2>Enunciado del problema</h2>
+          
+          <blockquote cite="https://leetcode.com/problems/roman-to-integer/">
+            <p>
+              Los números romanos se representan mediante siete símbolos diferentes: <code>I</code>, <code>V</code>, <code>X</code>, <code>L</code>, <code>C</code>, <code>D</code> y <code>M</code>.
+            </p>
+            <table style="margin:1em 0; border-collapse:collapse;">
+              <tr><th>Símbolo</th><th>Valor</th></tr>
+              <tr><td>I</td><td>1</td></tr>
+              <tr><td>V</td><td>5</td></tr>
+              <tr><td>X</td><td>10</td></tr>
+              <tr><td>L</td><td>50</td></tr>
+              <tr><td>C</td><td>100</td></tr>
+              <tr><td>D</td><td>500</td></tr>
+              <tr><td>M</td><td>1000</td></tr>
+            </table>
+            <p>
+              Por ejemplo, <code>2</code> se escribe como <code>II</code> en números romanos, simplemente dos unos sumados. <code>12</code> se escribe como <code>XII</code>, que es simplemente <code>X + II</code>. El número <code>27</code> se escribe como <code>XXVII</code>, que es <code>XX + V + II</code>.
+            </p>
+            <p>
+              Los números romanos generalmente se escriben de mayor a menor de izquierda a derecha. Sin embargo, el numeral para cuatro no es <code>IIII</code>. En su lugar, el número cuatro se escribe como <code>IV</code>. Como el uno está antes del cinco, lo restamos para obtener cuatro. El mismo principio se aplica al número nueve, que se escribe como <code>IX</code>. Hay seis casos donde se usa la resta:
+            </p>
+            <ul>
+              <li><code>I</code> puede colocarse antes de <code>V</code> (5) y <code>X</code> (10) para formar 4 y 9.</li>
+              <li><code>X</code> puede colocarse antes de <code>L</code> (50) y <code>C</code> (100) para formar 40 y 90.</li>
+              <li><code>C</code> puede colocarse antes de <code>D</code> (500) y <code>M</code> (1000) para formar 400 y 900.</li>
+            </ul>
+            <p>Dado un número romano, conviértelo a entero.</p>
+            
+            <p><strong>Ejemplo 1:</strong></p>
+            <aside class="post-aside" aria-label="Ejemplo 1">
+              <p><strong>Entrada:</strong> <code>s = "III"</code></p>
+              <p><strong>Salida:</strong> <code>3</code></p>
+              <p><strong>Explicación:</strong> III = 3.</p>
+            </aside>
+
+            <p><strong>Ejemplo 2:</strong></p>
+            <aside class="post-aside" aria-label="Ejemplo 2">
+              <p><strong>Entrada:</strong> <code>s = "LVIII"</code></p>
+              <p><strong>Salida:</strong> <code>58</code></p>
+              <p><strong>Explicación:</strong> L = 50, V= 5, III = 3.</p>
+            </aside>
+
+            <p><strong>Ejemplo 3:</strong></p>
+            <aside class="post-aside" aria-label="Ejemplo 3">
+              <p><strong>Entrada:</strong> <code>s = "MCMXCIV"</code></p>
+              <p><strong>Salida:</strong> <code>1994</code></p>
+              <p><strong>Explicación:</strong> M = 1000, CM = 900, XC = 90 y IV = 4.</p>
+            </aside>
+            
+            <p><strong>Restricciones:</strong></p>
+            <ul>
+              <li><p><code>1 <= s.length <= 15</code></p></li>
+              <li><p><code>s</code> contiene solo los caracteres <code>('I', 'V', 'X', 'L', 'C', 'D', 'M')</code>.</p></li>
+              <li>Se <strong>garantiza</strong> que <code>s</code> es un número romano válido en el rango <code>[1, 3999]</code>.</li>
+            </ul>
+          </blockquote> 
+
+          <h2>El enfoque ingenuo</h2>
+          
+          <p>
+            La traducción más directa de las reglas: recorre de izquierda a derecha, mapea cada símbolo a su valor, y si ves un valor menor antes de uno mayor (como <code>I</code> antes de <code>V</code>), réstalo en lugar de sumarlo. Es un enfoque perfectamente válido y funciona de inmediato.
+          </p>
+          
+          <div class="solution-card">
+            <div class="lang-tag">Python</div>
+            <pre><code>
+def romanoAEntero_ingenuo(s: str) -> int:
+    valores = {'I':1, 'V':5, 'X':10, 'L':50, 'C':100, 'D':500, 'M':1000}
+    total = 0
+    i = 0
+    while i < len(s):
+        # si el actual es menor que el siguiente, es un par sustractivo
+        if i + 1 < len(s) and valores[s[i]] < valores[s[i+1]]:
+            total += valores[s[i+1]] - valores[s[i]]
+            i += 2
+        else:
+            total += valores[s[i]]
+            i += 1
+    return total
+            </code></pre>
+          </div>
+          
+          <h2>Complejidad inicial</h2>
+          <p>
+            Esto ya es <strong>O(n)</strong> en tiempo y <strong>O(1)</strong> en espacio — solo tocamos cada carácter un par de veces. El código es claro y fácil de seguir. Pero el problema se vuelve aún más limpio cuando invertimos la perspectiva: en lugar de buscar pares, simplemente miramos hacia adelante y decidimos si el símbolo actual debe sumarse o restarse. Ese pequeño cambio elimina la necesidad de un índice que salte.
+          </p>
+          
+          <h2>Una sola pasada más fluida</h2>
+          <p>
+            La observación clave: en números romanos, si un símbolo es seguido por uno de mayor valor, actúa como un restador. De lo contrario, suma. Así que podemos recorrer la cadena una vez, comparar el valor actual con el siguiente, y sumar o restar en consecuencia. El último símbolo siempre se suma porque no hay nada después de él.
+          </p>
+          <p>
+            Esta versión se lee casi como el proceso mental: “M es 1000, siguiente es C (100) que es menor, así que sumo 1000. C es 100, siguiente es M (1000) — mayor, así que resto 100…” Es elegante y usa solo una pasada sin saltos de casos especiales.
+          </p>
+                    
+          <div class="solution-card">
+            <div class="lang-tag">Python</div>
+            <pre><code>
+def romanoAEntero(s: str) -> int:
+    valores = {
+        'I': 1,
+        'V': 5,
+        'X': 10,
+        'L': 50,
+        'C': 100,
+        'D': 500,
+        'M': 1000
+    }
+    
+    total = 0
+    n = len(s)
+    
+    for i in range(n):
+        # si el valor actual es menor que el siguiente, réstalo
+        if i < n - 1 and valores[s[i]] < valores[s[i+1]]:
+            total -= valores[s[i]]
+        else:
+            total += valores[s[i]]
+            
+    return total
+            </code></pre>
+          </div>
+          
+          <p>Sigamos el ejemplo más complicado: <code>s = "MCMXCIV"</code> (1994).</p>
+          
+          <div class="simulation-table">
+            <strong>Simulación paso a paso: s = "MCMXCIV"</strong>
+            <table>
+              <thead>
+                <tr>
+                  <th>i</th>
+                  <th>símbolo</th>
+                  <th>valor</th>
+                  <th>símbolo sig.</th>
+                  <th>valor sig.</th>
+                  <th>acción</th>
+                  <th>total tras paso</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>0</td>
+                  <td>M</td>
+                  <td>1000</td>
+                  <td>C</td>
+                  <td>100</td>
+                  <td>1000 ≥ 100 → sumar</td>
+                  <td>1000</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>C</td>
+                  <td>100</td>
+                  <td>M</td>
+                  <td>1000</td>
+                  <td>100 < 1000 → restar</td>
+                  <td>900</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>M</td>
+                  <td>1000</td>
+                  <td>X</td>
+                  <td>10</td>
+                  <td>1000 ≥ 10 → sumar</td>
+                  <td>1900</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>X</td>
+                  <td>10</td>
+                  <td>C</td>
+                  <td>100</td>
+                  <td>10 < 100 → restar</td>
+                  <td>1890</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>C</td>
+                  <td>100</td>
+                  <td>I</td>
+                  <td>1</td>
+                  <td>100 ≥ 1 → sumar</td>
+                  <td>1990</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>I</td>
+                  <td>1</td>
+                  <td>V</td>
+                  <td>5</td>
+                  <td>1 < 5 → restar</td>
+                  <td>1989</td>
+                </tr>
+                <tr>
+                  <td>6</td>
+                  <td>V</td>
+                  <td>5</td>
+                  <td>—</td>
+                  <td>—</td>
+                  <td>último símbolo → sumar</td>
+                  <td>1994</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="step-caption">La decisión se toma mirando el siguiente carácter. Los pares sustractivos (CM, XC, IV) se manejan naturalmente restando el valor menor antes de sumar el mayor en la siguiente iteración.</div>
+          </div>
+          
+          <p>Observa cómo la resta de <code>C</code> (100) y la posterior suma de <code>M</code> (1000) se combinan para dar el neto <code>+900</code> de <code>CM</code>. Lo mismo ocurre con <code>XC</code> (90) e <code>IV</code> (4).</p>
+          
+          <h2>Complejidad final</h2>
+          <p>
+            <strong>Complejidad temporal:</strong> O(n) — recorremos la cadena exactamente una vez, realizando una búsqueda en diccionario y una comparación de tiempo constante por carácter.<br>
+            <strong>Complejidad espacial:</strong> O(1) — el tamaño del diccionario está fijo en 7 entradas, y usamos solo unas pocas variables enteras. Ninguna estructura adicional escala con la entrada.
+          </p>
+          <p>
+            Esta solución es rápida, eficiente en memoria y refleja exactamente cómo un humano experimentado analizaría un número romano: echar un vistazo adelante y decidir.
+          </p>
+        </div>
+
+        <blockquote class="closing-quote">
+          Feliz programación, y que tu complejidad siempre sea baja.
+        </blockquote>
+
+        <div class="prev-chap-nav" aria-label="Navegación a Soluciones LeetCode #9">
+          <a class="next-chap-btn" href="9-numero-palindromo.html">
+            <img src="../../assets/arrow-previous-icon.png" alt="" width="18" height="18">
+            <span>#9</span>
+          </a>
+        </div>                
+        <hr class="home-intro-divider" aria-hidden="true">
+        
+        <div class="post-body">
+          <h2>Referencias y lecturas adicionales</h2>
+          <ul>
+            <li>
+              <a href="https://leetcode.com/problems/roman-to-integer/" target="_blank" rel="noopener noreferrer">
+                Página del problema Roman to Integer en LeetCode
+              </a> — problema oficial y foros de discusión.
+            </li>
+            <li>
+              <a href="https://es.wikipedia.org/wiki/Numeraci%C3%B3n_romana" target="_blank" rel="noopener noreferrer">
+                Wikipedia: Numeración romana
+              </a> — historia, reglas y ejemplos más complejos.
+            </li>
+            <li>
+              <a href="https://realpython.com/python-roman-numerals/" target="_blank" rel="noopener noreferrer">
+                Real Python: Convertir números romanos con Python
+              </a> — un análisis más profundo con ambas direcciones (hacia y desde romano).
+            </li>
+            <li>
+              <a href="https://www.geeksforgeeks.org/converting-roman-numerals-decimal-lying-1-3999/" target="_blank" rel="noopener noreferrer">
+                GeeksforGeeks: Convertir números romanos a decimal
+              </a> — implementaciones alternativas en múltiples lenguajes.
+            </li>
+          </ul>
+          
+          <h2>¿No te cansas de lumænaut? Lee esto...</h2>
+          <ul>
+            <li>
+              <a href="../blog/bitacora/ep-2-todo-lo-que-no-se-sobre-bloguear.html">
+                Capítulo 2 | Todo lo que no sé sobre bloguear
+              </a>
+              — la bitácora detrás del sitio: dominios, SEO, plugins y aprender en público.
+            </li>
+            <li>
+              <a href="../blog/computacion/los-8-paradigmas-de-algoritmos.html">
+                Los 8 paradigmas de algoritmos
+              </a>
+              — ocho modelos mentales que reutilizarás en problemas, entrevistas y código en producción.
+            </li>
+            <li>
+              <a href="../blog/computacion/asi-funciona-el-bucle-del-videojuego.html">
+                Cómo funciona el bucle de juego
+              </a>
+              — el latido de un fotograma de juego: actualizar, renderizar y temporización estable en lenguaje claro.
+            </li>
+          </ul>
+        </div>
+
+      </article>
+    </main>
+    
+    <footer class="footer">
+      <nav class="social-links" aria-label="Enlaces sociales">
+        <ul>
+          <li>
+            <a href="https://www.reddit.com/user/Lumaenaut_/" target="_blank" rel="noopener noreferrer" title="Reddit">
+              <img src="../../assets/reddit-icon.png" alt="Reddit" width="24" height="24">
+            </a>
+          </li>
+          <li>
+            <a href="https://x.com/lumaenaut" target="_blank" rel="noopener noreferrer" title="X">
+              <img src="../../assets/twitter-icon.png" alt="X" width="24" height="24">
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/lumaenaut" target="_blank" rel="noopener noreferrer" title="GitHub">
+              <img src="../../assets/github-icon.png" alt="GitHub" width="24" height="24">
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <div class="footer-meta">
+        <p>2026, lumænaut <a href="../politica-de-privacidad.html">Política de Privacidad</a></p>
+      </div>
+    </footer>
+
+  </div>
+  <script src="../../scripts/script.js"></script>
+</body>
+</html>
