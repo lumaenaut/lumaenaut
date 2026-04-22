@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-TLP7F5XM');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#F9F5EC">
+  <meta name="description" content="Soluciones LeetCode | #14 — Prefijo común más largo. Desde el escaneo horizontal y vertical hasta divide y vencerás y búsqueda binaria, con ejemplos en Python, notas de complejidad y referencias. Por Alberto Del Valle.">
+  <meta name="author" content="Alberto Del Valle">
+  <title>Soluciones LeetCode | #14 — Prefijo común más largo</title>
+  <link rel="canonical" href="https://lumaenaut.com/esp-LAT/soluciones-leetcode/14-prefijo-comun-mas-largo.html">
+  <link rel="alternate" hreflang="x-default" href="https://lumaenaut.com/eng-US/leetcode-solutions/14-longest-common-prefix.html">
+  <link rel="alternate" hreflang="en" href="https://lumaenaut.com/eng-US/leetcode-solutions/14-longest-common-prefix.html">
+  <link rel="alternate" hreflang="es" href="https://lumaenaut.com/esp-LAT/soluciones-leetcode/14-prefijo-comun-mas-largo.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="lumænaut">
+  <meta property="og:title" content="Soluciones LeetCode | #14 — Prefijo común más largo">
+  <meta property="og:description" content="Soluciones LeetCode | #14 — Prefijo común más largo. Desde el escaneo horizontal y vertical hasta divide y vencerás y búsqueda binaria, con ejemplos en Python, notas de complejidad y referencias. Por Alberto Del Valle.">
+  <meta property="og:url" content="https://lumaenaut.com/esp-LAT/soluciones-leetcode/14-prefijo-comun-mas-largo.html">
+  <meta property="og:image" content="https://lumaenaut.com/images/outdated-computer-ascii.png">
+  <meta property="og:image:alt" content="Arte ASCII: una computadora anticuada sobre un escritorio con una estantería al fondo, evocando la práctica clásica de programación.">
+  <meta property="og:image:width" content="1840">
+  <meta property="og:image:height" content="1690">
+  <meta property="og:locale" content="es_MX">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="article:published_time" content="2026-04-21">
+  <meta property="article:modified_time" content="2026-04-22">
+  <meta property="article:author" content="Alberto Del Valle">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:creator" content="@lumaenaut">
+  <meta name="twitter:image" content="https://lumaenaut.com/images/outdated-computer-ascii.png">
+  <meta name="twitter:title" content="Soluciones LeetCode | #14 — Prefijo común más largo">
+  <meta name="twitter:description" content="Soluciones LeetCode | #14 — Prefijo común más largo. Desde el escaneo horizontal y vertical hasta divide y vencerás y búsqueda binaria, con ejemplos en Python, notas de complejidad y referencias. Por Alberto Del Valle.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%94%A5%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../../style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Soluciones LeetCode | #14 — Prefijo común más largo",
+    "alternativeHeadline": "Horizontal, vertical, divide y vencerás, búsqueda binaria: cuatro formas de encontrar el prefijo común",
+    "description": "Soluciones LeetCode | #14 — Prefijo común más largo. Desde el escaneo horizontal y vertical hasta divide y vencerás y búsqueda binaria, con ejemplos en Python, notas de complejidad y referencias. Por Alberto Del Valle.",
+    "url": "https://lumaenaut.com/esp-LAT/soluciones-leetcode/14-prefijo-comun-mas-largo.html",
+    "mainEntityOfPage": { "@id": "https://lumaenaut.com/esp-LAT/soluciones-leetcode/14-prefijo-comun-mas-largo.html" },
+    "image": "https://lumaenaut.com/images/outdated-computer-ascii.png",
+    "inLanguage": "es-MX",
+    "datePublished": "2026-04-21",
+    "dateModified": "2026-04-22",
+    "author": {
+      "@type": "Person",
+      "name": "Alberto Del Valle",
+      "url": "https://lumaenaut.com/esp-LAT/"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Alberto Del Valle"
+    },
+    "isPartOf": { "@id": "https://lumaenaut.com/esp-LAT/blog/blog-index.html" }
+  }
+  </script>
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TLP7F5XM"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+  
+  <div class="page-wrapper">
+    
+    <header class="header">
+
+      <div class="header-left">
+        <div class="logo-div">
+          <pre class="logo-ascii" id="logo-container" aria-hidden="true"></pre>
+        </div>
+      </div>
+
+      <div class="header-center">
+        <p class="header-site-title">lumænaut</p>
+        <nav class="main-nav" aria-label="Navegación principal">
+          <ul>
+            <li><a class="home-btn" href="../../index.html">inicio</a></li>
+            <li><a class="blog-btn" href="../blog/blog-index.html">blog</a></li>
+            <li><a class="leetcode-btn" href="leetcode-solutions-index.html">soluciones leetcode</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="header-right">
+        <div class="logo-div-mirror" aria-hidden="true"></div>
+        <button type="button" class="share-btn" aria-label="Compartir esta página">
+          <img src="../../assets/share-icon.png" alt="" class="share-btn-icon" data-ios-src="../../assets/ios-share-icon.png" width="20" height="20">
+        </button>
+      </div>
+
+    </header>
+
+    <main id="main-content" class="content">
+
+      <div class="floating-controls">
+        <div class="lang-switcher">
+          <button type="button" class="lang-switcher-btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Seleccionar idioma">
+            <img src="../../assets/translate-icon.png" alt="" class="lang-switcher-icon">
+            <span class="lang-switcher-label">esp (LAT)</span>
+          </button>
+          <ul class="lang-switcher-dropdown" role="listbox" aria-label="Opciones de idioma">
+            <li><a href="#" data-lang="eng-US" role="option">eng (US)</a></li>
+            <li><a href="#" data-lang="esp-LAT" role="option">esp (LAT)</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <article class="post" aria-labelledby="post-title">
+      
+        <header class="post-header">
+          <h1 id="post-title">Soluciones LeetCode<br>#14 — Prefijo común más largo</h1>
+          <p class="post-subtitle">
+            Horizontal, vertical, divide y vencerás, búsqueda binaria: cuatro formas de encontrar el prefijo común
+          </p>
+          <p class="post-meta">
+            Por <span class="author">Alberto Del Valle</span><br>
+            <time datetime="2026-04-21">21 de abril de 2026</time><br>
+            <span class="post-read-time">(Tiempo de lectura ~7 min)</span>
+          </p>
+        </header>
+
+        <figure class="post-featured-image" aria-labelledby="lcp-feature-caption">
+          <img
+            src="../../images/outdated-computer-ascii.png"
+            alt="Arte ASCII a color: una computadora anticuada sobre un escritorio con una estantería al fondo, sugiriendo un espacio de trabajo clásico de programación."
+            title="Arte ASCII — computadora anticuada sobre un escritorio con estantería"
+            width="1840"
+            height="1690"
+            decoding="async"
+            loading="eager"
+            class="post-featured-img">
+          <figcaption id="lcp-feature-caption" class="visually-hidden">
+            Ilustración en estilo arte ASCII: una computadora anticuada sobre un escritorio 
+            con una estantería detrás.
+          </figcaption>
+        </figure>
+
+        <div class="post-body">          
+          <h2>Planteamiento del problema</h2>
+          
+          <blockquote cite="https://leetcode.com/problems/longest-common-prefix/">
+            <p>
+              Escribe una función para encontrar la cadena de prefijo común más larga entre un arreglo de cadenas.
+            </p>
+            <p>Si no hay un prefijo común, devuelve una cadena vacía <code>""</code>.</p>
+            
+            <p><strong>Ejemplo 1:</strong></p>
+            <aside class="post-aside" aria-label="Ejemplo 1">
+              <p><strong>Entrada:</strong> <code>strs = ["flower","flow","flight"]</code></p>
+              <p><strong>Salida:</strong> <code>"fl"</code></p>
+            </aside>
+
+            <p><strong>Ejemplo 2:</strong></p>
+            <aside class="post-aside" aria-label="Ejemplo 2">
+              <p><strong>Entrada:</strong> <code>strs = ["dog","racecar","car"]</code></p>
+              <p><strong>Salida:</strong> <code>""</code></p>
+              <p><strong>Explicación:</strong> No hay prefijo común entre las cadenas de entrada.</p>
+            </aside>
+            
+            <p><strong>Restricciones:</strong></p>
+            <ul>
+              <li><code>1 <= strs.length <= 200</code></li>
+              <li><code>0 <= strs[i].length <= 200</code></li>
+              <li><code>strs[i]</code> consiste solo de letras minúsculas del inglés si no está vacía.</li>
+            </ul>
+          </blockquote> 
+
+          <h2>La manera ingenua — escaneo horizontal</h2>
+          
+          <p>
+            El enfoque más intuitivo es tomar la primera cadena como prefijo candidato y luego iterar sobre las cadenas restantes. Para cada palabra subsiguiente, acortamos el candidato hasta que se convierta en prefijo de esa palabra. Esto se llama <strong>escaneo horizontal</strong> porque nos movemos de izquierda a derecha a través del arreglo, comparando el prefijo con cada cadena horizontalmente.
+          </p>
+          
+          <div class="solution-card">
+            <div class="lang-tag">Python</div>
+            <pre><code>
+class Solution:
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+        if len(strs) == 1:
+            return strs[0]          # Solo una cadena → es el prefijo
+        
+        prefix = strs[0]
+        
+        for i in range(1, len(strs)):
+            # Seguir acortando el prefijo hasta que coincida con el inicio de strs[i]
+            while strs[i].find(prefix) != 0:
+                prefix = prefix[:-1]   # Eliminar el último carácter
+                if not prefix:
+                    return ""          # No hay prefijo común
+        return prefix
+            </code></pre>
+          </div>
+          
+          <p>
+            Este método es directo pero puede realizar comparaciones redundantes. En el peor de los casos, podríamos terminar acortando el prefijo carácter por carácter para cada cadena, lo que lleva a un tiempo <strong>O(S)</strong> donde S es la suma de todos los caracteres en todas las cadenas. El espacio auxiliar es <strong>O(1)</strong>.
+          </p>
+          
+          <h2>Un ángulo diferente — escaneo vertical</h2>
+          <p>
+            En lugar de comparar palabras completas, podemos escanear carácter por carácter verticalmente. Tomamos el primer carácter de la primera cadena y lo comparamos con el primer carácter de cada una de las otras cadenas. Si todos coinciden, pasamos al segundo carácter, y así sucesivamente. En el momento en que encontramos una discrepancia o llegamos al final de alguna cadena, nos detenemos y devolvemos el prefijo construido hasta el momento.
+          </p>
+          <p>
+            Este enfoque puede ser más eficiente en casos donde el prefijo común es corto o ocurre una discrepancia temprana, porque evitamos mirar el resto de las cadenas.
+          </p>
+                    
+          <div class="solution-card">
+            <div class="lang-tag">Python</div>
+            <pre><code>
+class Solution:
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+        if len(strs) == 1:
+            return strs[0]
+        
+        # Escanear caracteres de la primera cadena
+        for i in range(len(strs[0])):
+            ch = strs[0][i]
+            # Comparar con cada otra cadena en la posición i
+            for j in range(1, len(strs)):
+                # Detenerse si excedemos la longitud o encontramos una discrepancia
+                if i == len(strs[j]) or strs[j][i] != ch:
+                    return strs[0][:i]
+        
+        # Todos los caracteres de la primera cadena coincidieron en las demás
+        return strs[0]
+            </code></pre>
+          </div>
+          
+          <p>Veamos la traza de <code>strs = ["flower","flow","flight"]</code> con escaneo vertical:</p>
+          
+          <div class="simulation-table">
+            <strong>Simulación paso a paso: escaneo vertical para ["flower","flow","flight"]</strong>
+            <table>
+              <thead>
+                <tr>
+                  <th>i (índice de carácter)</th>
+                  <th>ch (strs[0][i])</th>
+                  <th>j=1 ("flow")</th>
+                  <th>j=2 ("flight")</th>
+                  <th>Acción</th>
+                  <th>Prefijo hasta ahora</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>0</td>
+                  <td>'f'</td>
+                  <td>coincide</td>
+                  <td>coincide</td>
+                  <td>continuar</td>
+                  <td>"f"</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>'l'</td>
+                  <td>coincide</td>
+                  <td>coincide</td>
+                  <td>continuar</td>
+                  <td>"fl"</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>'o'</td>
+                  <td>'o' (coincide)</td>
+                  <td>'i' (discrepancia)</td>
+                  <td>detener, devolver rebanada [:2]</td>
+                  <td>"fl"</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="step-caption">
+              El algoritmo se detiene en el índice 2 porque "flight"[2] es 'i' ≠ 'o'. El prefijo devuelto son los primeros dos caracteres.
+            </div>
+          </div>
+          
+          <p>
+            La complejidad temporal sigue siendo <strong>O(S)</strong> en el peor caso (cuando todas las cadenas son idénticas), pero a menudo realiza menos comparaciones de caracteres. El espacio permanece <strong>O(1)</strong>.
+          </p>
+          
+          <h2>Divide y vencerás</h2>
+          <p>
+            Este problema también se presta muy bien a una estrategia recursiva de divide y vencerás. La idea: dividir el arreglo en dos mitades, encontrar el LCP de cada mitad recursivamente y luego encontrar el LCP de esos dos resultados. Esta es una aplicación clásica del paradigma y puede ser útil cuando queremos paralelizar o cuando el arreglo es grande.
+          </p>
+          <p>
+            La función auxiliar <code>lcp(izquierda, derecha)</code> encuentra el prefijo común entre dos cadenas usando un escaneo vertical, y <code>divide_y_venceras</code> divide recursivamente el arreglo.
+          </p>
+          
+          <div class="solution-card">
+            <div class="lang-tag">Python</div>
+            <pre><code>
+class Solution:
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+        def lcp(izquierda: str, derecha: str) -> str:
+            """Devuelve el prefijo común de dos cadenas."""
+            min_long = min(len(izquierda), len(derecha))
+            for i in range(min_long):
+                if izquierda[i] != derecha[i]:
+                    return izquierda[:i]
+            return izquierda[:min_long]
+
+        def divide_y_venceras(arr, l, r):
+            """Encuentra recursivamente el LCP en arr[l..r]."""
+            if l == r:
+                return arr[l]
+            medio = (l + r) // 2
+            lcp_izq = divide_y_venceras(arr, l, medio)
+            lcp_der = divide_y_venceras(arr, medio + 1, r)
+            return lcp(lcp_izq, lcp_der)
+
+        return divide_y_venceras(strs, 0, len(strs) - 1)
+            </code></pre>
+          </div>
+          
+          <p>
+            La relación de recurrencia para la complejidad temporal es <strong>T(n) = 2·T(n/2) + O(m)</strong>, donde m es la longitud de las cadenas. En el peor caso, esto todavía resulta en <strong>O(S)</strong> comparaciones totales de caracteres. Sin embargo, el enfoque de divide y vencerás tiene la ventaja de ser fácilmente paralelizable y demuestra un patrón algorítmico poderoso.
+          </p>
+          
+          <h2>Optimizando aún más — búsqueda binaria</h2>
+          <p>
+            ¿Podemos hacerlo mejor que los escaneos lineales? Si consideramos la longitud del prefijo común, está limitada por la longitud de la cadena más corta. Podemos realizar una búsqueda binaria en la posible longitud del prefijo. Para una longitud candidata <code>mid</code>, verificamos si los primeros <code>mid</code> caracteres de la primera cadena forman un prefijo común válido para todas las cadenas. Si es así, intentamos una longitud más larga; si no, intentamos una más corta.
+          </p>
+          <p>
+            Este enfoque reduce el número de comparaciones en muchos escenarios, especialmente cuando las cadenas son largas y el prefijo es relativamente corto o largo. La verificación en sí (<code>esLCP(mid)</code>) itera sobre las cadenas, haciendo que el tiempo total sea <strong>O(S·log m)</strong> donde m es la longitud de la cadena más corta. Esto puede ser más rápido que el escaneo lineal en la práctica.
+          </p>
+          
+          <div class="solution-card">
+            <div class="lang-tag">Python</div>
+            <pre><code>
+class Solution:
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+        def esLCP(longitud: int) -> bool:
+            """Verifica si los primeros `longitud` caracteres de strs[0] son comunes."""
+            prefijo = strs[0][:longitud]
+            for s in strs[1:]:
+                if not s.startswith(prefijo):
+                    return False
+            return True
+
+        if len(strs) == 1:
+            return strs[0]
+
+        bajo, alto = 0, min(len(s) for s in strs)
+        while bajo <= alto:
+            mid = (bajo + alto) // 2
+            if esLCP(mid):
+                bajo = mid + 1      # Intentar un prefijo más largo
+            else:
+                alto = mid - 1      # Intentar uno más corto
+
+        return strs[0][:alto]
+            </code></pre>
+          </div>
+          
+          <p>
+            La solución de búsqueda binaria reduce elegantemente la longitud del prefijo. <strong>La complejidad espacial es O(1)</strong>, y la verificación <code>startswith</code> utiliza una comparación eficiente de subcadenas.
+          </p>
+          
+          <h2>Comparación final de complejidades</h2>
+          <p>
+            Los cuatro enfoques son correctos y funcionan dentro de las restricciones del problema. Aquí un resumen rápido:
+          </p>
+          <ul>
+            <li><strong>Escaneo horizontal:</strong> tiempo O(S), espacio O(1). Simple pero puede hacer trabajo extra.</li>
+            <li><strong>Escaneo vertical:</strong> tiempo O(S), espacio O(1). A menudo se detiene temprano.</li>
+            <li><strong>Divide y vencerás:</strong> tiempo O(S), espacio O(m·log n) por la pila de recursión (o O(1) iterativo). Demuestra recursión.</li>
+            <li><strong>Búsqueda binaria:</strong> tiempo O(S·log m), espacio O(1). Puede ser más rápida cuando las cadenas son largas y la longitud del prefijo es extrema.</li>
+          </ul>
+          <p>
+            En una entrevista, los métodos de escaneo vertical o búsqueda binaria son particularmente apreciados por su eficiencia y claridad.
+          </p>
+        </div>
+
+        <blockquote class="closing-quote">
+          Feliz codificación, y que tu complejidad siempre sea baja.
+        </blockquote>
+
+        <div class="prev-chap-nav" aria-label="Navegación Soluciones LeetCode #13">
+          <a class="next-chap-btn" href="13-romano-a-entero.html">
+            <img src="../../assets/arrow-previous-icon.png" alt="" width="18" height="18">
+            <span>#13</span>
+          </a>
+        </div>                
+        <hr class="home-intro-divider" aria-hidden="true">
+        
+        <div class="post-body">
+          <h2>Referencias y lecturas adicionales</h2>
+          <ul>
+            <li>
+              <a href="https://leetcode.com/problems/longest-common-prefix/" target="_blank" rel="noopener noreferrer">
+                Página del problema LeetCode Longest Common Prefix
+              </a> — problema oficial y foros de discusión.
+            </li>
+            <li>
+              <a href="https://en.wikipedia.org/wiki/LCP_array" target="_blank" rel="noopener noreferrer">
+                Wikipedia: LCP array (en inglés)
+              </a> — concepto relacionado en arreglos de sufijos.
+            </li>
+            <li>
+              <a href="https://es.wikipedia.org/wiki/Algoritmo_divide_y_vencer%C3%A1s" target="_blank" rel="noopener noreferrer">
+                Wikipedia: Algoritmo divide y vencerás
+              </a> — el paradigma detrás de la solución recursiva.
+            </li>
+            <li>
+              <a href="https://realpython.com/python-strings/" target="_blank" rel="noopener noreferrer">
+                Real Python: Strings and Character Data in Python (en inglés)
+              </a> — inmersión profunda en operaciones con cadenas como <code>startswith()</code>.
+            </li>
+          </ul>
+          
+          <h2>¿No te cansas de lumænaut? Lee esto...</h2>
+          <ul>
+            <li>
+              <a href="../logbook/cap-2-todo-lo-que-no-se-so-bloguear.html">
+                Capítulo 2 | Todo lo que no sé sobre bloguear
+              </a>
+              — la bitácora detrás del sitio: dominios, SEO, plugins y aprender en público.
+            </li>
+            <li>
+              <a href="../ciencias-de-la-computacion/los-8-paradigmas-de-algoritmos.html">
+                Los 8 paradigmas de algoritmos
+              </a>
+              — ocho modelos mentales que reutilizarás en problemas, entrevistas y código de producción.
+            </li>
+            <li>
+              <a href="../ciencias-de-la-computacion/como-funciona-el-game-loop.html">
+                Cómo funciona el Game Loop
+              </a>
+              — el latido del corazón de un juego: actualizar, renderizar y temporización constante en lenguaje sencillo.
+            </li>
+          </ul>
+        </div>
+
+      </article>
+    </main>
+    
+    <footer class="footer">
+      <nav class="social-links" aria-label="Enlaces sociales">
+        <ul>
+          <li>
+            <a href="https://www.reddit.com/user/Lumaenaut_/" target="_blank" rel="noopener noreferrer" title="Reddit">
+              <img src="../../assets/reddit-icon.png" alt="Reddit" width="24" height="24">
+            </a>
+          </li>
+          <li>
+            <a href="https://x.com/lumaenaut" target="_blank" rel="noopener noreferrer" title="X">
+              <img src="../../assets/twitter-icon.png" alt="X" width="24" height="24">
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/lumaenaut" target="_blank" rel="noopener noreferrer" title="GitHub">
+              <img src="../../assets/github-icon.png" alt="GitHub" width="24" height="24">
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <div class="footer-meta">
+        <p>2026, lumænaut <a href="../../politica-de-privacidad.html">Política de Privacidad</a></p>
+      </div>
+    </footer>
+
+  </div>
+  <script src="../../scripts/script.js"></script>
+</body>
+</html>
