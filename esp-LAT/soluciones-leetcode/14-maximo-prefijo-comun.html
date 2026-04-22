@@ -11,18 +11,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#F9F5EC">
-  <meta name="description" content="Soluciones LeetCode | #14 — Prefijo común más largo. Desde el escaneo horizontal y vertical hasta divide y vencerás y búsqueda binaria, con ejemplos en Python, notas de complejidad y referencias. Por Alberto Del Valle.">
+  <meta name="description" content="Soluciones LeetCode | #14 — Máximo prefijo común. Desde el escaneo horizontal y vertical hasta divide y vencerás y búsqueda binaria, con ejemplos en Python, notas de complejidad y referencias. Por Alberto Del Valle.">
   <meta name="author" content="Alberto Del Valle">
-  <title>Soluciones LeetCode | #14 — Prefijo común más largo</title>
-  <link rel="canonical" href="https://lumaenaut.com/esp-LAT/soluciones-leetcode/14-prefijo-comun-maximo.html">
+  <title>Soluciones LeetCode | #14 — Máximo prefijo común.</title>
+  <link rel="canonical" href="https://lumaenaut.com/esp-LAT/soluciones-leetcode/14-maximo-prefijo-comun.html">
   <link rel="alternate" hreflang="x-default" href="https://lumaenaut.com/eng-US/leetcode-solutions/14-longest-common-prefix.html">
   <link rel="alternate" hreflang="en" href="https://lumaenaut.com/eng-US/leetcode-solutions/14-longest-common-prefix.html">
-  <link rel="alternate" hreflang="es" href="https://lumaenaut.com/esp-LAT/soluciones-leetcode/14-prefijo-comun-maximo.html">
+  <link rel="alternate" hreflang="es" href="https://lumaenaut.com/esp-LAT/soluciones-leetcode/14-maximo-prefijo-comun.html">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="lumænaut">
-  <meta property="og:title" content="Soluciones LeetCode | #14 — Prefijo común más largo">
-  <meta property="og:description" content="Soluciones LeetCode | #14 — Prefijo común más largo. Desde el escaneo horizontal y vertical hasta divide y vencerás y búsqueda binaria, con ejemplos en Python, notas de complejidad y referencias. Por Alberto Del Valle.">
-  <meta property="og:url" content="https://lumaenaut.com/esp-LAT/soluciones-leetcode/14-prefijo-comun-maximo.html">
+  <meta property="og:title" content="Soluciones LeetCode | #14 — Máximo prefijo común.">
+  <meta property="og:description" content="Soluciones LeetCode | #14 — Máximo prefijo común. Desde el escaneo horizontal y vertical hasta divide y vencerás y búsqueda binaria, con ejemplos en Python, notas de complejidad y referencias. Por Alberto Del Valle.">
+  <meta property="og:url" content="https://lumaenaut.com/esp-LAT/soluciones-leetcode/14-maximo-prefijo-comun.html">
   <meta property="og:image" content="https://lumaenaut.com/images/outdated-computer-ascii.png">
   <meta property="og:image:alt" content="Arte ASCII: una computadora anticuada sobre un escritorio con una estantería al fondo, evocando la práctica clásica de programación.">
   <meta property="og:image:width" content="1840">
@@ -35,19 +35,19 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:creator" content="@lumaenaut">
   <meta name="twitter:image" content="https://lumaenaut.com/images/outdated-computer-ascii.png">
-  <meta name="twitter:title" content="Soluciones LeetCode | #14 — Prefijo común más largo">
-  <meta name="twitter:description" content="Soluciones LeetCode | #14 — Prefijo común más largo. Desde el escaneo horizontal y vertical hasta divide y vencerás y búsqueda binaria, con ejemplos en Python, notas de complejidad y referencias. Por Alberto Del Valle.">
+  <meta name="twitter:title" content="Soluciones LeetCode | #14 — Máximo prefijo común.">
+  <meta name="twitter:description" content="Soluciones LeetCode | #14 — Máximo prefijo común. Desde el escaneo horizontal y vertical hasta divide y vencerás y búsqueda binaria, con ejemplos en Python, notas de complejidad y referencias. Por Alberto Del Valle.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%94%A5%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="../../style.css">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    "headline": "Soluciones LeetCode | #14 — Prefijo común más largo",
+    "headline": "Soluciones LeetCode | #14 — Máximo prefijo común.",
     "alternativeHeadline": "Horizontal, vertical, divide y vencerás, búsqueda binaria: cuatro formas de encontrar el prefijo común",
-    "description": "Soluciones LeetCode | #14 — Prefijo común más largo. Desde el escaneo horizontal y vertical hasta divide y vencerás y búsqueda binaria, con ejemplos en Python, notas de complejidad y referencias. Por Alberto Del Valle.",
-    "url": "https://lumaenaut.com/esp-LAT/soluciones-leetcode/14-prefijo-comun-maximo.html",
-    "mainEntityOfPage": { "@id": "https://lumaenaut.com/esp-LAT/soluciones-leetcode/14-prefijo-comun-maximo.html" },
+    "description": "Soluciones LeetCode | #14 — Máximo prefijo común. Desde el escaneo horizontal y vertical hasta divide y vencerás y búsqueda binaria, con ejemplos en Python, notas de complejidad y referencias. Por Alberto Del Valle.",
+    "url": "https://lumaenaut.com/esp-LAT/soluciones-leetcode/14-maximo-prefijo-comun.html",
+    "mainEntityOfPage": { "@id": "https://lumaenaut.com/esp-LAT/soluciones-leetcode/14-maximo-prefijo-comun.html" },
     "image": "https://lumaenaut.com/images/outdated-computer-ascii.png",
     "inLanguage": "es-MX",
     "datePublished": "2026-04-21",
@@ -120,14 +120,14 @@
       <article class="post" aria-labelledby="post-title">
       
         <header class="post-header">
-          <h1 id="post-title">Soluciones LeetCode<br>#14 — Prefijo común más largo</h1>
+          <h1 id="post-title">Soluciones LeetCode<br>#14 — Máximo prefijo común.</h1>
           <p class="post-subtitle">
             Horizontal, vertical, divide y vencerás, búsqueda binaria: cuatro formas de encontrar el prefijo común
           </p>
           <p class="post-meta">
             Por <span class="author">Alberto Del Valle</span><br>
             <time datetime="2026-04-21">21 de abril de 2026</time><br>
-            <span class="post-read-time">(Tiempo de lectura ~7 min)</span>
+            <span class="post-read-time">(Tiempo de lectura ~9 min)</span>
           </p>
         </header>
 
@@ -202,6 +202,77 @@ class Solution:
         return prefix
             </code></pre>
           </div>
+
+          <p>Tracemos el ejemplo <code>strs = ["flower","flow","flight"]</code>:</p>
+          
+          <div class="simulation-table">
+            <strong>Simulación paso a paso: escaneo horizontal para ["flower","flow","flight"]</strong>
+            <table>
+              <thead>
+                <tr>
+                  <th>Iteración (i)</th>
+                  <th>Cadena actual strs[i]</th>
+                  <th>Prefijo antes de verificar</th>
+                  <th>Acción</th>
+                  <th>Prefijo después de verificar</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>inicio</td>
+                  <td>—</td>
+                  <td>"flower"</td>
+                  <td>prefijo inicial = strs[0]</td>
+                  <td>"flower"</td>
+                </tr>
+                <tr>
+                  <td>i=1</td>
+                  <td>"flow"</td>
+                  <td>"flower"</td>
+                  <td>"flow".find("flower") != 0 → acortar</td>
+                  <td>"flowe"</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td>"flowe"</td>
+                  <td>aún no coincide → acortar</td>
+                  <td>"flow"</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td>"flow"</td>
+                  <td>"flow".find("flow") == 0 → coincide, siguiente cadena</td>
+                  <td>"flow"</td>
+                </tr>
+                <tr>
+                  <td>i=2</td>
+                  <td>"flight"</td>
+                  <td>"flow"</td>
+                  <td>"flight".find("flow") != 0 → acortar</td>
+                  <td>"flo"</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td>"flo"</td>
+                  <td>aún no coincide → acortar</td>
+                  <td>"fl"</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td>"fl"</td>
+                  <td>"flight".find("fl") == 0 → coincide, fin del ciclo</td>
+                  <td>"fl"</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="step-caption">
+              El prefijo se reduce gradualmente de "flower" a "flow" y finalmente a "fl", que es el prefijo común más largo.
+            </div>
+          </div>
           
           <p>
             Este método es directo pero puede realizar comparaciones redundantes. En el peor de los casos, podríamos terminar acortando el prefijo carácter por carácter para cada cadena, lo que lleva a un tiempo <strong>O(S)</strong> donde S es la suma de todos los caracteres en todas las cadenas. El espacio auxiliar es <strong>O(1)</strong>.
@@ -237,7 +308,7 @@ class Solution:
             </code></pre>
           </div>
           
-          <p>Veamos la traza de <code>strs = ["flower","flow","flight"]</code> con escaneo vertical:</p>
+          <p>Tracemos <code>strs = ["flower","flow","flight"]</code> con escaneo vertical:</p>
           
           <div class="simulation-table">
             <strong>Simulación paso a paso: escaneo vertical para ["flower","flow","flight"]</strong>
@@ -321,6 +392,69 @@ class Solution:
         return divide_y_venceras(strs, 0, len(strs) - 1)
             </code></pre>
           </div>
+
+          <p>Traza para <code>strs = ["flower","flow","flight"]</code>:</p>
+          
+          <div class="simulation-table">
+            <strong>Simulación paso a paso: divide y vencerás</strong>
+            <table>
+              <thead>
+                <tr>
+                  <th>Profundidad de llamada</th>
+                  <th>Rebanada del arreglo (índices)</th>
+                  <th>Acción</th>
+                  <th>LCP resultante</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>0</td>
+                  <td>[0, 1, 2]</td>
+                  <td>dividir en [0,1] y [2]</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>1 (izquierda)</td>
+                  <td>[0, 1]</td>
+                  <td>dividir en [0] y [1]</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>2 (hoja)</td>
+                  <td>[0]</td>
+                  <td>devolver strs[0] = "flower"</td>
+                  <td>"flower"</td>
+                </tr>
+                <tr>
+                  <td>2 (hoja)</td>
+                  <td>[1]</td>
+                  <td>devolver strs[1] = "flow"</td>
+                  <td>"flow"</td>
+                </tr>
+                <tr>
+                  <td>1 (mezcla)</td>
+                  <td></td>
+                  <td>lcp("flower", "flow") → "flow"</td>
+                  <td>"flow"</td>
+                </tr>
+                <tr>
+                  <td>1 (derecha)</td>
+                  <td>[2]</td>
+                  <td>devolver strs[2] = "flight"</td>
+                  <td>"flight"</td>
+                </tr>
+                <tr>
+                  <td>0 (mezcla)</td>
+                  <td></td>
+                  <td>lcp("flow", "flight") → "fl"</td>
+                  <td>"fl"</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="step-caption">
+              El arreglo se divide recursivamente hasta los casos base, luego los resultados se mezclan por pares. La mezcla final de "flow" y "flight" produce "fl".
+            </div>
+          </div>
           
           <p>
             La relación de recurrencia para la complejidad temporal es <strong>T(n) = 2·T(n/2) + O(m)</strong>, donde m es la longitud de las cadenas. En el peor caso, esto todavía resulta en <strong>O(S)</strong> comparaciones totales de caracteres. Sin embargo, el enfoque de divide y vencerás tiene la ventaja de ser fácilmente paralelizable y demuestra un patrón algorítmico poderoso.
@@ -361,6 +495,53 @@ class Solution:
         return strs[0][:alto]
             </code></pre>
           </div>
+
+          <p>Traza de búsqueda binaria para <code>strs = ["flower","flow","flight"]</code> donde la longitud más corta es 4 ("flow"):</p>
+          
+          <div class="simulation-table">
+            <strong>Simulación paso a paso: búsqueda binaria sobre la longitud del prefijo</strong>
+            <table>
+              <thead>
+                <tr>
+                  <th>Iteración</th>
+                  <th>bajo</th>
+                  <th>alto</th>
+                  <th>mid</th>
+                  <th>¿esLCP(mid)?</th>
+                  <th>Acción</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>0</td>
+                  <td>4</td>
+                  <td>2</td>
+                  <td>Verdadero (prefijo "fl" coincide con todos)</td>
+                  <td>bajo = 3</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>3</td>
+                  <td>4</td>
+                  <td>3</td>
+                  <td>Falso ("flo" no es prefijo de "flight")</td>
+                  <td>alto = 2</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>3</td>
+                  <td>2</td>
+                  <td>—</td>
+                  <td>bajo > alto → termina el ciclo</td>
+                  <td>devolver strs[0][:2] = "fl"</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="step-caption">
+              La búsqueda binaria reduce rápidamente la longitud a 2. Solo se necesitaron dos llamadas a esLCP.
+            </div>
+          </div>
           
           <p>
             La solución de búsqueda binaria reduce elegantemente la longitud del prefijo. <strong>La complejidad espacial es O(1)</strong>, y la verificación <code>startswith</code> utiliza una comparación eficiente de subcadenas.
@@ -385,8 +566,8 @@ class Solution:
           Feliz codificación, y que tu complejidad siempre sea baja.
         </blockquote>
 
-        <div class="prev-chap-nav" aria-label="Navegación Soluciones LeetCode">
-          <a class="next-chap-btn" href="13-romano-a-entero.html" aria-label="Solución anterior: #13 Romano a entero">
+        <div class="prev-chap-nav" aria-label="Navegación Soluciones LeetCode #13">
+          <a class="next-chap-btn" href="13-romano-a-entero.html">
             <img src="../../assets/arrow-previous-icon.png" alt="" width="18" height="18">
             <span>#13</span>
           </a>
