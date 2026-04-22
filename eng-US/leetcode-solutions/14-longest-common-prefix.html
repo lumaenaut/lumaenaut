@@ -1,0 +1,535 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-TLP7F5XM');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#F9F5EC">
+  <meta name="description" content="LeetCode Solutions | #14 — Longest Common Prefix. From horizontal and vertical scanning to divide & conquer and binary search, with Python examples, complexity notes and references. By Alberto Del Valle.">
+  <meta name="author" content="Alberto Del Valle">
+  <title>LeetCode Solutions | #14 — Longest Common Prefix</title>
+  <link rel="canonical" href="https://lumaenaut.com/eng-US/leetcode-solutions/14-longest-common-prefix.html">
+  <link rel="alternate" hreflang="x-default" href="https://lumaenaut.com/eng-US/leetcode-solutions/14-longest-common-prefix.html">
+  <link rel="alternate" hreflang="en" href="https://lumaenaut.com/eng-US/leetcode-solutions/14-longest-common-prefix.html">
+  <link rel="alternate" hreflang="es" href="https://lumaenaut.com/esp-LAT/soluciones-leetcode/14-prefijo-comun-mas-largo.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="lumænaut">
+  <meta property="og:title" content="LeetCode Solutions | #14 — Longest Common Prefix">
+  <meta property="og:description" content="LeetCode Solutions | #14 — Longest Common Prefix. From horizontal and vertical scanning to divide & conquer and binary search, with Python examples, complexity notes and references. By Alberto Del Valle.">
+  <meta property="og:url" content="https://lumaenaut.com/eng-US/leetcode-solutions/14-longest-common-prefix.html">
+  <meta property="og:image" content="https://lumaenaut.com/images/outdated-computer-ascii.png">
+  <meta property="og:image:alt" content="ASCII art: an outdated computer on a desk with a bookshelf in the background, evoking classic coding practice.">
+  <meta property="og:image:width" content="1840">
+  <meta property="og:image:height" content="1690">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="es_MX">
+  <meta property="article:published_time" content="2026-04-21">
+  <meta property="article:modified_time" content="2026-04-21">
+  <meta property="article:author" content="Alberto Del Valle">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:creator" content="@lumaenaut">
+  <meta name="twitter:image" content="https://lumaenaut.com/images/outdated-computer-ascii.png">
+  <meta name="twitter:title" content="LeetCode Solutions | #14 — Longest Common Prefix">
+  <meta name="twitter:description" content="LeetCode Solutions | #14 — Longest Common Prefix. From horizontal and vertical scanning to divide & conquer and binary search, with Python examples, complexity notes and references. By Alberto Del Valle.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%94%A5%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../../style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "LeetCode Solutions | #14 — Longest Common Prefix",
+    "alternativeHeadline": "Horizontal, vertical, divide & conquer, binary search — four ways to find the LCP",
+    "description": "LeetCode Solutions | #14 — Longest Common Prefix. From horizontal and vertical scanning to divide & conquer and binary search, with Python examples, complexity notes and references. By Alberto Del Valle.",
+    "url": "https://lumaenaut.com/eng-US/leetcode-solutions/14-longest-common-prefix.html",
+    "mainEntityOfPage": { "@id": "https://lumaenaut.com/eng-US/leetcode-solutions/14-longest-common-prefix.html" },
+    "image": "https://lumaenaut.com/images/outdated-computer-ascii.png",
+    "inLanguage": "en-US",
+    "datePublished": "2026-04-21",
+    "dateModified": "2026-04-21",
+    "author": {
+      "@type": "Person",
+      "name": "Alberto Del Valle",
+      "url": "https://lumaenaut.com/eng-US/"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Alberto Del Valle"
+    },
+    "isPartOf": { "@id": "https://lumaenaut.com/eng-US/blog/blog-index.html" }
+  }
+  </script>
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TLP7F5XM"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  
+  <div class="page-wrapper">
+    
+    <header class="header">
+
+      <div class="header-left">
+        <div class="logo-div">
+          <pre class="logo-ascii" id="logo-container" aria-hidden="true"></pre>
+        </div>
+      </div>
+
+      <div class="header-center">
+        <p class="header-site-title">lumænaut</p>
+        <nav class="main-nav" aria-label="Main navigation">
+          <ul>
+            <li><a class="home-btn" href="../../index.html">home</a></li>
+            <li><a class="blog-btn" href="../blog/blog-index.html">blog</a></li>
+            <li><a class="leetcode-btn" href="leetcode-solutions-index.html">leetcode solutions</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="header-right">
+        <div class="logo-div-mirror" aria-hidden="true"></div>
+        <button type="button" class="share-btn" aria-label="Share this page">
+          <img src="../../assets/share-icon.png" alt="" class="share-btn-icon" data-ios-src="../../assets/ios-share-icon.png" width="20" height="20">
+        </button>
+      </div>
+
+    </header>
+
+    <main id="main-content" class="content">
+
+      <div class="floating-controls">
+        <div class="lang-switcher">
+          <button type="button" class="lang-switcher-btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Select language">
+            <img src="../../assets/translate-icon.png" alt="" class="lang-switcher-icon">
+            <span class="lang-switcher-label">eng (US)</span>
+          </button>
+          <ul class="lang-switcher-dropdown" role="listbox" aria-label="Language options">
+            <li><a href="#" data-lang="eng-US" role="option">eng (US)</a></li>
+            <li><a href="#" data-lang="esp-LAT" role="option">esp (LAT)</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <article class="post" aria-labelledby="post-title">
+      
+        <header class="post-header">
+          <h1 id="post-title">LeetCode Solutions<br>#14 — Longest Common Prefix</h1>
+          <p class="post-subtitle">
+            Horizontal, vertical, divide & conquer, binary search — four ways to find the LCP
+          </p>
+          <p class="post-meta">
+            By <span class="author">Alberto Del Valle</span><br>
+            <time datetime="2026-04-21">April 21, 2026</time><br>
+            <span class="post-read-time">(Read time ~7 min)</span>
+          </p>
+        </header>
+
+        <figure class="post-featured-image" aria-labelledby="lcp-feature-caption">
+          <img
+            src="../../images/outdated-computer-ascii.png"
+            alt="Color ASCII art: an outdated computer on a desk with a bookshelf in the background, suggesting a classic coding workspace."
+            title="ASCII art — outdated computer on a desk with bookshelf"
+            width="1840"
+            height="1690"
+            decoding="async"
+            loading="eager"
+            class="post-featured-img">
+          <figcaption id="lcp-feature-caption" class="visually-hidden">
+            Illustration in ASCII art style: an outdated computer on a desk 
+            with a bookshelf behind it.
+          </figcaption>
+        </figure>
+
+        <div class="post-body">          
+          <h2>Problem statement</h2>
+          
+          <blockquote cite="https://leetcode.com/problems/longest-common-prefix/">
+            <p>
+              Write a function to find the longest common prefix string amongst an array of strings.
+            </p>
+            <p>If there is no common prefix, return an empty string <code>""</code>.</p>
+            
+            <p><strong>Example 1:</strong></p>
+            <aside class="post-aside" aria-label="Example 1">
+              <p><strong>Input:</strong> <code>strs = ["flower","flow","flight"]</code></p>
+              <p><strong>Output:</strong> <code>"fl"</code></p>
+            </aside>
+
+            <p><strong>Example 2:</strong></p>
+            <aside class="post-aside" aria-label="Example 2">
+              <p><strong>Input:</strong> <code>strs = ["dog","racecar","car"]</code></p>
+              <p><strong>Output:</strong> <code>""</code></p>
+              <p><strong>Explanation:</strong> There is no common prefix among the input strings.</p>
+            </aside>
+            
+            <p><strong>Constraints:</strong></p>
+            <ul>
+              <li><code>1 <= strs.length <= 200</code></li>
+              <li><code>0 <= strs[i].length <= 200</code></li>
+              <li><code>strs[i]</code> consists of only lowercase English letters if it is non-empty.</li>
+            </ul>
+          </blockquote> 
+
+          <h2>The naïve way — horizontal scanning</h2>
+          
+          <p>
+            The most intuitive approach is to take the first string as a candidate prefix, then iterate over the remaining strings. For each subsequent word, we shorten the candidate until it becomes a prefix of that word. This is called <strong>horizontal scanning</strong> because we move from left to right across the array, comparing the prefix with each string horizontally.
+          </p>
+          
+          <div class="solution-card">
+            <div class="lang-tag">Python</div>
+            <pre><code>
+class Solution:
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+        # prefix is one word if strs contains only one word
+        if len(strs) == 1: return strs[0]    
+        
+        prefix = strs[0]
+        
+        # iterations are dependent on number of comparisons. In this case strs - 1
+        for i in range(1, len(strs)):
+          
+            # find the LCP between both words. If not, return empty string
+            while strs[i].find(prefix) != 0:              # find prefix in strs[1]
+                prefix = prefix[0: len(prefix) - 1]       # remove prefix's last char
+                if prefix == "": return ""
+
+        return prefix
+            </code></pre>
+          </div>
+          
+          <p>
+            This method is straightforward but may perform redundant comparisons. In the worst case, we could end up shortening the prefix character by character for each string, leading to <strong>O(S)</strong> time where S is the sum of all characters in all strings. Space is <strong>O(1)</strong> auxiliary.
+          </p>
+          
+          <h2>A different angle — vertical scanning</h2>
+          <p>
+            Instead of comparing whole words, we can scan character by character vertically. We pick the first character of the first string and compare it with the first character of every other string. If all match, we move to the second character, and so on. The moment we find a mismatch or reach the end of any string, we stop and return the prefix built so far.
+          </p>
+          <p>
+            This approach can be more efficient in cases where the common prefix is short or a mismatch occurs early, because we avoid looking at the rest of the strings.
+          </p>
+                    
+          <div class="solution-card">
+            <div class="lang-tag">Python</div>
+            <pre><code>
+class Solution:
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+
+        # if string has only one word, that word is the common prefix
+        if len(strs) == 1: return strs[0]
+        
+        # for loop that saves one character at a time from the first word
+        for i in range(len(strs[0])):
+            ch = strs[0][i]
+            
+            # for loop comparing vertically ch and its height with every other word
+            for j in range(1, len(strs)):        
+            
+                # if height of ch is == to current word length or the current word character is != to char
+                if i == len(strs[j]) or strs[j][i] != ch:
+            
+                    # return first word sliced until the previous char
+                    return strs[0][:i]
+        
+        # return the first word if both loops finish
+        return strs[0]
+            </code></pre>
+          </div>
+          
+          <p>Let’s trace <code>strs = ["flower","flow","flight"]</code> with vertical scanning:</p>
+          
+          <div class="simulation-table">
+            <strong>Step‑by‑Step Simulation: vertical scan for ["flower","flow","flight"]</strong>
+            <table>
+              <thead>
+                <tr>
+                  <th>i (char index)</th>
+                  <th>ch (strs[0][i])</th>
+                  <th>j=1 ("flow")</th>
+                  <th>j=2 ("flight")</th>
+                  <th>Action</th>
+                  <th>Prefix so far</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>0</td>
+                  <td>'f'</td>
+                  <td>match</td>
+                  <td>match</td>
+                  <td>continue</td>
+                  <td>"f"</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>'l'</td>
+                  <td>match</td>
+                  <td>match</td>
+                  <td>continue</td>
+                  <td>"fl"</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>'o'</td>
+                  <td>'o' (match)</td>
+                  <td>'i' (mismatch)</td>
+                  <td>stop, return slice [:2]</td>
+                  <td>"fl"</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="step-caption">
+              The algorithm stops at index 2 because "flight"[2] is 'i' ≠ 'o'. The prefix returned is the first two characters.
+            </div>
+          </div>
+          
+          <p>
+            Time complexity is still <strong>O(S)</strong> in the worst case (when all strings are identical), but often it performs fewer character comparisons. Space remains <strong>O(1)</strong>.
+          </p>
+          
+          <h2>Divide and conquer</h2>
+          <p>
+            This problem also lends itself nicely to a recursive divide‑and‑conquer strategy. The idea: split the array into two halves, find the LCP of each half recursively, and then find the LCP of those two results. This is a classic application of the paradigm and can be useful when we want to parallelize or when the array is large.
+          </p>
+          <p>
+            The helper function <code>lcp(left, right)</code> finds the common prefix between two strings using a vertical scan, and <code>divide_and_conquer</code> recursively splits the array.
+          </p>
+          
+          <div class="solution-card">
+            <div class="lang-tag">Python</div>
+            <pre><code>
+class Solution:
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+        '''
+        Finds the longest common prefix (LCP) in an array of strings.
+        
+        This function uses a recursive algorithm to divide the array in two elements 
+        (left, right) and a second function to find the LCP between both using 
+        vertical search.
+
+        Args:
+          strs (List[str]): A list of non-empty strings.
+
+        Return:
+          str: LCP. If there is non, it will return an empty string.
+        '''
+
+        def lcp(left, right):
+            '''
+            Finds the LCP of any two given strings
+
+            The function runs a vertical search between two strigns to find their LCP.
+
+            Args:
+              left: String.
+              right: String.
+
+            Return:
+              return: LCP between the left and right argument.
+            '''
+            
+            # min length between both args we will use as range for iterating and as
+            #   index in case LCP is as large as the smallest string
+            min_len = min(len(left), len(right))
+            for i in range(min_len):
+                
+                # if both chars are different, slice the string until current char and
+                #   return        
+                if left[i] != right[i]:
+                    return left[:i]
+
+            return left[:min_len]
+
+        def divide_and_conquer(strs, left, right):
+            '''
+            Finds
+
+            Args:
+              strs (List[str]): A list of non-empty strings.
+              left: leftmost index of an array slice
+              right: rightmost index of an array slice
+
+            Return:
+              strs[left]: string at this index if left and right indexes are equal
+              LCP: LCP string slice between lcp_left and lcp_right
+            '''
+
+            # if left and right are the same index, return the string at that index
+            if left == right:
+                return strs[left]        
+            else:
+                # average both indexes
+                mid = (left + right) // 2
+                # find the left half LCP using mid as the right index
+                lcp_left = divide_and_conquer(strs, left, mid)
+                # find the right half LCP using mid + 1 as the left index
+                lcp_right = divide_and_conquer(strs, mid + 1, right)
+
+                # uses lcp fun to find LCP between both strings with vertical search
+                return lcp(lcp_left, lcp_right)
+        
+        # return lcp
+        return divide_and_conquer(strs, 0, len(strs) - 1)
+            </code></pre>
+          </div>
+          
+          <p>
+            The recurrence relation for time complexity is <strong>T(n) = 2·T(n/2) + O(m)</strong>, where m is the length of the strings. In the worst case this still results in <strong>O(S)</strong> total character comparisons. However, the divide‑and‑conquer approach has the advantage of being easily parallelizable and demonstrates a powerful algorithmic pattern.
+          </p>
+          
+          <h2>Optimizing further — binary search</h2>
+          <p>
+            Can we do better than linear scans? If we consider the length of the common prefix, it is bounded by the length of the shortest string. We can perform a binary search on the possible prefix length. For a candidate length <code>mid</code>, we check whether the first <code>mid</code> characters of the first string form a valid common prefix for all strings. If yes, we try a longer length; if not, we try a shorter one.
+          </p>
+          <p>
+            This approach reduces the number of comparisons in many scenarios, especially when strings are long and the prefix is relatively short or long. The check itself (<code>isLCP(mid)</code>) iterates over the strings, making the overall time <strong>O(S·log m)</strong> where m is the length of the shortest string. This can be faster than linear scanning in practice.
+          </p>
+          
+          <div class="solution-card">
+            <div class="lang-tag">Python</div>
+            <pre><code>
+class Solution:
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+
+        def isLCP(mid):
+            for i in range(1, len(strs)):
+                if not strs[i].startswith(strs[0][:mid]):
+                    return False
+            return True
+
+        if len(strs) == 1:
+            return strs[0]
+
+        low, high = 0, min(len(x) for x in strs)
+
+        while low <= high:
+            mid = (low + high) // 2
+
+            if isLCP(mid):
+                low = mid + 1
+            else:
+                high = mid - 1
+
+        return strs[0][:high]
+            </code></pre>
+          </div>
+          
+          <p>
+            The binary search solution elegantly narrows down the prefix length. <strong>Space complexity is O(1)</strong>, and the <code>startswith</code> check uses efficient substring comparison.
+          </p>
+          
+          <h2>Final complexity comparison</h2>
+          <p>
+            All four approaches are correct and run within the problem's constraints. Here's a quick summary:
+          </p>
+          <ul>
+            <li><strong>Horizontal scanning:</strong> O(S) time, O(1) space. Simple but may do extra work.</li>
+            <li><strong>Vertical scanning:</strong> O(S) time, O(1) space. Often stops early.</li>
+            <li><strong>Divide and conquer:</strong> O(S) time, O(m·log n) space due to recursion stack (or O(1) with iterative). Demonstrates recursion.</li>
+            <li><strong>Binary search:</strong> O(S·log m) time, O(1) space. Can be faster when strings are long and prefix length is extreme.</li>
+          </ul>
+          <p>
+            In an interview setting, the vertical scanning or binary search methods are particularly appreciated for their efficiency and clarity.
+          </p>
+        </div>
+
+        <blockquote class="closing-quote">
+          Happy coding, and may your complexity always be low.
+        </blockquote>
+
+        <div class="prev-chap-nav" aria-label="LeetCode Solutions #13 navigation">
+          <a class="next-chap-btn" href="13-roman-to-integer.html">
+            <img src="../../assets/arrow-previous-icon.png" alt="" width="18" height="18">
+            <span>#13</span>
+          </a>
+        </div>                
+        <hr class="home-intro-divider" aria-hidden="true">
+        
+        <div class="post-body">
+          <h2>References & further reading</h2>
+          <ul>
+            <li>
+              <a href="https://leetcode.com/problems/longest-common-prefix/" target="_blank" rel="noopener noreferrer">
+                LeetCode Longest Common Prefix Problem Page
+              </a> — official problem and discussion forums.
+            </li>
+            <li>
+              <a href="https://en.wikipedia.org/wiki/LCP_array" target="_blank" rel="noopener noreferrer">
+                Wikipedia: LCP array
+              </a> — related concept in suffix arrays.
+            </li>
+            <li>
+              <a href="https://en.wikipedia.org/wiki/Divide-and-conquer_algorithm" target="_blank" rel="noopener noreferrer">
+                Wikipedia: Divide-and-conquer algorithm
+              </a> — the paradigm behind the recursive solution.
+            </li>
+            <li>
+              <a href="https://realpython.com/python-strings/" target="_blank" rel="noopener noreferrer">
+                Real Python: Strings and Character Data in Python
+              </a> — a deep dive into string operations like <code>startswith()</code>.
+            </li>
+          </ul>
+          
+          <h2>Can't get enough from lumænaut? Read this...</h2>
+          <ul>
+            <li>
+              <a href="../logbook/ch-2-everything-i-dont-know-about-blogging.html">
+                Chapter 2 | Everything I Don't Know About Blogging
+              </a>
+              — the logbook behind the site: domains, SEO, plugins, and learning in public.
+            </li>
+            <li>
+              <a href="../computer-science/the-8-algorithm-paradigms.html">
+                The 8 Algorithm Paradigms
+              </a>
+              — eight mental models you’ll keep reusing across problems, interviews, and production code.
+            </li>
+            <li>
+              <a href="../computer-science/how-the-game-loop-works.html">
+                How the Game Loop Works
+              </a>
+              — the heartbeat of a game frame: update, render, and steady timing in plain language.
+            </li>
+          </ul>
+        </div>
+
+      </article>
+    </main>
+    
+    <footer class="footer">
+      <nav class="social-links" aria-label="Social links">
+        <ul>
+          <li>
+            <a href="https://www.reddit.com/user/Lumaenaut_/" target="_blank" rel="noopener noreferrer" title="Reddit">
+              <img src="../../assets/reddit-icon.png" alt="Reddit" width="24" height="24">
+            </a>
+          </li>
+          <li>
+            <a href="https://x.com/lumaenaut" target="_blank" rel="noopener noreferrer" title="X">
+              <img src="../../assets/twitter-icon.png" alt="X" width="24" height="24">
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/lumaenaut" target="_blank" rel="noopener noreferrer" title="GitHub">
+              <img src="../../assets/github-icon.png" alt="GitHub" width="24" height="24">
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <div class="footer-meta">
+        <p>2026, lumænaut <a href="../../privacy-policy.html">Privacy Policy</a></p>
+      </div>
+    </footer>
+
+  </div>
+  <script src="../../scripts/script.js"></script>
+</body>
+</html>
