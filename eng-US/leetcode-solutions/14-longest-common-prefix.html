@@ -30,7 +30,7 @@
   <meta property="og:locale" content="en_US">
   <meta property="og:locale:alternate" content="es_MX">
   <meta property="article:published_time" content="2026-04-21">
-  <meta property="article:modified_time" content="2026-04-21">
+  <meta property="article:modified_time" content="2026-04-22">
   <meta property="article:author" content="Alberto Del Valle">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:creator" content="@lumaenaut">
@@ -51,7 +51,7 @@
     "image": "https://lumaenaut.com/images/outdated-computer-ascii.png",
     "inLanguage": "en-US",
     "datePublished": "2026-04-21",
-    "dateModified": "2026-04-21",
+    "dateModified": "2026-04-22",
     "author": {
       "@type": "Person",
       "name": "Alberto Del Valle",
@@ -188,19 +188,17 @@
             <pre><code>
 class Solution:
     def longestCommonPrefix(self, strs: List[str]) -> str:
-        # prefix is one word if strs contains only one word
-        if len(strs) == 1: return strs[0]    
+        if len(strs) == 1:
+            return strs[0]          # Only one string → it's the prefix
         
         prefix = strs[0]
         
-        # iterations are dependent on number of comparisons. In this case strs - 1
         for i in range(1, len(strs)):
-          
-            # find the LCP between both words. If not, return empty string
-            while strs[i].find(prefix) != 0:              # find prefix in strs[1]
-                prefix = prefix[0: len(prefix) - 1]       # remove prefix's last char
-                if prefix == "": return ""
-
+            # Keep shortening prefix until it matches the start of strs[i]
+            while strs[i].find(prefix) != 0:
+                prefix = prefix[:-1]   # Remove last character
+                if not prefix:
+                    return ""          # No common prefix
         return prefix
             </code></pre>
           </div>
@@ -222,24 +220,19 @@ class Solution:
             <pre><code>
 class Solution:
     def longestCommonPrefix(self, strs: List[str]) -> str:
-
-        # if string has only one word, that word is the common prefix
-        if len(strs) == 1: return strs[0]
+        if len(strs) == 1:
+            return strs[0]
         
-        # for loop that saves one character at a time from the first word
+        # Scan characters of the first string
         for i in range(len(strs[0])):
             ch = strs[0][i]
-            
-            # for loop comparing vertically ch and its height with every other word
-            for j in range(1, len(strs)):        
-            
-                # if height of ch is == to current word length or the current word character is != to char
+            # Compare with every other string at position i
+            for j in range(1, len(strs)):
+                # Stop if we exceed length or find a mismatch
                 if i == len(strs[j]) or strs[j][i] != ch:
-            
-                    # return first word sliced until the previous char
                     return strs[0][:i]
         
-        # return the first word if both loops finish
+        # All characters of first string matched in all others
         return strs[0]
             </code></pre>
           </div>
@@ -308,75 +301,23 @@ class Solution:
             <pre><code>
 class Solution:
     def longestCommonPrefix(self, strs: List[str]) -> str:
-        '''
-        Finds the longest common prefix (LCP) in an array of strings.
-        
-        This function uses a recursive algorithm to divide the array in two elements 
-        (left, right) and a second function to find the LCP between both using 
-        vertical search.
-
-        Args:
-          strs (List[str]): A list of non-empty strings.
-
-        Return:
-          str: LCP. If there is non, it will return an empty string.
-        '''
-
-        def lcp(left, right):
-            '''
-            Finds the LCP of any two given strings
-
-            The function runs a vertical search between two strigns to find their LCP.
-
-            Args:
-              left: String.
-              right: String.
-
-            Return:
-              return: LCP between the left and right argument.
-            '''
-            
-            # min length between both args we will use as range for iterating and as
-            #   index in case LCP is as large as the smallest string
+        def lcp(left: str, right: str) -> str:
+            """Return the common prefix of two strings."""
             min_len = min(len(left), len(right))
             for i in range(min_len):
-                
-                # if both chars are different, slice the string until current char and
-                #   return        
                 if left[i] != right[i]:
                     return left[:i]
-
             return left[:min_len]
 
-        def divide_and_conquer(strs, left, right):
-            '''
-            Finds
+        def divide_and_conquer(arr, l, r):
+            """Recursively find LCP in arr[l..r]."""
+            if l == r:
+                return arr[l]
+            mid = (l + r) // 2
+            left_lcp = divide_and_conquer(arr, l, mid)
+            right_lcp = divide_and_conquer(arr, mid + 1, r)
+            return lcp(left_lcp, right_lcp)
 
-            Args:
-              strs (List[str]): A list of non-empty strings.
-              left: leftmost index of an array slice
-              right: rightmost index of an array slice
-
-            Return:
-              strs[left]: string at this index if left and right indexes are equal
-              LCP: LCP string slice between lcp_left and lcp_right
-            '''
-
-            # if left and right are the same index, return the string at that index
-            if left == right:
-                return strs[left]        
-            else:
-                # average both indexes
-                mid = (left + right) // 2
-                # find the left half LCP using mid as the right index
-                lcp_left = divide_and_conquer(strs, left, mid)
-                # find the right half LCP using mid + 1 as the left index
-                lcp_right = divide_and_conquer(strs, mid + 1, right)
-
-                # uses lcp fun to find LCP between both strings with vertical search
-                return lcp(lcp_left, lcp_right)
-        
-        # return lcp
         return divide_and_conquer(strs, 0, len(strs) - 1)
             </code></pre>
           </div>
@@ -398,25 +339,24 @@ class Solution:
             <pre><code>
 class Solution:
     def longestCommonPrefix(self, strs: List[str]) -> str:
-
-        def isLCP(mid):
-            for i in range(1, len(strs)):
-                if not strs[i].startswith(strs[0][:mid]):
+        def isLCP(length: int) -> bool:
+            """Check if the first `length` chars of strs[0] are common."""
+            prefix = strs[0][:length]
+            for s in strs[1:]:
+                if not s.startswith(prefix):
                     return False
             return True
 
         if len(strs) == 1:
             return strs[0]
 
-        low, high = 0, min(len(x) for x in strs)
-
+        low, high = 0, min(len(s) for s in strs)
         while low <= high:
             mid = (low + high) // 2
-
             if isLCP(mid):
-                low = mid + 1
+                low = mid + 1      # Try a longer prefix
             else:
-                high = mid - 1
+                high = mid - 1     # Try a shorter one
 
         return strs[0][:high]
             </code></pre>
