@@ -17,7 +17,7 @@
   <link rel="canonical" href="https://lumaenaut.com/eng-US/leetcode-solutions/14-longest-common-prefix.html">
   <link rel="alternate" hreflang="x-default" href="https://lumaenaut.com/eng-US/leetcode-solutions/14-longest-common-prefix.html">
   <link rel="alternate" hreflang="en" href="https://lumaenaut.com/eng-US/leetcode-solutions/14-longest-common-prefix.html">
-  <link rel="alternate" hreflang="es" href="https://lumaenaut.com/esp-LAT/soluciones-leetcode/14-prefijo-comun-mas-largo.html">
+  <link rel="alternate" hreflang="es" href="https://lumaenaut.com/esp-LAT/soluciones-leetcode/14-prefijo-comun-maximo.html">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="lumænaut">
   <meta property="og:title" content="LeetCode Solutions | #14 — Longest Common Prefix">
@@ -127,7 +127,7 @@
           <p class="post-meta">
             By <span class="author">Alberto Del Valle</span><br>
             <time datetime="2026-04-21">April 21, 2026</time><br>
-            <span class="post-read-time">(Read time ~7 min)</span>
+            <span class="post-read-time">(Read time ~9 min)</span>
           </p>
         </header>
 
@@ -201,6 +201,77 @@ class Solution:
                     return ""          # No common prefix
         return prefix
             </code></pre>
+          </div>
+
+          <p>Let's trace the example <code>strs = ["flower","flow","flight"]</code>:</p>
+          
+          <div class="simulation-table">
+            <strong>Step‑by‑Step Simulation: horizontal scan for ["flower","flow","flight"]</strong>
+            <table>
+              <thead>
+                <tr>
+                  <th>Iteration (i)</th>
+                  <th>Current string strs[i]</th>
+                  <th>Prefix before check</th>
+                  <th>Action</th>
+                  <th>Prefix after check</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>start</td>
+                  <td>—</td>
+                  <td>"flower"</td>
+                  <td>initial prefix = strs[0]</td>
+                  <td>"flower"</td>
+                </tr>
+                <tr>
+                  <td>i=1</td>
+                  <td>"flow"</td>
+                  <td>"flower"</td>
+                  <td>"flow".find("flower") != 0 → shorten</td>
+                  <td>"flowe"</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td>"flowe"</td>
+                  <td>still not match → shorten</td>
+                  <td>"flow"</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td>"flow"</td>
+                  <td>"flow".find("flow") == 0 → match, move to next string</td>
+                  <td>"flow"</td>
+                </tr>
+                <tr>
+                  <td>i=2</td>
+                  <td>"flight"</td>
+                  <td>"flow"</td>
+                  <td>"flight".find("flow") != 0 → shorten</td>
+                  <td>"flo"</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td>"flo"</td>
+                  <td>still not match → shorten</td>
+                  <td>"fl"</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td>"fl"</td>
+                  <td>"flight".find("fl") == 0 → match, loop ends</td>
+                  <td>"fl"</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="step-caption">
+              The prefix is gradually reduced from "flower" to "flow" and finally to "fl", which is the longest common prefix.
+            </div>
           </div>
           
           <p>
@@ -321,6 +392,69 @@ class Solution:
         return divide_and_conquer(strs, 0, len(strs) - 1)
             </code></pre>
           </div>
+
+          <p>Trace for <code>strs = ["flower","flow","flight"]</code>:</p>
+          
+          <div class="simulation-table">
+            <strong>Step‑by‑Step Simulation: divide and conquer</strong>
+            <table>
+              <thead>
+                <tr>
+                  <th>Call depth</th>
+                  <th>Array slice (indices)</th>
+                  <th>Action</th>
+                  <th>Result LCP</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>0</td>
+                  <td>[0, 1, 2]</td>
+                  <td>split into [0,1] and [2]</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>1 (left)</td>
+                  <td>[0, 1]</td>
+                  <td>split into [0] and [1]</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>2 (leaf)</td>
+                  <td>[0]</td>
+                  <td>return strs[0] = "flower"</td>
+                  <td>"flower"</td>
+                </tr>
+                <tr>
+                  <td>2 (leaf)</td>
+                  <td>[1]</td>
+                  <td>return strs[1] = "flow"</td>
+                  <td>"flow"</td>
+                </tr>
+                <tr>
+                  <td>1 (merge)</td>
+                  <td></td>
+                  <td>lcp("flower", "flow") → "flow"</td>
+                  <td>"flow"</td>
+                </tr>
+                <tr>
+                  <td>1 (right)</td>
+                  <td>[2]</td>
+                  <td>return strs[2] = "flight"</td>
+                  <td>"flight"</td>
+                </tr>
+                <tr>
+                  <td>0 (merge)</td>
+                  <td></td>
+                  <td>lcp("flow", "flight") → "fl"</td>
+                  <td>"fl"</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="step-caption">
+              The array is recursively divided until base cases, then results are merged pairwise. The final merge of "flow" and "flight" yields "fl".
+            </div>
+          </div>
           
           <p>
             The recurrence relation for time complexity is <strong>T(n) = 2·T(n/2) + O(m)</strong>, where m is the length of the strings. In the worst case this still results in <strong>O(S)</strong> total character comparisons. However, the divide‑and‑conquer approach has the advantage of being easily parallelizable and demonstrates a powerful algorithmic pattern.
@@ -361,6 +495,53 @@ class Solution:
         return strs[0][:high]
             </code></pre>
           </div>
+
+          <p>Trace binary search for <code>strs = ["flower","flow","flight"]</code> where shortest length = 4 ("flow"):</p>
+          
+          <div class="simulation-table">
+            <strong>Step‑by‑Step Simulation: binary search on prefix length</strong>
+            <table>
+              <thead>
+                <tr>
+                  <th>Iteration</th>
+                  <th>low</th>
+                  <th>high</th>
+                  <th>mid</th>
+                  <th>isLCP(mid)?</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>0</td>
+                  <td>4</td>
+                  <td>2</td>
+                  <td>True (prefix "fl" matches all)</td>
+                  <td>low = 3</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>3</td>
+                  <td>4</td>
+                  <td>3</td>
+                  <td>False ("flo" not prefix of "flight")</td>
+                  <td>high = 2</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>3</td>
+                  <td>2</td>
+                  <td>—</td>
+                  <td>low > high → loop ends</td>
+                  <td>return strs[0][:2] = "fl"</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="step-caption">
+              Binary search quickly narrows down the length to 2. Only two calls to isLCP were needed.
+            </div>
+          </div>
           
           <p>
             The binary search solution elegantly narrows down the prefix length. <strong>Space complexity is O(1)</strong>, and the <code>startswith</code> check uses efficient substring comparison.
@@ -385,8 +566,8 @@ class Solution:
           Happy coding, and may your complexity always be low.
         </blockquote>
 
-        <div class="prev-chap-nav" aria-label="LeetCode Solutions #13 navigation">
-          <a class="next-chap-btn" href="13-roman-to-integer.html">
+        <div class="prev-chap-nav" aria-label="LeetCode Solutions navigation">
+          <a class="next-chap-btn" href="13-roman-to-integer.html" aria-label="Previous solution: #13 Roman to Integer">
             <img src="../../assets/arrow-previous-icon.png" alt="" width="18" height="18">
             <span>#13</span>
           </a>
