@@ -252,6 +252,41 @@ h2 {
   transform: translateY(-140%);
 }
 
+.floating-home-btn {
+  text-decoration: none;
+  font-size: 1rem;
+  color: inherit;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--contrast);
+  border-radius: 50%;
+  background: var(--background-color);
+
+  /* Match the current home button green shadow */
+  box-shadow: 4px 4px 0px #8DCEA7;
+
+  margin: 4px 0;
+  margin-right: auto;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+}
+
+.floating-home-btn:hover {
+  opacity: 0.9;
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px #8DCEA7;
+}
+
+.floating-home-btn img {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
 .lang-switcher {
   position: relative;
 }
