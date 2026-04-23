@@ -161,14 +161,6 @@ h2 {
   transform: translate(2px, 2px);
 }
 
-.home-btn {
-  box-shadow: 4px 4px 0px #8DCEA7;
-}
-
-.home-btn:hover {
-  box-shadow: 2px 2px 0px #8DCEA7;
-}
-
 .blog-btn {
   box-shadow: 4px 4px 0px #99B4EA;
 }
