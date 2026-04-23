@@ -1124,32 +1124,6 @@ article.post .where-to-start p + p {
 }
 
 @media (max-width: 600px) {
-  .header {
-    /* Prevent header overflow on small screens */
-    padding: 0.4rem;
-    max-height: none;
-  }
-
-  .main-nav ul {
-    /* Allow the 3rd button to wrap to its own row */
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-
-  .main-nav a {
-    /* Slightly tighter buttons for mobile */
-    margin: 2px 4px;
-    padding: 4px 10px;
-    font-size: 0.95rem;
-  }
-
-  /* Place "leetcode solutions" on a centered second row */
-  .main-nav li:nth-child(3) {
-    flex-basis: 100%;
-    display: flex;
-    justify-content: center;
-  }
-
   .content {
     padding-left: 1rem;
     padding-right: 1rem;
