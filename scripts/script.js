@@ -20,6 +20,7 @@
     window.clearTimeout(feedbackTimeout);
     feedbackTimeout = window.setTimeout(() => {
       feedback.classList.remove("is-visible");
+      feedback.textContent = "";
     }, 2000);
   }
 

@@ -178,7 +178,8 @@ h2 {
   box-shadow: 2px 2px 0px #c9a227;
 }
 
-.share-btn {
+.share-btn,
+.home-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -189,12 +190,18 @@ h2 {
   border-radius: 50%;
   background-color: var(--background-color);
   color: inherit;
-  cursor: pointer;
+  text-decoration: none;
   box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.4);
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-.share-btn:hover {
+.share-btn,
+.home-btn {
+  cursor: pointer;
+}
+
+.share-btn:hover,
+.home-btn:hover {
   transform: translate(2px, 2px);
   box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.4);
 }
@@ -204,7 +211,8 @@ h2 {
   cursor: default;
 }
 
-.share-btn-icon {
+.share-btn-icon,
+.home-btn-icon {
   display: block;
   width: 20px;
   height: 20px;
