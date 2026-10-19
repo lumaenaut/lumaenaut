@@ -28,6 +28,11 @@ body {
   overflow: hidden;
 }
 
+i {
+  font-family: Georgia, "Times New Roman", serif;
+  font-style: oblique 18deg;
+}
+
 h2 {
   font-weight: 500;
 }
