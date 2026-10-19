@@ -172,11 +172,6 @@ h2 {
   box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.4);
 }
 
-.share-btn:disabled {
-  opacity: 0.7;
-  cursor: default;
-}
-
 .share-btn-icon,
 .home-btn-icon {
   display: block;
@@ -266,8 +261,7 @@ h2 {
   list-style-type: disc;
 }
 
-.legal-page ul li,
-.post-body ol li {
+.legal-page ul li {
   margin-top: 0.35rem;
 }
 
@@ -326,17 +320,6 @@ h2 {
   color: var(--text-main);
   font-size: 1.05rem;
   font-weight: 600;
-}
-
-.post-body ol {
-  margin-top: 1rem;
-  margin-bottom: 1.25rem;
-  padding-left: 2.25rem;
-  list-style-position: outside;
-}
-
-.post-body ol li {
-  padding-left: 0.35rem;
 }
 
 .blog-menu {
