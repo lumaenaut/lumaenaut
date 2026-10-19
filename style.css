@@ -351,6 +351,43 @@ h2 {
   font-weight: 550;
 }
 
+.blog-post-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  width: 100%;
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 2px solid var(--contrast);
+  border-radius: 6px;
+  color: inherit;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.4);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.blog-post-link:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.4);
+}
+
+.blog-post-link:focus-visible {
+  outline: 3px solid var(--contrast);
+  outline-offset: 4px;
+}
+
+.blog-post-date {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.blog-post-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
 #welcome {
   max-width: 38rem;
   margin: 0 auto;
