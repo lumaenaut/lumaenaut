@@ -310,6 +310,16 @@ h2 {
   margin-top: 1.25rem;
 }
 
+.post-body ul,
+.post-body ol {
+  margin: 0.5rem 0 1rem 1.25rem;
+  padding-left: 1rem;
+}
+
+.post-body li + li {
+  margin-top: 0.35rem;
+}
+
 .post-body h2 {
   color: var(--text-main);
   font-size: 1.2rem;
