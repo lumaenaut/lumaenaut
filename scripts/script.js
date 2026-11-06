@@ -1,7 +1,8 @@
 (() => {
   const shareButtons = document.querySelectorAll(".share-btn");
+  const emailLinks = document.querySelectorAll(".copy-email-link");
 
-  if (shareButtons.length === 0) {
+  if (shareButtons.length === 0 && emailLinks.length === 0) {
     return;
   }
 
@@ -48,25 +49,44 @@
     return copied;
   }
 
-  async function copyPageUrl() {
-    const url = window.location.href;
-
+  async function copyText(text, successMessage, failureMessage) {
     try {
       if (navigator.clipboard?.writeText) {
-        await navigator.clipboard.writeText(url);
-      } else if (!copyWithFallback(url)) {
+        await navigator.clipboard.writeText(text);
+      } else if (!copyWithFallback(text)) {
         throw new Error("Clipboard copy is not supported");
       }
 
-      showFeedback("Link copied!");
+      showFeedback(successMessage);
     } catch {
-      showFeedback("Could not copy link. Please copy the URL from your address bar.");
+      showFeedback(failureMessage);
     }
+  }
+
+  async function copyPageUrl() {
+    const url = window.location.href;
+    await copyText(url, "Link copied!", "Could not copy link. Please copy the URL from your address bar.");
+  }
+
+  async function copyEmailAddress(event) {
+    event.preventDefault();
+    const email = event.currentTarget.dataset.copyEmail;
+    if (!email) {
+      return;
+    }
+
+    await copyText(email, "email address copied", "Could not copy email address.");
   }
 
   shareButtons.forEach((button) => {
     button.addEventListener("click", () => {
       void copyPageUrl();
+    });
+  });
+
+  emailLinks.forEach((link) => {
+    link.addEventListener("click", (event) => {
+      void copyEmailAddress(event);
     });
   });
 })();
