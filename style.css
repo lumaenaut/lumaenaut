@@ -310,6 +310,13 @@ h2 {
   margin-top: 1.25rem;
 }
 
+.post-body blockquote {
+  margin: 1rem 0 1.25rem;
+  padding: 0.5rem 1rem;
+  border-left: 4px solid var(--contrast);
+  background-color: rgb(0 0 0 / 4%);
+}
+
 .post-body ul,
 .post-body ol {
   margin: 0.5rem 0 1rem 1.25rem;
